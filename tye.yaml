@@ -2,6 +2,8 @@ name: ukraine
 
 extensions:
   - name: zipkin
+  - name: seq
+    logPath: ./.logs
 
 services:
 
@@ -22,9 +24,7 @@ services:
     project: src/Services/Test/FirstTestApiService/FirstTestApiService.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT
-        value: Development;
-      - name: ConnectionStrings__Postgres
-        value: Server=localhost;Port=5432;Database=ukraine;User Id=postgres;Password=postgres;  
+        value: Development
     bindings:
       - port: 6050
         

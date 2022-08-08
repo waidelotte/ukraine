@@ -449,4 +449,5 @@ FodyWeavers.xsd
 # Custom
 **/.idea/
 **/.tye/
+.logs
 
