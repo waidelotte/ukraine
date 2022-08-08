@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1C32040D-03EF-4BCE-9506-C8F61C4930ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{52761B76-4E59-47CB-8734-1B42FCF4F7AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C683742C-D0E8-4BE5-8CFF-3F2FD56EA4D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstTestApiService", "src\Services\Test\FirstTestApiService\FirstTestApiService.csproj", "{073CC5D8-F1A5-4C95-9A59-CC490A23428A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondTestApiService", "src\Services\Test\SecondTestApiService\SecondTestApiService.csproj", "{22824A80-0AB6-43DC-B6F1-E94DE27DB79F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.EfCore", "src\BuildingBlocks\Ukraine.Infrastructure.EfCore\Ukraine.Infrastructure.EfCore.csproj", "{92235677-5B49-421C-89A1-5C5312CA3DE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure", "src\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj", "{8F90B275-7B2F-4C26-BC03-BEE807739477}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Domain", "src\BuildingBlocks\Ukraine.Domain\Ukraine.Domain.csproj", "{8DC5425E-753F-4A1F-BD0E-5AEF10476EE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Application", "src\BuildingBlocks\Ukraine.Infrastructure.Application\Ukraine.Infrastructure.Application.csproj", "{84BBAA9F-86BA-430B-AA3F-09568FF0E0C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{3D7ED6A3-561F-49C9-AF87-AC10DCE95A89}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
+		docker-compose.yml = docker-compose.yml
+		NuGet.config = NuGet.config
+		tye.yaml = tye.yaml
+		docker-compose.development.yml = docker-compose.development.yml
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+		.gitattributes = .gitattributes
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Telemetry", "src\BuildingBlocks\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj", "{4BEE8599-276D-4E0D-AE44-67720FE37DF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52761B76-4E59-47CB-8734-1B42FCF4F7AC} = {1C32040D-03EF-4BCE-9506-C8F61C4930ED}
+		{C683742C-D0E8-4BE5-8CFF-3F2FD56EA4D2} = {52761B76-4E59-47CB-8734-1B42FCF4F7AC}
+		{073CC5D8-F1A5-4C95-9A59-CC490A23428A} = {C683742C-D0E8-4BE5-8CFF-3F2FD56EA4D2}
+		{22824A80-0AB6-43DC-B6F1-E94DE27DB79F} = {C683742C-D0E8-4BE5-8CFF-3F2FD56EA4D2}
+		{AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE} = {1C32040D-03EF-4BCE-9506-C8F61C4930ED}
+		{92235677-5B49-421C-89A1-5C5312CA3DE1} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{8F90B275-7B2F-4C26-BC03-BEE807739477} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{8DC5425E-753F-4A1F-BD0E-5AEF10476EE5} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{84BBAA9F-86BA-430B-AA3F-09568FF0E0C6} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{4BEE8599-276D-4E0D-AE44-67720FE37DF6} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{073CC5D8-F1A5-4C95-9A59-CC490A23428A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{073CC5D8-F1A5-4C95-9A59-CC490A23428A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{073CC5D8-F1A5-4C95-9A59-CC490A23428A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{073CC5D8-F1A5-4C95-9A59-CC490A23428A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22824A80-0AB6-43DC-B6F1-E94DE27DB79F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22824A80-0AB6-43DC-B6F1-E94DE27DB79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22824A80-0AB6-43DC-B6F1-E94DE27DB79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22824A80-0AB6-43DC-B6F1-E94DE27DB79F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F90B275-7B2F-4C26-BC03-BEE807739477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F90B275-7B2F-4C26-BC03-BEE807739477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F90B275-7B2F-4C26-BC03-BEE807739477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F90B275-7B2F-4C26-BC03-BEE807739477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DC5425E-753F-4A1F-BD0E-5AEF10476EE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DC5425E-753F-4A1F-BD0E-5AEF10476EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DC5425E-753F-4A1F-BD0E-5AEF10476EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DC5425E-753F-4A1F-BD0E-5AEF10476EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84BBAA9F-86BA-430B-AA3F-09568FF0E0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84BBAA9F-86BA-430B-AA3F-09568FF0E0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84BBAA9F-86BA-430B-AA3F-09568FF0E0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84BBAA9F-86BA-430B-AA3F-09568FF0E0C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BEE8599-276D-4E0D-AE44-67720FE37DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEE8599-276D-4E0D-AE44-67720FE37DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEE8599-276D-4E0D-AE44-67720FE37DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEE8599-276D-4E0D-AE44-67720FE37DF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

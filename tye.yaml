@@ -1,0 +1,37 @@
+name: ukraine
+
+extensions:
+  - name: zipkin
+
+services:
+
+  - name: component-postgresql
+    image: postgres:14.4
+    env:
+      - name: POSTGRES_DB
+        value: ukraine
+      - name: POSTGRES_USER
+        value: postgres
+      - name: POSTGRES_PASSWORD
+        value: postgres 
+    bindings:
+      - port: 5432
+        connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
+
+  - name: service-test-first-api
+    project: src/Services/Test/FirstTestApiService/FirstTestApiService.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development;
+      - name: ConnectionStrings__Postgres
+        value: Server=localhost;Port=5432;Database=ukraine;User Id=postgres;Password=postgres;  
+    bindings:
+      - port: 6050
+        
+  - name: service-test-second-api
+    project: src/Services/Test/SecondTestApiService/SecondTestApiService.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development;
+    bindings:
+      - port: 6051
