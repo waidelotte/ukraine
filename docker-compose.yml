@@ -33,6 +33,12 @@ services:
     container_name: zipkin
     networks:
       - ukraine-network
+      
+  component-seq:
+    image: datalust/seq:latest
+    container_name: seq
+    networks:
+      - ukraine-network
         
 networks:
   ukraine-network:

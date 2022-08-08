@@ -7,8 +7,6 @@ using Ukraine.Infrastructure.Telemetry.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 var serviceName = builder.Configuration["ServiceName"];
 
-Console.WriteLine( builder.Configuration.GetDebugView());
-
 builder.AddCustomLog(options =>
 {
     options.ApplicationName = serviceName;
