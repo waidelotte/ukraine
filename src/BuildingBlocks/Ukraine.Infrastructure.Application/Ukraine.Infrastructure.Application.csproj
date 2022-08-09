@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Ukraine.Infrastructure.EfCore\Ukraine.Infrastructure.EfCore.csproj" />
-      <ProjectReference Include="..\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj" />
     </ItemGroup>
 
 </Project>

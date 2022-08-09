@@ -2,7 +2,7 @@ using FirstTestApiService;
 using Ukraine.Infrastructure.EfCore.Extensions;
 using Ukraine.Infrastructure.Logging;
 using Ukraine.Infrastructure.Swagger;
-using Ukraine.Infrastructure.Telemetry.Extensions;
+using Ukraine.Infrastructure.Telemetry;
 
 var builder = WebApplication.CreateBuilder(args);
 

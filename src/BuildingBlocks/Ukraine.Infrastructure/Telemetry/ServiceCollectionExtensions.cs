@@ -3,7 +3,7 @@ using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace Ukraine.Infrastructure.Telemetry.Extensions;
+namespace Ukraine.Infrastructure.Telemetry;
 
 public static class ServiceCollectionExtensions
 {
