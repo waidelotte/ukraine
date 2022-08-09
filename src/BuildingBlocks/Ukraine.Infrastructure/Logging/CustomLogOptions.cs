@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.Options;
+﻿namespace Ukraine.Infrastructure.Logging;
 
 public class CustomLogOptions
 {

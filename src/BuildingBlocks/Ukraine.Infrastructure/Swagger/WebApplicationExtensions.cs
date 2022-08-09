@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 
-namespace Ukraine.Infrastructure.Extensions;
+namespace Ukraine.Infrastructure.Swagger;
 
 public static class WebApplicationExtensions
 {
