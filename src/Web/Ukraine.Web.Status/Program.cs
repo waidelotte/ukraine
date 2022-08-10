@@ -22,8 +22,6 @@ builder.Services
     })
     .AddInMemoryStorage();
 
-builder.Logging.AddJsonConsole();
-
 var app = builder.Build();
 
 app.UseHealthChecksUI(config =>
