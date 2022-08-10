@@ -9,10 +9,10 @@ WORKDIR /src
 COPY ["src/BuildingBlocks/Ukraine.Domain/Ukraine.Domain.csproj", "src/BuildingBlocks/Ukraine.Domain/"]
 COPY ["src/BuildingBlocks/Ukraine.Infrastructure/Ukraine.Infrastructure.csproj", "src/BuildingBlocks/Ukraine.Infrastructure/"]
 COPY ["src/BuildingBlocks/Ukraine.Infrastructure.EfCore/Ukraine.Infrastructure.EfCore.csproj", "src/BuildingBlocks/Ukraine.Infrastructure.EfCore/"]
-COPY ["src/BuildingBlocks/Ukraine.Infrastructure.Telemetry/Ukraine.Infrastructure.Telemetry.csproj", "src/BuildingBlocks/Ukraine.Infrastructure.Telemetry/"]
 COPY ["src/BuildingBlocks/Ukraine.Infrastructure.Application/Ukraine.Infrastructure.Application.csproj", "src/BuildingBlocks/Ukraine.Infrastructure.Application/"]
 COPY ["src/Services/Test/FirstTestApiService/FirstTestApiService.csproj", "src/Services/Test/FirstTestApiService/"]
 COPY ["src/Services/Test/SecondTestApiService/SecondTestApiService.csproj", "src/Services/Test/SecondTestApiService/"]
+COPY ["src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj", "src/Web/Test/Ukraine.Web.Status/"]
 COPY ["NuGet.config", "./"]
 COPY ["Ukraine.sln", "./"]
 RUN dotnet restore "src/Services/Test/FirstTestApiService/FirstTestApiService.csproj"

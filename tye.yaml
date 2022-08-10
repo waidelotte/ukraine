@@ -35,3 +35,11 @@ services:
         value: Development;
     bindings:
       - port: 6051
+        
+  - name: web-status
+    project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 6040

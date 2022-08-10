@@ -5,19 +5,25 @@ services:
   service-test-first-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__Postgres=Server=postgres_container;Port=5432;Database=ukraine;User Id=postgres;Password=postgres;
+      - ConnectionStrings__Postgres=Server=postgres;Port=5432;Database=ukraine;User Id=postgres;Password=postgres;
       - ZipkinTelemetry__Endpoint=http://zipkin:9411/api/v2/spans
       - SeqServerUrl=http://seq
     ports:
       - "6050:6050"
-    depends_on: 
-    - component-zipkin
         
   service-test-second-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "6051:6051"
+      
+  web-status:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Seq__ServerUrl=http://seq
+      - HealthChecksUI__HealthChecks__0__Uri=http://service-test-first-api:6050/health/status
+    ports:
+      - "6040:6040"
         
   component-postgresql:
     environment:

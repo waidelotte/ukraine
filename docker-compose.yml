@@ -8,6 +8,8 @@ services:
       context: .
       dockerfile: src/Services/Test/FirstTestApiService/Dockerfile
     depends_on:
+      - component-seq
+      - component-zipkin
       - component-postgresql
     networks:
       - ukraine-network
@@ -17,14 +19,24 @@ services:
     build:
       context: .
       dockerfile: src/Services/Test/SecondTestApiService/Dockerfile
+    networks:
+      - ukraine-network
+        
+  web-status:
+    image: ${REGISTRY:-ukraine}/web-status:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Web/Ukraine.Web.Status/Dockerfile
     depends_on:
+      - component-seq
       - component-postgresql
+      - service-test-first-api
     networks:
       - ukraine-network
       
   component-postgresql:
     image: postgres:14.4
-    container_name: postgres_container
+    container_name: postgres
     networks:
       - ukraine-network
       

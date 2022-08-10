@@ -1,5 +1,7 @@
 using FirstTestApiService;
 using Ukraine.Infrastructure.EfCore.Extensions;
+using Ukraine.Infrastructure.EfCore.Interfaces;
+using Ukraine.Infrastructure.HealthChecks;
 using Ukraine.Infrastructure.Logging;
 using Ukraine.Infrastructure.Swagger;
 using Ukraine.Infrastructure.Telemetry;
@@ -7,6 +9,7 @@ using Ukraine.Infrastructure.Telemetry;
 var builder = WebApplication.CreateBuilder(args);
 
 var serviceName = builder.Configuration["ServiceName"];
+var connectionString = builder.Configuration.GetConnectionString("Postgres");
 
 builder.AddCustomLog(options =>
 {
@@ -15,8 +18,9 @@ builder.AddCustomLog(options =>
     options.SeqServerUrl = builder.Configuration["SeqServerUrl"];
 });
 builder.Services.AddCustomSwagger(serviceName);
-builder.Services.AddCustomNpgsqlContext<Context, Context>(builder.Configuration.GetConnectionString("Postgres"));
+builder.Services.AddCustomNpgsqlContext<Context, Context>(connectionString);
 builder.Services.AddControllers();
+builder.Services.AddCustomHealthChecks().AddCustomNpgSql(connectionString);
 builder.Services.AddCustomTelemetry(serviceName,o =>
 {
     o.Endpoint = builder.Configuration.GetValue<Uri>("ZipkinTelemetry:Endpoint");
@@ -24,14 +28,26 @@ builder.Services.AddCustomTelemetry(serviceName,o =>
 
 var app = builder.Build();
 
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<IDatabaseFacadeResolver>();
+    context.Database.EnsureCreated();
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
 
 app.UseCustomSwagger();
+
 app.UseAuthorization();
+
+app.MapGet("/", () => Results.LocalRedirect("~/swagger"));
+
 app.MapControllers();
+
+app.UseCustomHealthChecks();
 
 try
 {
