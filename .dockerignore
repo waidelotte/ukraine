@@ -1,11 +1,8 @@
 **/.dockerignore
-**/.env
 **/docker-compose*.yml
 **/Dockerfile*
 **/.gitignore
 **/README.md
 
-**/bin/
-**/out/
-**/obj/
-**/.idea/
+.logs
+.idea
