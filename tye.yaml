@@ -36,6 +36,14 @@ services:
     bindings:
       - port: 6051
         
+  - name: gateway-http
+    project: src/Gateways/Ukraine.Gateways.Http/Ukraine.Gateways.Http.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 6001
+        
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
     env:

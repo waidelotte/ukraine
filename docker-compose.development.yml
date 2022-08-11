@@ -16,6 +16,14 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "6051:6051"
+        
+  gateway-http:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Telemetry__ZipkinEndpoint=http://zipkin:9411/api/v2/spans
+      - Seq__ServerUrl=http://seq
+    ports:
+      - "6001:6001"      
       
   web-status:
     environment:

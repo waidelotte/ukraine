@@ -21,9 +21,11 @@ builder.Services.AddCustomSwagger(serviceName);
 builder.Services.AddCustomNpgsqlContext<Context, Context>(connectionString);
 builder.Services.AddControllers();
 builder.Services.AddCustomHealthChecks().AddCustomNpgSql(connectionString);
-builder.Services.AddCustomTelemetry(serviceName,o =>
+builder.Services.AddCustomTelemetry(o =>
 {
-    o.Endpoint = builder.Configuration.GetValue<Uri>("ZipkinTelemetry:Endpoint");
+    o.ApplicationName = builder.Configuration["ServiceName"];
+    o.UseZipkin = true;
+    o.ZipkinEndpoint = builder.Configuration["ZipkinTelemetry:Endpoint"];
 });
 
 var app = builder.Build();

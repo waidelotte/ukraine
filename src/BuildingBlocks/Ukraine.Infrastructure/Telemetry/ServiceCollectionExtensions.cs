@@ -9,18 +9,25 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddCustomTelemetry(
 		this IServiceCollection services,
-		string serviceName,
-		Action<ZipkinExporterOptions> configureZipkin)
+		Action<CustomTelemetryOptions> options)
 	{
-		services.AddOpenTelemetryTracing(builder => builder
-			.SetResourceBuilder(ResourceBuilder
-				.CreateDefault()
-				.AddService(serviceName)) 
-			.SetSampler(new AlwaysOnSampler())
-			.AddAspNetCoreInstrumentation()
-			.AddHttpClientInstrumentation()
-			.AddSqlClientInstrumentation(o => o.SetDbStatementForText = true)
-			.AddZipkinExporter(configureZipkin));
+		var opt = new CustomTelemetryOptions();
+		options.Invoke(opt);
+
+		services.AddOpenTelemetryTracing(builder =>
+		{
+			builder
+				.SetResourceBuilder(ResourceBuilder
+					.CreateDefault()
+					.AddService(opt.ApplicationName))
+				.SetSampler(new AlwaysOnSampler())
+				.AddAspNetCoreInstrumentation()
+				.AddHttpClientInstrumentation()
+				.AddSqlClientInstrumentation(o => o.SetDbStatementForText = true);
+			
+			if (opt.UseZipkin)
+				builder.AddZipkinExporter(o => o.Endpoint = new Uri(opt.ZipkinEndpoint));
+		});
 		
 		return services;
 	}

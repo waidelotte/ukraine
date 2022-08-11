@@ -13,6 +13,7 @@ COPY ["src/BuildingBlocks/Ukraine.Infrastructure.Application/Ukraine.Infrastruct
 COPY ["src/Services/Test/FirstTestApiService/FirstTestApiService.csproj", "src/Services/Test/FirstTestApiService/"]
 COPY ["src/Services/Test/SecondTestApiService/SecondTestApiService.csproj", "src/Services/Test/SecondTestApiService/"]
 COPY ["src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj", "src/Web/Ukraine.Web.Status/"]
+COPY ["src/Gateways/Ukraine.Gateways.Http/Ukraine.Gateways.Http.csproj", "src/Gateways/Ukraine.Gateways.Http/"]
 COPY ["NuGet.config", "./"]
 COPY ["Ukraine.sln", "./"]
 RUN dotnet restore "src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj"
