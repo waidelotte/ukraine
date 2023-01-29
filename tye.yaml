@@ -1,7 +1,19 @@
 name: ukraine
 
 extensions:
-  - name: zipkin
+
+  - name: dapr
+    log-level: debug
+    config: ./dapr/components/ukraine-config.yaml
+    components-path: ./dapr/components
+    app-max-concurrency: 1
+    services:
+      service-test-first-api:
+        enabled: true
+      gateway-http:
+        enabled: false
+      web-status:
+        enabled: false 
   - name: seq
     logPath: ./.logs
 
@@ -20,29 +32,21 @@ services:
       - port: 5432
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
 
-  - name: service-test-first-api
-    project: src/Services/Test/FirstTestApiService/FirstTestApiService.csproj
+  - name: service-example-api
+    project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 6050
-        
-  - name: service-test-second-api
-    project: src/Services/Test/SecondTestApiService/SecondTestApiService.csproj
-    env:
-      - name: ASPNETCORE_ENVIRONMENT
-        value: Development;
-    bindings:
-      - port: 6051
-        
+      - port: 7002
+         
   - name: gateway-http
     project: src/Gateways/Ukraine.Gateways.Http/Ukraine.Gateways.Http.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 6001
+      - port: 7000
         
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
@@ -50,4 +54,4 @@ services:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 6040
+      - port: 7001

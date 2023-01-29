@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
+      <ProjectReference Include="..\Ukraine.Services.Example.Application\Ukraine.Services.Example.Application.csproj" />
     </ItemGroup>
 
 </Project>

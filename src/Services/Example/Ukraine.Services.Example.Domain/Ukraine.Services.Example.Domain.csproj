@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Domain\Ukraine.Domain.csproj" />
     </ItemGroup>
 
 </Project>

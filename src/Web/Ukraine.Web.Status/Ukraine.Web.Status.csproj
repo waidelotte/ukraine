@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\BuildingBlocks\Ukraine.Infrastructure.Application\Ukraine.Infrastructure.Application.csproj" />
+      <PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.5" />
+      <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.5" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.5" />
-      <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.5" />
+      <ProjectReference Include="..\..\Services\Example\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
