@@ -2,7 +2,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace Ukraine.Infrastructure.HealthChecks;
+namespace Ukraine.Infrastructure.HealthChecks.Extenstion;
 
 public static class WebApplicationExtensions
 {
@@ -13,6 +13,10 @@ public static class WebApplicationExtensions
             Predicate = _ => true,
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
+    }
+    
+    public static void UseCustomDatabaseHealthChecks(this WebApplication webApplication)
+    {
         webApplication.MapHealthChecks("/health/database", new HealthCheckOptions
         {
             Predicate = r => r.Name.Contains("db"),

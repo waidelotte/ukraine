@@ -1,0 +1,1 @@
+﻿tye run .\tye.yaml --dashboard

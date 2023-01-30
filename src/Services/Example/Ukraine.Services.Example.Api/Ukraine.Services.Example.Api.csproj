@@ -8,7 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ukraine.Services.Example.Application\Ukraine.Services.Example.Application.csproj" />
+      <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure.EfCore\Ukraine.Services.Example.Infrastructure.EfCore.csproj" />
+      <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

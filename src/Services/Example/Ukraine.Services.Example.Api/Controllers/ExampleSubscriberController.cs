@@ -5,6 +5,7 @@ using Ukraine.Services.Example.Domain.Events;
 namespace Ukraine.Services.Example.Api.Controllers;
 
 [ApiController]
+[ApiExplorerSettings(IgnoreApi = true)]
 [Route("[controller]")]
 public class ExampleSubscriberController : ControllerBase
 {

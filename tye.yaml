@@ -4,7 +4,7 @@ extensions:
 
   - name: dapr
     log-level: debug
-    config: ./dapr/components/ukraine-config.yaml
+    config: ukraine-config
     components-path: ./dapr/components
     app-max-concurrency: 1
     services:

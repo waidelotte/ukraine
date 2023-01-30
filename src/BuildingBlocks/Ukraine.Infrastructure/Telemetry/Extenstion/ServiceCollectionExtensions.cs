@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Ukraine.Domain.Exceptions;
+using Ukraine.Infrastructure.Telemetry.Options;
 
-namespace Ukraine.Infrastructure.Telemetry;
+namespace Ukraine.Infrastructure.Telemetry.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
@@ -24,9 +25,13 @@ public static class ServiceCollectionExtensions
 				.AddAspNetCoreInstrumentation()
 				.AddHttpClientInstrumentation()
 				.AddSqlClientInstrumentation(o => o.SetDbStatementForText = true);
-			
+
 			if (opt.UseZipkin)
+			{
+				if(string.IsNullOrEmpty(opt.ZipkinEndpoint))
+					throw CoreException.NullOrEmpty(nameof(opt.ZipkinEndpoint));
 				builder.AddZipkinExporter(o => o.Endpoint = new Uri(opt.ZipkinEndpoint));
+			}
 		});
 		
 		return services;

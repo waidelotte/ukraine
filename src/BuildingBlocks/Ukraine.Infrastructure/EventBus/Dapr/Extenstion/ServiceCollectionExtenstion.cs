@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ukraine.Infrastructure.EventBus.Dapr
+namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion
 {
     public static class DaprServiceCollectionExtenstion
     {

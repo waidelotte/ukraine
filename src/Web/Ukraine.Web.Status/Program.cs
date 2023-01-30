@@ -1,4 +1,5 @@
 using Ukraine.Infrastructure.Logging;
+using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Web.Status.Options;
 
 var builder = WebApplication.CreateBuilder(args);

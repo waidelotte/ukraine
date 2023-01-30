@@ -1,6 +1,8 @@
 using Ukraine.Gateways.Http.Options;
 using Ukraine.Infrastructure.Logging;
+using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Infrastructure.Telemetry;
+using Ukraine.Infrastructure.Telemetry.Extenstion;
 
 var builder = WebApplication.CreateBuilder(args);
 

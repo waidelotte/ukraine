@@ -2,8 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Ukraine.Domain.Exceptions;
+using Ukraine.Infrastructure.Logging.Options;
 
-namespace Ukraine.Infrastructure.Logging;
+namespace Ukraine.Infrastructure.Logging.Extenstion;
 
 public static class WebApplicationBuilderExtensions
 {

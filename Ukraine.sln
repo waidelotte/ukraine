@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{3D7ED6A3-5
 		.gitignore = .gitignore
 		.gitattributes = .gitattributes
 		README.md = README.md
+		terminal.txt = terminal.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{AEB23F19-ECA5-4249-B81E-925BBE1165EA}"
@@ -40,7 +41,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.Infrastructure.EfCore", "src\Services\Example\Ukraine.Services.Example.Infrastructure.EfCore\Ukraine.Services.Example.Infrastructure.EfCore.csproj", "{9DA0E518-0A7D-4F08-80A6-D51F09383EF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.Application", "src\Services\Example\Ukraine.Services.Example.Application\Ukraine.Services.Example.Application.csproj", "{F0101815-3366-48CA-9DAC-75E30F8ACA42}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\components\ukraine-config.yaml = dapr\components\ukraine-config.yaml
+		dapr\components\ukraine-pubsub.yaml = dapr\components\ukraine-pubsub.yaml
+		dapr\components\ukraine-statestore.yaml = dapr\components\ukraine-statestore.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,7 +68,7 @@ Global
 		{56D548FC-A539-4109-8B7F-6FD697160756} = {DA93160E-BCD5-43BB-8B14-AD94F1528159}
 		{C3A149F9-1049-4614-A712-D9C557F1A5A3} = {DA93160E-BCD5-43BB-8B14-AD94F1528159}
 		{9DA0E518-0A7D-4F08-80A6-D51F09383EF7} = {DA93160E-BCD5-43BB-8B14-AD94F1528159}
-		{F0101815-3366-48CA-9DAC-75E30F8ACA42} = {DA93160E-BCD5-43BB-8B14-AD94F1528159}
+		{F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B} = {3D7ED6A3-561F-49C9-AF87-AC10DCE95A89}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -101,9 +107,5 @@ Global
 		{9DA0E518-0A7D-4F08-80A6-D51F09383EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DA0E518-0A7D-4F08-80A6-D51F09383EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DA0E518-0A7D-4F08-80A6-D51F09383EF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0101815-3366-48CA-9DAC-75E30F8ACA42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0101815-3366-48CA-9DAC-75E30F8ACA42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0101815-3366-48CA-9DAC-75E30F8ACA42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0101815-3366-48CA-9DAC-75E30F8ACA42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
