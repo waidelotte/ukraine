@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Domain.Entities;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Configurations
 {
-    public class ProductMappingConfiguration : IEntityTypeConfiguration<ExampleEntity>
+    public class ExampleEntityConfiguration : IEntityTypeConfiguration<ExampleEntity>
     {
         public void Configure(EntityTypeBuilder<ExampleEntity> builder)
         {
