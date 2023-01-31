@@ -3,7 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Services.Example.Infrastructure.Behaviors;
+using Ukraine.Infrastructure.Mediator.Extensions;
 using Ukraine.Services.Example.Infrastructure.Options;
 
 namespace Ukraine.Services.Example.Infrastructure.Extensions;
@@ -20,8 +20,8 @@ public static class ServiceCollectionExtensions
 		services.AddAutoMapper(Assembly.GetExecutingAssembly());
 		services.AddMediatR(Assembly.GetExecutingAssembly());
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-		
-		services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+		services.AddCustomMediatorFluentValidation();
 		
 		return services;
 	}

@@ -62,6 +62,12 @@ builder.Services.AddCustomTelemetry(o =>
 
 builder.Services.AddCustomDapr();
 
+builder.Host.UseDefaultServiceProvider((context, options) =>
+{
+	options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+	options.ValidateOnBuild = true;
+});
+
 var app = builder.Build();
 
 using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())

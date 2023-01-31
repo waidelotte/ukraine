@@ -2,8 +2,8 @@ using Dapr.Client;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Services.Example.Domain.Events;
-using Ukraine.Services.Example.Infrastructure.UseCases;
 using Ukraine.Services.Example.Infrastructure.UseCases.Create;
+using Ukraine.Services.Example.Infrastructure.UseCases.Read;
 
 namespace Ukraine.Services.Example.Api.Controllers;
 
@@ -42,6 +42,18 @@ public class ExampleController : ControllerBase
 		var result = await _mediator.Send(request);
 
 		_logger.LogDebug($"{nameof(CreateExampleEntityAsync)} controller end");
+		
+		return Ok(result);
+	}
+	
+	[HttpGet("GetExampleEntities")]
+	public async Task<ActionResult> GetExampleEntitiesAsync([FromQuery] GetExampleEntitiesRequest request)
+	{
+		_logger.LogDebug($"{nameof(GetExampleEntitiesAsync)} controller start");
+
+		var result = await _mediator.Send(request);
+
+		_logger.LogDebug($"{nameof(GetExampleEntitiesAsync)} controller end");
 		
 		return Ok(result);
 	}
