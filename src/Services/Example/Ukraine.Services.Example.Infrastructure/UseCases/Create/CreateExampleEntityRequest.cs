@@ -1,5 +1,6 @@
 ﻿using MediatR;
-namespace Ukraine.Services.Example.Infrastructure.UseCases;
+
+namespace Ukraine.Services.Example.Infrastructure.UseCases.Create;
 
 public class CreateExampleEntityRequest : IRequest<CreateExampleEntityResponse>
 {

@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Domain.Entities;
 using Ukraine.Services.Example.Infrastructure.DTO;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 
-namespace Ukraine.Services.Example.Infrastructure.UseCases
+namespace Ukraine.Services.Example.Infrastructure.UseCases.Create
 {
 	public class CreateExampleEntityHandler : IRequestHandler<CreateExampleEntityRequest, CreateExampleEntityResponse>
 	{

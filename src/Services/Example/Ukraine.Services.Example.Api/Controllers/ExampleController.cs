@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Infrastructure.UseCases;
+using Ukraine.Services.Example.Infrastructure.UseCases.Create;
 
 namespace Ukraine.Services.Example.Api.Controllers;
 
