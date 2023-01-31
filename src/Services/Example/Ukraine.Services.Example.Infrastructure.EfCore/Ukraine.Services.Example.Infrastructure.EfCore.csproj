@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.EfCore\Ukraine.Infrastructure.EfCore.csproj" />
-      <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
+      <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
     </ItemGroup>
 
 </Project>

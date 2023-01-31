@@ -1,12 +1,16 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.EfCore;
 using Ukraine.Infrastructure.EfCore.Contexts;
+using Ukraine.Services.Example.Domain.Entities;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore
 {
     public class ExampleContext : AppDbContextBase
     {
         private const string SCHEMA = "example_schema";
+        
+        public DbSet<ExampleEntity> ExampleEntity { get; set; } = null!;
 
         public ExampleContext(DbContextOptions options) : base(options) { }
         
@@ -14,6 +18,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore
         {
             modelBuilder.HasDefaultSchema(SCHEMA);
             modelBuilder.HasPostgresExtension(Constants.UUID_GENERATOR);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

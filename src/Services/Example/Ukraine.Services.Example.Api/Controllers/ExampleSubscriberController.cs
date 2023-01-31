@@ -19,7 +19,7 @@ public class ExampleSubscriberController : ControllerBase
 	[Topic("ukraine-pubsub", "ExampleEmptyEvent")]
 	public IActionResult ExampleEmptyEvent([FromBody] ExampleEmptyEvent request)
 	{
-		_logger.LogDebug("ExampleEmptyEvent request catched");
+		_logger.LogDebug("ExampleEmptyEvent request catched. Created: {CreatedAt}", request.CreatedAt);
 		return Ok();
 	}
 }
