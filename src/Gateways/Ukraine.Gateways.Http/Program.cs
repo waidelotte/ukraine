@@ -10,7 +10,7 @@ var gatewayOptions = builder.Configuration.Get<GatewayOptions>();
 var seqOptions = builder.Configuration.GetSection(SeqOptions.Position).Get<SeqOptions>();
 var telemetryOptions = builder.Configuration.GetSection(TelemetryOptions.Position).Get<TelemetryOptions>();
 
-builder.AddCustomLog(options =>
+builder.Host.AddCustomLog(builder.Configuration, options =>
 {
     options.ApplicationName = gatewayOptions.ApplicationName;
     options.WriteToSeq = seqOptions.IsEnabled;

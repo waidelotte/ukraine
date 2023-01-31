@@ -1,20 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Ukraine.Domain.Exceptions;
 using Ukraine.Infrastructure.Logging.Options;
 
 namespace Ukraine.Infrastructure.Logging.Extenstion;
 
-public static class WebApplicationBuilderExtensions
+public static class HostBuilderExtensions
 {
-    public static void AddCustomLog(this WebApplicationBuilder builder, Action<CustomLogOptions> options)
-    {
-        AddCustomLog(builder, builder.Configuration, options);
-    }
-
-    public static void AddCustomLog(this WebApplicationBuilder builder, IConfiguration configuration,
-        Action<CustomLogOptions> options)
+    public static void AddCustomLog(this IHostBuilder hostBuilder, IConfiguration configuration, Action<CustomLogOptions> options)
     {
         var opt = new CustomLogOptions();
         options.Invoke(opt);
@@ -38,6 +32,6 @@ public static class WebApplicationBuilderExtensions
         Log.Logger = loggerConfiguration.CreateLogger();
 
         if(opt.UseSerilog)
-            builder.Host.UseSerilog();
+            hostBuilder.UseSerilog();
     }
 }

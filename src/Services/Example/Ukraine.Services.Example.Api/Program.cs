@@ -2,6 +2,7 @@ using Ukraine.Domain.Exceptions;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
+using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Infrastructure.Telemetry.Extenstion;
@@ -30,7 +31,7 @@ if (databaseOptions == null) throw CoreException.Exception($"Unable to initializ
 var connectionString = builder.Configuration.GetConnectionString("Postgres");
 if (string.IsNullOrEmpty(connectionString)) throw CoreException.Exception("Unable to initialize section: connectionString");
 
-builder.AddCustomLog(options =>
+builder.Host.AddCustomLog(builder.Configuration, options =>
 {
 	options.ApplicationName = applicationOptions.ServiceName;
 	options.WriteToConsole = loggingOptions.WriteToConsole;
@@ -61,12 +62,7 @@ builder.Services.AddCustomTelemetry(o =>
 });
 
 builder.Services.AddCustomDapr();
-
-builder.Host.UseDefaultServiceProvider((context, options) =>
-{
-	options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
-	options.ValidateOnBuild = true;
-});
+builder.Host.ValidateServicesOnBuild();
 
 var app = builder.Build();
 

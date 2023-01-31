@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 var statusOptions = builder.Configuration.Get<StatusOptions>();
 var seqOptions = builder.Configuration.GetSection(SeqOptions.Position).Get<SeqOptions>();
 
-builder.AddCustomLog(options =>
+builder.Host.AddCustomLog(builder.Configuration, options =>
 {
     options.ApplicationName = statusOptions.ApplicationName;
     options.WriteToSeq = seqOptions.IsEnabled;
