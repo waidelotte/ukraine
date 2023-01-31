@@ -9,6 +9,8 @@ namespace Ukraine.Services.Example.Api.Controllers;
 [Route("[controller]")]
 public class ExampleSubscriberController : ControllerBase
 {
+	private const string DAPR_PUBSUB_NAME = "ukraine-pubsub";
+	
 	private readonly ILogger<ExampleSubscriberController> _logger;
 
 	public ExampleSubscriberController(ILogger<ExampleSubscriberController> logger)
@@ -16,7 +18,7 @@ public class ExampleSubscriberController : ControllerBase
 		_logger = logger;
 	}
 	[HttpPost]
-	[Topic("ukraine-pubsub", "ExampleEmptyEvent")]
+	[Topic(DAPR_PUBSUB_NAME, nameof(ExampleEmptyEvent))]
 	public IActionResult ExampleEmptyEvent([FromBody] ExampleEmptyEvent request)
 	{
 		_logger.LogDebug("ExampleEmptyEvent request catched. Created: {CreatedAt}", request.CreatedAt);
