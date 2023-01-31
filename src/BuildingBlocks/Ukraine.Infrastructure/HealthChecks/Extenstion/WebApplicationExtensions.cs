@@ -10,7 +10,7 @@ public static class WebApplicationExtensions
     {
         webApplication.MapHealthChecks("/health/status", new HealthCheckOptions
         {
-            Predicate = _ => true,
+            Predicate = reg => reg.Tags.Contains("ready"),
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
     }
@@ -19,7 +19,7 @@ public static class WebApplicationExtensions
     {
         webApplication.MapHealthChecks("/health/database", new HealthCheckOptions
         {
-            Predicate = r => r.Name.Contains("db"),
+            Predicate = r => r.Tags.Contains("database"),
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
     }
