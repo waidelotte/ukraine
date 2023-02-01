@@ -31,6 +31,17 @@ services:
     bindings:
       - port: 5432
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
+        
+  - name: component-rabbitmq
+    image: rabbitmq:3-management
+    bindings:
+      - name: ui
+        protocol: http
+        port: 15672
+        containerPort: 15672
+      - name: amqp
+        protocol: amqp
+        port: 5672
 
   - name: service-example-api
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
