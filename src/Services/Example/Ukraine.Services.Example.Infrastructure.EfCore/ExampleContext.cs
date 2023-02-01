@@ -10,7 +10,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore
     {
         private const string SCHEMA = "example_schema";
         
-        public DbSet<ExampleEntity> ExampleEntity { get; set; } = null!;
+        public DbSet<ExampleEntity> ExampleEntities => Set<ExampleEntity>();
 
         public ExampleContext(DbContextOptions options) : base(options) { }
         

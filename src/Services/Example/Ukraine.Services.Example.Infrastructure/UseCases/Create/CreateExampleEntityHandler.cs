@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
+using Ukraine.Domain.Abstractions;
 using Ukraine.Services.Example.Domain.Entities;
+using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Infrastructure.DTO;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 
@@ -10,11 +12,13 @@ namespace Ukraine.Services.Example.Infrastructure.UseCases.Create
 	{
 		private readonly ExampleContext _dbContext;
 		private readonly IMapper _mapper;
+		private readonly IEventBus _eventBus;
 
-		public CreateExampleEntityHandler(ExampleContext dbContext, IMapper mapper)
+		public CreateExampleEntityHandler(ExampleContext dbContext, IMapper mapper, IEventBus eventBus)
 		{
 			_dbContext = dbContext;
 			_mapper = mapper;
+			_eventBus = eventBus;
 		}
 
 		public async Task<CreateExampleEntityResponse> Handle(CreateExampleEntityRequest request, CancellationToken cancellationToken)
@@ -25,9 +29,10 @@ namespace Ukraine.Services.Example.Infrastructure.UseCases.Create
 				IntValue = request.IntValue
 			};
 
-			var entry = await _dbContext.ExampleEntity.AddAsync(exampleEntity, cancellationToken);
+			var entry = await _dbContext.ExampleEntities.AddAsync(exampleEntity, cancellationToken);
 			await _dbContext.SaveChangesAsync(cancellationToken);
-
+			await _eventBus.PublishAsync(new ExampleEntityCreatedEvent(entry.Entity), cancellationToken);
+			
 			var dto = _mapper.Map<ExampleEntityDTO>(entry.Entity);
 
 			return new CreateExampleEntityResponse(dto);

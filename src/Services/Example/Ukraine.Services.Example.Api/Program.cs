@@ -75,13 +75,13 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
 }
 
 if (app.Environment.IsDevelopment())
-{
 	app.UseDeveloperExceptionPage();
-}
 
 app.UseCustomSwagger();
 
 app.UseAuthorization();
+
+app.UseCloudEvents();
 
 app.MapGet("/", () => Results.LocalRedirect("~/swagger"));
 

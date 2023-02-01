@@ -20,14 +20,14 @@ namespace Ukraine.Services.Example.Infrastructure.UseCases.Read
 
 		public async Task<GetExampleEntitiesResponse> Handle(GetExampleEntitiesRequest request, CancellationToken cancellationToken)
 		{
-			var entities = await _dbContext.ExampleEntity
+			var entities = await _dbContext.ExampleEntities
 				.AsNoTracking()
 				.Skip((request.PageIndex - 1) * request.PageSize)
 				.Take(request.PageSize)
 				.ProjectTo<ExampleEntityDTO>(_mapper.ConfigurationProvider)
 				.ToListAsync(cancellationToken);
 
-			var total = await _dbContext.ExampleEntity.CountAsync(cancellationToken: cancellationToken);
+			var total = await _dbContext.ExampleEntities.CountAsync(cancellationToken: cancellationToken);
 			
 			var response = new GetExampleEntitiesResponse
 			{

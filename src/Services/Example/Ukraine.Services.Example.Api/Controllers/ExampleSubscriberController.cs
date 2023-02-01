@@ -17,11 +17,17 @@ public class ExampleSubscriberController : ControllerBase
 		_logger = logger;
 	}
 	
-	[HttpPost]
+	[HttpPost("ExampleEmpty")]
 	[Topic(Constants.PUB_SUB_NAME, nameof(ExampleEmptyEvent))]
-	public IActionResult ExampleEmptyEvent([FromBody] ExampleEmptyEvent request)
+	public async Task HandleAsync(ExampleEmptyEvent request)
 	{
-		_logger.LogDebug("[Created: {Date}][ID: {ID}] ExampleEmptyEvent request catched", request.CreatedAt, request.Id);
-		return Ok();
+		_logger.LogDebug("[Created: {CreatedAt}][Event ID: {RequestId}] ExampleEmptyEvent request catched", request.CreatedAt, request.Id);
+	}
+	
+	[HttpPost("ExampleEntityCreated")]
+	[Topic(Constants.PUB_SUB_NAME, nameof(ExampleEntityCreatedEvent))]
+	public async Task HandleAsync(ExampleEntityCreatedEvent request)
+	{
+		_logger.LogDebug("[Event ID: {EventId}][Entity ID: {EntityId}] Entity Created Event", request.Id, request.Entity.Id);
 	}
 }
