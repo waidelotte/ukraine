@@ -1,4 +1,4 @@
-using Dapr.Client;
+using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Domain.Abstractions;
@@ -24,6 +24,7 @@ public class ExampleController : ControllerBase
 	}
 
 	[HttpGet("GetOk")]
+	[ProducesResponseType((int)HttpStatusCode.OK)]
 	public async Task<ActionResult> GetOkAsync(CancellationToken cancellationToken)
 	{
 		_logger.LogDebug($"{nameof(GetOkAsync)} controller start");
@@ -36,6 +37,7 @@ public class ExampleController : ControllerBase
 	}
 	
 	[HttpPost("CreateExampleEntity")]
+	[ProducesResponseType(typeof(CreateExampleEntityResponse), (int)HttpStatusCode.OK)]
 	public async Task<ActionResult> CreateExampleEntityAsync(CreateExampleEntityRequest request)
 	{
 		_logger.LogDebug($"{nameof(CreateExampleEntityAsync)} controller start");
@@ -48,6 +50,7 @@ public class ExampleController : ControllerBase
 	}
 	
 	[HttpGet("GetExampleEntities")]
+	[ProducesResponseType(typeof(GetExampleEntitiesResponse), (int)HttpStatusCode.OK)]
 	public async Task<ActionResult> GetExampleEntitiesAsync([FromQuery] GetExampleEntitiesRequest request)
 	{
 		_logger.LogDebug($"{nameof(GetExampleEntitiesAsync)} controller start");
