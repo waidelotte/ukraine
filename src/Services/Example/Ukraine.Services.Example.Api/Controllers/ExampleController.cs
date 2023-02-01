@@ -1,6 +1,7 @@
 using Dapr.Client;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Ukraine.Domain.Abstractions;
 using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Infrastructure.UseCases.Create;
 using Ukraine.Services.Example.Infrastructure.UseCases.Read;
@@ -12,13 +13,13 @@ namespace Ukraine.Services.Example.Api.Controllers;
 public class ExampleController : ControllerBase
 {
 	private readonly IMediator _mediator;
-	private readonly DaprClient _daprClient;
+	private readonly IEventBus _eventBus;
 	private readonly ILogger<ExampleController> _logger;
 
-	public ExampleController(IMediator mediator, DaprClient daprClient, ILogger<ExampleController> logger)
+	public ExampleController(IMediator mediator, IEventBus eventBus, ILogger<ExampleController> logger)
 	{
 		_mediator = mediator;
-		_daprClient = daprClient;
+		_eventBus = eventBus;
 		_logger = logger;
 	}
 
@@ -28,7 +29,7 @@ public class ExampleController : ControllerBase
 		_logger.LogDebug($"{nameof(GetOkAsync)} controller start");
 
 		var emptyEvent = new ExampleEmptyEvent();
-		await _daprClient.PublishEventAsync("ukraine-pubsub", emptyEvent.GetType().Name, emptyEvent, cancellationToken);
+		await _eventBus.PublishAsync(emptyEvent, cancellationToken);
 
 		_logger.LogDebug($"{nameof(GetOkAsync)} controller end");
 		return Ok();

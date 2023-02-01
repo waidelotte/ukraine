@@ -1,7 +1,8 @@
 ﻿namespace Ukraine.Domain.Abstractions
 {
-    public interface IDomainEvent
+    public interface IIntegrationEvent
     {
+        Guid Id { get; }
         DateTime CreatedAt { get; }
     }
 }

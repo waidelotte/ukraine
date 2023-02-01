@@ -6,4 +6,5 @@ public class ExampleHealthCheckOptions
 	
 	public bool IsEnabled { get; set; }
 	public bool CheckDatabase { get; set; }
+	public bool CheckDaprSidecar { get; set; }
 }

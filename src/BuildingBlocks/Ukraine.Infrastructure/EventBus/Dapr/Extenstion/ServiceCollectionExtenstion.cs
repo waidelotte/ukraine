@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
+using Ukraine.Domain.Abstractions;
 
 namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion
 {
@@ -17,6 +18,8 @@ namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion
             {
                 client.UseJsonSerializationOptions(options);
             });
+            
+            services.AddScoped<IEventBus, DaprEventBus>();
 
             return services;
         }

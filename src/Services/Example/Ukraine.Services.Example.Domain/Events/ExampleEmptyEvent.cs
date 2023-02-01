@@ -1,8 +1,5 @@
-﻿using Ukraine.Domain.Abstractions;
+﻿using Ukraine.Domain.Events;
 
 namespace Ukraine.Services.Example.Domain.Events;
 
-public class ExampleEmptyEvent : IDomainEvent
-{
-	public DateTime CreatedAt => DateTime.UtcNow;
-}
+public record ExampleEmptyEvent : IntegrationEvent;

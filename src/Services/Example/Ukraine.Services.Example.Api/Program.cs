@@ -51,7 +51,9 @@ builder.Services.AddControllers();
 if (healthCheckOptions.IsEnabled)
 {
 	var healthCheckBuilder = builder.Services.AddCustomHealthChecks();
+	
 	if(healthCheckOptions.CheckDatabase) healthCheckBuilder.AddCustomNpgSql(connectionString);
+	if(healthCheckOptions.CheckDaprSidecar) healthCheckBuilder.AddCustomDaprHealthCheck();
 }
 
 builder.Services.AddCustomTelemetry(o =>
