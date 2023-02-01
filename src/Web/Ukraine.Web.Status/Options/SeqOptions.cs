@@ -2,8 +2,8 @@ namespace Ukraine.Web.Status.Options;
 
 public class SeqOptions
 {
-    public const string Position = "Seq";
+    public const string SectionName = "Seq";
     
-    public bool IsEnabled { get; set; } = false;
-    public string ServerUrl { get; set; } = string.Empty;
+    public bool IsEnabled { get; set; }
+    public string? ServerUrl { get; set; }
 }

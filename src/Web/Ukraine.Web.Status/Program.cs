@@ -1,15 +1,20 @@
-using Ukraine.Infrastructure.Logging;
+using Ukraine.Domain.Exceptions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Web.Status.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var statusOptions = builder.Configuration.Get<StatusOptions>();
-var seqOptions = builder.Configuration.GetSection(SeqOptions.Position).Get<SeqOptions>();
+if (statusOptions == null) throw CoreException.Exception("Unable to initialize section: root");
+if (string.IsNullOrEmpty(statusOptions.ResourcesPath)) throw CoreException.NullOrEmpty(nameof(statusOptions.ResourcesPath));
+if (string.IsNullOrEmpty(statusOptions.UIPath)) throw CoreException.NullOrEmpty(nameof(statusOptions.UIPath));
+
+var seqOptions = builder.Configuration.GetSection(SeqOptions.SectionName).Get<SeqOptions>();
+if (seqOptions == null) throw CoreException.Exception($"Unable to initialize section: {SeqOptions.SectionName}");
 
 builder.Host.AddCustomLog(builder.Configuration, options =>
 {
-    options.ApplicationName = statusOptions.ApplicationName;
+    options.ApplicationName = statusOptions.ServiceName;
     options.WriteToSeq = seqOptions.IsEnabled;
     options.SeqServerUrl = seqOptions.ServerUrl;
 });
@@ -35,12 +40,12 @@ app.MapHealthChecksUI(config => config.UIPath = statusOptions.UIPath);
 
 try
 {
-    app.Logger.LogInformation("Starting Web Host [{ServiceName}]", statusOptions.ApplicationName);
+    app.Logger.LogInformation("Starting Web Host [{ServiceName}]", statusOptions.ServiceName);
     app.Run();
 }
 catch (Exception ex)
 {
-    app.Logger.LogCritical(ex, "Host terminated unexpectedly [{ServiceName}]", statusOptions.ApplicationName);
+    app.Logger.LogCritical(ex, "Host terminated unexpectedly [{ServiceName}]", statusOptions.ServiceName);
 }
 finally
 {
