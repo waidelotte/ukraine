@@ -23,11 +23,7 @@ namespace Ukraine.Services.Example.Infrastructure.UseCases.Create
 
 		public async Task<CreateExampleEntityResponse> Handle(CreateExampleEntityRequest request, CancellationToken cancellationToken)
 		{
-			var exampleEntity = new ExampleEntity
-			{
-				StringValue = request.StringValue,
-				IntValue = request.IntValue
-			};
+			var exampleEntity = new ExampleEntity(request.StringValue, request.IntValue);
 
 			var entry = await _dbContext.ExampleEntities.AddAsync(exampleEntity, cancellationToken);
 			await _dbContext.SaveChangesAsync(cancellationToken);

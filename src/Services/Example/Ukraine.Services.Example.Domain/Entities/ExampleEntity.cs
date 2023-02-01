@@ -1,8 +1,17 @@
-﻿namespace Ukraine.Services.Example.Domain.Entities;
+﻿using Ukraine.Domain.Models;
 
-public class ExampleEntity
+namespace Ukraine.Services.Example.Domain.Entities;
+
+public class ExampleEntity : AggregateRoot<Guid>
 {
-	public Guid Id { get; set; }
-	public string? StringValue { get; set; }
-	public int? IntValue { get; set; }
+	public string? StringValue { get; private set;}
+	public int? IntValue { get; private set; }
+	
+	public ExampleEntity(string? stringValue, int? intValue)
+	{
+		StringValue = stringValue;
+		IntValue = intValue;
+	}
+	
+	
 }
