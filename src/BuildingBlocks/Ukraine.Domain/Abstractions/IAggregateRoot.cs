@@ -1,4 +1,3 @@
-﻿namespace Ukraine.Domain.Abstractions
-{
-    public interface IAggregateRoot { }
-}
+﻿namespace Ukraine.Domain.Abstractions;
+
+public interface IAggregateRoot { }

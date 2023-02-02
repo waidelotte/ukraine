@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Contexts
+namespace Ukraine.Infrastructure.EfCore.Contexts;
+
+public abstract class AppDbContextBase : DbContext, IDatabaseFacadeResolver
 {
-	public abstract class AppDbContextBase : DbContext, IDatabaseFacadeResolver
-	{
-		protected AppDbContextBase(DbContextOptions options) : base(options) { }
-	}
+	protected AppDbContextBase(DbContextOptions options) : base(options) { }
 }

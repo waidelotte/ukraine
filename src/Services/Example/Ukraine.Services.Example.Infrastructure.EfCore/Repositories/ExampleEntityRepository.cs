@@ -16,7 +16,6 @@ public class ExampleEntityRepository : IExampleEntityRepository
 	public async Task<ExampleEntity> AddAsync(ExampleEntity entity, CancellationToken cancellationToken = default)
 	{
 		var entry = await _context.ExampleEntities.AddAsync(entity, cancellationToken);
-		await _context.SaveChangesAsync(cancellationToken);
 		return entry.Entity;
 	}
 

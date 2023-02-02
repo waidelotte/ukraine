@@ -2,42 +2,41 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Ukraine.Infrastructure.Mediator.Behaviors
+namespace Ukraine.Infrastructure.Mediator.Behaviors;
+
+public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
-    public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-         where TRequest : IRequest<TResponse>
+    private readonly IEnumerable<IValidator<TRequest>> _validators;
+    private readonly ILogger<RequestValidationBehavior<TRequest, TResponse>> _logger;
+        
+    public RequestValidationBehavior(IEnumerable<IValidator<TRequest>> validators, ILogger<RequestValidationBehavior<TRequest, TResponse>> logger)
     {
-        private readonly IEnumerable<IValidator<TRequest>> _validators;
-        private readonly ILogger<RequestValidationBehavior<TRequest, TResponse>> _logger;
+        _validators = validators;
+        _logger = logger;
+    }
         
-        public RequestValidationBehavior(IEnumerable<IValidator<TRequest>> validators, ILogger<RequestValidationBehavior<TRequest, TResponse>> logger)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    {
+        _logger.LogDebug($"Start validation for {nameof(request)}");
+
+        if (_validators.Any())
         {
-            _validators = validators;
-            _logger = logger;
+            var context = new ValidationContext<TRequest>(request);
+            var validationResults = 
+                await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
+
+            var failures = validationResults
+                .SelectMany(x => x.Errors)
+                .Where(f => f != null)
+                .ToList();
+
+            if (failures.Any())
+                throw new ValidationException(failures);
         }
-        
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
-        {
-            _logger.LogDebug($"Start validation for {nameof(request)}");
 
-            if (_validators.Any())
-            {
-                var context = new ValidationContext<TRequest>(request);
-                var validationResults = 
-                    await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
+        _logger.LogDebug($"The {nameof(request)} is valid.");
 
-                var failures = validationResults
-                    .SelectMany(x => x.Errors)
-                    .Where(f => f != null)
-                    .ToList();
-
-                if (failures.Any())
-                    throw new ValidationException(failures);
-            }
-
-            _logger.LogDebug($"The {nameof(request)} is valid.");
-
-            return await next();
-        }
+        return await next();
     }
 }

@@ -1,18 +1,17 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace Ukraine.Infrastructure.Hosting.Extensions
+namespace Ukraine.Infrastructure.Hosting.Extensions;
+
+public static class HostBuilderExtensions
 {
-    public static class HostBuilderExtensions
+    public static IHostBuilder ValidateServicesOnBuild(this IHostBuilder hostBuilder)
     {
-        public static IHostBuilder ValidateServicesOnBuild(this IHostBuilder hostBuilder)
+        hostBuilder.UseDefaultServiceProvider((context, options) =>
         {
-            hostBuilder.UseDefaultServiceProvider((context, options) =>
-            {
-                options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
-                options.ValidateOnBuild = true;
-            });
+            options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+            options.ValidateOnBuild = true;
+        });
             
-            return hostBuilder;
-        }
+        return hostBuilder;
     }
 }

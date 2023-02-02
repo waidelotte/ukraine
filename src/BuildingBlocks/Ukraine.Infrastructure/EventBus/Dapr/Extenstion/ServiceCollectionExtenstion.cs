@@ -2,26 +2,25 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Domain.Abstractions;
 
-namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion
+namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
+
+public static class DaprServiceCollectionExtenstion
 {
-    public static class DaprServiceCollectionExtenstion
+    public static IServiceCollection AddCustomDapr(this IServiceCollection services)
     {
-        public static IServiceCollection AddCustomDapr(this IServiceCollection services)
+        var options = new JsonSerializerOptions
         {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
 
-            services.AddDaprClient(client =>
-            {
-                client.UseJsonSerializationOptions(options);
-            });
+        services.AddDaprClient(client =>
+        {
+            client.UseJsonSerializationOptions(options);
+        });
             
-            services.AddScoped<IEventBus, DaprEventBus>();
+        services.AddScoped<IEventBus, DaprEventBus>();
 
-            return services;
-        }
+        return services;
     }
 }

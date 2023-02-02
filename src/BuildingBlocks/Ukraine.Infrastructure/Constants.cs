@@ -1,7 +1,6 @@
-namespace Ukraine.Infrastructure
+namespace Ukraine.Infrastructure;
+
+public static class Constants
 {
-    public static class Constants
-    {
-        public const string PUB_SUB_NAME = "ukraine-pubsub";
-    }
+    public const string PUB_SUB_NAME = "ukraine-pubsub";
 }

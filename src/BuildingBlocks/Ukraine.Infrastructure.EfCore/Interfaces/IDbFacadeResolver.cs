@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace Ukraine.Infrastructure.EfCore.Interfaces
+namespace Ukraine.Infrastructure.EfCore.Interfaces;
+
+public interface IDatabaseFacadeResolver
 {
-    public interface IDatabaseFacadeResolver
-    {
-        DatabaseFacade Database { get; }
-    }
+    DatabaseFacade Database { get; }
 }
