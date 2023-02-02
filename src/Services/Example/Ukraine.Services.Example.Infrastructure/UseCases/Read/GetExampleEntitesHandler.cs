@@ -20,12 +20,8 @@ namespace Ukraine.Services.Example.Infrastructure.UseCases.Read
 		{
 			var entities = await _repository.GetAsync(request.PageIndex, request.PageSize, cancellationToken);
 			var total = await _repository.CountAsync(cancellationToken);
-			
-			var response = new GetExampleEntitiesResponse
-			{
-				Total = total,
-				Values = _mapper.Map<ExampleEntityDTO[]>(entities)
-			};
+
+			var response = new GetExampleEntitiesResponse(_mapper.Map<ExampleEntityDTO[]>(entities), total);
 
 			return response;
 		}

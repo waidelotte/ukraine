@@ -2,8 +2,4 @@
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.Read;
 
-public class GetExampleEntitiesResponse
-{
-	public IEnumerable<ExampleEntityDTO> Values { get; set; } = Array.Empty<ExampleEntityDTO>();
-	public int Total { get; set; }
-}
+public record GetExampleEntitiesResponse(IEnumerable<ExampleEntityDTO> Values, int Total);

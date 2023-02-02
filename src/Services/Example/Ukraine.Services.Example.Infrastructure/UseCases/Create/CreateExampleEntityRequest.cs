@@ -2,8 +2,4 @@
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.Create;
 
-public class CreateExampleEntityRequest : IRequest<CreateExampleEntityResponse>
-{
-	public string? StringValue { get; set; }
-	public int? IntValue { get; set; }
-}
+public record CreateExampleEntityRequest(string? StringValue, int? IntValue) : IRequest<CreateExampleEntityResponse>;
