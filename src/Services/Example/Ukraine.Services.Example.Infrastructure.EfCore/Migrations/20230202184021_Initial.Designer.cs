@@ -12,7 +12,7 @@ using Ukraine.Services.Example.Infrastructure.EfCore;
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    [Migration("20230131102153_Initial")]
+    [Migration("20230202184021_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -43,9 +43,9 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                         .HasColumnName("string_value");
 
                     b.HasKey("Id")
-                        .HasName("pk_example_entity");
+                        .HasName("pk_example_entities");
 
-                    b.ToTable("example_entity", "example_schema");
+                    b.ToTable("example_entities", "example_schema");
                 });
 #pragma warning restore 612, 618
         }

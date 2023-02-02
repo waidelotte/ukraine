@@ -21,13 +21,13 @@ public class ExampleSubscriberController : ControllerBase
 	[Topic(Constants.PUB_SUB_NAME, nameof(ExampleEmptyEvent))]
 	public async Task HandleAsync(ExampleEmptyEvent request)
 	{
-		_logger.LogDebug("[Created: {CreatedAt}][Event ID: {RequestId}] ExampleEmptyEvent request catched", request.CreatedAt, request.Id);
+		_logger.LogDebug("Subscriber Event: {@Request}", request);
 	}
 	
 	[HttpPost("ExampleEntityCreated")]
 	[Topic(Constants.PUB_SUB_NAME, nameof(ExampleEntityCreatedEvent))]
 	public async Task HandleAsync(ExampleEntityCreatedEvent request)
 	{
-		_logger.LogDebug("[Event ID: {EventId}][Entity ID: {EntityId}] Entity Created Event", request.Id, request.Entity.Id);
+		_logger.LogDebug("Subscriber Event: {@Request}", request);
 	}
 }

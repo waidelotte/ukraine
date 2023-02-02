@@ -40,9 +40,9 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                         .HasColumnName("string_value");
 
                     b.HasKey("Id")
-                        .HasName("pk_example_entity");
+                        .HasName("pk_example_entities");
 
-                    b.ToTable("example_entity", "example_schema");
+                    b.ToTable("example_entities", "example_schema");
                 });
 #pragma warning restore 612, 618
         }

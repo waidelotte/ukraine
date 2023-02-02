@@ -18,7 +18,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                 .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
 
             migrationBuilder.CreateTable(
-                name: "example_entity",
+                name: "example_entities",
                 schema: "example_schema",
                 columns: table => new
                 {
@@ -28,7 +28,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_example_entity", x => x.id);
+                    table.PrimaryKey("pk_example_entities", x => x.id);
                 });
         }
 
@@ -36,7 +36,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "example_entity",
+                name: "example_entities",
                 schema: "example_schema");
         }
     }

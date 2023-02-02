@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Domain.Abstractions;
 using Ukraine.Domain.Exceptions;
@@ -5,31 +6,31 @@ using Ukraine.Infrastructure.EfCore.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Contexts;
 
-public class UnitOfWork<TContext> : IUnitOfWork, IDisposable where TContext : AppDbContextBase
+public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>, IDisposable where TDbContext : DbContext
 {
-    private readonly TContext _context;
+    private readonly TDbContext _context;
     private readonly IServiceProvider _serviceProvider;
     private Dictionary<Type, IRepository>? _repositories;
     private bool _disposed;
 
-    public UnitOfWork(TContext context, IServiceProvider serviceProvider)
+    public UnitOfWork(TDbContext context, IServiceProvider serviceProvider)
     {
         _context = context;
         _serviceProvider = serviceProvider;
     }
-
-    public TRepository GetRepository<TRepository>() where TRepository : IRepository
+    
+    public IRepository<TDbContext, TEntity> GetRepository<TEntity>() where TEntity : class, IAggregateRoot
     {
         _repositories ??= new Dictionary<Type, IRepository>();
 
-        var type = typeof(TRepository);
+        var type = typeof(TEntity);
 
         if (_repositories.TryGetValue(type, out var repository))
-            return (TRepository)repository;
+            return (IRepository<TDbContext, TEntity>)repository;
             
-        var serviceRepository = _serviceProvider.GetService<TRepository>();
+        var serviceRepository = _serviceProvider.GetService<IRepository<TDbContext, TEntity>>();
         if (serviceRepository == null)
-            throw CoreException.Exception($"Repository of type {type.Name} not found.");
+            throw CoreException.Exception($"Repository of type {typeof(TEntity)} not found.");
             
         _repositories.TryAdd(type, serviceRepository);
 
