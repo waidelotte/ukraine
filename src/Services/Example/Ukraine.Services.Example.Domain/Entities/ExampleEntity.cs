@@ -12,6 +12,4 @@ public class ExampleEntity : AggregateRoot<Guid>
 		StringValue = stringValue;
 		IntValue = intValue;
 	}
-	
-	
 }

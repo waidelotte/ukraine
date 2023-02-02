@@ -1,38 +1,30 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Ukraine.Services.Example.Domain.Repositories;
 using Ukraine.Services.Example.Infrastructure.DTO;
-using Ukraine.Services.Example.Infrastructure.EfCore;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.Read
 {
 	public class CreateExampleEntityHandler : IRequestHandler<GetExampleEntitiesRequest, GetExampleEntitiesResponse>
 	{
-		private readonly ExampleContext _dbContext;
+		private readonly IExampleEntityRepository _repository;
 		private readonly IMapper _mapper;
 
-		public CreateExampleEntityHandler(ExampleContext dbContext, IMapper mapper)
+		public CreateExampleEntityHandler(IExampleEntityRepository repository, IMapper mapper)
 		{
-			_dbContext = dbContext;
+			_repository = repository;
 			_mapper = mapper;
 		}
 
 		public async Task<GetExampleEntitiesResponse> Handle(GetExampleEntitiesRequest request, CancellationToken cancellationToken)
 		{
-			var entities = await _dbContext.ExampleEntities
-				.AsNoTracking()
-				.Skip((request.PageIndex - 1) * request.PageSize)
-				.Take(request.PageSize)
-				.ProjectTo<ExampleEntityDTO>(_mapper.ConfigurationProvider)
-				.ToListAsync(cancellationToken);
-
-			var total = await _dbContext.ExampleEntities.CountAsync(cancellationToken: cancellationToken);
+			var entities = await _repository.GetAsync(request.PageIndex, request.PageSize, cancellationToken);
+			var total = await _repository.CountAsync(cancellationToken);
 			
 			var response = new GetExampleEntitiesResponse
 			{
 				Total = total,
-				Values = entities
+				Values = _mapper.Map<ExampleEntityDTO[]>(entities)
 			};
 
 			return response;

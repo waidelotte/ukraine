@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Infrastructure.EfCore.Extensions;
+using Ukraine.Services.Example.Domain.Repositories;
 using Ukraine.Services.Example.Infrastructure.EfCore.Options;
+using Ukraine.Services.Example.Infrastructure.EfCore.Repositories;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 
@@ -14,6 +16,8 @@ public static class ServiceCollectionExtensions
 			o.RetryOnFailureCount = options.RetryOnFailureCount;
 			o.RetryOnFailureDelay = options.RetryOnFailureDelay;
 		});
+		
+		services.AddTransient(typeof(IExampleEntityRepository), typeof(ExampleEntityRepository));
 		
 		return services;
 	}
