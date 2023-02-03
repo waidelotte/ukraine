@@ -4,7 +4,7 @@ using Ukraine.Domain.Abstractions;
 using Ukraine.Domain.Exceptions;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Contexts;
+namespace Ukraine.Infrastructure.EfCore.Repositories;
 
 internal sealed class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext : DbContext
 {

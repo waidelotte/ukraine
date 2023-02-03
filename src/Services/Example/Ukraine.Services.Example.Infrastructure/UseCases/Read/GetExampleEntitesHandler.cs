@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Services.Example.Domain.Entities;
 using Ukraine.Services.Example.Infrastructure.DTO;
@@ -11,12 +10,10 @@ namespace Ukraine.Services.Example.Infrastructure.UseCases.Read;
 public class CreateExampleEntityHandler : IRequestHandler<GetExampleEntitiesRequest, GetExampleEntitiesResponse>
 {
 	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
-	private readonly IMapper _mapper;
 
-	public CreateExampleEntityHandler(IUnitOfWork<ExampleContext> unitOfWork, IMapper mapper)
+	public CreateExampleEntityHandler(IUnitOfWork<ExampleContext> unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
-		_mapper = mapper;
 	}
 
 	public async Task<GetExampleEntitiesResponse> Handle(GetExampleEntitiesRequest request, CancellationToken cancellationToken)
@@ -24,11 +21,11 @@ public class CreateExampleEntityHandler : IRequestHandler<GetExampleEntitiesRequ
 		var repository = _unitOfWork.GetRepository<ExampleEntity>();
 			
 		var entities = await repository
-			.ListAsync(ExampleSpec.Create(request.PageIndex, request.PageSize), cancellationToken);
+			.ProjectListAsync<ExampleEntityDTO>(ExampleSpec.Create(request.PageIndex, request.PageSize), cancellationToken);
 		
 		var total = await repository.CountAsync(ExampleSpec.Create(), cancellationToken);
 
-		var response = new GetExampleEntitiesResponse(_mapper.Map<ExampleEntityDTO[]>(entities), total);
+		var response = new GetExampleEntitiesResponse(entities, total);
 
 		return response;
 	}
