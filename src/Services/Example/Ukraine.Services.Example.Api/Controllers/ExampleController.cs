@@ -3,8 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Domain.Abstractions;
 using Ukraine.Services.Example.Domain.Events;
-using Ukraine.Services.Example.Infrastructure.UseCases.Create;
-using Ukraine.Services.Example.Infrastructure.UseCases.Read;
+using Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleChildEntity;
+using Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleEntity;
+using Ukraine.Services.Example.Infrastructure.UseCases.ReadExampleEntity;
 
 namespace Ukraine.Services.Example.Api.Controllers;
 
@@ -45,6 +46,19 @@ public class ExampleController : ControllerBase
 		var result = await _mediator.Send(request);
 
 		_logger.LogDebug($"{nameof(CreateExampleEntityAsync)} controller end");
+		
+		return Ok(result);
+	}
+	
+	[HttpPost("CreateChildExampleEntity")]
+	[ProducesResponseType(typeof(CreateExampleChildEntityResponse), (int)HttpStatusCode.OK)]
+	public async Task<ActionResult> CreateExampleChildEntityAsync(CreateExampleChildEntityRequest request)
+	{
+		_logger.LogDebug($"{nameof(CreateExampleChildEntityAsync)} controller start");
+
+		var result = await _mediator.Send(request);
+
+		_logger.LogDebug($"{nameof(CreateExampleChildEntityAsync)} controller end");
 		
 		return Ok(result);
 	}

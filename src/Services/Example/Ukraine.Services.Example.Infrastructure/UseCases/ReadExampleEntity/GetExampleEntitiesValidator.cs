@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ukraine.Services.Example.Infrastructure.UseCases.Read;
+namespace Ukraine.Services.Example.Infrastructure.UseCases.ReadExampleEntity;
 
 public class GetExampleEntitiesValidator : AbstractValidator<GetExampleEntitiesRequest>
 {

@@ -10,6 +10,7 @@ public interface IRepository<TDbContext, TEntity> : IRepository
 	where TEntity : class, IAggregateRoot
 	where TDbContext : DbContext
 {
+	Task<TEntity?> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
 	Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
 	Task<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
 	Task<List<TProject>> ProjectListAsync<TProject>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);

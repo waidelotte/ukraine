@@ -21,6 +21,11 @@ public class BaseRepository<TDbContext, TEntity> : IRepository<TDbContext, TEnti
 		_dbSet = dbContext.Set<TEntity>();
 	}
 	
+	public async Task<TEntity?> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+	{
+		return await ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken);
+	}
+	
 	public async Task<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
 	{
 		var queryResult = await ApplySpecification(specification).ToListAsync(cancellationToken);
