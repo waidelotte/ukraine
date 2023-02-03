@@ -1,4 +1,3 @@
-using Ukraine.Domain.Exceptions;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
@@ -6,6 +5,7 @@ using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Infrastructure.Telemetry.Extenstion;
+using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Options;
 using Ukraine.Services.Example.Infrastructure.Extensions;
@@ -14,22 +14,22 @@ using Ukraine.Services.Example.Infrastructure.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 var applicationOptions = builder.Configuration.Get<ExampleApplicationOptions>();
-if (applicationOptions == null) throw CoreException.Exception("Unable to initialize section: root");
+if (applicationOptions == null) throw ExampleException.Exception("Unable to initialize section: root");
 
 var loggingOptions = builder.Configuration.GetSection(ExampleLoggingOptions.SectionName).Get<ExampleLoggingOptions>();
-if (loggingOptions == null) throw CoreException.Exception($"Unable to initialize section: {ExampleLoggingOptions.SectionName}");
+if (loggingOptions == null) throw ExampleException.Exception($"Unable to initialize section: {ExampleLoggingOptions.SectionName}");
 
 var telemetryOptions = builder.Configuration.GetSection(ExampleTelemetryOptions.SectionName).Get<ExampleTelemetryOptions>();
-if (telemetryOptions == null) throw CoreException.Exception($"Unable to initialize section: {ExampleTelemetryOptions.SectionName}");
+if (telemetryOptions == null) throw ExampleException.Exception($"Unable to initialize section: {ExampleTelemetryOptions.SectionName}");
 
 var healthCheckOptions = builder.Configuration.GetSection(ExampleHealthCheckOptions.SectionName).Get<ExampleHealthCheckOptions>();
-if (healthCheckOptions == null) throw CoreException.Exception($"Unable to initialize section: {ExampleHealthCheckOptions.SectionName}");
+if (healthCheckOptions == null) throw ExampleException.Exception($"Unable to initialize section: {ExampleHealthCheckOptions.SectionName}");
 
 var databaseOptions = builder.Configuration.GetSection(ExampleDatabaseOptions.SectionName).Get<ExampleDatabaseOptions>();
-if (databaseOptions == null) throw CoreException.Exception($"Unable to initialize section: {ExampleDatabaseOptions.SectionName}");
+if (databaseOptions == null) throw ExampleException.Exception($"Unable to initialize section: {ExampleDatabaseOptions.SectionName}");
 
 var connectionString = builder.Configuration.GetConnectionString("Postgres");
-if (string.IsNullOrEmpty(connectionString)) throw CoreException.Exception("Unable to initialize section: connectionString");
+if (string.IsNullOrEmpty(connectionString)) throw ExampleException.Exception("Unable to initialize section: connectionString");
 
 builder.Host.AddCustomLog(builder.Configuration, options =>
 {
@@ -42,7 +42,7 @@ builder.Host.AddCustomLog(builder.Configuration, options =>
 
 builder.Services.AddCustomSwagger(options =>
 {
-	options.ApplicationName = applicationOptions.ServiceName;
+	options.ServiceName = applicationOptions.ServiceName;
 });
 builder.Services.AddExampleInfrastructure(builder.Configuration);
 builder.Services.AddExampleInfrastructureEfCore(connectionString, databaseOptions);

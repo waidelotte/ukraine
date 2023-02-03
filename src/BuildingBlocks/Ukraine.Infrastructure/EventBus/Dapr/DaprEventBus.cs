@@ -4,7 +4,7 @@ using Ukraine.Domain.Abstractions;
 
 namespace Ukraine.Infrastructure.EventBus.Dapr;
 
-public class DaprEventBus : IEventBus
+internal sealed class DaprEventBus : IEventBus
 {
     private readonly DaprClient _dapr;
     private readonly ILogger _logger;

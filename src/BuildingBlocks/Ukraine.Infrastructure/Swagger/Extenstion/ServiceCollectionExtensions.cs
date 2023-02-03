@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
         {
             c.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = $"Ukraine API - {opt.ApplicationName ?? "Application"}",
+                Title = $"Ukraine API - {opt.ServiceName ?? "Service"}",
                 Version = "v1"
             });
         });

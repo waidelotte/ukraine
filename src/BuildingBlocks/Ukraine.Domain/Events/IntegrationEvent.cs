@@ -2,7 +2,7 @@
 
 namespace Ukraine.Domain.Events;
 
-public record IntegrationEvent(Guid Id, DateTime CreatedAt) : IIntegrationEvent
+public abstract record IntegrationEvent(Guid Id, DateTime CreatedAt) : IIntegrationEvent
 {
-	public IntegrationEvent() : this(Guid.NewGuid(), DateTime.UtcNow) { }
+	protected IntegrationEvent() : this(Guid.NewGuid(), DateTime.UtcNow) { }
 }

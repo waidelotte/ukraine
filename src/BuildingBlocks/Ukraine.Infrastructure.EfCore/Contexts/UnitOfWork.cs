@@ -6,12 +6,11 @@ using Ukraine.Infrastructure.EfCore.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Contexts;
 
-public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>, IDisposable where TDbContext : DbContext
+internal sealed class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext : DbContext
 {
     private readonly TDbContext _context;
     private readonly IServiceProvider _serviceProvider;
     private Dictionary<Type, IRepository>? _repositories;
-    private bool _disposed;
 
     public UnitOfWork(TDbContext context, IServiceProvider serviceProvider)
     {
@@ -45,21 +44,5 @@ public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>, IDisposable where
     public async Task<int> SaveChangesAsync()
     {
         return await _context.SaveChangesAsync();
-    }
-        
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-        
-    private void Dispose(bool disposing)
-    {
-        if (!_disposed && disposing)
-        {
-            _repositories?.Clear();
-            _context.Dispose();
-        }
-        _disposed = true;
     }
 }
