@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿using Ukraine.Infrastructure.Mediator.Requests;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.Read;
 
-public record GetExampleEntitiesRequest(int PageIndex, int PageSize) : IRequest<GetExampleEntitiesResponse>;
+public record GetExampleEntitiesRequest : BasePagedRequest<GetExampleEntitiesResponse>;
