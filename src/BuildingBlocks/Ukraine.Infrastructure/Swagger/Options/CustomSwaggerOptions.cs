@@ -2,5 +2,5 @@
 
 public class CustomSwaggerOptions
 {
-    public string? ApplicationName { get; set; }
+    public string? ServiceName { get; set; }
 }
