@@ -22,7 +22,7 @@ public class CreateExampleChildEntityHandler : IRequestHandler<CreateExampleChil
 
 	public async Task<CreateExampleChildEntityResponse> Handle(CreateExampleChildEntityRequest request, CancellationToken cancellationToken)
 	{
-		var repository = _unitOfWork.GetRepository<ExampleEntity>();
+		var repository = _unitOfWork.GetRepository<ISpecificationRepository<ExampleEntity>>();
 
 		var exampleEntity = await repository.GetAsync(ExampleSpec.Create(request.ExampleEntityId), cancellationToken);
 		if(exampleEntity == null) throw new ExampleException($"Example Entity {request.ExampleEntityId} not exists");

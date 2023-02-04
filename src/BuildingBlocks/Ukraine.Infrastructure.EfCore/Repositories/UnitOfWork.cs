@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Domain.Abstractions;
 using Ukraine.Domain.Exceptions;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 
@@ -18,24 +17,24 @@ internal sealed class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDb
         _serviceProvider = serviceProvider;
     }
     
-    public IRepository<TDbContext, TEntity> GetRepository<TEntity>() where TEntity : class, IAggregateRoot
+    public TRepository GetRepository<TRepository>() where TRepository : IRepository
     {
         _repositories ??= new Dictionary<Type, IRepository>();
 
-        var type = typeof(TEntity);
+        var type = typeof(IRepository);
 
         if (_repositories.TryGetValue(type, out var repository))
-            return (IRepository<TDbContext, TEntity>)repository;
+            return (TRepository)repository;
             
-        var serviceRepository = _serviceProvider.GetService<IRepository<TDbContext, TEntity>>();
+        var serviceRepository = _serviceProvider.GetService<TRepository>();
         if (serviceRepository == null)
-            throw CoreException.Exception($"Repository of type {typeof(TEntity)} not found.");
+            throw CoreException.Exception($"Repository of type {typeof(TRepository)} not found.");
             
         _repositories.TryAdd(type, serviceRepository);
 
         return serviceRepository;
     }
-        
+    
     public int SaveChanges()
     {
         return _context.SaveChanges();

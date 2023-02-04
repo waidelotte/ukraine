@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Ukraine.Infrastructure.EfCore.Interfaces;
+using Ukraine.Services.Example.Domain.Entities;
 using Ukraine.Services.Example.Infrastructure.DTO;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
@@ -17,7 +18,7 @@ public class CreateExampleEntityHandler : IRequestHandler<GetExampleEntitiesRequ
 
 	public async Task<GetExampleEntitiesResponse> Handle(GetExampleEntitiesRequest request, CancellationToken cancellationToken)
 	{
-		var repository = _unitOfWork.GetRepository<Domain.Entities.ExampleEntity>();
+		var repository = _unitOfWork.GetRepository<ISpecificationRepository<ExampleEntity>>();
 			
 		var entities = await repository
 			.ProjectListAsync<ExampleEntityDTO>(ExampleSpec.Create(request.PageIndex, request.PageSize), cancellationToken);
