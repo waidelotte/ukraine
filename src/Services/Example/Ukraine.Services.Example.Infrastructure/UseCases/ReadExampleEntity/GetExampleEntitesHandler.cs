@@ -7,11 +7,11 @@ using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.ReadExampleEntity;
 
-public class CreateExampleEntityHandler : IRequestHandler<GetExampleEntitiesRequest, GetExampleEntitiesResponse>
+public class GetExampleEntitiesHandler : IRequestHandler<GetExampleEntitiesRequest, GetExampleEntitiesResponse>
 {
 	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
 
-	public CreateExampleEntityHandler(IUnitOfWork<ExampleContext> unitOfWork)
+	public GetExampleEntitiesHandler(IUnitOfWork<ExampleContext> unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
