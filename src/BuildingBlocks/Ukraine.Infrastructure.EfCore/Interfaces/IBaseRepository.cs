@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Ukraine.Domain.Abstractions;
+﻿using Ukraine.Domain.Abstractions;
 
 namespace Ukraine.Infrastructure.EfCore.Interfaces;
 

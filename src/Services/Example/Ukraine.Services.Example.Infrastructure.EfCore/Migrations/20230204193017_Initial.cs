@@ -6,11 +6,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
 {
     /// <inheritdoc />
-    public partial class ExampleChildEntity : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "example_schema");
+
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
+
+            migrationBuilder.CreateTable(
+                name: "example_entities",
+                schema: "example_schema",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    stringvalue = table.Column<string>(name: "string_value", type: "text", nullable: true),
+                    intvalue = table.Column<int>(name: "int_value", type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_example_entities", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "example_child_entity",
                 schema: "example_schema",
@@ -44,6 +64,10 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
         {
             migrationBuilder.DropTable(
                 name: "example_child_entity",
+                schema: "example_schema");
+
+            migrationBuilder.DropTable(
+                name: "example_entities",
                 schema: "example_schema");
         }
     }

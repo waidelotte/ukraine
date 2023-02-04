@@ -24,7 +24,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Ukraine.Services.Example.Domain.Entities.ExampleChildEntity", b =>
+            modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.ExampleChildEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                     b.ToTable("example_child_entity", "example_schema");
                 });
 
-            modelBuilder.Entity("Ukraine.Services.Example.Domain.Entities.ExampleEntity", b =>
+            modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.ExampleEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,9 +69,9 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                     b.ToTable("example_entities", "example_schema");
                 });
 
-            modelBuilder.Entity("Ukraine.Services.Example.Domain.Entities.ExampleChildEntity", b =>
+            modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.ExampleChildEntity", b =>
                 {
-                    b.HasOne("Ukraine.Services.Example.Domain.Entities.ExampleEntity", "ExampleEntity")
+                    b.HasOne("Ukraine.Services.Example.Domain.Models.ExampleEntity", "ExampleEntity")
                         .WithMany("ChildEntities")
                         .HasForeignKey("ExampleEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -81,7 +81,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                     b.Navigation("ExampleEntity");
                 });
 
-            modelBuilder.Entity("Ukraine.Services.Example.Domain.Entities.ExampleEntity", b =>
+            modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.ExampleEntity", b =>
                 {
                     b.Navigation("ChildEntities");
                 });

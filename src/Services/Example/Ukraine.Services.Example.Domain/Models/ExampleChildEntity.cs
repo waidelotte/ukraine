@@ -2,15 +2,10 @@
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public class ExampleChildEntity : AggregateRoot<Guid>
+public sealed class ExampleChildEntity : AggregateRoot<Guid>
 {
-	public int NotNullIntValue { get; private set; }
+	public int NotNullIntValue { get; set; }
 
-	public Guid ExampleEntityId { get; private set; }
-	public ExampleEntity ExampleEntity { get; private set; } = null!;
-	
-	public ExampleChildEntity(int notNullIntValue)
-	{
-		NotNullIntValue = notNullIntValue;
-	}
+	public Guid ExampleEntityId { get; set; }
+	public ExampleEntity ExampleEntity { get; set; } = null!;
 }

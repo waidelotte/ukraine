@@ -16,13 +16,10 @@ public static class ServiceCollectionExtensions
 		services.Configure<ExampleLoggingOptions>(configuration.GetSection(ExampleLoggingOptions.SectionName));
 		services.Configure<ExampleTelemetryOptions>(configuration.GetSection(ExampleTelemetryOptions.SectionName));
 		services.Configure<ExampleHealthCheckOptions>(configuration.GetSection(ExampleHealthCheckOptions.SectionName));
-
-		services.AddAutoMapper(Assembly.GetExecutingAssembly());
+		
 		services.AddMediatR(Assembly.GetExecutingAssembly());
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
 		services.AddCustomMediatorRequestValidation();
-		services.AddCustomPagedRequestValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 		
 		return services;
 	}

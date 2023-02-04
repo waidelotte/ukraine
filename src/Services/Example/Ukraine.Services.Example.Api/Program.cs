@@ -5,6 +5,8 @@ using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Infrastructure.Telemetry.Extenstion;
+using Ukraine.Services.Example.Api.Graph.Mutations;
+using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Options;
@@ -66,6 +68,14 @@ builder.Services.AddCustomTelemetry(o =>
 builder.Services.AddCustomDapr();
 builder.Host.ValidateServicesOnBuild();
 
+builder.Services
+	.AddGraphQLServer()
+	.AddProjections()
+	.AddQueryType()
+	.AddMutationType()
+	.AddTypeExtension<ExampleEntityQueries>()
+	.AddTypeExtension<ExampleEntityMutations>();
+
 var app = builder.Build();
 
 using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -83,9 +93,10 @@ app.UseAuthorization();
 
 app.UseCloudEvents();
 
-app.MapGet("/", () => Results.LocalRedirect("~/swagger"));
+app.MapGet("/", () => Results.LocalRedirect("~/graphql"));
 
 app.MapSubscribeHandler();
+app.MapGraphQL();
 
 app.MapControllers();
 

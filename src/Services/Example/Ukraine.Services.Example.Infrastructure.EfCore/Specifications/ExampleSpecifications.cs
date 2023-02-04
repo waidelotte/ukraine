@@ -12,13 +12,6 @@ public sealed class ExampleSpec : Specification<ExampleEntity>
 		Query.Where(w => w.Id == id);
 	}
 	
-	private ExampleSpec(int pageIndex, int pageSize)
-	{
-		Query
-			.Skip((pageIndex - 1) * pageSize)
-			.Take(pageSize);
-	}
-	
 	public static ExampleSpec Create()
 	{
 		return new ExampleSpec();
@@ -27,10 +20,5 @@ public sealed class ExampleSpec : Specification<ExampleEntity>
 	public static ExampleSpec Create(Guid id)
 	{
 		return new ExampleSpec(id);
-	}
-
-	public static ExampleSpec Create(int pageIndex, int pageSize)
-	{
-		return new ExampleSpec(pageIndex, pageSize);
 	}
 }

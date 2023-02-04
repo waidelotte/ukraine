@@ -1,39 +1,37 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.DTO;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleChildEntity;
 
-public class CreateExampleChildEntityHandler : IRequestHandler<CreateExampleChildEntityRequest, CreateExampleChildEntityResponse>
+public class CreateExampleChildEntityHandler : IRequestHandler<CreateExampleChildEntityRequest, ExampleChildEntity>
 {
 	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
-	private readonly IMapper _mapper;
 
-	public CreateExampleChildEntityHandler(IUnitOfWork<ExampleContext> unitOfWork, IMapper mapper)
+	public CreateExampleChildEntityHandler(IUnitOfWork<ExampleContext> unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
-		_mapper = mapper;
 	}
 
-	public async Task<CreateExampleChildEntityResponse> Handle(CreateExampleChildEntityRequest request, CancellationToken cancellationToken)
+	public async Task<ExampleChildEntity> Handle(CreateExampleChildEntityRequest request, CancellationToken cancellationToken)
 	{
 		var repository = _unitOfWork.GetRepository<ISpecificationRepository<ExampleEntity>>();
 
 		var exampleEntity = await repository.GetAsync(ExampleSpec.Create(request.ExampleEntityId), cancellationToken);
 		if(exampleEntity == null) throw new ExampleException($"Example Entity {request.ExampleEntityId} not exists");
 
-		var childEntity = new ExampleChildEntity(request.NotNullIntValue);
+		var childEntity = new ExampleChildEntity
+		{
+			NotNullIntValue = request.NotNullIntValue
+		};
+		
 		exampleEntity.ChildEntities.Add(childEntity);
 		
 		await _unitOfWork.SaveChangesAsync();
 		
-		var dto = _mapper.Map<ExampleChildEntityDTO>(childEntity);
-		
-		return new CreateExampleChildEntityResponse(dto);
+		return childEntity;
 	}
 }
