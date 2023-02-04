@@ -21,7 +21,7 @@ public static class ServiceCollectionExtensions
 		services.AddMediatR(Assembly.GetExecutingAssembly());
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-		services.AddCustomMediatorFluentValidation();
+		services.AddCustomMediatorRequestValidation();
 		services.AddCustomPagedRequestValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 		
 		return services;

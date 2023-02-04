@@ -9,7 +9,7 @@ namespace Ukraine.Infrastructure.Mediator.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddCustomMediatorFluentValidation(this IServiceCollection services)
+	public static IServiceCollection AddCustomMediatorRequestValidation(this IServiceCollection services)
 	{
 		services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 		
