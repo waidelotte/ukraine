@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using Ukraine.Infrastructure.EfCore.Interfaces;
-using Ukraine.Services.Example.Domain.Entities;
 using Ukraine.Services.Example.Domain.Exceptions;
+using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.DTO;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;

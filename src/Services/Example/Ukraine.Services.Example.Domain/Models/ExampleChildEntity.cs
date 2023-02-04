@@ -1,6 +1,6 @@
 ﻿using Ukraine.Domain.Models;
 
-namespace Ukraine.Services.Example.Domain.Entities;
+namespace Ukraine.Services.Example.Domain.Models;
 
 public class ExampleChildEntity : AggregateRoot<Guid>
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ukraine.Services.Example.Domain.Entities;
+using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Configurations;
 

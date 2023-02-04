@@ -2,8 +2,8 @@
 using MediatR;
 using Ukraine.Domain.Abstractions;
 using Ukraine.Infrastructure.EfCore.Interfaces;
-using Ukraine.Services.Example.Domain.Entities;
 using Ukraine.Services.Example.Domain.Events;
+using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.DTO;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 

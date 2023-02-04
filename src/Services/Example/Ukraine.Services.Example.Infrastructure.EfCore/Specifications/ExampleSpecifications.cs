@@ -1,5 +1,5 @@
 ﻿using Ardalis.Specification;
-using Ukraine.Services.Example.Domain.Entities;
+using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
