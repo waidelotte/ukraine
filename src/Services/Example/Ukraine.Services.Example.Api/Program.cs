@@ -8,6 +8,7 @@ using Ukraine.Infrastructure.Telemetry.Extenstion;
 using Ukraine.Services.Example.Api.Graph.ErrorFilters;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
+using Ukraine.Services.Example.Api.Graph.Types;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Options;
@@ -76,6 +77,7 @@ builder.Services
 	.AddMutationType()
 	.AddTypeExtension<ExampleEntityQueries>()
 	.AddTypeExtension<ExampleEntityMutations>()
+	.AddTypeExtension<ExampleEntityType>()
 	.AddMutationConventions()
 	.AddErrorFilter<ExampleValidationErrorFilter>()
 	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);

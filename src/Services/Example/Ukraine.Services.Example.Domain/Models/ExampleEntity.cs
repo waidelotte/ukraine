@@ -6,6 +6,7 @@ public sealed class ExampleEntity : AggregateRoot<Guid>
 {
 	public string? StringValue { get; set; }
 	public int? IntValue { get; set; }
+	public Guid? SuperSecretKey { get; set; }
 
 	public ICollection<ExampleChildEntity> ChildEntities { get; set; } = new List<ExampleChildEntity>();
 }

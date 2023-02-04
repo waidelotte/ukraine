@@ -23,7 +23,8 @@ public class CreateExampleEntityHandler : IRequestHandler<CreateExampleEntityCom
 		var exampleEntity = new ExampleEntity
 		{
 			StringValue = request.StringValue,
-			IntValue = request.IntValue
+			IntValue = request.IntValue,
+			SuperSecretKey = Guid.NewGuid()
 		};
 		
 		var repository = _unitOfWork.GetRepository<ISpecificationRepository<ExampleEntity>>();
