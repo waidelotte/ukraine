@@ -16,16 +16,16 @@ public class ExampleSubscriberController : ControllerBase
 		_logger = logger;
 	}
 	
-	[HttpPost("ExampleEmpty")]
-	[Dapr.Topic(Constants.PUB_SUB_NAME, nameof(ExampleEmptyEvent))]
-	public async Task HandleAsync(ExampleEmptyEvent request)
+	[HttpPost("Empty")]
+	[Dapr.Topic(Constants.PUB_SUB_NAME, nameof(EmptyEvent))]
+	public async Task HandleAsync(EmptyEvent request)
 	{
 		_logger.LogDebug("Subscriber Event: {@Request}", request);
 	}
 	
-	[HttpPost("ExampleEntityCreated")]
-	[Dapr.Topic(Constants.PUB_SUB_NAME, nameof(ExampleEntityCreatedEvent))]
-	public async Task HandleAsync(ExampleEntityCreatedEvent request)
+	[HttpPost("AuthorCreated")]
+	[Dapr.Topic(Constants.PUB_SUB_NAME, nameof(AuthorCreatedEvent))]
+	public async Task HandleAsync(AuthorCreatedEvent request)
 	{
 		_logger.LogDebug("Subscriber Event: {@Request}", request);
 	}

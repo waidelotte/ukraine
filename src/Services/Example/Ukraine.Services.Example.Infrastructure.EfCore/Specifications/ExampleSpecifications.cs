@@ -3,22 +3,22 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
-public sealed class ExampleSpec : Specification<ExampleEntity>
+public sealed class AuthorSpec : Specification<Author>
 {
-	private ExampleSpec() { }
+	private AuthorSpec() { }
 	
-	private ExampleSpec(Guid id)
+	private AuthorSpec(Guid id)
 	{
 		Query.Where(w => w.Id == id);
 	}
 	
-	public static ExampleSpec Create()
+	public static AuthorSpec Create()
 	{
-		return new ExampleSpec();
+		return new AuthorSpec();
 	}
 	
-	public static ExampleSpec Create(Guid id)
+	public static AuthorSpec Create(Guid id)
 	{
-		return new ExampleSpec(id);
+		return new AuthorSpec(id);
 	}
 }

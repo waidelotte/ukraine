@@ -8,42 +8,42 @@ namespace Ukraine.Services.Example.Api.Graph;
 public class Mutations
 {
 	/// <summary>
-	/// Creates a new Entity
+	/// Creates a new Author
 	/// </summary>
 	/// <param name="mediator">Injected Mediator by the execution engine</param>
 	/// <param name="input">Example Input</param>
 	/// <param name="cancellationToken">The cancellation token</param>
-	public async Task<ExampleEntity> CreateExampleEntityAsync(
+	public async Task<Author> CreateAuthorAsync(
 		[Service] IMediator mediator,
-		CreateExampleEntityRequest input,
+		CreateAuthorRequest input,
 		CancellationToken cancellationToken)
 	{
 		return await mediator.Send(input, cancellationToken);
 	}
 	
 	/// <summary>
-	/// Deprecated version of creating a new entity
+	/// Deprecated version of creating a new Author
 	/// </summary>
 	/// <param name="mediator">Injected Mediator by the execution engine</param>
 	/// <param name="input">Example Input</param>
 	/// <param name="cancellationToken">The cancellation token</param>
-	public async Task<ExampleEntity> DeprecatedCreateExampleEntityAsync(
+	public async Task<Author> DeprecatedCreateAuthorAsync(
 		[Service] IMediator mediator,
-		CreateExampleEntityRequest input,
+		CreateAuthorRequest input,
 		CancellationToken cancellationToken)
 	{
 		return await mediator.Send(input, cancellationToken);
 	}
 	
 	/// <summary>
-	/// Creates a new Child Entity
+	/// Creates a new Author Book
 	/// </summary>
 	/// <param name="mediator">Injected Mediator by the execution engine</param>
 	/// <param name="input">Example Input</param>
 	/// <param name="cancellationToken">The cancellation token</param>
-	public async Task<ExampleChildEntity> CreateExampleChildEntityAsync(
+	public async Task<Book> CreateBookAsync(
 		[Service] IMediator mediator,
-		CreateExampleChildEntityRequest input,
+		CreateBookRequest input,
 		CancellationToken cancellationToken)
 	{
 		return await mediator.Send(input, cancellationToken);

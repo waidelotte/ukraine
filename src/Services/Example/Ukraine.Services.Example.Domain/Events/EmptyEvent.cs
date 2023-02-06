@@ -2,4 +2,4 @@
 
 namespace Ukraine.Services.Example.Domain.Events;
 
-public record ExampleEmptyEvent : IntegrationEvent;
+public record EmptyEvent : IntegrationEvent;

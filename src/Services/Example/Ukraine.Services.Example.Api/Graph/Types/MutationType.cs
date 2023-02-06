@@ -8,25 +8,25 @@ public class MutationType : ObjectType<Mutations>
 	protected override void Configure(IObjectTypeDescriptor<Mutations> descriptor)
 	{
 		descriptor
-			.Field(f => f.CreateExampleEntityAsync(default!, default!, default))
-			.Argument("input", a => a.Type<NonNullType<CreateExampleEntityInputType>>())
-			.Type<ExampleEntityType>()
-			.Error<ExamplePayloadError>()
+			.Field(f => f.CreateAuthorAsync(default!, default!, default))
+			.Argument("input", a => a.Type<NonNullType<CreateAuthorInputType>>())
+			.Type<AuthorType>()
+			.Error<PayloadError>()
 			.UseMutationConvention();
 		
 		descriptor
-			.Field(f => f.DeprecatedCreateExampleEntityAsync(default!, default!, default))
-			.Deprecated("Use the `CreateExampleEntity` field instead")
-			.Argument("input", a => a.Type<NonNullType<CreateExampleEntityInputType>>())
-			.Type<ExampleEntityType>()
-			.Error<ExamplePayloadError>()
+			.Field(f => f.DeprecatedCreateAuthorAsync(default!, default!, default))
+			.Deprecated("Use the `CreateAuthor` field instead")
+			.Argument("input", a => a.Type<NonNullType<CreateAuthorInputType>>())
+			.Type<AuthorType>()
+			.Error<PayloadError>()
 			.UseMutationConvention();
 		
 		descriptor
-			.Field(f => f.CreateExampleChildEntityAsync(default!, default!, default))
-			.Argument("input", a => a.Type<NonNullType<CreateExampleChildEntityInputType>>())
-			.Type<ExampleChildEntityType>()
-			.Error<ExamplePayloadError>()
+			.Field(f => f.CreateBookAsync(default!, default!, default))
+			.Argument("input", a => a.Type<NonNullType<CreateBookInputType>>())
+			.Type<BookType>()
+			.Error<PayloadError>()
 			.UseMutationConvention(); 
 	}
 }

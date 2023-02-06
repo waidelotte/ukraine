@@ -8,12 +8,12 @@ namespace Ukraine.Services.Example.Api.Graph;
 public class Queries
 {
 	/// <summary>
-	/// Gets a list of Entities
+	/// Gets a list of Authors
 	/// </summary>
 	/// <param name="mediator">Injected Mediator by the execution engine</param>
 	/// <param name="cancellationToken">The cancellation token</param>
-	public async Task<IQueryable<ExampleEntity>> GetExampleEntitiesAsync([FromServices] IMediator mediator, CancellationToken cancellationToken)
+	public async Task<IQueryable<Author>> GetAuthorsAsync([FromServices] IMediator mediator, CancellationToken cancellationToken)
 	{
-		return await mediator.Send(new GetExampleEntitiesQueryRequest(), cancellationToken); 
+		return await mediator.Send(new GetAuthorsQueryRequest(), cancellationToken); 
 	}
 }

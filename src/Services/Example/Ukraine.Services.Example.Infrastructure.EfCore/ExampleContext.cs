@@ -10,7 +10,7 @@ public class ExampleContext : AppDbContextBase
 {
     private const string SCHEMA = "example_schema";
         
-    public DbSet<ExampleEntity> ExampleEntities => Set<ExampleEntity>();
+    public DbSet<Author> ExampleEntities => Set<Author>();
 
     public ExampleContext(DbContextOptions options) : base(options) { }
         

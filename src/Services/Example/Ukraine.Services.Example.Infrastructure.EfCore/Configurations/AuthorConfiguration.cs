@@ -4,10 +4,12 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Configurations;
 
-public class ExampleEntityConfiguration : IEntityTypeConfiguration<ExampleEntity>
+public class AuthorConfiguration : IEntityTypeConfiguration<Author>
 {
-    public void Configure(EntityTypeBuilder<ExampleEntity> builder)
+    public void Configure(EntityTypeBuilder<Author> builder)
     {
         builder.HasKey(b => b.Id);
+        builder.Property(b => b.FullName).IsRequired();
+        builder.Property(b => b.SuperSecretKey).IsRequired();
     }
 }

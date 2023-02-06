@@ -3,4 +3,4 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleEntity;
 
-public record CreateExampleEntityRequest(string? StringValue, int? IntValue) : IRequest<ExampleEntity>;
+public record CreateAuthorRequest(string FullName, int? Age) : IRequest<Author>;

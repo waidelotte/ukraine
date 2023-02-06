@@ -5,10 +5,10 @@ public class QueryType : ObjectType<Queries>
 	protected override void Configure(IObjectTypeDescriptor<Queries> descriptor)
 	{
 		descriptor
-			.Field(f => f.GetExampleEntitiesAsync(default!, default))
-			.Type<ListType<ExampleEntityType>>()
+			.Field(f => f.GetAuthorsAsync(default!, default))
+			.Type<ListType<AuthorType>>()
 			.UsePaging()
 			.UseProjection()
-			.UseSorting<ExampleEntitySortType>();
+			.UseSorting<AuthorSortType>();
 	}
 }

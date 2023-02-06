@@ -2,4 +2,4 @@
 
 namespace Ukraine.Services.Example.Domain.Events;
 
-public record ExampleEntityCreatedEvent(Guid EntityId) : IntegrationEvent;
+public record AuthorCreatedEvent(Guid Id) : IntegrationEvent;
