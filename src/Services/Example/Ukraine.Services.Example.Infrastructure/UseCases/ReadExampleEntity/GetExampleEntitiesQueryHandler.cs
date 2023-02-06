@@ -6,16 +6,16 @@ using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.ReadExampleEntity;
 
-public class GetExampleEntitiesHandler : IRequestHandler<GetExampleEntitiesQuery, IQueryable<ExampleEntity>>
+public class GetExampleEntitiesQueryHandler : IRequestHandler<GetExampleEntitiesQueryRequest, IQueryable<ExampleEntity>>
 {
 	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
 
-	public GetExampleEntitiesHandler(IUnitOfWork<ExampleContext> unitOfWork)
+	public GetExampleEntitiesQueryHandler(IUnitOfWork<ExampleContext> unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 
-	public Task<IQueryable<ExampleEntity>> Handle(GetExampleEntitiesQuery request, CancellationToken cancellationToken)
+	public Task<IQueryable<ExampleEntity>> Handle(GetExampleEntitiesQueryRequest request, CancellationToken cancellationToken)
 	{
 		var repository = _unitOfWork.GetRepository<ISpecificationRepository<ExampleEntity>>();
 		var entities = repository.GetQuery(ExampleSpec.Create());

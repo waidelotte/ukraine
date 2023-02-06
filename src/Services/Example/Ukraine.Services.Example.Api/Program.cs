@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
@@ -5,9 +6,6 @@ using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Infrastructure.Telemetry.Extenstion;
-using Ukraine.Services.Example.Api.Graph.ErrorFilters;
-using Ukraine.Services.Example.Api.Graph.Mutations;
-using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Api.Graph.Types;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
@@ -70,16 +68,14 @@ builder.Services.AddCustomTelemetry(o =>
 builder.Services.AddCustomDapr();
 builder.Host.ValidateServicesOnBuild();
 
+builder.Services.AddFluentValidationAutoValidation();
+
 builder.Services
 	.AddGraphQLServer()
 	.AddProjections()
-	.AddQueryType()
-	.AddMutationType()
-	.AddTypeExtension<ExampleEntityQueries>()
-	.AddTypeExtension<ExampleEntityMutations>()
-	.AddTypeExtension<ExampleEntityType>()
+	.AddQueryType<QueryType>()
+	.AddMutationType<MutationType>()
 	.AddMutationConventions()
-	.AddErrorFilter<ExampleValidationErrorFilter>()
 	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
 
 var app = builder.Build();

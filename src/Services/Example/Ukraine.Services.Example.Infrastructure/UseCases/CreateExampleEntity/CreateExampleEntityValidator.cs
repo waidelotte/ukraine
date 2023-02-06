@@ -2,7 +2,7 @@
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleEntity;
 
-public class CreateExampleEntityValidator : AbstractValidator<CreateExampleEntityCommand>
+public class CreateExampleEntityValidator : AbstractValidator<CreateExampleEntityRequest>
 {
     public CreateExampleEntityValidator()
     {

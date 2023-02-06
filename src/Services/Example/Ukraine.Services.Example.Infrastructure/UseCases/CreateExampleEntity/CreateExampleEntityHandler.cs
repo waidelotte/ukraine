@@ -7,7 +7,7 @@ using Ukraine.Services.Example.Infrastructure.EfCore;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleEntity;
 
-public class CreateExampleEntityHandler : IRequestHandler<CreateExampleEntityCommand, ExampleEntity>
+public class CreateExampleEntityHandler : IRequestHandler<CreateExampleEntityRequest, ExampleEntity>
 {
 	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
 	private readonly IEventBus _eventBus;
@@ -18,7 +18,7 @@ public class CreateExampleEntityHandler : IRequestHandler<CreateExampleEntityCom
 		_eventBus = eventBus;
 	}
 
-	public async Task<ExampleEntity> Handle(CreateExampleEntityCommand request, CancellationToken cancellationToken)
+	public async Task<ExampleEntity> Handle(CreateExampleEntityRequest request, CancellationToken cancellationToken)
 	{
 		var exampleEntity = new ExampleEntity
 		{
