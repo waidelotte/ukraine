@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using HotChocolate.AspNetCore;
 using HotChocolate.Types.Pagination;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
@@ -9,7 +10,6 @@ using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Infrastructure.Telemetry.Extenstion;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
-using Ukraine.Services.Example.Api.Graph.Types;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
@@ -92,7 +92,8 @@ builder.Services
 		DefaultPageSize = 10,
 		IncludeTotalCount = true,
 		AllowBackwardPagination = false
-	});
+	})
+	.AllowIntrospection(builder.Environment.IsDevelopment());
 
 var app = builder.Build();
 
@@ -111,10 +112,17 @@ app.UseAuthorization();
 
 app.UseCloudEvents();
 
-app.MapGet("/", () => Results.LocalRedirect("~/graphql"));
+app.MapGet("/", () => Results.LocalRedirect("~/graphql/ui"));
 
 app.MapSubscribeHandler();
-app.MapGraphQL();
+
+app.MapGraphQL().WithOptions(new GraphQLServerOptions
+{
+	EnableSchemaRequests = false,
+	EnableGetRequests = false,
+	EnableMultipartRequests = true,
+	Tool = { Enable = app.Environment.IsDevelopment() }
+});
 
 app.MapControllers();
 
