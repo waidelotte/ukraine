@@ -5,7 +5,7 @@ using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
-namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleChildEntity;
+namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 
 public class CreateBookHandler : IRequestHandler<CreateBookRequest, Book>
 {

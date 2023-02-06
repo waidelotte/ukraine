@@ -5,7 +5,7 @@ using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.EfCore;
 
-namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleEntity;
+namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
 public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 {

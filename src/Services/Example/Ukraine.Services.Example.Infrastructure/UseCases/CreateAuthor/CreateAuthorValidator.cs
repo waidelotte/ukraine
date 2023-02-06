@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleEntity;
+namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
 public class CreateAuthorValidator : AbstractValidator<CreateAuthorRequest>
 {

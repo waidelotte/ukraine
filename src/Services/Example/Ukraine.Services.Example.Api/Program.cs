@@ -11,6 +11,7 @@ using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Api.Graph.Types;
 using Ukraine.Services.Example.Domain.Exceptions;
+using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Options;
 using Ukraine.Services.Example.Infrastructure.Extensions;
@@ -75,6 +76,7 @@ builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services
 	.AddGraphQLServer()
+	.RegisterDbContext<ExampleContext>()
 	.AddProjections()
 	.AddSorting()
 	.AddQueryType(q => q.Name(OperationTypeNames.Query))

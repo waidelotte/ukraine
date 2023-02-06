@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleChildEntity;
+using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 
 namespace Ukraine.Services.Example.Api.Graph.Resolvers;
 

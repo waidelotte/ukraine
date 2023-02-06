@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleChildEntity;
+namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 
 public class CreateBookValidator : AbstractValidator<CreateBookRequest>
 {
