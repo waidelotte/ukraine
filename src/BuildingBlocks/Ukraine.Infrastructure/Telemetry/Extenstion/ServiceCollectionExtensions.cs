@@ -24,6 +24,7 @@ public static class ServiceCollectionExtensions
 				.SetSampler(new AlwaysOnSampler())
 				.AddAspNetCoreInstrumentation()
 				.AddHttpClientInstrumentation()
+				.AddHotChocolateInstrumentation()
 				.AddSqlClientInstrumentation(o => o.SetDbStatementForText = true);
 
 			if (opt.UseZipkin)

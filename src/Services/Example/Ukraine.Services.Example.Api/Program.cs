@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using HotChocolate.AspNetCore;
 using HotChocolate.Types.Pagination;
+using MediatR;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
@@ -77,6 +78,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services
 	.AddGraphQLServer()
 	.RegisterDbContext<ExampleContext>()
+	.RegisterService<IMediator>(ServiceKind.Synchronized)
 	.AddProjections()
 	.AddSorting()
 	.AddQueryType(q => q.Name(OperationTypeNames.Query))
@@ -93,7 +95,12 @@ builder.Services
 		IncludeTotalCount = true,
 		AllowBackwardPagination = false
 	})
-	.AllowIntrospection(builder.Environment.IsDevelopment());
+	.AddInstrumentation(o =>
+	{
+		o.RenameRootActivity = true;
+	})
+	.AllowIntrospection(builder.Environment.IsDevelopment())
+	.InitializeOnStartup();
 
 var app = builder.Build();
 

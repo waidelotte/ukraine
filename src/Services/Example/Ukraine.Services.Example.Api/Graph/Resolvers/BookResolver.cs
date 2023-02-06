@@ -13,7 +13,7 @@ public class BookResolver
 	/// <param name="input">Example Input</param>
 	/// <param name="cancellationToken">The cancellation token</param>
 	public async Task<Book> CreateBookAsync(
-		[Service] IMediator mediator,
+		IMediator mediator,
 		CreateBookRequest input,
 		CancellationToken cancellationToken)
 	{

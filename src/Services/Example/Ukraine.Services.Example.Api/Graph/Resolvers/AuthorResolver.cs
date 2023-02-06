@@ -12,7 +12,7 @@ public class AuthorResolver
 	/// </summary>
 	/// <param name="mediator">Injected Mediator by the execution engine</param>
 	/// <param name="cancellationToken">The cancellation token</param>
-	public async Task<IQueryable<Author>> GetAuthorsAsync([Service] IMediator mediator, CancellationToken cancellationToken)
+	public async Task<IQueryable<Author>> GetAuthorsAsync(IMediator mediator, CancellationToken cancellationToken)
 	{
 		return await mediator.Send(new GetAuthorsQueryRequest(), cancellationToken); 
 	}
@@ -24,7 +24,7 @@ public class AuthorResolver
 	/// <param name="input">Example Input</param>
 	/// <param name="cancellationToken">The cancellation token</param>
 	public async Task<Author> CreateAuthorAsync(
-		[Service] IMediator mediator,
+		IMediator mediator,
 		CreateAuthorRequest input,
 		CancellationToken cancellationToken)
 	{
@@ -38,7 +38,7 @@ public class AuthorResolver
 	/// <param name="input">Example Input</param>
 	/// <param name="cancellationToken">The cancellation token</param>
 	public async Task<Author> DeprecatedCreateAuthorAsync(
-		[Service] IMediator mediator,
+		IMediator mediator,
 		CreateAuthorRequest input,
 		CancellationToken cancellationToken)
 	{
