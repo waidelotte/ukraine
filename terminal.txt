@@ -1,1 +1,3 @@
-﻿tye run .\tye.yaml --dashboard
+﻿tye run .\tye.yaml
+tye run .\tye.yaml --dashboard
+tye run .\tye.yaml --dashboard --debug *
