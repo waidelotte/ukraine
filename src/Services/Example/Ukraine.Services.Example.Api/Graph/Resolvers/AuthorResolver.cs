@@ -1,12 +1,22 @@
 ﻿using MediatR;
 using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleChildEntity;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateExampleEntity;
+using Ukraine.Services.Example.Infrastructure.UseCases.ReadExampleEntity;
 
-namespace Ukraine.Services.Example.Api.Graph;
+namespace Ukraine.Services.Example.Api.Graph.Resolvers;
 
-public class Mutations
+public class AuthorResolver
 {
+	/// <summary>
+	/// Gets a list of Authors
+	/// </summary>
+	/// <param name="mediator">Injected Mediator by the execution engine</param>
+	/// <param name="cancellationToken">The cancellation token</param>
+	public async Task<IQueryable<Author>> GetAuthorsAsync([Service] IMediator mediator, CancellationToken cancellationToken)
+	{
+		return await mediator.Send(new GetAuthorsQueryRequest(), cancellationToken); 
+	}
+	
 	/// <summary>
 	/// Creates a new Author
 	/// </summary>
@@ -30,20 +40,6 @@ public class Mutations
 	public async Task<Author> DeprecatedCreateAuthorAsync(
 		[Service] IMediator mediator,
 		CreateAuthorRequest input,
-		CancellationToken cancellationToken)
-	{
-		return await mediator.Send(input, cancellationToken);
-	}
-	
-	/// <summary>
-	/// Creates a new Author Book
-	/// </summary>
-	/// <param name="mediator">Injected Mediator by the execution engine</param>
-	/// <param name="input">Example Input</param>
-	/// <param name="cancellationToken">The cancellation token</param>
-	public async Task<Book> CreateBookAsync(
-		[Service] IMediator mediator,
-		CreateBookRequest input,
 		CancellationToken cancellationToken)
 	{
 		return await mediator.Send(input, cancellationToken);

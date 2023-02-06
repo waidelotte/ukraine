@@ -7,6 +7,8 @@ using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Infrastructure.Telemetry.Extenstion;
+using Ukraine.Services.Example.Api.Graph.Mutations;
+using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Api.Graph.Types;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
@@ -75,8 +77,11 @@ builder.Services
 	.AddGraphQLServer()
 	.AddProjections()
 	.AddSorting()
-	.AddQueryType<QueryType>()
-	.AddMutationType<MutationType>()
+	.AddQueryType(q => q.Name(OperationTypeNames.Query))
+		.AddType<AuthorQueryTypeExtension>()
+	.AddMutationType(q => q.Name(OperationTypeNames.Mutation))
+		.AddType<AuthorMutationTypeExtension>()
+		.AddType<BookMutationTypeExtension>()
 	.AddMutationConventions()
 	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true)
 	.SetPagingOptions(new PagingOptions
