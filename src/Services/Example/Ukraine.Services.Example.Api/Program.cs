@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using HotChocolate.Types.Pagination;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
@@ -73,10 +74,18 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services
 	.AddGraphQLServer()
 	.AddProjections()
+	.AddSorting()
 	.AddQueryType<QueryType>()
 	.AddMutationType<MutationType>()
 	.AddMutationConventions()
-	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
+	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true)
+	.SetPagingOptions(new PagingOptions
+	{
+		MaxPageSize = 100,
+		DefaultPageSize = 10,
+		IncludeTotalCount = true,
+		AllowBackwardPagination = false
+	});
 
 var app = builder.Build();
 

@@ -1,12 +1,14 @@
 ﻿namespace Ukraine.Services.Example.Api.Graph.Types;
 
-public class QueryType : ObjectType<Query>
+public class QueryType : ObjectType<Queries>
 {
-	protected override void Configure(IObjectTypeDescriptor<Query> descriptor)
+	protected override void Configure(IObjectTypeDescriptor<Queries> descriptor)
 	{
 		descriptor
 			.Field(f => f.GetExampleEntitiesAsync(default!, default))
 			.Type<ListType<ExampleEntityType>>()
-			.UseProjection();
+			.UsePaging()
+			.UseProjection()
+			.UseSorting<ExampleEntitySortType>();
 	}
 }

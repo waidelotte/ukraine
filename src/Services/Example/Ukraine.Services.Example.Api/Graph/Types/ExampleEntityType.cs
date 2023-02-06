@@ -6,8 +6,8 @@ public class ExampleEntityType : ObjectType<ExampleEntity>
 {
 	protected override void Configure(IObjectTypeDescriptor<ExampleEntity> descriptor)
 	{
-		descriptor.BindFields(BindingBehavior.Implicit);
-		
+		descriptor.Field(f => f.Id).ID();
 		descriptor.Ignore(f => f.SuperSecretKey);
+		descriptor.Field(f => f.ChildEntities).UseSorting<ExampleChildEntitySortType>();
 	}
 }

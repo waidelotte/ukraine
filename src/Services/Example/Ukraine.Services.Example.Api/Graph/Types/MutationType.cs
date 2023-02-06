@@ -3,9 +3,9 @@ using Ukraine.Services.Example.Api.Graph.Inputs;
 
 namespace Ukraine.Services.Example.Api.Graph.Types;
 
-public class MutationType : ObjectType<Mutation>
+public class MutationType : ObjectType<Mutations>
 {
-	protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)
+	protected override void Configure(IObjectTypeDescriptor<Mutations> descriptor)
 	{
 		descriptor
 			.Field(f => f.CreateExampleEntityAsync(default!, default!, default))
@@ -21,5 +21,12 @@ public class MutationType : ObjectType<Mutation>
 			.Type<ExampleEntityType>()
 			.Error<ExamplePayloadError>()
 			.UseMutationConvention();
+		
+		descriptor
+			.Field(f => f.CreateExampleChildEntityAsync(default!, default!, default))
+			.Argument("input", a => a.Type<NonNullType<CreateExampleChildEntityInputType>>())
+			.Type<ExampleChildEntityType>()
+			.Error<ExamplePayloadError>()
+			.UseMutationConvention(); 
 	}
 }

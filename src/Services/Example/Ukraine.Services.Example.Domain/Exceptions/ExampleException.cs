@@ -2,6 +2,8 @@
 
 public class ExampleException : Exception
 {
+	public ExampleException() { }
+	
 	public ExampleException(string message) : base(message) { }
 
 	public static ExampleException Exception(string message)
