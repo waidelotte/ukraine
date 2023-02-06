@@ -13,5 +13,13 @@ public class MutationType : ObjectType<Mutation>
 			.Type<ExampleEntityType>()
 			.Error<ExamplePayloadError>()
 			.UseMutationConvention();
+		
+		descriptor
+			.Field(f => f.DeprecatedCreateExampleEntityAsync(default!, default!, default))
+			.Deprecated("Use the `CreateExampleEntity` field instead")
+			.Argument("input", a => a.Type<NonNullType<CreateExampleEntityInputType>>())
+			.Type<ExampleEntityType>()
+			.Error<ExamplePayloadError>()
+			.UseMutationConvention();
 	}
 }
