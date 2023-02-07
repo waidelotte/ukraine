@@ -1,4 +1,5 @@
-﻿using Ukraine.Services.Example.Api.Graph.Errors;
+﻿using HotChocolate.Types;
+using Ukraine.Services.Example.Api.Graph.Errors;
 using Ukraine.Services.Example.Api.Graph.Inputs;
 using Ukraine.Services.Example.Api.Graph.Resolvers;
 using Ukraine.Services.Example.Api.Graph.Types;

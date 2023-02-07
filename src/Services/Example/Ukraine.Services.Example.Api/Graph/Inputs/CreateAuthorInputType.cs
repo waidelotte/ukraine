@@ -1,4 +1,5 @@
-﻿using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
+﻿using HotChocolate.Types;
+using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
 namespace Ukraine.Services.Example.Api.Graph.Inputs;
 

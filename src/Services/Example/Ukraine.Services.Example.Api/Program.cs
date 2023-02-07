@@ -1,9 +1,11 @@
 using FluentValidation.AspNetCore;
-using HotChocolate.AspNetCore;
-using HotChocolate.Types.Pagination;
+using HotChocolate;
+using HotChocolate.Types;
 using MediatR;
+using Ukraine.Infrastructure.EfCore.GraphQL.Extensions;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
+using Ukraine.Infrastructure.GraphQL.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
 using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
@@ -34,6 +36,9 @@ if (healthCheckOptions == null) throw ExampleException.Exception($"Unable to ini
 
 var databaseOptions = builder.Configuration.GetSection(ExampleDatabaseOptions.SectionName).Get<ExampleDatabaseOptions>();
 if (databaseOptions == null) throw ExampleException.Exception($"Unable to initialize section: {ExampleDatabaseOptions.SectionName}");
+
+var graphQlOptions = builder.Configuration.GetSection(ExampleGraphQLOptions.SectionName).Get<ExampleGraphQLOptions>();
+if (graphQlOptions == null) throw ExampleException.Exception($"Unable to initialize section: {ExampleGraphQLOptions.SectionName}");
 
 var connectionString = builder.Configuration.GetConnectionString("Postgres");
 if (string.IsNullOrEmpty(connectionString)) throw ExampleException.Exception("Unable to initialize section: connectionString");
@@ -75,32 +80,23 @@ builder.Host.ValidateServicesOnBuild();
 
 builder.Services.AddFluentValidationAutoValidation();
 
-builder.Services
-	.AddGraphQLServer()
-	.RegisterDbContext<ExampleContext>()
-	.RegisterService<IMediator>(ServiceKind.Synchronized)
-	.AddProjections()
-	.AddSorting()
+builder.Services.AddCustomGraphQL(options =>
+{
+	options.IncludeExceptionDetails = graphQlOptions.IncludeExceptionDetails;
+	options.IsIntrospectionEnabled = graphQlOptions.IsIntrospectionEnabled;
+	options.IsInstrumentationEnabled = graphQlOptions.IsInstrumentationEnabled;
+	options.AllowBackwardPagination = graphQlOptions.Paging.AllowBackwardPagination;
+	options.DefaultPageSize = graphQlOptions.Paging.DefaultPageSize;
+	options.MaxPageSize = graphQlOptions.Paging.MaxPageSize;
+	options.IncludeTotalCount = graphQlOptions.Paging.IncludeTotalCount;
+}).AddCustomEfCore<ExampleContext>()
 	.AddQueryType(q => q.Name(OperationTypeNames.Query))
-		.AddType<AuthorQueryTypeExtension>()
+	.AddType<AuthorQueryTypeExtension>()
 	.AddMutationType(q => q.Name(OperationTypeNames.Mutation))
-		.AddType<AuthorMutationTypeExtension>()
-		.AddType<BookMutationTypeExtension>()
-	.AddMutationConventions()
-	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true)
-	.SetPagingOptions(new PagingOptions
-	{
-		MaxPageSize = 100,
-		DefaultPageSize = 10,
-		IncludeTotalCount = true,
-		AllowBackwardPagination = false
-	})
-	.AddInstrumentation(o =>
-	{
-		o.RenameRootActivity = true;
-	})
-	.AllowIntrospection(builder.Environment.IsDevelopment())
-	.InitializeOnStartup();
+	.AddType<AuthorMutationTypeExtension>()
+	.AddType<BookMutationTypeExtension>()
+	.RegisterService<IMediator>(ServiceKind.Synchronized);
+	
 
 var app = builder.Build();
 
@@ -123,12 +119,12 @@ app.MapGet("/", () => Results.LocalRedirect("~/graphql/ui"));
 
 app.MapSubscribeHandler();
 
-app.MapGraphQL().WithOptions(new GraphQLServerOptions
+app.UseCustomGraphQL(options =>
 {
-	EnableSchemaRequests = false,
-	EnableGetRequests = false,
-	EnableMultipartRequests = true,
-	Tool = { Enable = app.Environment.IsDevelopment() }
+	options.IsToolEnabled = graphQlOptions.IsToolEnabled;
+	options.IsGetRequestsEnabled = graphQlOptions.IsGetRequestsEnabled;
+	options.IsMultipartRequestsEnabled = graphQlOptions.IsMultipartRequestsEnabled;
+	options.IsSchemaRequestsEnabled = graphQlOptions.IsSchemaRequestsEnabled;
 });
 
 app.MapControllers();

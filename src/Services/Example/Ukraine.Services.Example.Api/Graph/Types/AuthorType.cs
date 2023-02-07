@@ -1,4 +1,6 @@
-﻿using Ukraine.Services.Example.Domain.Models;
+﻿using HotChocolate.Types;
+using Ukraine.Services.Example.Api.Graph.Sort;
+using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Api.Graph.Types;
 

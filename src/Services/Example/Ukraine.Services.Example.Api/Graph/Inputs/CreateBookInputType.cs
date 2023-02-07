@@ -1,4 +1,5 @@
-﻿using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
+﻿using HotChocolate.Types;
+using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 
 namespace Ukraine.Services.Example.Api.Graph.Inputs;
 

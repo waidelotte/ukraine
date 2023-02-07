@@ -1,4 +1,6 @@
-﻿using Ukraine.Services.Example.Api.Graph.Resolvers;
+﻿using HotChocolate.Types;
+using Ukraine.Services.Example.Api.Graph.Resolvers;
+using Ukraine.Services.Example.Api.Graph.Sort;
 using Ukraine.Services.Example.Api.Graph.Types;
 
 namespace Ukraine.Services.Example.Api.Graph.Queries;
