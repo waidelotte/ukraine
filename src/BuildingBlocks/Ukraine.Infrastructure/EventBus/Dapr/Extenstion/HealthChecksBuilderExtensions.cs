@@ -4,9 +4,12 @@ namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
 
 public static class HealthChecksBuilderExtensions
 {
-	public static IHealthChecksBuilder AddCustomDaprHealthCheck(this IHealthChecksBuilder builder)
+	public static IHealthChecksBuilder AddUkraineDaprHealthCheck(this IHealthChecksBuilder builder)
 	{
-		builder.AddCheck<DaprHealthCheck>("Dapr", tags: new []{ "ready", "dapr"});
+		builder.AddCheck<HealthCheck>(Constants.SERVICE_NAME, tags: new []
+		{
+			HealthChecks.Constants.READY_STATUS, Constants.SERVICE_NAME
+		});
 
 		return builder;
 	}

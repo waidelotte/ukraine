@@ -3,11 +3,11 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Ukraine.Infrastructure.EventBus.Dapr;
 
-internal sealed class DaprHealthCheck : IHealthCheck
+internal sealed class HealthCheck : IHealthCheck
 {
 	private readonly DaprClient _daprClient;
 
-	public DaprHealthCheck(DaprClient daprClient)
+	public HealthCheck(DaprClient daprClient)
 	{
 		_daprClient = daprClient;
 	}

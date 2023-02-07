@@ -1,15 +1,15 @@
 using Dapr.Client;
 using Microsoft.Extensions.Logging;
-using Ukraine.Domain.Abstractions;
+using Ukraine.Domain.Interfaces;
 
 namespace Ukraine.Infrastructure.EventBus.Dapr;
 
-internal sealed class DaprEventBus : IEventBus
+internal sealed class EventBus : IEventBus
 {
     private readonly DaprClient _dapr;
     private readonly ILogger _logger;
 
-    public DaprEventBus(DaprClient dapr, ILogger<DaprEventBus> logger)
+    public EventBus(DaprClient dapr, ILogger<EventBus> logger)
     {
         _dapr = dapr;
         _logger = logger;

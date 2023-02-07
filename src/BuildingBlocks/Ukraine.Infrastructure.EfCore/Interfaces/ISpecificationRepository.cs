@@ -1,5 +1,5 @@
 ﻿using Ardalis.Specification;
-using Ukraine.Domain.Abstractions;
+using Ukraine.Domain.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Interfaces;
 

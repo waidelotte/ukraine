@@ -1,7 +1,7 @@
 ﻿using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Domain.Abstractions;
+using Ukraine.Domain.Interfaces;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Repositories;

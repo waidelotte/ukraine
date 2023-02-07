@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Domain.Abstractions;
+﻿namespace Ukraine.Domain.Interfaces;
 
 public interface IIntegrationEvent
 {

@@ -65,7 +65,7 @@ if (healthCheckOptions.IsEnabled)
 	var healthCheckBuilder = builder.Services.AddCustomHealthChecks();
 	
 	if(healthCheckOptions.CheckDatabase) healthCheckBuilder.AddCustomNpgSql(connectionString);
-	if(healthCheckOptions.CheckDaprSidecar) healthCheckBuilder.AddCustomDaprHealthCheck();
+	if(healthCheckOptions.CheckDaprSidecar) healthCheckBuilder.AddUkraineDaprHealthCheck();
 }
 
 builder.Services.AddCustomTelemetry(o =>
@@ -75,7 +75,7 @@ builder.Services.AddCustomTelemetry(o =>
 	o.ZipkinEndpoint = telemetryOptions.ZipkinServerUrl;
 });
 
-builder.Services.AddCustomDapr();
+builder.Services.AddUkraineDaprEventBus();
 builder.Host.ValidateServicesOnBuild();
 
 builder.Services.AddFluentValidationAutoValidation();

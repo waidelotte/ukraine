@@ -1,4 +1,4 @@
-﻿using Ukraine.Domain.Abstractions;
+﻿using Ukraine.Domain.Interfaces;
 using Ukraine.Infrastructure.EfCore.Repositories;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore;

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Ukraine.Infrastructure;
+using Ukraine.Infrastructure.EventBus.Dapr;
 using Ukraine.Services.Example.Domain.Events;
 
 namespace Ukraine.Services.Example.Api.Controllers;

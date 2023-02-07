@@ -1,4 +1,4 @@
-﻿using Ukraine.Domain.Abstractions;
+﻿using Ukraine.Domain.Interfaces;
 
 namespace Ukraine.Domain.Models;
 
