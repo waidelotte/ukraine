@@ -5,9 +5,12 @@ namespace Ukraine.Infrastructure.HealthChecks.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
-	public static IHealthChecksBuilder AddCustomHealthChecks(this IServiceCollection serviceCollection)
+	public static IHealthChecksBuilder AddUkraineHealthChecks(this IServiceCollection serviceCollection)
 	{
 		return serviceCollection.AddHealthChecks()
-			.AddCheck("Application", () => HealthCheckResult.Healthy(), tags: new[] { "ready", "application" });
+			.AddCheck(Constants.DEFAULT_SERVICE_NAME, () => HealthCheckResult.Healthy(), tags: new[]
+			{
+				Constants.Tags.READY, Constants.DEFAULT_SERVICE_NAME
+			});
 	}
 }

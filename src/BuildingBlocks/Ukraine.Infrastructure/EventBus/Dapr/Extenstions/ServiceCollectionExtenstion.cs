@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Domain.Interfaces;
 
-namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
+namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstions;
 
 public static class DaprServiceCollectionExtenstion
 {
@@ -10,7 +10,7 @@ public static class DaprServiceCollectionExtenstion
     {
         var options = new JsonSerializerOptions
         {
-            PropertyNameCaseInsensitive = true,
+            PropertyNameCaseInsensitive = Constants.Serialization.CaseInsensitive,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 

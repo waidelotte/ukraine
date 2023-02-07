@@ -10,16 +10,11 @@ namespace Ukraine.Services.Example.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddExampleInfrastructure(this IServiceCollection services, IConfiguration configuration)
+	public static IServiceCollection AddExampleInfrastructure(this IServiceCollection services)
 	{
-		services.Configure<ExampleApplicationOptions>(configuration);
-		services.Configure<ExampleLoggingOptions>(configuration.GetSection(ExampleLoggingOptions.SectionName));
-		services.Configure<ExampleTelemetryOptions>(configuration.GetSection(ExampleTelemetryOptions.SectionName));
-		services.Configure<ExampleHealthCheckOptions>(configuration.GetSection(ExampleHealthCheckOptions.SectionName));
-		
 		services.AddMediatR(Assembly.GetExecutingAssembly());
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-		services.AddCustomMediatorRequestValidation();
+		services.AddUkraineMediatorRequestValidation();
 		
 		return services;
 	}

@@ -6,20 +6,20 @@ namespace Ukraine.Infrastructure.HealthChecks.Extenstion;
 
 public static class WebApplicationExtensions
 {
-    public static void UseCustomHealthChecks(this WebApplication webApplication)
+    public static void UseUkraineHealthChecks(this WebApplication webApplication)
     {
-        webApplication.MapHealthChecks("/health/status", new HealthCheckOptions
+        webApplication.MapHealthChecks(Constants.Endpoints.READY, new HealthCheckOptions
         {
-            Predicate = reg => reg.Tags.Contains("ready"),
+            Predicate = reg => reg.Tags.Contains(Constants.Tags.READY),
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
     }
     
-    public static void UseCustomDatabaseHealthChecks(this WebApplication webApplication)
+    public static void UseUkraineDatabaseHealthChecks(this WebApplication webApplication)
     {
-        webApplication.MapHealthChecks("/health/database", new HealthCheckOptions
+        webApplication.MapHealthChecks(Constants.Endpoints.DATABASE, new HealthCheckOptions
         {
-            Predicate = r => r.Tags.Contains("database"),
+            Predicate = r => r.Tags.Contains(Constants.Tags.DATABASE),
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
     }

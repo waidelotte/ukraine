@@ -6,7 +6,7 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore;
 
-public class ExampleContext : AppDbContextBase
+public class ExampleContext : UkraineDatabaseContextBase
 {
     private const string SCHEMA = "example_schema";
         

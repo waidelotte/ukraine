@@ -4,11 +4,11 @@ namespace Ukraine.Infrastructure.Hosting.Extensions;
 
 public static class HostBuilderExtensions
 {
-    public static IHostBuilder ValidateServicesOnBuild(this IHostBuilder hostBuilder)
+    public static IHostBuilder AddUkraineServicesValidationOnBuild(this IHostBuilder hostBuilder)
     {
-        hostBuilder.UseDefaultServiceProvider((context, options) =>
+        hostBuilder.UseDefaultServiceProvider((_, options) =>
         {
-            options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+            options.ValidateScopes = true;
             options.ValidateOnBuild = true;
         });
             

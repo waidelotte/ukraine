@@ -1,7 +1,5 @@
-﻿using HotChocolate.Diagnostics;
-using HotChocolate.Execution.Configuration;
+﻿using HotChocolate.Execution.Configuration;
 using HotChocolate.Types.Pagination;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Infrastructure.GraphQL.Options;
 
@@ -9,9 +7,9 @@ namespace Ukraine.Infrastructure.GraphQL.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
-	public static IRequestExecutorBuilder AddCustomGraphQL(this IServiceCollection services, Action<CustomGraphQLOptions> options)
+	public static IRequestExecutorBuilder AddUkraineGraphQL(this IServiceCollection services, Action<UkraineGraphQLOptions> options)
 	{
-		var opt = new CustomGraphQLOptions();
+		var opt = new UkraineGraphQLOptions();
 		options.Invoke(opt);
 		
 		var builder = services
@@ -22,22 +20,11 @@ public static class ServiceCollectionExtensions
 			{
 				MaxPageSize = opt.MaxPageSize,
 				DefaultPageSize = opt.DefaultPageSize,
-				IncludeTotalCount = opt.IncludeTotalCount,
-				AllowBackwardPagination = opt.AllowBackwardPagination
+				IncludeTotalCount = Constants.PAGING_TOTAL_COUNT_ENABLED,
+				AllowBackwardPagination = Constants.PAGING_BACKWARD_ENABLED
 			})
-			.AllowIntrospection(opt.IsIntrospectionEnabled)
+			.AllowIntrospection(opt.UseIntrospection)
 			.InitializeOnStartup();
-
-		if (opt.IsIntrospectionEnabled)
-		{
-			builder.AddInstrumentation(o =>
-			{
-				o.RequestDetails = RequestDetails.All;
-				o.IncludeDataLoaderKeys = true;
-				o.RenameRootActivity = true;
-			});
-		}
-
 		return builder;
 	}
 }

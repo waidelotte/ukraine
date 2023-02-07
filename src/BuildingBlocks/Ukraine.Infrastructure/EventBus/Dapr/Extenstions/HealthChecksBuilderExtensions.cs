@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstion;
+namespace Ukraine.Infrastructure.EventBus.Dapr.Extenstions;
 
 public static class HealthChecksBuilderExtensions
 {
@@ -8,7 +8,7 @@ public static class HealthChecksBuilderExtensions
 	{
 		builder.AddCheck<HealthCheck>(Constants.SERVICE_NAME, tags: new []
 		{
-			HealthChecks.Constants.READY_STATUS, Constants.SERVICE_NAME
+			HealthChecks.Constants.Tags.READY, Constants.SERVICE_NAME
 		});
 
 		return builder;

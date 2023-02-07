@@ -1,5 +1,6 @@
 using Dapr.Client;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Ukraine.Domain.Interfaces;
 
 namespace Ukraine.Infrastructure.EventBus.Dapr;

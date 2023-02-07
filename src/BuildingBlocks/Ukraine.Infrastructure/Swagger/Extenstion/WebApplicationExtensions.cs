@@ -4,12 +4,12 @@ namespace Ukraine.Infrastructure.Swagger.Extenstion;
 
 public static class WebApplicationExtensions
 {
-    public static void UseCustomSwagger(this WebApplication application)
+    public static IApplicationBuilder UseUkraineSwagger(this WebApplication application)
     {
         application.UseSwagger();
-        application.UseSwaggerUI(c =>
+        return application.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
+            c.SwaggerEndpoint(Constants.ENDPOINT, Constants.DEFAULT_ENDPOINT_NAME);
         });
     }
 }

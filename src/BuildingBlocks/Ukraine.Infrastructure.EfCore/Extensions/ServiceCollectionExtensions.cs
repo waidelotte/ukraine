@@ -8,12 +8,12 @@ namespace Ukraine.Infrastructure.EfCore.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddCustomNpgsqlContext<TContext, TMigrationAssembly>(
+	public static IServiceCollection AddUkrainePostgresContext<TContext, TMigrationAssembly>(
 		this IServiceCollection services,
 		string connectionString,
-		Action<CustomNpgsqlOptions> options) where TContext : DbContext, IDatabaseFacadeResolver
+		Action<UkrainePostgresOptions> options) where TContext : DbContext, IDatabaseFacadeResolver
 	{
-		var opt = new CustomNpgsqlOptions();
+		var opt = new UkrainePostgresOptions();
 		options.Invoke(opt);
 		
 		services.AddDbContextPool<TContext>(o =>
@@ -30,7 +30,7 @@ public static class ServiceCollectionExtensions
 		return services;
 	}
 	
-	public static IServiceCollection AddCustomUnitOfWork<TDbContext>(this IServiceCollection services) 
+	public static IServiceCollection AddUkraineUnitOfWork<TDbContext>(this IServiceCollection services) 
 		where TDbContext : DbContext
 	{
 		services.AddScoped<IUnitOfWork<TDbContext>, UnitOfWork<TDbContext>>();
