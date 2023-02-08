@@ -5,7 +5,7 @@ namespace Ukraine.Infrastructure.Configuration.Extensions;
 
 public static class ConfigurationExtensions
 {
-	public static TOption GetOption<TOption>(this IConfiguration configuration, string sectionName) where TOption : class
+	public static TOption GetRequiredOption<TOption>(this IConfiguration configuration, string sectionName) where TOption : class
 	{
 		var options = configuration.GetSection(sectionName).Get<TOption>();
 		
@@ -15,13 +15,18 @@ public static class ConfigurationExtensions
 		return options;
 	}
 	
-	public static string GetServiceName(this IConfiguration configuration)
+	public static T GetRequiredValue<T>(this IConfiguration configuration, string key)
 	{
-		var serviceName = configuration.GetValue<string?>(Constants.SERVICE_NAME_KEY);
+		var value = configuration.GetValue<T>(key);
 		
-		if (string.IsNullOrEmpty(serviceName)) 
-			throw CoreException.Exception($"Couldn't find service name key [{Constants.SERVICE_NAME_KEY}] in configuration");
+		if (value == null) 
+			throw CoreException.Exception($"The Key [{Constants.SERVICE_NAME_KEY}] value is null in configuration");
 
-		return serviceName;
+		return value;
+	}
+	
+	public static string GetRequiredServiceName(this IConfiguration configuration)
+	{
+		return GetRequiredValue<string>(configuration, Constants.SERVICE_NAME_KEY);
 	}
 }

@@ -2,8 +2,6 @@
 
 public class ExampleGraphQLOptions
 {
-	public const string SectionName = "CustomGraphQL";
-	
 	public bool IncludeExceptionDetails { get; set; }
 	public bool IsIntrospectionEnabled { get; set; }
 	public bool IsToolEnabled { get; set; }

@@ -9,9 +9,9 @@ namespace Ukraine.Infrastructure.Logging.Extenstion;
 
 public static class HostBuilderExtensions
 {
-    public static IHostBuilder AddUkraineSerilog(this IHostBuilder hostBuilder, string serviceName, IConfigurationSection configurationSection)
+    public static IHostBuilder UseUkraineSerilog(this IHostBuilder hostBuilder, string serviceName, IConfigurationSection configurationSection)
     {
-        return AddUkraineSerilog(hostBuilder, serviceName, options =>
+        return UseUkraineSerilog(hostBuilder, serviceName, options =>
         {
             options.MinimumLevel = configurationSection.GetValue(nameof(options.MinimumLevel), options.MinimumLevel);
             options.MinimumLevelOverride = configurationSection.GetSection(nameof(options.MinimumLevelOverride)).Get<Dictionary<string, LogEventLevel>?>();
@@ -24,7 +24,7 @@ public static class HostBuilderExtensions
         });
     }
     
-    public static IHostBuilder AddUkraineSerilog(this IHostBuilder hostBuilder, string serviceName, 
+    public static IHostBuilder UseUkraineSerilog(this IHostBuilder hostBuilder, string serviceName, 
         Action<UkraineLoggingOptions>? configure = null)
     {
         var options = new UkraineLoggingOptions();
