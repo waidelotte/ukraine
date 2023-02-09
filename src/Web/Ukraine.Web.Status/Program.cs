@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 var statusOptions = builder.Configuration.Get<StatusOptions>();
 if (statusOptions == null) throw CoreException.Exception("Unable to initialize section: root");
 if (string.IsNullOrEmpty(statusOptions.ResourcesPath)) throw CoreException.NullOrEmpty(nameof(statusOptions.ResourcesPath));
-if (string.IsNullOrEmpty(statusOptions.UIPath)) throw CoreException.NullOrEmpty(nameof(statusOptions.UIPath));
+if (string.IsNullOrEmpty(statusOptions.UiPath)) throw CoreException.NullOrEmpty(nameof(statusOptions.UiPath));
 
 var seqOptions = builder.Configuration.GetSection(SeqOptions.SectionName).Get<SeqOptions>();
 if (seqOptions == null) throw CoreException.Exception($"Unable to initialize section: {SeqOptions.SectionName}");
@@ -29,8 +29,8 @@ app.UseHealthChecksUI(config =>
     config.ResourcesPath = statusOptions.ResourcesPath;
 });
 
-app.MapGet("/", () => Results.LocalRedirect(statusOptions.UIPath));
-app.MapHealthChecksUI(config => config.UIPath = statusOptions.UIPath);
+app.MapGet("/", () => Results.LocalRedirect(statusOptions.UiPath));
+app.MapHealthChecksUI(config => config.UIPath = statusOptions.UiPath);
 
 try
 {
