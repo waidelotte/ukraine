@@ -1,4 +1,5 @@
 ﻿using HotChocolate.Execution.Configuration;
+using HotChocolate.Language;
 using HotChocolate.Types.Pagination;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Infrastructure.GraphQL.Options;
@@ -14,6 +15,13 @@ public static class ServiceCollectionExtensions
 
 		var builder = services
 			.AddGraphQLServer()
+			.ConfigureSchema(schemaBuilder =>
+			{
+				schemaBuilder.TryAddRootType(() => new ObjectType(d => 
+					d.Name(OperationTypeNames.Query)), OperationType.Query);
+				schemaBuilder.TryAddRootType(() => new ObjectType(d => 
+					d.Name(OperationTypeNames.Mutation)), OperationType.Mutation);
+			})
 			.AddMutationConventions()
 			.ModifyRequestOptions(o => o.IncludeExceptionDetails = opt.IncludeExceptionDetails)
 			.SetPagingOptions(new PagingOptions

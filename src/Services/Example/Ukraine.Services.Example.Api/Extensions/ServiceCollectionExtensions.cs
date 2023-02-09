@@ -64,9 +64,7 @@ public static class ServiceCollectionExtensions
 			})
 			.AddUkraineGraphQLInstrumentation()
 			.AddUkraineEfCore<ExampleContext>()
-			.AddQueryType(q => q.Name(OperationTypeNames.Query))
 			.AddType<AuthorQueryTypeExtension>()
-			.AddMutationType(q => q.Name(OperationTypeNames.Mutation))
 			.AddType<AuthorMutationTypeExtension>()
 			.AddType<BookMutationTypeExtension>()
 			.RegisterService<IMediator>(ServiceKind.Synchronized);
