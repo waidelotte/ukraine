@@ -15,8 +15,4 @@
       </PackageReference>
     </ItemGroup>
     
-    <ItemGroup>
-        <AdditionalFiles Include="$(SolutionDir)stylecop.json" Link="stylecop.json" />
-    </ItemGroup>
-    
 </Project>
