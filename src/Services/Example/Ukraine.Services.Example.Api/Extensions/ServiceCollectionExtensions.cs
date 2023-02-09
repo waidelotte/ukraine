@@ -52,7 +52,7 @@ public static class ServiceCollectionExtensions
 			.AddUkraineHealthChecks()
 			.AddUkrainePostgresHealthCheck(connectionString)
 			.AddUkraineDaprHealthCheck();
-
+		
 		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQLOptions>(ExampleGraphQLOptions.SECTION_NAME);
 		
 		services.AddUkraineGraphQL(options =>
@@ -70,7 +70,7 @@ public static class ServiceCollectionExtensions
 			.AddType<AuthorMutationTypeExtension>()
 			.AddType<BookMutationTypeExtension>()
 			.RegisterService<IMediator>(ServiceKind.Synchronized);
-		
+			
 		return services;
 	}
 }

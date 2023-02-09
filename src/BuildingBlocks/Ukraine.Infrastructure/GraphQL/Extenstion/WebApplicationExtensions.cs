@@ -1,7 +1,6 @@
 using HotChocolate.AspNetCore;
+using HotChocolate.AspNetCore.Voyager;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Ukraine.Infrastructure.GraphQL.Options;
 
 namespace Ukraine.Infrastructure.GraphQL.Extenstion;
@@ -13,12 +12,25 @@ public static class WebApplicationExtensions
         var opt = new UkraineGraphQLWebOptions();
         options?.Invoke(opt);
         
-        application.MapGraphQL().WithOptions(new GraphQLServerOptions
+        application.MapGraphQL(opt.Path).WithOptions(new GraphQLServerOptions
         {
             EnableSchemaRequests = Constants.SCHEMA_REQUESTS,
             EnableGetRequests = Constants.GET_REQUESTS,
             EnableMultipartRequests = Constants.MULTIPART_REQUESTS,
-            Tool = { Enable = opt.UseBananaCakePopTool }
+            Tool =
+            {
+                
+                Enable = opt.UseBananaCakePopTool
+            }
         });
+
+        if (!string.IsNullOrEmpty(opt.VoyagerPath))
+        {
+            application.UseVoyager(new VoyagerOptions
+            {
+                QueryPath = opt.Path,
+                Path = opt.VoyagerPath
+            });
+        }
     }
 }

@@ -1,7 +1,9 @@
-﻿using Ukraine.Infrastructure.EfCore.Interfaces;
+﻿using Ukraine.Infrastructure.Configuration.Extensions;
+using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.GraphQL.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
+using Ukraine.Services.Example.Api.Options;
 
 namespace Ukraine.Services.Example.Api.Extensions;
 
@@ -9,28 +11,35 @@ public static class WebApplicationExtensions
 {
 	public static WebApplication UseExampleApi(this WebApplication application)
 	{
+		if (application.Environment.IsDevelopment())
+			application.UseDeveloperExceptionPage();
+		
 		using (var serviceScope = application.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 		{
 			var context = serviceScope.ServiceProvider.GetRequiredService<IDatabaseFacadeResolver>();
 			context.Database.EnsureCreated();
 		}
 
-		if (application.Environment.IsDevelopment())
-			application.UseDeveloperExceptionPage();
-
 		application
 			.UseUkraineSwagger()
 			.UseAuthorization()
 			.UseCloudEvents();
 
-		application.MapGet("/", () => Results.LocalRedirect("~/graphql"));
+		var graphQlOptions = application.Configuration.GetRequiredSection<ExampleGraphQLOptions>(ExampleGraphQLOptions.SECTION_NAME);
+
+		application.MapGet("/", () => Results.LocalRedirect($"~{graphQlOptions.Path}"));
 
 		application.MapSubscribeHandler();
-
-		application.UseUkraineGraphQL(options =>
+		
+		if (!string.IsNullOrEmpty(graphQlOptions.Path))
 		{
-			options.UseBananaCakePopTool = true;
-		});
+			application.UseUkraineGraphQL(options =>
+			{
+				options.Path = graphQlOptions.Path;
+				options.VoyagerPath = graphQlOptions.VoyagerPath;
+				options.UseBananaCakePopTool = true;
+			});
+		}
 
 		application.MapControllers();
 

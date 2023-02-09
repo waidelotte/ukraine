@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
 			})
 			.AllowIntrospection(opt.UseIntrospection)
 			.InitializeOnStartup();
+		
 		return builder;
 	}
 }
