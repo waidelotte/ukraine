@@ -59,10 +59,10 @@ public static class ServiceCollectionExtensions
 			{
 				options.IncludeExceptionDetails = graphQlOptions.IncludeExceptionDetails;
 				options.UseIntrospection = graphQlOptions.UseIntrospection;
+				options.UseInstrumentation = graphQlOptions.UseInstrumentation;
 				options.DefaultPageSize = graphQlOptions.DefaultPageSize;
 				options.MaxPageSize = graphQlOptions.MaxPageSize;
 			})
-			.AddUkraineGraphQLInstrumentation()
 			.AddUkraineEfCore<ExampleContext>()
 			.AddType<AuthorQueryTypeExtension>()
 			.AddType<AuthorMutationTypeExtension>()

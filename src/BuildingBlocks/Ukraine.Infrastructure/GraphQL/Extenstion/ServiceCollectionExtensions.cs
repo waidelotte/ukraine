@@ -31,9 +31,17 @@ public static class ServiceCollectionExtensions
 				IncludeTotalCount = Constants.PAGING_TOTAL_COUNT_ENABLED,
 				AllowBackwardPagination = Constants.PAGING_BACKWARD_ENABLED
 			})
-			.AllowIntrospection(opt.UseIntrospection)
-			.InitializeOnStartup();
+			.AllowIntrospection(opt.UseIntrospection);
+
+		if (opt.UseInstrumentation)
+		{
+			builder.AddInstrumentation(o =>
+			{
+				o.IncludeDataLoaderKeys = true;
+				o.RenameRootActivity = true;
+			});
+		}
 		
-		return builder;
+		return builder.InitializeOnStartup();
 	}
 }
