@@ -23,8 +23,8 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddExampleApi(this IServiceCollection services, IConfiguration configuration)
 	{
-		var databaseOptions = configuration.GetRequiredSection<ExampleDatabaseOptions>("DatabaseOptions");
-		var telemetryOptions = configuration.GetRequiredSection<ExampleTelemetryOptions>("TelemetryOptions");
+		var databaseOptions = configuration.GetRequiredSection<ExampleDatabaseOptions>(ExampleDatabaseOptions.SECTION_NAME);
+		var telemetryOptions = configuration.GetRequiredSection<ExampleTelemetryOptions>(ExampleTelemetryOptions.SECTION_NAME);
 		
 		if(string.IsNullOrEmpty(telemetryOptions.ZipkinServerUrl))
 			throw ExampleException.Exception($"Configuration: {nameof(telemetryOptions.ZipkinServerUrl)} is null or empty");
@@ -53,7 +53,7 @@ public static class ServiceCollectionExtensions
 			.AddUkrainePostgresHealthCheck(connectionString)
 			.AddUkraineDaprHealthCheck();
 
-		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQLOptions>("GraphQLOptions");
+		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQLOptions>(ExampleGraphQLOptions.SECTION_NAME);
 		
 		services.AddUkraineGraphQL(options =>
 			{

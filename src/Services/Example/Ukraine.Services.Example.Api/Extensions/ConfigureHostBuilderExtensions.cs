@@ -9,7 +9,7 @@ public static class ConfigureHostBuilderExtensions
 {
 	public static ConfigureHostBuilder ConfigureHostApi(this ConfigureHostBuilder configureWebHostBuilder, IConfiguration configuration)
 	{
-		var loggingOptions = configuration.GetRequiredSection<ExampleLoggingOptions>("LoggingOptions");
+		var loggingOptions = configuration.GetRequiredSection<ExampleLoggingOptions>(ExampleLoggingOptions.SECTION_NAME);
 		
 		configureWebHostBuilder
 			.UseUkraineSerilog(Constants.SERVICE_NAME, options =>
