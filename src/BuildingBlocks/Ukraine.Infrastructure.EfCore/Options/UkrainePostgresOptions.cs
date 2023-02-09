@@ -2,6 +2,7 @@
 
 public class UkrainePostgresOptions
 {
-    public int? RetryOnFailureCount { get; set; }
-    public TimeSpan? RetryOnFailureDelay { get; set; }
+	public int? RetryOnFailureCount { get; set; }
+
+	public TimeSpan? RetryOnFailureDelay { get; set; }
 }

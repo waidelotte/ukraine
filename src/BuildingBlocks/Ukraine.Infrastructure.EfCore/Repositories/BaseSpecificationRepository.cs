@@ -10,17 +10,17 @@ public abstract class BaseSpecificationRepository<TEntity> : BaseRepository<TEnt
 	where TEntity : class, IAggregateRoot
 {
 	public BaseSpecificationRepository(DbContext dbContext) : base(dbContext) { }
-	
+
 	public IQueryable<TEntity> GetQuery(ISpecification<TEntity> specification)
 	{
 		return ApplySpecification(specification);
 	}
-	
+
 	public async Task<TEntity?> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
 	{
 		return await ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken);
 	}
-	
+
 	private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
 	{
 		return SpecificationEvaluator.Default.GetQuery(DbSet.AsQueryable(), specification);
