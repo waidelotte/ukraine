@@ -4,7 +4,7 @@ using HotChocolate.Types;
 using MediatR;
 using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.EfCore.GraphQL.Extensions;
-using Ukraine.Infrastructure.EventBus.Dapr.Extenstions;
+using Ukraine.Infrastructure.EventBus.Dapr.Extensions;
 using Ukraine.Infrastructure.GraphQL.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
@@ -55,7 +55,7 @@ public static class ServiceCollectionExtensions
 		
 		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQLOptions>(ExampleGraphQLOptions.SECTION_NAME);
 		
-		services.AddUkraineGraphQL(options =>
+		services.AddUkraineGraphQl(options =>
 			{
 				options.IncludeExceptionDetails = graphQlOptions.IncludeExceptionDetails;
 				options.UseIntrospection = graphQlOptions.UseIntrospection;

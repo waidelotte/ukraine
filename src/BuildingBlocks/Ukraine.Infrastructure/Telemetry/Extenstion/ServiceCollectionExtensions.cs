@@ -6,8 +6,10 @@ namespace Ukraine.Infrastructure.Telemetry.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddUkraineZipkinTelemetry(this IServiceCollection services, 
-		string serviceName, string serverUrl)
+	public static IServiceCollection AddUkraineZipkinTelemetry(
+		this IServiceCollection services,
+		string serviceName,
+		string serverUrl)
 	{
 		services.AddOpenTelemetryTracing(builder =>
 		{
@@ -25,7 +27,7 @@ public static class ServiceCollectionExtensions
 				})
 				.AddZipkinExporter(o => o.Endpoint = new Uri(serverUrl));
 		});
-		
+
 		return services;
 	}
 }

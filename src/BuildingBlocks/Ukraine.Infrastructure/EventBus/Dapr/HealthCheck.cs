@@ -15,7 +15,7 @@ internal sealed class HealthCheck : IHealthCheck
 	public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
 	{
 		var healthy = await _daprClient.CheckHealthAsync(cancellationToken);
-            
+
 		return healthy ? HealthCheckResult.Healthy() : new HealthCheckResult(context.Registration.FailureStatus);
 	}
 }

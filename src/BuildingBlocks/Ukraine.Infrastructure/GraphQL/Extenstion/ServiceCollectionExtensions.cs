@@ -8,19 +8,23 @@ namespace Ukraine.Infrastructure.GraphQL.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
-	public static IRequestExecutorBuilder AddUkraineGraphQL(this IServiceCollection services, Action<UkraineGraphQLOptions>? options = null)
+	public static IRequestExecutorBuilder AddUkraineGraphQl(this IServiceCollection services, Action<UkraineGraphQlOptions>? options = null)
 	{
-		var opt = new UkraineGraphQLOptions();
+		var opt = new UkraineGraphQlOptions();
 		options?.Invoke(opt);
 
 		var builder = services
 			.AddGraphQLServer()
 			.ConfigureSchema(schemaBuilder =>
 			{
-				schemaBuilder.TryAddRootType(() => new ObjectType(d => 
-					d.Name(OperationTypeNames.Query)), OperationType.Query);
-				schemaBuilder.TryAddRootType(() => new ObjectType(d => 
-					d.Name(OperationTypeNames.Mutation)), OperationType.Mutation);
+				schemaBuilder.TryAddRootType(
+					() => new ObjectType(d =>
+					d.Name(OperationTypeNames.Query)),
+					OperationType.Query);
+				schemaBuilder.TryAddRootType(
+					() => new ObjectType(d =>
+					d.Name(OperationTypeNames.Mutation)),
+					OperationType.Mutation);
 			})
 			.AddMutationConventions()
 			.ModifyRequestOptions(o => o.IncludeExceptionDetails = opt.IncludeExceptionDetails)
@@ -42,9 +46,11 @@ public static class ServiceCollectionExtensions
 			});
 		}
 
-		if(opt.MaxDepth is > 0)
+		if (opt.MaxDepth is > 0)
+		{
 			builder.AddMaxExecutionDepthRule(opt.MaxDepth.Value, true);
-		
+		}
+
 		return builder.InitializeOnStartup();
 	}
 }

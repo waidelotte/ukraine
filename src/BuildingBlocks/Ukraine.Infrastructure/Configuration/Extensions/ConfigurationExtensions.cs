@@ -11,10 +11,12 @@ public static class ConfigurationExtensions
 		{
 			options.ErrorOnUnknownConfiguration = true;
 		});
-		
-		if (value == null) 
+
+		if (value == null)
+		{
 			throw CoreException.Exception($"Cannot bind the Configuration instance to a new instance of type {typeof(T)}");
-	
+		}
+
 		return value;
 	}
 }

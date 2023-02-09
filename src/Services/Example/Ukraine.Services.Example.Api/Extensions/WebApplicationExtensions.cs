@@ -33,7 +33,7 @@ public static class WebApplicationExtensions
 		
 		if (!string.IsNullOrEmpty(graphQlOptions.Path))
 		{
-			application.UseUkraineGraphQL(options =>
+			application.UseUkraineGraphQl(options =>
 			{
 				options.Path = graphQlOptions.Path;
 				options.VoyagerPath = graphQlOptions.VoyagerPath;

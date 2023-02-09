@@ -29,6 +29,7 @@
       "allowDoWhileOnClosingBrace": false
     },
     "documentationRules": {
+      "documentInternalElements": false,
       "documentInterfaces": false,
       "documentExposedElements": false,
       "documentationCulture": "en-US"

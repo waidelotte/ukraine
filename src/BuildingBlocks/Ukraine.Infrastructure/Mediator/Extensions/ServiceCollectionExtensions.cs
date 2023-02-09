@@ -9,7 +9,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddUkraineMediatorRequestValidation(this IServiceCollection services)
 	{
 		services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-		
+
 		return services;
 	}
 }
