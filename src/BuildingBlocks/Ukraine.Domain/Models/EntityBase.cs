@@ -2,5 +2,5 @@
 
 public abstract class EntityBase<TIdentity>
 {
-    public TIdentity Id { get; set; } = default!;
+	public TIdentity Id { get; set; } = default!;
 }

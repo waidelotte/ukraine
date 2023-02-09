@@ -1,0 +1,7 @@
+﻿<RuleSet Name="Ukraine Rules"  ToolsVersion="15.0">
+    <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+        <Rule Id="SA1128" Action="Hidden" />
+        <Rule Id="SA1502" Action="Hidden" />
+        <Rule Id="SA1633" Action="Hidden" />
+    </Rules>
+</RuleSet>

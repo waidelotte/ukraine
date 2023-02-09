@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{3D7ED6A3-5
 		.gitattributes = .gitattributes
 		README.md = README.md
 		terminal.txt = terminal.txt
+		stylecop.json = stylecop.json
+		Ukraine.ruleset = Ukraine.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{AEB23F19-ECA5-4249-B81E-925BBE1165EA}"
