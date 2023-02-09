@@ -17,11 +17,8 @@ public static class WebApplicationExtensions
             EnableSchemaRequests = Constants.SCHEMA_REQUESTS,
             EnableGetRequests = Constants.GET_REQUESTS,
             EnableMultipartRequests = Constants.MULTIPART_REQUESTS,
-            Tool =
-            {
-                
-                Enable = opt.UseBananaCakePopTool
-            }
+            Tool = { Enable = opt.UseBananaCakePopTool },
+            EnableBatching = Constants.BATCHING
         });
 
         if (!string.IsNullOrEmpty(opt.VoyagerPath))

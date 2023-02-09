@@ -18,9 +18,9 @@
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.0.0-rc2.7" />
         <PackageReference Include="Dapr.Actors" Version="1.9.0" />
         <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" />
-        <PackageReference Include="HotChocolate.AspNetCore" Version="12.16.0" />
+        <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.1" />
         <PackageReference Include="HotChocolate.AspNetCore.Voyager" Version="10.5.5" />
-        <PackageReference Include="HotChocolate.Diagnostics" Version="12.16.0" />
+        <PackageReference Include="HotChocolate.Diagnostics" Version="13.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />

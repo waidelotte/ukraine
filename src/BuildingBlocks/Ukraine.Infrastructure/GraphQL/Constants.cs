@@ -8,4 +8,5 @@ public static class Constants
 	public const bool MULTIPART_REQUESTS = true;
 	public const bool GET_REQUESTS = true;
 	public const bool SCHEMA_REQUESTS = true;
+	public const bool BATCHING = false;
 }
