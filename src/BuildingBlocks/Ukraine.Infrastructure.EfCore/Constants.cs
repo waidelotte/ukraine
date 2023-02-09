@@ -2,5 +2,8 @@ namespace Ukraine.Infrastructure.EfCore;
 
 public static class Constants
 {
-    public const string UUID_GENERATOR = "uuid-ossp";
+    public static class Extensions
+    {
+        public const string UUID_GENERATOR = "uuid-ossp";
+    }
 }

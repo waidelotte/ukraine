@@ -8,7 +8,7 @@ namespace Ukraine.Services.Example.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddExampleInfrastructure(this IServiceCollection services)
+	public static IServiceCollection AddInfrastructure(this IServiceCollection services)
 	{
 		services.AddMediatR(Assembly.GetExecutingAssembly());
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

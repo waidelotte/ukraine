@@ -35,8 +35,8 @@ public static class ServiceCollectionExtensions
 			throw ExampleException.Exception("Configuration: Postgres Connection String is null or empty");
 		
 		services
-			.AddExampleInfrastructure()
-			.AddExampleInfrastructureEfCore(connectionString, options =>
+			.AddInfrastructure()
+			.AddInfrastructureEfCore(connectionString, options =>
 			{
 				options.RetryOnFailureDelay = databaseOptions.RetryOnFailureDelay;
 				options.RetryOnFailureCount = databaseOptions.RetryOnFailureCount;

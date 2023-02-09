@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Configurations;
 
-public class AuthorConfiguration : IEntityTypeConfiguration<Author>
+internal class AuthorConfiguration : IEntityTypeConfiguration<Author>
 {
     public void Configure(EntityTypeBuilder<Author> builder)
     {

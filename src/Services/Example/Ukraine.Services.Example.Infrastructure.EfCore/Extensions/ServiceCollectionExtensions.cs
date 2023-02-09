@@ -6,7 +6,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddExampleInfrastructureEfCore(this IServiceCollection services,
+	public static IServiceCollection AddInfrastructureEfCore(this IServiceCollection services,
 		string connectionString, Action<UkrainePostgresOptions>? options = null)
 	{
 		services.AddUkrainePostgresContext<ExampleContext, ExampleContext>(connectionString, options);

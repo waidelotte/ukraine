@@ -21,7 +21,7 @@ public class CreateBookHandler : IRequestHandler<CreateBookRequest, Book>
 		var repository = _unitOfWork.GetRepository<ISpecificationRepository<Author>>();
 
 		var author = await repository.GetAsync(AuthorSpec.Create(request.AuthorId), cancellationToken);
-		if(author == null) throw new ExampleException("Author not exists");
+		if(author == null) throw ExampleException.Exception("Author not exists");
 
 		var book = new Book
 		{

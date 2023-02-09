@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Configurations;
 
-public class BookConfiguration : IEntityTypeConfiguration<Book>
+internal class BookConfiguration : IEntityTypeConfiguration<Book>
 {
     public void Configure(EntityTypeBuilder<Book> builder)
     {

@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Infrastructure.EfCore;
 using Ukraine.Infrastructure.EfCore.Contexts;
 using Ukraine.Services.Example.Domain.Models;
 
@@ -8,8 +7,6 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore;
 
 public class ExampleContext : UkraineDatabaseContextBase
 {
-    private const string SCHEMA = "example_schema";
-        
     public DbSet<Author> Authors => Set<Author>();
     public DbSet<Book> Books => Set<Book>();
 
@@ -17,8 +14,8 @@ public class ExampleContext : UkraineDatabaseContextBase
         
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema(SCHEMA);
-        modelBuilder.HasPostgresExtension(Constants.UUID_GENERATOR);
+        modelBuilder.HasDefaultSchema(Constants.SCHEMA_NAME);
+        modelBuilder.HasPostgresExtension(Ukraine.Infrastructure.EfCore.Constants.Extensions.UUID_GENERATOR);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }
