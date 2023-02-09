@@ -62,6 +62,7 @@ public static class ServiceCollectionExtensions
 				options.UseInstrumentation = graphQlOptions.UseInstrumentation;
 				options.DefaultPageSize = graphQlOptions.DefaultPageSize;
 				options.MaxPageSize = graphQlOptions.MaxPageSize;
+				options.MaxDepth = graphQlOptions.MaxDepth;
 			})
 			.AddUkraineEfCore<ExampleContext>()
 			.AddType<AuthorQueryTypeExtension>()

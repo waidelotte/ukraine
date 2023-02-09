@@ -41,6 +41,9 @@ public static class ServiceCollectionExtensions
 				o.RenameRootActivity = true;
 			});
 		}
+
+		if(opt.MaxDepth is > 0)
+			builder.AddMaxExecutionDepthRule(opt.MaxDepth.Value, true);
 		
 		return builder.InitializeOnStartup();
 	}

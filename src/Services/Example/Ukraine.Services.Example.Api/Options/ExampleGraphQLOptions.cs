@@ -11,4 +11,5 @@ public class ExampleGraphQLOptions
 	public bool UseIntrospection { get; set; }
 	public int MaxPageSize { get; set; }
 	public int DefaultPageSize { get; set; }
+	public int? MaxDepth { get; set; }
 }
