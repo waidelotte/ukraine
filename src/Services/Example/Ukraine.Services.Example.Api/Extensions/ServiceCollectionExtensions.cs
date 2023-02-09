@@ -1,6 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
 using HotChocolate;
-using HotChocolate.Types;
 using MediatR;
 using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.EfCore.GraphQL.Extensions;

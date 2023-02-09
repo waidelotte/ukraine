@@ -11,7 +11,7 @@ internal class BookConfiguration : IEntityTypeConfiguration<Book>
 		builder.HasKey(b => b.Id);
 		builder.Property(o => o.Name).IsRequired();
 		builder.Property(o => o.Rating).IsRequired();
-		
+
 		builder.HasOne(o => o.Author)
 			.WithMany(m => m.Books)
 			.HasForeignKey(k => k.AuthorId)
