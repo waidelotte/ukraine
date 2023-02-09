@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 using Ukraine.Domain.Exceptions;
 using Ukraine.Infrastructure.Logging.Options;
 
@@ -25,13 +26,18 @@ public static class HostBuilderExtensions
         options.WriteTo?.Invoke(writeOptions);
 
         if(writeOptions.WriteToConsole)
-            loggerConfiguration.WriteTo.Console();
+            loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Code);
         
         if(!string.IsNullOrEmpty(writeOptions.WriteToSeqServerUrl))
             loggerConfiguration.WriteTo.Seq(writeOptions.WriteToSeqServerUrl);
         
         if(string.IsNullOrEmpty(serviceName)) throw CoreException.NullOrEmpty(nameof(serviceName));
-        loggerConfiguration.Enrich.WithProperty(Constants.ENRICH_SERVICE_PROPERTY, serviceName);
+        
+        loggerConfiguration
+            .Enrich.FromLogContext()
+            .Enrich.WithMachineName()
+            .Enrich.WithEnvironmentName()
+            .Enrich.WithProperty(Constants.ENRICH_SERVICE_PROPERTY, serviceName);
             
         Log.Logger = loggerConfiguration.CreateLogger();
 
