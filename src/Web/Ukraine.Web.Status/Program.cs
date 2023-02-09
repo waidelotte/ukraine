@@ -1,5 +1,4 @@
 using Ukraine.Domain.Exceptions;
-using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Web.Status.Options;
 
 var builder = WebApplication.CreateBuilder(args);
