@@ -11,17 +11,20 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddUkrainePostgresContext<TContext, TMigrationAssembly>(
 		this IServiceCollection services,
 		string connectionString,
-		Action<UkrainePostgresOptions> options) where TContext : DbContext, IDatabaseFacadeResolver
+		Action<UkrainePostgresOptions>? options) where TContext : DbContext, IDatabaseFacadeResolver
 	{
 		var opt = new UkrainePostgresOptions();
-		options.Invoke(opt);
+		options?.Invoke(opt);
 		
 		services.AddDbContextPool<TContext>(o =>
 		{
 			o.UseNpgsql(connectionString, sqlOptions =>
 			{
 				sqlOptions.MigrationsAssembly(typeof(TMigrationAssembly).Assembly.GetName().Name);
-				sqlOptions.EnableRetryOnFailure(opt.RetryOnFailureCount, opt.RetryOnFailureDelay, null);
+				
+				if(opt.RetryOnFailureCount.HasValue && opt.RetryOnFailureDelay.HasValue)
+					sqlOptions.EnableRetryOnFailure(opt.RetryOnFailureCount.Value, opt.RetryOnFailureDelay.Value, null);
+				
 			}).UseSnakeCaseNamingConvention();
 		});
 

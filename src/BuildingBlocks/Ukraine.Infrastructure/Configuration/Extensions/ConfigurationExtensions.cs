@@ -5,28 +5,16 @@ namespace Ukraine.Infrastructure.Configuration.Extensions;
 
 public static class ConfigurationExtensions
 {
-	public static TOption GetRequiredOption<TOption>(this IConfiguration configuration, string sectionName) where TOption : class
+	public static T GetRequiredSection<T>(this IConfiguration configuration, string sectionName)
 	{
-		var options = configuration.GetSection(sectionName).Get<TOption>();
-		
-		if (options == null) 
-			throw CoreException.Exception($"Unable to initialize section: {sectionName}");
-
-		return options;
-	}
-	
-	public static T GetRequiredValue<T>(this IConfiguration configuration, string key)
-	{
-		var value = configuration.GetValue<T>(key);
+		var value = configuration.GetRequiredSection(sectionName).Get<T>(options =>
+		{
+			options.ErrorOnUnknownConfiguration = true;
+		});
 		
 		if (value == null) 
-			throw CoreException.Exception($"The Key [{Constants.SERVICE_NAME_KEY}] value is null in configuration");
-
-		return value;
-	}
+			throw CoreException.Exception($"Cannot bind the Configuration instance to a new instance of type {typeof(T)}");
 	
-	public static string GetRequiredServiceName(this IConfiguration configuration)
-	{
-		return GetRequiredValue<string>(configuration, Constants.SERVICE_NAME_KEY);
+		return value;
 	}
 }

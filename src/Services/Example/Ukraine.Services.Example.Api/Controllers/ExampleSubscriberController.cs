@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Ukraine.Infrastructure.EventBus.Dapr;
 using Ukraine.Services.Example.Domain.Events;
 
 namespace Ukraine.Services.Example.Api.Controllers;
@@ -17,14 +16,14 @@ public class ExampleSubscriberController : ControllerBase
 	}
 	
 	[HttpPost("Empty")]
-	[Dapr.Topic(Constants.PUB_SUB_NAME, nameof(EmptyEvent))]
+	[Dapr.Topic(Ukraine.Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(EmptyEvent))]
 	public async Task HandleAsync(EmptyEvent request)
 	{
 		_logger.LogDebug("Subscriber Event: {@Request}", request);
 	}
 	
 	[HttpPost("AuthorCreated")]
-	[Dapr.Topic(Constants.PUB_SUB_NAME, nameof(AuthorCreatedEvent))]
+	[Dapr.Topic(Ukraine.Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorCreatedEvent))]
 	public async Task HandleAsync(AuthorCreatedEvent request)
 	{
 		_logger.LogDebug("Subscriber Event: {@Request}", request);

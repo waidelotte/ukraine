@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Options;
-using Ukraine.Infrastructure.EfCore.Interfaces;
+﻿using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.GraphQL.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;
-using Ukraine.Services.Example.Infrastructure.Options;
 
 namespace Ukraine.Services.Example.Api.Extensions;
 
@@ -29,7 +27,10 @@ public static class WebApplicationExtensions
 
 		application.MapSubscribeHandler();
 
-		application.UseUkraineGraphQL(application.Services.GetRequiredService<IOptions<ExampleGraphQLOptions>>().Value.IsToolEnabled);
+		application.UseUkraineGraphQL(options =>
+		{
+			options.UseBananaCakePopTool = true;
+		});
 
 		application.MapControllers();
 

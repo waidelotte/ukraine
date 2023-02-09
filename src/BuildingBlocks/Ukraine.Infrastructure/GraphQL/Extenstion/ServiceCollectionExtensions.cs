@@ -7,11 +7,11 @@ namespace Ukraine.Infrastructure.GraphQL.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
-	public static IRequestExecutorBuilder AddUkraineGraphQL(this IServiceCollection services, Action<UkraineGraphQLOptions> options)
+	public static IRequestExecutorBuilder AddUkraineGraphQL(this IServiceCollection services, Action<UkraineGraphQLOptions>? options = null)
 	{
 		var opt = new UkraineGraphQLOptions();
-		options.Invoke(opt);
-		
+		options?.Invoke(opt);
+
 		var builder = services
 			.AddGraphQLServer()
 			.AddMutationConventions()

@@ -2,6 +2,6 @@
 
 public class UkrainePostgresOptions
 {
-    public int RetryOnFailureCount { get; set; } = 3;
-    public TimeSpan RetryOnFailureDelay { get; set; } = TimeSpan.FromSeconds(5);
+    public int? RetryOnFailureCount { get; set; }
+    public TimeSpan? RetryOnFailureDelay { get; set; }
 }
