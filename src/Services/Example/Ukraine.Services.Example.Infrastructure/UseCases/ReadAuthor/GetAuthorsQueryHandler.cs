@@ -6,11 +6,11 @@ using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.ReadAuthor;
 
-public class GetExampleEntitiesQueryHandler : IRequestHandler<GetAuthorsQueryRequest, IQueryable<Author>>
+public class GetAuthorsQueryHandler : IRequestHandler<GetAuthorsQueryRequest, IQueryable<Author>>
 {
 	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
 
-	public GetExampleEntitiesQueryHandler(IUnitOfWork<ExampleContext> unitOfWork)
+	public GetAuthorsQueryHandler(IUnitOfWork<ExampleContext> unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}

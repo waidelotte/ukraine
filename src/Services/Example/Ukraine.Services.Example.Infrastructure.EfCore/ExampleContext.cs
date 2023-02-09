@@ -7,15 +7,16 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore;
 
 public class ExampleContext : UkraineDatabaseContextBase
 {
-    public DbSet<Author> Authors => Set<Author>();
-    public DbSet<Book> Books => Set<Book>();
+	public ExampleContext(DbContextOptions options) : base(options) { }
 
-    public ExampleContext(DbContextOptions options) : base(options) { }
-        
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.HasDefaultSchema(Constants.SCHEMA_NAME);
-        modelBuilder.HasPostgresExtension(Ukraine.Infrastructure.EfCore.Constants.Extensions.UUID_GENERATOR);
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-    }
+	public DbSet<Author> Authors => Set<Author>();
+
+	public DbSet<Book> Books => Set<Book>();
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.HasDefaultSchema(Constants.SCHEMA_NAME);
+		modelBuilder.HasPostgresExtension(Ukraine.Infrastructure.EfCore.Constants.Extensions.UUID_GENERATOR);
+		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+	}
 }

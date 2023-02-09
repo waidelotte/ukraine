@@ -14,14 +14,14 @@ public class ExampleSubscriberController : ControllerBase
 	{
 		_logger = logger;
 	}
-	
+
 	[HttpPost("Empty")]
 	[Dapr.Topic(Ukraine.Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(EmptyEvent))]
 	public async Task HandleAsync(EmptyEvent request)
 	{
 		_logger.LogDebug("Subscriber Event: {@Request}", request);
 	}
-	
+
 	[HttpPost("AuthorCreated")]
 	[Dapr.Topic(Ukraine.Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorCreatedEvent))]
 	public async Task HandleAsync(AuthorCreatedEvent request)

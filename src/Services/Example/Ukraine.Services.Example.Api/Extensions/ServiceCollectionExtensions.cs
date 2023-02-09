@@ -25,15 +25,19 @@ public static class ServiceCollectionExtensions
 	{
 		var databaseOptions = configuration.GetRequiredSection<ExampleDatabaseOptions>(ExampleDatabaseOptions.SECTION_NAME);
 		var telemetryOptions = configuration.GetRequiredSection<ExampleTelemetryOptions>(ExampleTelemetryOptions.SECTION_NAME);
-		
-		if(string.IsNullOrEmpty(telemetryOptions.ZipkinServerUrl))
+
+		if (string.IsNullOrEmpty(telemetryOptions.ZipkinServerUrl))
+		{
 			throw ExampleException.Exception($"Configuration: {nameof(telemetryOptions.ZipkinServerUrl)} is null or empty");
-		
+		}
+
 		var connectionString = configuration.GetConnectionString("Postgres");
 
-		if (string.IsNullOrEmpty(connectionString)) 
+		if (string.IsNullOrEmpty(connectionString))
+		{
 			throw ExampleException.Exception("Configuration: Postgres Connection String is null or empty");
-		
+		}
+
 		services
 			.AddInfrastructure()
 			.AddInfrastructureEfCore(connectionString, options =>
@@ -45,16 +49,16 @@ public static class ServiceCollectionExtensions
 			.AddUkraineZipkinTelemetry(Constants.SERVICE_NAME, telemetryOptions.ZipkinServerUrl)
 			.AddUkraineDaprEventBus()
 			.AddFluentValidationAutoValidation();
-		
+
 		services.AddControllers();
-		
+
 		services
 			.AddUkraineHealthChecks()
 			.AddUkrainePostgresHealthCheck(connectionString)
 			.AddUkraineDaprHealthCheck();
-		
-		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQLOptions>(ExampleGraphQLOptions.SECTION_NAME);
-		
+
+		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);
+
 		services.AddUkraineGraphQl(options =>
 			{
 				options.IncludeExceptionDetails = graphQlOptions.IncludeExceptionDetails;
@@ -69,7 +73,7 @@ public static class ServiceCollectionExtensions
 			.AddType<AuthorMutationTypeExtension>()
 			.AddType<BookMutationTypeExtension>()
 			.RegisterService<IMediator>(ServiceKind.Synchronized);
-			
+
 		return services;
 	}
 }

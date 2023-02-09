@@ -10,12 +10,16 @@ public static class ConfigureHostBuilderExtensions
 	public static ConfigureHostBuilder ConfigureHostApi(this ConfigureHostBuilder configureWebHostBuilder, IConfiguration configuration)
 	{
 		var loggingOptions = configuration.GetRequiredSection<ExampleLoggingOptions>(ExampleLoggingOptions.SECTION_NAME);
-		
+
 		configureWebHostBuilder
 			.UseUkraineSerilog(Constants.SERVICE_NAME, options =>
 			{
 				options.MinimumLevel = loggingOptions.MinimumLevel;
-				if(loggingOptions.Override != null) options.Override(loggingOptions.Override);
+				if (loggingOptions.Override != null)
+				{
+					options.Override(loggingOptions.Override);
+				}
+
 				options.WriteTo = writeOptions =>
 				{
 					writeOptions.WriteToConsole = loggingOptions.WriteToConsole;
@@ -23,7 +27,7 @@ public static class ConfigureHostBuilderExtensions
 				};
 			})
 			.UseUkraineServicesValidationOnBuild();
-		
+
 		return configureWebHostBuilder;
 	}
 }

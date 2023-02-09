@@ -7,11 +7,11 @@ namespace Ukraine.Services.Example.Api.Graph.Resolvers;
 public class BookResolver
 {
 	/// <summary>
-	/// Creates a new Author Book
+	/// Creates a new Author Book.
 	/// </summary>
-	/// <param name="mediator">Injected Mediator by the execution engine</param>
-	/// <param name="input">Example Input</param>
-	/// <param name="cancellationToken">The cancellation token</param>
+	/// <param name="mediator">Injected Mediator by the execution engine.</param>
+	/// <param name="input">Example Input.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	public async Task<Book> CreateBookAsync(
 		IMediator mediator,
 		CreateBookRequest input,

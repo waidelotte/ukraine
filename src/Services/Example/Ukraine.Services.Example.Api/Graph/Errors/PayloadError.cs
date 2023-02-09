@@ -5,13 +5,13 @@ namespace Ukraine.Services.Example.Api.Graph.Errors;
 
 public class PayloadError
 {
-	public string Message { get; }
-
 	public PayloadError(string message)
 	{
 		Message = message;
 	}
-	
+
+	public string Message { get; }
+
 	public static PayloadError CreateErrorFrom(ValidationException ex)
 	{
 		return new PayloadError(ex.Errors.First().ErrorMessage);

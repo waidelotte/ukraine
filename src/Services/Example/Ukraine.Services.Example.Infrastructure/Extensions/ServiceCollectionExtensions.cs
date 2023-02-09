@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
 		services.AddMediatR(Assembly.GetExecutingAssembly());
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 		services.AddUkraineMediatorRequestValidation();
-		
+
 		return services;
 	}
 }

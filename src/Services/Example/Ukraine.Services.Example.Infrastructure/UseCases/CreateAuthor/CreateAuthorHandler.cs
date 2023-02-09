@@ -26,15 +26,15 @@ public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 			Age = request.Age,
 			SuperSecretKey = Guid.NewGuid()
 		};
-		
+
 		var repository = _unitOfWork.GetRepository<ISpecificationRepository<Author>>();
-			
+
 		await repository.AddAsync(author, cancellationToken);
 
 		await _unitOfWork.SaveChangesAsync();
-		
+
 		await _eventBus.PublishAsync(new AuthorCreatedEvent(author.Id), cancellationToken);
-		
+
 		return author;
 	}
 }

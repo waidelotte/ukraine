@@ -37,7 +37,7 @@ public class ExampleController : ControllerBase
 		_logger.LogDebug($"{nameof(GetOkAsync)} controller end");
 		return Ok();
 	}
-	
+
 	[HttpPost("CreateAuthor")]
 	[ProducesResponseType(typeof(Author), (int)HttpStatusCode.OK)]
 	public async Task<ActionResult> CreateAuthorAsync(CreateAuthorRequest request)
@@ -47,10 +47,10 @@ public class ExampleController : ControllerBase
 		var result = await _mediator.Send(request);
 
 		_logger.LogDebug($"{nameof(CreateAuthorAsync)} controller end");
-		
+
 		return Ok(result);
 	}
-	
+
 	[HttpPost("CreateBook")]
 	[ProducesResponseType(typeof(Book), (int)HttpStatusCode.OK)]
 	public async Task<ActionResult> CreateBookAsync(CreateBookRequest request)
@@ -60,10 +60,10 @@ public class ExampleController : ControllerBase
 		var result = await _mediator.Send(request);
 
 		_logger.LogDebug($"{nameof(CreateBookAsync)} controller end");
-		
+
 		return Ok(result);
 	}
-	
+
 	[HttpGet("GetAuthors")]
 	[ProducesResponseType(typeof(IEnumerable<Author>), (int)HttpStatusCode.OK)]
 	public async Task<ActionResult> GetAuthorsAsync()
@@ -73,7 +73,7 @@ public class ExampleController : ControllerBase
 		var result = await _mediator.Send(new GetAuthorsQueryRequest());
 
 		_logger.LogDebug($"{nameof(GetAuthorsAsync)} controller end");
-		
+
 		return Ok(result);
 	}
 }

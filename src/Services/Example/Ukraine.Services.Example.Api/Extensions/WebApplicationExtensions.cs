@@ -12,8 +12,10 @@ public static class WebApplicationExtensions
 	public static WebApplication UseExampleApi(this WebApplication application)
 	{
 		if (application.Environment.IsDevelopment())
+		{
 			application.UseDeveloperExceptionPage();
-		
+		}
+
 		using (var serviceScope = application.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 		{
 			var context = serviceScope.ServiceProvider.GetRequiredService<IDatabaseFacadeResolver>();
@@ -25,12 +27,12 @@ public static class WebApplicationExtensions
 			.UseAuthorization()
 			.UseCloudEvents();
 
-		var graphQlOptions = application.Configuration.GetRequiredSection<ExampleGraphQLOptions>(ExampleGraphQLOptions.SECTION_NAME);
+		var graphQlOptions = application.Configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);
 
 		application.MapGet("/", () => Results.LocalRedirect($"~{graphQlOptions.Path}"));
 
 		application.MapSubscribeHandler();
-		
+
 		if (!string.IsNullOrEmpty(graphQlOptions.Path))
 		{
 			application.UseUkraineGraphQl(options =>
@@ -45,7 +47,7 @@ public static class WebApplicationExtensions
 
 		application.UseUkraineHealthChecks();
 		application.UseUkraineDatabaseHealthChecks();
-		
+
 		return application;
 	}
 }

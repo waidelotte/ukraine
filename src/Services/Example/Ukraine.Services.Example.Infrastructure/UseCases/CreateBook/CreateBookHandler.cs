@@ -21,18 +21,21 @@ public class CreateBookHandler : IRequestHandler<CreateBookRequest, Book>
 		var repository = _unitOfWork.GetRepository<ISpecificationRepository<Author>>();
 
 		var author = await repository.GetAsync(AuthorSpec.Create(request.AuthorId), cancellationToken);
-		if(author == null) throw ExampleException.Exception("Author not exists");
+		if (author == null)
+		{
+			throw ExampleException.Exception("Author not exists");
+		}
 
 		var book = new Book
 		{
 			Name = request.Name,
 			Rating = 5 // default 5 stars
 		};
-		
+
 		author.Books.Add(book);
-		
+
 		await _unitOfWork.SaveChangesAsync();
-		
+
 		return book;
 	}
 }

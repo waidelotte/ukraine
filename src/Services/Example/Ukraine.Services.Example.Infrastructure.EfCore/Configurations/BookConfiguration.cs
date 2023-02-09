@@ -6,15 +6,15 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Configurations;
 
 internal class BookConfiguration : IEntityTypeConfiguration<Book>
 {
-    public void Configure(EntityTypeBuilder<Book> builder)
-    {
-        builder.HasKey(b => b.Id);
-        builder.Property(o => o.Name).IsRequired();
-        builder.Property(o => o.Rating).IsRequired();
-        
-        builder.HasOne(o => o.Author)
-            .WithMany(m => m.Books)
-            .HasForeignKey(k => k.AuthorId)
-            .IsRequired();
-    }
+	public void Configure(EntityTypeBuilder<Book> builder)
+	{
+		builder.HasKey(b => b.Id);
+		builder.Property(o => o.Name).IsRequired();
+		builder.Property(o => o.Rating).IsRequired();
+		
+		builder.HasOne(o => o.Author)
+			.WithMany(m => m.Books)
+			.HasForeignKey(k => k.AuthorId)
+			.IsRequired();
+	}
 }
