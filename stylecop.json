@@ -29,6 +29,8 @@
       "allowDoWhileOnClosingBrace": false
     },
     "documentationRules": {
+      "documentPrivateFields": false,
+      "documentPrivateElements": false,
       "documentInternalElements": false,
       "documentInterfaces": false,
       "documentExposedElements": false,
