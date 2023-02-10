@@ -1,5 +1,7 @@
+using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Services.Example.Domain.Events;
+using Ukraine.Services.Example.Infrastructure.State;
 
 namespace Ukraine.Services.Example.Api.Controllers;
 
@@ -9,10 +11,12 @@ namespace Ukraine.Services.Example.Api.Controllers;
 public class ExampleSubscriberController : ControllerBase
 {
 	private readonly ILogger<ExampleSubscriberController> _logger;
+	private readonly DaprClient _daprClient;
 
-	public ExampleSubscriberController(ILogger<ExampleSubscriberController> logger)
+	public ExampleSubscriberController(ILogger<ExampleSubscriberController> logger, DaprClient daprClient)
 	{
 		_logger = logger;
+		_daprClient = daprClient;
 	}
 
 	[HttpPost("Empty")]
@@ -27,5 +31,7 @@ public class ExampleSubscriberController : ControllerBase
 	public async Task HandleAsync(AuthorCreatedEvent request)
 	{
 		_logger.LogDebug("Subscriber Event: {@Request}", request);
+		var state = await _daprClient.GetStateAsync<AuthorState>("ukraine-statestore", $"author-{request.AuthorId}");
+		_logger.LogDebug("Author State: {@State}", state);
 	}
 }
