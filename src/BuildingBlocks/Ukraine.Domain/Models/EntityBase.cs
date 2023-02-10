@@ -1,6 +1,7 @@
 ﻿namespace Ukraine.Domain.Models;
 
 public abstract class EntityBase<TIdentity>
+	where TIdentity : struct
 {
-	public TIdentity Id { get; set; } = default!;
+	public TIdentity Id { get; }
 }

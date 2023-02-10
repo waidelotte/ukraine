@@ -2,7 +2,7 @@
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public sealed class Book : AggregateRoot<Guid>
+public sealed class Book : EntityRootBase<Guid>
 {
 	public string Name { get; set; } = null!;
 
