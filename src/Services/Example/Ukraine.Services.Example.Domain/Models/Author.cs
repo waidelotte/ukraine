@@ -10,5 +10,5 @@ public sealed class Author : EntityRootBase<Guid>
 
 	public Guid SuperSecretKey { get; set; }
 
-	public ICollection<Book> Books { get; set; } = new List<Book>();
+	public ICollection<Book> Books { get; } = new HashSet<Book>();
 }

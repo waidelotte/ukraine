@@ -2,7 +2,7 @@
 
 public interface IIntegrationEvent
 {
-	Guid Id { get; }
+	Guid EventId { get; }
 
 	DateTime CreatedAt { get; }
 }
