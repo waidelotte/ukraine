@@ -13,7 +13,7 @@ extensions:
       gateway-http:
         enabled: false
       web-status:
-        enabled: false 
+        enabled: false
   - name: seq
     logPath: ./.logs
 
@@ -27,11 +27,11 @@ services:
       - name: POSTGRES_USER
         value: postgres
       - name: POSTGRES_PASSWORD
-        value: postgres 
+        value: postgres
     bindings:
       - port: 5432
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
-        
+
   - name: component-rabbitmq
     image: rabbitmq:3-management
     bindings:
@@ -50,15 +50,7 @@ services:
         value: Development
     bindings:
       - port: 7002
-         
-  - name: gateway-http
-    project: src/Gateways/Ukraine.Gateways.Http/Ukraine.Gateways.Http.csproj
-    env:
-      - name: ASPNETCORE_ENVIRONMENT
-        value: Development
-    bindings:
-      - port: 7000
-        
+
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
     env:
