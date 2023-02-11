@@ -31,6 +31,8 @@ public class ExampleSubscriberController : ControllerBase
 	public async Task HandleAsync(AuthorCreatedEvent request)
 	{
 		_logger.LogDebug("Subscriber Event: {@Request}", request);
+
+		// TODO TEMP VERSION
 		var state = await _daprClient.GetStateAsync<AuthorState>("ukraine-statestore", $"author-{request.AuthorId}");
 		_logger.LogDebug("Author State: {@State}", state);
 	}
