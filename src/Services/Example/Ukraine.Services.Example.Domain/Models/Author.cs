@@ -2,7 +2,7 @@
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public sealed class Author : EntityRootBase<Guid>
+public sealed class Author : AuditableEntityBase<Guid>
 {
 	public string FullName { get; set; } = null!;
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Ukraine.Infrastructure.EfCore.Interceptors;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EfCore.Options;
 using Ukraine.Infrastructure.EfCore.Repositories;
@@ -19,6 +20,8 @@ public static class ServiceCollectionExtensions
 
 		services.AddDbContextPool<TContext>(o =>
 		{
+			o.AddInterceptors(new AuditEntitiesSaveInterceptor());
+
 			if (opt.UseInMemoryDatabase)
 			{
 				o.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME);
