@@ -19,15 +19,22 @@ public static class ServiceCollectionExtensions
 
 		services.AddDbContextPool<TContext>(o =>
 		{
-			o.UseNpgsql(connectionString, sqlOptions =>
+			if (opt.UseInMemoryDatabase)
 			{
-				sqlOptions.MigrationsAssembly(typeof(TMigrationAssembly).Assembly.GetName().Name);
-
-				if (opt.RetryOnFailureCount.HasValue && opt.RetryOnFailureDelay.HasValue)
+				o.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME);
+			}
+			else
+			{
+				o.UseNpgsql(connectionString, sqlOptions =>
 				{
-					sqlOptions.EnableRetryOnFailure(opt.RetryOnFailureCount.Value, opt.RetryOnFailureDelay.Value, null);
-				}
-			}).UseSnakeCaseNamingConvention();
+					sqlOptions.MigrationsAssembly(typeof(TMigrationAssembly).Assembly.GetName().Name);
+
+					if (opt.RetryOnFailureCount.HasValue && opt.RetryOnFailureDelay.HasValue)
+					{
+						sqlOptions.EnableRetryOnFailure(opt.RetryOnFailureCount.Value, opt.RetryOnFailureDelay.Value, null);
+					}
+				}).UseSnakeCaseNamingConvention();
+			}
 		});
 
 		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
