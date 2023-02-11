@@ -44,6 +44,8 @@ public static class ServiceCollectionExtensions
 			{
 				options.RetryOnFailureDelay = databaseOptions.RetryOnFailureDelay;
 				options.RetryOnFailureCount = databaseOptions.RetryOnFailureCount;
+				options.DetailedErrors = databaseOptions.DetailedErrors;
+				options.SensitiveDataLogging = databaseOptions.SensitiveDataLogging;
 			})
 			.AddUkraineSwagger(Constants.SERVICE_NAME)
 			.AddUkraineZipkinTelemetry(Constants.SERVICE_NAME, telemetryOptions.ZipkinServerUrl)

@@ -10,12 +10,15 @@ namespace Ukraine.Infrastructure.EfCore.Extensions;
 public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection UseUkraineInMemoryDatabase<TContext>(
-		this IServiceCollection services)
+		this IServiceCollection services, Action<UkrainePostgresOptions>? options)
 		where TContext : DbContext, IDatabaseFacadeResolver
 	{
+		var opt = new UkrainePostgresOptions();
+		options?.Invoke(opt);
+
 		services.AddDbContextPool<TContext>(o =>
 		{
-			o.AddInterceptors(new AuditEntitiesSaveInterceptor());
+			o.ConfigureDbContextOptionsBuilder(opt);
 
 			o.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME).UseSnakeCaseNamingConvention();
 		});
@@ -36,7 +39,7 @@ public static class ServiceCollectionExtensions
 
 		services.AddDbContextPool<TContext>(o =>
 		{
-			o.AddInterceptors(new AuditEntitiesSaveInterceptor());
+			o.ConfigureDbContextOptionsBuilder(opt);
 
 			o.UseNpgsql(connectionString, sqlOptions =>
 			{
@@ -46,7 +49,7 @@ public static class ServiceCollectionExtensions
 				{
 					sqlOptions.EnableRetryOnFailure(opt.RetryOnFailureCount.Value, opt.RetryOnFailureDelay.Value, null);
 				}
-			}).UseSnakeCaseNamingConvention();
+			});
 		});
 
 		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
@@ -59,5 +62,15 @@ public static class ServiceCollectionExtensions
 	{
 		services.AddScoped<IUnitOfWork<TDbContext>, UnitOfWork<TDbContext>>();
 		return services;
+	}
+
+	private static void ConfigureDbContextOptionsBuilder(
+		this DbContextOptionsBuilder builder,
+		UkrainePostgresOptions options)
+	{
+		builder.EnableDetailedErrors(options.DetailedErrors);
+		builder.EnableSensitiveDataLogging(options.SensitiveDataLogging);
+		builder.AddInterceptors(new AuditEntitiesSaveInterceptor());
+		builder.UseSnakeCaseNamingConvention();
 	}
 }
