@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
 		{
 			o.ConfigureDbContextOptionsBuilder(opt);
 
-			o.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME).UseSnakeCaseNamingConvention();
+			o.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME);
 		});
 
 		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
