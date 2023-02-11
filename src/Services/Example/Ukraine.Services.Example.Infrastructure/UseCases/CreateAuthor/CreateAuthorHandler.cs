@@ -40,7 +40,7 @@ public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 
 		await _unitOfWork.SaveChangesAsync();
 
-		// TEMP VERSION
+		// TODO TEMP VERSION
 		await _daprClient.SaveStateAsync("ukraine-statestore", $"author-{author.Id}", new AuthorState(author.Id, author.FullName), cancellationToken: cancellationToken);
 
 		await _eventBus.PublishAsync(new AuthorCreatedEvent(author.Id), cancellationToken);
