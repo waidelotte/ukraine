@@ -3,5 +3,5 @@
 public abstract class EntityBase<TIdentity>
 	where TIdentity : struct
 {
-	public TIdentity Id { get; }
+	public TIdentity Id { get; private set; }
 }
