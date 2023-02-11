@@ -23,6 +23,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddExampleApi(this IServiceCollection services, IConfiguration configuration)
 	{
 		var databaseOptions = configuration.GetRequiredSection<ExampleDatabaseOptions>(ExampleDatabaseOptions.SECTION_NAME);
+
 		var telemetryOptions = configuration.GetRequiredSection<ExampleTelemetryOptions>(ExampleTelemetryOptions.SECTION_NAME);
 
 		if (string.IsNullOrEmpty(telemetryOptions.ZipkinServerUrl))

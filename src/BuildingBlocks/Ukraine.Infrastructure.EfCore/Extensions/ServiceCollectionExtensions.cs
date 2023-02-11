@@ -9,6 +9,22 @@ namespace Ukraine.Infrastructure.EfCore.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+	public static IServiceCollection UseUkraineInMemoryDatabase<TContext>(
+		this IServiceCollection services)
+		where TContext : DbContext, IDatabaseFacadeResolver
+	{
+		services.AddDbContextPool<TContext>(o =>
+		{
+			o.AddInterceptors(new AuditEntitiesSaveInterceptor());
+
+			o.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME).UseSnakeCaseNamingConvention();
+		});
+
+		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
+
+		return services;
+	}
+
 	public static IServiceCollection AddUkrainePostgresContext<TContext, TMigrationAssembly>(
 		this IServiceCollection services,
 		string connectionString,
@@ -22,22 +38,15 @@ public static class ServiceCollectionExtensions
 		{
 			o.AddInterceptors(new AuditEntitiesSaveInterceptor());
 
-			if (opt.UseInMemoryDatabase)
+			o.UseNpgsql(connectionString, sqlOptions =>
 			{
-				o.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME);
-			}
-			else
-			{
-				o.UseNpgsql(connectionString, sqlOptions =>
-				{
-					sqlOptions.MigrationsAssembly(typeof(TMigrationAssembly).Assembly.GetName().Name);
+				sqlOptions.MigrationsAssembly(typeof(TMigrationAssembly).Assembly.GetName().Name);
 
-					if (opt.RetryOnFailureCount.HasValue && opt.RetryOnFailureDelay.HasValue)
-					{
-						sqlOptions.EnableRetryOnFailure(opt.RetryOnFailureCount.Value, opt.RetryOnFailureDelay.Value, null);
-					}
-				}).UseSnakeCaseNamingConvention();
-			}
+				if (opt.RetryOnFailureCount.HasValue && opt.RetryOnFailureDelay.HasValue)
+				{
+					sqlOptions.EnableRetryOnFailure(opt.RetryOnFailureCount.Value, opt.RetryOnFailureDelay.Value, null);
+				}
+			}).UseSnakeCaseNamingConvention();
 		});
 
 		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
