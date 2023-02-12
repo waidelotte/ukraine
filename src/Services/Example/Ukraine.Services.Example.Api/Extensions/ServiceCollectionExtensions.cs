@@ -6,6 +6,7 @@ using Ukraine.Infrastructure.EventBus.Dapr.Extensions;
 using Ukraine.Infrastructure.GraphQl.Extenstion;
 using Ukraine.Infrastructure.GraphQL.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
+using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Api.Options;
@@ -45,6 +46,7 @@ public static class ServiceCollectionExtensions
 				options.SensitiveDataLogging = databaseOptions.SensitiveDataLogging;
 			});
 
+		services.AddUkraineSwagger(Constants.SERVICE_NAME);
 		services.AddFluentValidationAutoValidation();
 		services.AddControllers();
 
