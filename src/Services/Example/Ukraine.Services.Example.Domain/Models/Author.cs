@@ -4,11 +4,11 @@ namespace Ukraine.Services.Example.Domain.Models;
 
 public sealed class Author : AuditableEntityBase<Guid>
 {
-	public string FullName { get; set; } = null!;
+	public string FullName { get; init; } = null!;
 
-	public int? Age { get; set; }
+	public int? Age { get; init; }
 
-	public Guid SuperSecretKey { get; set; }
+	public Guid SuperSecretKey { get; init; }
 
-	public ICollection<Book> Books { get; } = new HashSet<Book>();
+	public ICollection<Book> Books { get; init; } = new HashSet<Book>();
 }

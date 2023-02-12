@@ -4,11 +4,11 @@ namespace Ukraine.Services.Example.Domain.Models;
 
 public sealed class Book : AuditableEntityBase<Guid>
 {
-	public string Name { get; set; } = null!;
+	public string Name { get; init; } = null!;
 
-	public int Rating { get; set; }
+	public int Rating { get; init; }
 
-	public Guid AuthorId { get; set; }
+	public Guid AuthorId { get; init; }
 
-	public Author Author { get; set; } = null!;
+	public Author Author { get; init; } = null!;
 }
