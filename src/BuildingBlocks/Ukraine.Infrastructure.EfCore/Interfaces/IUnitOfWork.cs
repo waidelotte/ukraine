@@ -8,7 +8,7 @@ public interface IUnitOfWork<TDbContext>
 	TRepository GetRepository<TRepository>()
 		where TRepository : IRepository;
 
-	int SaveChanges();
+	bool SaveChanges();
 
-	Task<int> SaveChangesAsync();
+	Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

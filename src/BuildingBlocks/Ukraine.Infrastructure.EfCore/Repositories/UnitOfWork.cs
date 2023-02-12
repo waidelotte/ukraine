@@ -41,13 +41,13 @@ internal sealed class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>
 		return serviceRepository;
 	}
 
-	public int SaveChanges()
+	public bool SaveChanges()
 	{
-		return _context.SaveChanges();
+		return _context.SaveChanges(false) > 0;
 	}
 
-	public async Task<int> SaveChangesAsync()
+	public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
 	{
-		return await _context.SaveChangesAsync();
+		return await _context.SaveChangesAsync(cancellationToken) > 0;
 	}
 }
