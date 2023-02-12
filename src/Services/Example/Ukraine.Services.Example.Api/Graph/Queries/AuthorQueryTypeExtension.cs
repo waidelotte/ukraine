@@ -16,6 +16,7 @@ public class AuthorQueryTypeExtension : ObjectTypeExtension
 			.Type<ListType<AuthorType>>()
 			.UsePaging()
 			.UseProjection()
+			.UseFiltering()
 			.UseSorting<AuthorSortType>();
 	}
 }

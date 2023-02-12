@@ -35,6 +35,7 @@ public static class ServiceCollectionExtensions
 				IncludeTotalCount = Constants.PAGING_TOTAL_COUNT_ENABLED,
 				AllowBackwardPagination = Constants.PAGING_BACKWARD_ENABLED
 			})
+			.AddFiltering()
 			.AllowIntrospection(opt.UseIntrospection);
 
 		if (opt.UseInstrumentation)
