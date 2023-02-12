@@ -1,16 +1,20 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Ukraine.Infrastructure.Telemetry.Options;
 
 namespace Ukraine.Infrastructure.Telemetry.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddUkraineZipkinTelemetry(
+	public static IServiceCollection AddUkraineTelemetry(
 		this IServiceCollection services,
 		string serviceName,
-		string serverUrl)
+		Action<UkraineTelemetryOptions>? options = null)
 	{
+		var opt = new UkraineTelemetryOptions();
+		options?.Invoke(opt);
+
 		services.AddOpenTelemetryTracing(builder =>
 		{
 			builder
@@ -23,9 +27,13 @@ public static class ServiceCollectionExtensions
 				.AddHotChocolateInstrumentation()
 				.AddSqlClientInstrumentation(o =>
 				{
-					o.RecordException = true;
-				})
-				.AddZipkinExporter(o => o.Endpoint = new Uri(serverUrl));
+					o.RecordException = opt.RecordSqlException;
+				});
+
+			if (!string.IsNullOrEmpty(opt.ZipkinServerUrl))
+			{
+				builder.AddZipkinExporter(o => o.Endpoint = new Uri(opt.ZipkinServerUrl));
+			}
 		});
 
 		return services;

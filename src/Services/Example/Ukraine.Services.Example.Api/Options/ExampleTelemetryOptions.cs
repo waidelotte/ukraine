@@ -4,5 +4,7 @@ public class ExampleTelemetryOptions
 {
 	public const string SECTION_NAME = "TelemetryOptions";
 
-	public string ZipkinServerUrl { get; set; } = null!;
+	public string? ZipkinServerUrl { get; set; }
+
+	public bool RecordSqlException { get; set; }
 }

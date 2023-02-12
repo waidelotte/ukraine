@@ -6,8 +6,6 @@ using Ukraine.Infrastructure.EventBus.Dapr.Extensions;
 using Ukraine.Infrastructure.GraphQl.Extenstion;
 using Ukraine.Infrastructure.GraphQL.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
-using Ukraine.Infrastructure.Swagger.Extenstion;
-using Ukraine.Infrastructure.Telemetry.Extenstion;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Api.Options;
@@ -24,13 +22,6 @@ public static class ServiceCollectionExtensions
 	{
 		var databaseOptions = configuration.GetRequiredSection<ExampleDatabaseOptions>(ExampleDatabaseOptions.SECTION_NAME);
 
-		var telemetryOptions = configuration.GetRequiredSection<ExampleTelemetryOptions>(ExampleTelemetryOptions.SECTION_NAME);
-
-		if (string.IsNullOrEmpty(telemetryOptions.ZipkinServerUrl))
-		{
-			throw ExampleException.Exception($"Configuration: {nameof(telemetryOptions.ZipkinServerUrl)} is null or empty");
-		}
-
 		var connectionString = configuration.GetConnectionString("Postgres");
 
 		if (string.IsNullOrEmpty(connectionString))
@@ -38,26 +29,29 @@ public static class ServiceCollectionExtensions
 			throw ExampleException.Exception("Configuration: Postgres Connection String is null or empty");
 		}
 
+		var telemetryOptions = configuration.GetRequiredSection<ExampleTelemetryOptions>(ExampleTelemetryOptions.SECTION_NAME);
+
 		services
-			.AddInfrastructure()
+			.AddInfrastructure(Constants.SERVICE_NAME, telemetry =>
+			{
+				telemetry.ZipkinServerUrl = telemetryOptions.ZipkinServerUrl;
+				telemetry.RecordSqlException = telemetryOptions.RecordSqlException;
+			})
 			.AddInfrastructureEfCore(connectionString, options =>
 			{
 				options.RetryOnFailureDelay = databaseOptions.RetryOnFailureDelay;
 				options.RetryOnFailureCount = databaseOptions.RetryOnFailureCount;
 				options.DetailedErrors = databaseOptions.DetailedErrors;
 				options.SensitiveDataLogging = databaseOptions.SensitiveDataLogging;
-			})
-			.AddUkraineSwagger(Constants.SERVICE_NAME)
-			.AddUkraineZipkinTelemetry(Constants.SERVICE_NAME, telemetryOptions.ZipkinServerUrl)
-			.AddUkraineDaprEventBus()
-			.AddFluentValidationAutoValidation();
+			});
 
+		services.AddFluentValidationAutoValidation();
 		services.AddControllers();
 
 		services
 			.AddUkraineHealthChecks()
-			.AddUkrainePostgresHealthCheck(connectionString)
-			.AddUkraineDaprHealthCheck();
+			.AddUkraineDaprHealthCheck()
+			.AddUkrainePostgresHealthCheck(connectionString);
 
 		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);
 
