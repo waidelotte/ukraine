@@ -18,46 +18,50 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                 .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
 
             migrationBuilder.CreateTable(
-                name: "example_entities",
+                name: "authors",
                 schema: "example_schema",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     fullname = table.Column<string>(name: "full_name", type: "text", nullable: false),
                     age = table.Column<int>(type: "integer", nullable: true),
-                    supersecretkey = table.Column<Guid>(name: "super_secret_key", type: "uuid", nullable: false)
+                    supersecretkey = table.Column<Guid>(name: "super_secret_key", type: "uuid", nullable: false),
+                    createdutc = table.Column<DateTime>(name: "created_utc", type: "timestamp with time zone", nullable: false),
+                    lastmodifiedutc = table.Column<DateTime>(name: "last_modified_utc", type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_example_entities", x => x.id);
+                    table.PrimaryKey("pk_authors", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "book",
+                name: "books",
                 schema: "example_schema",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     rating = table.Column<int>(type: "integer", nullable: false),
-                    authorid = table.Column<Guid>(name: "author_id", type: "uuid", nullable: false)
+                    authorid = table.Column<Guid>(name: "author_id", type: "uuid", nullable: false),
+                    createdutc = table.Column<DateTime>(name: "created_utc", type: "timestamp with time zone", nullable: false),
+                    lastmodifiedutc = table.Column<DateTime>(name: "last_modified_utc", type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_book", x => x.id);
+                    table.PrimaryKey("pk_books", x => x.id);
                     table.ForeignKey(
-                        name: "fk_book_example_entities_author_id",
+                        name: "fk_books_authors_author_id",
                         column: x => x.authorid,
                         principalSchema: "example_schema",
-                        principalTable: "example_entities",
+                        principalTable: "authors",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_book_author_id",
+                name: "ix_books_author_id",
                 schema: "example_schema",
-                table: "book",
+                table: "books",
                 column: "author_id");
         }
 
@@ -65,11 +69,11 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "book",
+                name: "books",
                 schema: "example_schema");
 
             migrationBuilder.DropTable(
-                name: "example_entities",
+                name: "authors",
                 schema: "example_schema");
         }
     }

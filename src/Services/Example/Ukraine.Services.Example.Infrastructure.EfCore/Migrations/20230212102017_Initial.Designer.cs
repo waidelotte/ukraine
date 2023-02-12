@@ -12,7 +12,7 @@ using Ukraine.Services.Example.Infrastructure.EfCore;
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    [Migration("20230206184537_Initial")]
+    [Migration("20230212102017_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,19 +38,27 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_utc");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("full_name");
+
+                    b.Property<DateTime?>("LastModifiedUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_modified_utc");
 
                     b.Property<Guid>("SuperSecretKey")
                         .HasColumnType("uuid")
                         .HasColumnName("super_secret_key");
 
                     b.HasKey("Id")
-                        .HasName("pk_example_entities");
+                        .HasName("pk_authors");
 
-                    b.ToTable("example_entities", "example_schema");
+                    b.ToTable("authors", "example_schema");
                 });
 
             modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.Book", b =>
@@ -64,6 +72,14 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("author_id");
 
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_utc");
+
+                    b.Property<DateTime?>("LastModifiedUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_modified_utc");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
@@ -74,12 +90,12 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                         .HasColumnName("rating");
 
                     b.HasKey("Id")
-                        .HasName("pk_book");
+                        .HasName("pk_books");
 
                     b.HasIndex("AuthorId")
-                        .HasDatabaseName("ix_book_author_id");
+                        .HasDatabaseName("ix_books_author_id");
 
-                    b.ToTable("book", "example_schema");
+                    b.ToTable("books", "example_schema");
                 });
 
             modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.Book", b =>
@@ -89,7 +105,7 @@ namespace Ukraine.Services.Example.Infrastructure.EfCore.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_book_example_entities_author_id");
+                        .HasConstraintName("fk_books_authors_author_id");
 
                     b.Navigation("Author");
                 });
