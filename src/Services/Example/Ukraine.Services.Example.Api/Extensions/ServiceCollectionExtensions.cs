@@ -2,8 +2,8 @@
 using HotChocolate;
 using MediatR;
 using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.EfCore.GraphQL.Extensions;
 using Ukraine.Infrastructure.EventBus.Dapr.Extensions;
+using Ukraine.Infrastructure.GraphQl.Extenstion;
 using Ukraine.Infrastructure.GraphQL.Extenstion;
 using Ukraine.Infrastructure.HealthChecks.Extenstion;
 using Ukraine.Infrastructure.Swagger.Extenstion;

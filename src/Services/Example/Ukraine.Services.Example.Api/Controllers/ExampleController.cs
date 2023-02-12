@@ -3,10 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Domain.Interfaces;
 using Ukraine.Services.Example.Domain.Events;
-using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
-using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
-using Ukraine.Services.Example.Infrastructure.UseCases.ReadAuthor;
 
 namespace Ukraine.Services.Example.Api.Controllers;
 
@@ -38,42 +34,16 @@ public class ExampleController : ControllerBase
 		return Ok();
 	}
 
-	[HttpPost("CreateAuthor")]
-	[ProducesResponseType(typeof(Author), (int)HttpStatusCode.OK)]
-	public async Task<ActionResult> CreateAuthorAsync(CreateAuthorRequest request)
+	[HttpGet("SeedData")]
+	[ProducesResponseType((int)HttpStatusCode.OK)]
+	public async Task<ActionResult> SeedDataAsync(CancellationToken cancellationToken)
 	{
-		_logger.LogDebug($"{nameof(CreateAuthorAsync)} controller start");
+		_logger.LogDebug($"{nameof(SeedDataAsync)} controller start");
 
-		var result = await _mediator.Send(request);
+		var emptyEvent = new EmptyEvent();
+		await _eventBus.PublishAsync(emptyEvent, cancellationToken);
 
-		_logger.LogDebug($"{nameof(CreateAuthorAsync)} controller end");
-
-		return Ok(result);
-	}
-
-	[HttpPost("CreateBook")]
-	[ProducesResponseType(typeof(Book), (int)HttpStatusCode.OK)]
-	public async Task<ActionResult> CreateBookAsync(CreateBookRequest request)
-	{
-		_logger.LogDebug($"{nameof(CreateBookAsync)} controller start");
-
-		var result = await _mediator.Send(request);
-
-		_logger.LogDebug($"{nameof(CreateBookAsync)} controller end");
-
-		return Ok(result);
-	}
-
-	[HttpGet("GetAuthors")]
-	[ProducesResponseType(typeof(IEnumerable<Author>), (int)HttpStatusCode.OK)]
-	public async Task<ActionResult> GetAuthorsAsync()
-	{
-		_logger.LogDebug($"{nameof(GetAuthorsAsync)} controller start");
-
-		var result = await _mediator.Send(new GetAuthorsQueryRequest());
-
-		_logger.LogDebug($"{nameof(GetAuthorsAsync)} controller end");
-
-		return Ok(result);
+		_logger.LogDebug($"{nameof(SeedDataAsync)} controller end");
+		return Ok();
 	}
 }

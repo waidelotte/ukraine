@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ukraine.Infrastructure.EfCore.GraphQL.Extensions;
+namespace Ukraine.Infrastructure.GraphQl.Extenstion;
 
 public static class RequestExecutorBuilderExtensions
 {
