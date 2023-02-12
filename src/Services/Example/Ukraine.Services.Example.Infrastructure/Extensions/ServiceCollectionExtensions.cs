@@ -10,8 +10,7 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddInfrastructure(this IServiceCollection services)
 	{
-		services.AddMediatR(Assembly.GetExecutingAssembly());
-		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+		services.AddUkraineMediatorAndValidators(Assembly.GetExecutingAssembly());
 		services.AddUkraineMediatorRequestValidation();
 
 		return services;
