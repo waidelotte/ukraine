@@ -39,8 +39,4 @@
         <PackageReference Include="HotChocolate.Diagnostics" Version="13.0.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="GraphQL" />
-    </ItemGroup>
-
 </Project>
