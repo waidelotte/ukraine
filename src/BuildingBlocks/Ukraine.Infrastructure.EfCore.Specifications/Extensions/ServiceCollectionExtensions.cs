@@ -6,7 +6,7 @@ namespace Ukraine.Infrastructure.EfCore.Specifications.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddUkraineEfCoreSpecifications(this IServiceCollection services)
+	public static IServiceCollection AddUkraineSpecifications(this IServiceCollection services)
 	{
 		services.AddScoped(typeof(ISpecificationRepository<>), typeof(SpecificationRepository<>));
 		return services;

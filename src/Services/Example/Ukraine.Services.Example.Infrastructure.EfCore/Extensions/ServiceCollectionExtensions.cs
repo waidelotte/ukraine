@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
 	{
 		services
 			.AddUkrainePostgresContext<ExampleContext, ExampleContext>(connectionString, options)
-			.AddUkraineEfCoreSpecifications()
+			.AddUkraineSpecifications()
 			.AddUkraineUnitOfWork();
 
 		return services;
