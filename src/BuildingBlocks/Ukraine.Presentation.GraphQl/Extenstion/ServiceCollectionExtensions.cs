@@ -2,9 +2,9 @@
 using HotChocolate.Language;
 using HotChocolate.Types.Pagination;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Infrastructure.GraphQL.Options;
+using Ukraine.Presentation.GraphQl.Options;
 
-namespace Ukraine.Infrastructure.GraphQL.Extenstion;
+namespace Ukraine.Presentation.GraphQl.Extenstion;
 
 public static class ServiceCollectionExtensions
 {

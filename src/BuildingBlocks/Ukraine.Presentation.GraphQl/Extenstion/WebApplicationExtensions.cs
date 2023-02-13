@@ -1,9 +1,9 @@
 using HotChocolate.AspNetCore;
 using HotChocolate.AspNetCore.Voyager;
 using Microsoft.AspNetCore.Builder;
-using Ukraine.Infrastructure.GraphQL.Options;
+using Ukraine.Presentation.GraphQl.Options;
 
-namespace Ukraine.Infrastructure.GraphQL.Extenstion;
+namespace Ukraine.Presentation.GraphQl.Extenstion;
 
 public static class WebApplicationExtensions
 {

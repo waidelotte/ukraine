@@ -1,13 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <WarningsAsErrors>nullable</WarningsAsErrors>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    </PropertyGroup>
-
+    
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
@@ -22,9 +14,10 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.GraphQl\Ukraine.Infrastructure.GraphQl.csproj" />
-      <ProjectReference Include="..\Ukraine.Services.Example.Persistence\Ukraine.Services.Example.Persistence.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Presentation.GraphQl\Ukraine.Presentation.GraphQl.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Presentation.HealthChecks\Ukraine.Presentation.HealthChecks.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Presentation.Swagger\Ukraine.Presentation.Swagger.csproj" />
       <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
     </ItemGroup>
-
+    
 </Project>

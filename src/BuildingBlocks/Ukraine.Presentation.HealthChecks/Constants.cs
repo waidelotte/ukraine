@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.HealthChecks;
+﻿namespace Ukraine.Presentation.HealthChecks;
 
 public static class Constants
 {

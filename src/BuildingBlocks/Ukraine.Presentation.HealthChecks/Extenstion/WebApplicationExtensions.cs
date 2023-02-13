@@ -2,7 +2,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace Ukraine.Infrastructure.HealthChecks.Extenstion;
+namespace Ukraine.Presentation.HealthChecks.Extenstion;
 
 public static class WebApplicationExtensions
 {

@@ -1,13 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <WarningsAsErrors>nullable</WarningsAsErrors>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    </PropertyGroup>
-
+    
     <ItemGroup>
       <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Domain\Ukraine.Domain.csproj" />
     </ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.GraphQL;
+﻿namespace Ukraine.Presentation.GraphQl;
 
 public static class Constants
 {

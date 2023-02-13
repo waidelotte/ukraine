@@ -1,8 +1,8 @@
 ﻿using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.GraphQL.Extenstion;
-using Ukraine.Infrastructure.HealthChecks.Extenstion;
-using Ukraine.Infrastructure.Swagger.Extenstion;
 using Ukraine.Persistence.EfCore.Interfaces;
+using Ukraine.Presentation.GraphQl.Extenstion;
+using Ukraine.Presentation.HealthChecks.Extenstion;
+using Ukraine.Presentation.Swagger.Extenstion;
 using Ukraine.Services.Example.Api.Options;
 
 namespace Ukraine.Services.Example.Api.Extensions;

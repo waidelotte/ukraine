@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ukraine.Infrastructure.HealthChecks.Extenstion;
+namespace Ukraine.Presentation.HealthChecks.Extenstion;
 
 public static class HealthChecksBuilderExtensions
 {

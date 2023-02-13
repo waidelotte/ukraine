@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.Swagger;
+﻿namespace Ukraine.Presentation.Swagger;
 
 public static class Constants
 {

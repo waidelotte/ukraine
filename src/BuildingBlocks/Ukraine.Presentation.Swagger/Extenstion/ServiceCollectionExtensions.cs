@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Ukraine.Infrastructure.Swagger.Extenstion;
+namespace Ukraine.Presentation.Swagger.Extenstion;
 
 public static class ServiceCollectionExtensions
 {

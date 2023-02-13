@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.GraphQL.Options;
+﻿namespace Ukraine.Presentation.GraphQl.Options;
 
 public class UkraineGraphQlOptions
 {

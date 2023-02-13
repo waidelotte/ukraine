@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Ukraine.Infrastructure.HealthChecks.Extenstion;
+namespace Ukraine.Presentation.HealthChecks.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
