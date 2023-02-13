@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
+      <ProjectReference Include="..\Ukraine.Domain\Ukraine.Domain.csproj" />
     </ItemGroup>
-
+    
 </Project>

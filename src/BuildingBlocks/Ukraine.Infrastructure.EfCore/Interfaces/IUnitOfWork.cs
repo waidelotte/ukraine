@@ -1,4 +1,6 @@
-﻿namespace Ukraine.Infrastructure.EfCore.Interfaces;
+﻿using Ukraine.Domain.Interfaces;
+
+namespace Ukraine.Infrastructure.EfCore.Interfaces;
 
 public interface IUnitOfWork
 {

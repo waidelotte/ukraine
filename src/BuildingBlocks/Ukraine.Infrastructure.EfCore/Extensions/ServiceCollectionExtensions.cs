@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Ukraine.Domain.Interfaces;
 using Ukraine.Infrastructure.EfCore.Interceptors;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EfCore.Options;
@@ -62,7 +63,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddUkraineUnitOfWork(this IServiceCollection services)
 	{
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
-		services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+		services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 		return services;
 	}
 

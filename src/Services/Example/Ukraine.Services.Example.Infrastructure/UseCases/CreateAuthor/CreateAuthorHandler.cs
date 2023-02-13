@@ -33,7 +33,7 @@ public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 			SuperSecretKey = Guid.NewGuid()
 		};
 
-		var repository = _unitOfWork.GetRepository<IBaseRepository<Author>>();
+		var repository = _unitOfWork.GetRepository<IRepository<Author>>();
 
 		await repository.AddAsync(author, cancellationToken);
 
