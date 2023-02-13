@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Grap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.EfCore.Specifications", "src\BuildingBlocks\Ukraine.Infrastructure.EfCore.Specifications\Ukraine.Infrastructure.EfCore.Specifications.csproj", "{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Telemetry", "src\BuildingBlocks\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj", "{7AAA8708-A70E-4917-8474-A00A7B7800B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,7 @@ Global
 		{F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B} = {3D7ED6A3-561F-49C9-AF87-AC10DCE95A89}
 		{9970C865-F1C1-4EEF-8355-4BE15691921B} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{7AAA8708-A70E-4917-8474-A00A7B7800B3} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -115,5 +118,9 @@ Global
 		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAA8708-A70E-4917-8474-A00A7B7800B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAA8708-A70E-4917-8474-A00A7B7800B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAA8708-A70E-4917-8474-A00A7B7800B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAA8708-A70E-4917-8474-A00A7B7800B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
