@@ -34,7 +34,7 @@ public class CreateBookHandler : IRequestHandler<CreateBookRequest, Book>
 
 		author.Books.Add(book);
 
-		await _unitOfWork.SaveChangesAsync();
+		await _unitOfWork.SaveChangesAsync(cancellationToken);
 
 		return book;
 	}
