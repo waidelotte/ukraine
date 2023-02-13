@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.GraphQl", "src\BuildingBlocks\Ukraine.Infrastructure.GraphQl\Ukraine.Infrastructure.GraphQl.csproj", "{9970C865-F1C1-4EEF-8355-4BE15691921B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.EfCore.Specifications", "src\BuildingBlocks\Ukraine.Infrastructure.EfCore.Specifications\Ukraine.Infrastructure.EfCore.Specifications.csproj", "{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,7 @@ Global
 		{9DA0E518-0A7D-4F08-80A6-D51F09383EF7} = {DA93160E-BCD5-43BB-8B14-AD94F1528159}
 		{F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B} = {3D7ED6A3-561F-49C9-AF87-AC10DCE95A89}
 		{9970C865-F1C1-4EEF-8355-4BE15691921B} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -108,5 +111,9 @@ Global
 		{9970C865-F1C1-4EEF-8355-4BE15691921B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9970C865-F1C1-4EEF-8355-4BE15691921B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9970C865-F1C1-4EEF-8355-4BE15691921B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

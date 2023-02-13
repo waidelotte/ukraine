@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Ukraine.Infrastructure.EfCore.Interfaces;
+using Ukraine.Infrastructure.EfCore.Specifications.Interfaces;
 using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.ReadAuthor;
 
 public class GetAuthorsQueryHandler : IRequestHandler<GetAuthorsQueryRequest, IQueryable<Author>>
 {
-	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
+	private readonly IUnitOfWork _unitOfWork;
 
-	public GetAuthorsQueryHandler(IUnitOfWork<ExampleContext> unitOfWork)
+	public GetAuthorsQueryHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}

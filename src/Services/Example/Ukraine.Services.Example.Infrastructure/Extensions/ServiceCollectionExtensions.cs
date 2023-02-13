@@ -14,10 +14,9 @@ public static class ServiceCollectionExtensions
 		string serviceName,
 		Action<UkraineTelemetryOptions>? telemetryOptions = null)
 	{
-		services.AddUkraineMediatorAndValidators(Assembly.GetExecutingAssembly());
-		services.AddUkraineMediatorRequestValidation();
-
 		services
+			.AddUkraineMediatorAndValidators(Assembly.GetExecutingAssembly())
+			.AddUkraineMediatorRequestValidation()
 			.AddUkraineTelemetry(serviceName, telemetryOptions)
 			.AddUkraineDaprEventBus();
 

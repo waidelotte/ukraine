@@ -24,6 +24,7 @@ public static class ServiceCollectionExtensions
 		});
 
 		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
+		services.AddScoped<DbContext, TContext>();
 
 		return services;
 	}
@@ -53,14 +54,15 @@ public static class ServiceCollectionExtensions
 		});
 
 		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
+		services.AddScoped<DbContext, TContext>();
 
 		return services;
 	}
 
-	public static IServiceCollection AddUkraineUnitOfWork<TDbContext>(this IServiceCollection services)
-		where TDbContext : DbContext
+	public static IServiceCollection AddUkraineUnitOfWork(this IServiceCollection services)
 	{
-		services.AddScoped<IUnitOfWork<TDbContext>, UnitOfWork<TDbContext>>();
+		services.AddScoped<IUnitOfWork, UnitOfWork>();
+		services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 		return services;
 	}
 

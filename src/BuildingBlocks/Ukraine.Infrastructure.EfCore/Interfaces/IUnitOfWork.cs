@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace Ukraine.Infrastructure.EfCore.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Interfaces;
-
-public interface IUnitOfWork<TDbContext>
-	where TDbContext : DbContext
+public interface IUnitOfWork
 {
 	TRepository GetRepository<TRepository>()
 		where TRepository : IRepository;

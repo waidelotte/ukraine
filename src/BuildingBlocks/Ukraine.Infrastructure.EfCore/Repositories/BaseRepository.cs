@@ -4,10 +4,10 @@ using Ukraine.Infrastructure.EfCore.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Repositories;
 
-public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
+public class BaseRepository<TEntity> : IBaseRepository<TEntity>
 	where TEntity : class, IAggregateRoot
 {
-	protected BaseRepository(DbContext dbContext)
+	public BaseRepository(DbContext dbContext)
 	{
 		DbSet = dbContext.Set<TEntity>();
 	}

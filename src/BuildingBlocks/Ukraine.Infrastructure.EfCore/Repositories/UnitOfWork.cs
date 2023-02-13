@@ -5,14 +5,13 @@ using Ukraine.Infrastructure.EfCore.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Repositories;
 
-internal sealed class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>
-	where TDbContext : DbContext
+internal sealed class UnitOfWork : IUnitOfWork
 {
-	private readonly TDbContext _context;
+	private readonly DbContext _context;
 	private readonly IServiceProvider _serviceProvider;
 	private Dictionary<Type, IRepository>? _repositories;
 
-	public UnitOfWork(TDbContext context, IServiceProvider serviceProvider)
+	public UnitOfWork(DbContext context, IServiceProvider serviceProvider)
 	{
 		_context = context;
 		_serviceProvider = serviceProvider;
@@ -23,7 +22,7 @@ internal sealed class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>
 	{
 		_repositories ??= new Dictionary<Type, IRepository>();
 
-		var type = typeof(IRepository);
+		var type = typeof(TRepository);
 
 		if (_repositories.TryGetValue(type, out var repository))
 		{

@@ -1,17 +1,17 @@
 ﻿using MediatR;
 using Ukraine.Infrastructure.EfCore.Interfaces;
+using Ukraine.Infrastructure.EfCore.Specifications.Interfaces;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 
 public class CreateBookHandler : IRequestHandler<CreateBookRequest, Book>
 {
-	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
+	private readonly IUnitOfWork _unitOfWork;
 
-	public CreateBookHandler(IUnitOfWork<ExampleContext> unitOfWork)
+	public CreateBookHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}

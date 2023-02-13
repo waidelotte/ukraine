@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Infrastructure.EfCore.Extensions;
-using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EfCore.Options;
+using Ukraine.Infrastructure.EfCore.Specifications.Extensions;
 
 namespace Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 
@@ -12,9 +12,10 @@ public static class ServiceCollectionExtensions
 		string connectionString,
 		Action<UkrainePostgresOptions>? options = null)
 	{
-		services.AddUkrainePostgresContext<ExampleContext, ExampleContext>(connectionString, options);
-		services.AddUkraineUnitOfWork<ExampleContext>();
-		services.AddScoped(typeof(ISpecificationRepository<>), typeof(ExampleRepository<>));
+		services
+			.AddUkrainePostgresContext<ExampleContext, ExampleContext>(connectionString, options)
+			.AddUkraineEfCoreSpecifications()
+			.AddUkraineUnitOfWork();
 
 		return services;
 	}

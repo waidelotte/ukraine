@@ -4,19 +4,18 @@ using Ukraine.Domain.Interfaces;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.EfCore;
 using Ukraine.Services.Example.Infrastructure.State;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
 public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 {
-	private readonly IUnitOfWork<ExampleContext> _unitOfWork;
+	private readonly IUnitOfWork _unitOfWork;
 	private readonly IEventBus _eventBus;
 	private readonly DaprClient _daprClient;
 
 	public CreateAuthorHandler(
-		IUnitOfWork<ExampleContext> unitOfWork,
+		IUnitOfWork unitOfWork,
 		IEventBus eventBus,
 		DaprClient daprClient)
 	{
@@ -34,11 +33,11 @@ public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 			SuperSecretKey = Guid.NewGuid()
 		};
 
-		var repository = _unitOfWork.GetRepository<ISpecificationRepository<Author>>();
+		var repository = _unitOfWork.GetRepository<IBaseRepository<Author>>();
 
 		await repository.AddAsync(author, cancellationToken);
 
-		await _unitOfWork.SaveChangesAsync();
+		await _unitOfWork.SaveChangesAsync(cancellationToken);
 
 		// TODO TEMP VERSION
 		await _daprClient.SaveStateAsync("ukraine-statestore", $"author-{author.Id}", new AuthorState(author.Id, author.FullName), cancellationToken: cancellationToken);

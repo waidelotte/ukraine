@@ -2,14 +2,20 @@
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Infrastructure.EfCore.Interfaces;
+using Ukraine.Infrastructure.EfCore.Repositories;
+using Ukraine.Infrastructure.EfCore.Specifications.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Repositories;
+namespace Ukraine.Infrastructure.EfCore.Specifications.Repositories;
 
-public abstract class BaseSpecificationRepository<TEntity> : BaseRepository<TEntity>, ISpecificationRepository<TEntity>
+public class SpecificationRepository<TEntity> : BaseRepository<TEntity>, ISpecificationRepository<TEntity>
 	where TEntity : class, IAggregateRoot
 {
-	public BaseSpecificationRepository(DbContext dbContext) : base(dbContext) { }
+	private readonly DbSet<TEntity> _dbSet;
+
+	public SpecificationRepository(DbContext dbContext) : base(dbContext)
+	{
+		_dbSet = dbContext.Set<TEntity>();
+	}
 
 	public IQueryable<TEntity> GetQuery(ISpecification<TEntity> specification)
 	{
@@ -23,6 +29,6 @@ public abstract class BaseSpecificationRepository<TEntity> : BaseRepository<TEnt
 
 	private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
 	{
-		return SpecificationEvaluator.Default.GetQuery(DbSet.AsQueryable(), specification);
+		return SpecificationEvaluator.Default.GetQuery(_dbSet.AsQueryable(), specification);
 	}
 }
