@@ -11,9 +11,9 @@ using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Api.Options;
 using Ukraine.Services.Example.Domain.Exceptions;
-using Ukraine.Services.Example.Infrastructure.EfCore;
-using Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
 using Ukraine.Services.Example.Infrastructure.Extensions;
+using Ukraine.Services.Example.Persistence;
+using Ukraine.Services.Example.Persistence.Extensions;
 
 namespace Ukraine.Services.Example.Api.Extensions;
 
@@ -38,7 +38,7 @@ public static class ServiceCollectionExtensions
 				telemetry.ZipkinServerUrl = telemetryOptions.ZipkinServerUrl;
 				telemetry.RecordSqlException = telemetryOptions.RecordSqlException;
 			})
-			.AddInfrastructureEfCore(connectionString, options =>
+			.AddPersistence(connectionString, options =>
 			{
 				options.RetryOnFailureDelay = databaseOptions.RetryOnFailureDelay;
 				options.RetryOnFailureCount = databaseOptions.RetryOnFailureCount;

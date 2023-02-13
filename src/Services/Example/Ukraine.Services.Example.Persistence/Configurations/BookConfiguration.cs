@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Ukraine.Services.Example.Domain.Models;
 
-namespace Ukraine.Services.Example.Infrastructure.EfCore.Configurations;
+namespace Ukraine.Services.Example.Persistence.Configurations;
 
 internal class BookConfiguration : IEntityTypeConfiguration<Book>
 {

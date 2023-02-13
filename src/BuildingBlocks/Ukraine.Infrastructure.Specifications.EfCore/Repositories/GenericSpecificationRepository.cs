@@ -2,17 +2,16 @@
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Infrastructure.EfCore.Repositories;
-using Ukraine.Infrastructure.EfCore.Specifications.Interfaces;
+using Ukraine.Infrastructure.Specifications.EfCore.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Specifications.Repositories;
+namespace Ukraine.Infrastructure.Specifications.EfCore.Repositories;
 
-public class SpecificationRepository<TEntity> : BaseRepository<TEntity>, ISpecificationRepository<TEntity>
+public class GenericSpecificationRepository<TEntity> : ISpecificationRepository<TEntity>
 	where TEntity : class, IAggregateRoot
 {
 	private readonly DbSet<TEntity> _dbSet;
 
-	public SpecificationRepository(DbContext dbContext) : base(dbContext)
+	public GenericSpecificationRepository(DbContext dbContext)
 	{
 		_dbSet = dbContext.Set<TEntity>();
 	}

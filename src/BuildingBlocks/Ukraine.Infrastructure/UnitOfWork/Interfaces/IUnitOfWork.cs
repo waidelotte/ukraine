@@ -1,6 +1,6 @@
 ﻿using Ukraine.Domain.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Interfaces;
+namespace Ukraine.Infrastructure.UnitOfWork.Interfaces;
 
 public interface IUnitOfWork
 {

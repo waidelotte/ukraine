@@ -9,11 +9,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.GraphQl\Ukraine.Infrastructure.GraphQl.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
       <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
-      <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure.EfCore\Ukraine.Services.Example.Infrastructure.EfCore.csproj" />
+      <ProjectReference Include="..\Ukraine.Services.Example.Persistence\Ukraine.Services.Example.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

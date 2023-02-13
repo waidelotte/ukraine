@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.EfCore.Contexts;
 using Ukraine.Services.Example.Domain.Models;
 
-namespace Ukraine.Services.Example.Infrastructure.EfCore;
+namespace Ukraine.Services.Example.Persistence;
 
 public class ExampleContext : UkraineDatabaseContextBase
 {

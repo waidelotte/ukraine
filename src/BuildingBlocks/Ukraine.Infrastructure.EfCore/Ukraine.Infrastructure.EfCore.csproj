@@ -2,9 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <WarningsAsErrors>nullable</WarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ukraine.Domain\Ukraine.Domain.csproj" />
+      <ProjectReference Include="..\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
     </ItemGroup>
-    
+
 </Project>

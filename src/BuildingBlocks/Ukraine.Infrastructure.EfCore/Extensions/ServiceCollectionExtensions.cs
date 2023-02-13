@@ -5,6 +5,7 @@ using Ukraine.Infrastructure.EfCore.Interceptors;
 using Ukraine.Infrastructure.EfCore.Interfaces;
 using Ukraine.Infrastructure.EfCore.Options;
 using Ukraine.Infrastructure.EfCore.Repositories;
+using Ukraine.Infrastructure.UnitOfWork.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Extensions;
 
@@ -60,10 +61,10 @@ public static class ServiceCollectionExtensions
 		return services;
 	}
 
-	public static IServiceCollection AddUkraineUnitOfWork(this IServiceCollection services)
+	public static IServiceCollection AddUkraineEfUnitOfWork(this IServiceCollection services)
 	{
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
-		services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+		services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 		return services;
 	}
 

@@ -22,6 +22,8 @@
     </ItemGroup>
     
     <ItemGroup>
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.GraphQl\Ukraine.Infrastructure.GraphQl.csproj" />
+      <ProjectReference Include="..\Ukraine.Services.Example.Persistence\Ukraine.Services.Example.Persistence.csproj" />
       <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
     </ItemGroup>
 

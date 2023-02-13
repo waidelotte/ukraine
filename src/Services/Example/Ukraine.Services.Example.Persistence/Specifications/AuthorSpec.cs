@@ -1,7 +1,7 @@
 ﻿using Ardalis.Specification;
 using Ukraine.Services.Example.Domain.Models;
 
-namespace Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
+namespace Ukraine.Services.Example.Persistence.Specifications;
 
 public sealed class AuthorSpec : Specification<Author>
 {

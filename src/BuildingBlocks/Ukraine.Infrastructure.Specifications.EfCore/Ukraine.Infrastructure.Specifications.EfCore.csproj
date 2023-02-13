@@ -2,17 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <WarningsAsErrors>nullable</WarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ardalis.Specification" Version="6.1.0" />
         <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="6.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ukraine.Infrastructure.EfCore\Ukraine.Infrastructure.EfCore.csproj" />
+      <ProjectReference Include="..\Ukraine.Domain\Ukraine.Domain.csproj" />
     </ItemGroup>
 </Project>

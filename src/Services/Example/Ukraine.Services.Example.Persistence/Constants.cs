@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Services.Example.Infrastructure.EfCore;
+﻿namespace Ukraine.Services.Example.Persistence;
 
 internal static class Constants
 {

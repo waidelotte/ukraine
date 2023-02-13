@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Ukraine.Infrastructure.EfCore.Interfaces;
-using Ukraine.Infrastructure.EfCore.Specifications.Interfaces;
+using Ukraine.Infrastructure.Specifications.EfCore.Interfaces;
+using Ukraine.Infrastructure.UnitOfWork.Interfaces;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Domain.Models;
-using Ukraine.Services.Example.Infrastructure.EfCore.Specifications;
+using Ukraine.Services.Example.Persistence.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 

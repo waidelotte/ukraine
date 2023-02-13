@@ -1,21 +1,21 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Infrastructure.EfCore.Extensions;
 using Ukraine.Infrastructure.EfCore.Options;
-using Ukraine.Infrastructure.EfCore.Specifications.Extensions;
+using Ukraine.Infrastructure.Specifications.EfCore.Extensions;
 
-namespace Ukraine.Services.Example.Infrastructure.EfCore.Extensions;
+namespace Ukraine.Services.Example.Persistence.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddInfrastructureEfCore(
+	public static IServiceCollection AddPersistence(
 		this IServiceCollection services,
 		string connectionString,
 		Action<UkrainePostgresOptions>? options = null)
 	{
 		services
 			.AddUkrainePostgresContext<ExampleContext, ExampleContext>(connectionString, options)
-			.AddUkraineSpecifications()
-			.AddUkraineUnitOfWork();
+			.AddUkraineEfCoreSpecifications()
+			.AddUkraineEfUnitOfWork();
 
 		return services;
 	}

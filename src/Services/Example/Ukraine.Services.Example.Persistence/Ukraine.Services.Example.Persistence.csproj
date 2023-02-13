@@ -7,15 +7,11 @@
         <WarningsAsErrors>nullable</WarningsAsErrors>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
-
+    
     <ItemGroup>
       <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.EfCore\Ukraine.Infrastructure.EfCore.csproj" />
-      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.EfCore.Specifications\Ukraine.Infrastructure.EfCore.Specifications.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.Specifications.EfCore\Ukraine.Infrastructure.Specifications.EfCore.csproj" />
       <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Migrations" />
     </ItemGroup>
 
 </Project>

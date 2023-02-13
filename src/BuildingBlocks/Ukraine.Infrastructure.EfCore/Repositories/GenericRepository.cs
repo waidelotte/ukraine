@@ -3,10 +3,10 @@ using Ukraine.Domain.Interfaces;
 
 namespace Ukraine.Infrastructure.EfCore.Repositories;
 
-public class BaseRepository<TEntity> : IRepository<TEntity>
+public class GenericRepository<TEntity> : IRepository<TEntity>
 	where TEntity : class, IAggregateRoot
 {
-	public BaseRepository(DbContext dbContext)
+	public GenericRepository(DbContext dbContext)
 	{
 		DbSet = dbContext.Set<TEntity>();
 	}
