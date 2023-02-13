@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.EfCore.Options;
+﻿namespace Ukraine.Persistence.EfCore.Options;
 
 public class UkrainePostgresOptions
 {

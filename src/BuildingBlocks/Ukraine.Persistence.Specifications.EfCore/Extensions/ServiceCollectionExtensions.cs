@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Infrastructure.Specifications.EfCore.Interfaces;
-using Ukraine.Infrastructure.Specifications.EfCore.Repositories;
+using Ukraine.Persistence.Specifications.EfCore.Interfaces;
+using Ukraine.Persistence.Specifications.EfCore.Repositories;
 
-namespace Ukraine.Infrastructure.Specifications.EfCore.Extensions;
+namespace Ukraine.Persistence.Specifications.EfCore.Extensions;
 
 public static class ServiceCollectionExtensions
 {

@@ -9,4 +9,9 @@ public static class Constants
 	{
 		public const bool CaseInsensitive = true;
 	}
+
+	public static class Tags
+	{
+		public const string READY = "ready";
+	}
 }

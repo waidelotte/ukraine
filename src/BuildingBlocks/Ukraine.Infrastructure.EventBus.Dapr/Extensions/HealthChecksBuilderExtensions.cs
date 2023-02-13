@@ -8,7 +8,7 @@ public static class HealthChecksBuilderExtensions
 	{
 		builder.AddCheck<HealthCheck>(Constants.SERVICE_NAME, tags: new[]
 		{
-			HealthChecks.Constants.Tags.READY, Constants.SERVICE_NAME
+			Constants.Tags.READY, Constants.SERVICE_NAME
 		});
 
 		return builder;

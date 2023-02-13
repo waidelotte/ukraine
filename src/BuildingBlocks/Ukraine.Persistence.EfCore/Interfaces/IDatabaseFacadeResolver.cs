@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace Ukraine.Infrastructure.EfCore.Interfaces;
+namespace Ukraine.Persistence.EfCore.Interfaces;
 
 public interface IDatabaseFacadeResolver
 {

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Ukraine.Domain.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Interceptors;
+namespace Ukraine.Persistence.EfCore.Interceptors;
 
 internal sealed class AuditEntitiesSaveInterceptor : SaveChangesInterceptor
 {

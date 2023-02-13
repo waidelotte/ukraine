@@ -2,9 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Domain.Exceptions;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Infrastructure.UnitOfWork.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore;
+namespace Ukraine.Persistence.EfCore;
 
 internal sealed class UnitOfWork : IUnitOfWork
 {

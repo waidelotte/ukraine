@@ -1,4 +1,4 @@
-namespace Ukraine.Infrastructure.EfCore;
+namespace Ukraine.Persistence.EfCore;
 
 public static class Constants
 {

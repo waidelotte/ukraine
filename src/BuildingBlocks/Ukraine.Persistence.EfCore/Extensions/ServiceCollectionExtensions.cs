@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Infrastructure.EfCore.Interceptors;
-using Ukraine.Infrastructure.EfCore.Interfaces;
-using Ukraine.Infrastructure.EfCore.Options;
-using Ukraine.Infrastructure.EfCore.Repositories;
-using Ukraine.Infrastructure.UnitOfWork.Interfaces;
+using Ukraine.Persistence.EfCore.Interceptors;
+using Ukraine.Persistence.EfCore.Interfaces;
+using Ukraine.Persistence.EfCore.Options;
+using Ukraine.Persistence.EfCore.Repositories;
 
-namespace Ukraine.Infrastructure.EfCore.Extensions;
+namespace Ukraine.Persistence.EfCore.Extensions;
 
 public static class ServiceCollectionExtensions
 {

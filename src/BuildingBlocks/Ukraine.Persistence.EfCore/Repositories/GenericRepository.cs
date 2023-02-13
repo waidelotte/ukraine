@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ukraine.Domain.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Repositories;
+namespace Ukraine.Persistence.EfCore.Repositories;
 
 public class GenericRepository<TEntity> : IRepository<TEntity>
 	where TEntity : class, IAggregateRoot

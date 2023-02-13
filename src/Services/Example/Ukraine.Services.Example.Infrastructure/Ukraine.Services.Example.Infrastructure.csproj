@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.EventBus.Dapr\Ukraine.Infrastructure.EventBus.Dapr.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
       <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />

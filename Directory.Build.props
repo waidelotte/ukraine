@@ -1,5 +1,13 @@
 ﻿<Project>
     <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <WarningsAsErrors>nullable</WarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <PropertyGroup>
         <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)Ukraine.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>

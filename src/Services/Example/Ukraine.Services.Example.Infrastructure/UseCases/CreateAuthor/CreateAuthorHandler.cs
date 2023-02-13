@@ -1,7 +1,6 @@
 ﻿using Dapr.Client;
 using MediatR;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Infrastructure.UnitOfWork.Interfaces;
 using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.State;

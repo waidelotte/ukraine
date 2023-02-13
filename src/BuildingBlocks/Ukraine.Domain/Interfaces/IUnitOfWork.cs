@@ -1,6 +1,4 @@
-﻿using Ukraine.Domain.Interfaces;
-
-namespace Ukraine.Infrastructure.UnitOfWork.Interfaces;
+﻿namespace Ukraine.Domain.Interfaces;
 
 public interface IUnitOfWork
 {

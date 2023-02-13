@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{52
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.EfCore", "src\BuildingBlocks\Ukraine.Infrastructure.EfCore\Ukraine.Infrastructure.EfCore.csproj", "{92235677-5B49-421C-89A1-5C5312CA3DE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.EfCore", "src\BuildingBlocks\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj", "{92235677-5B49-421C-89A1-5C5312CA3DE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure", "src\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj", "{8F90B275-7B2F-4C26-BC03-BEE807739477}"
 EndProject
@@ -50,9 +50,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.GraphQl", "src\BuildingBlocks\Ukraine.Infrastructure.GraphQl\Ukraine.Infrastructure.GraphQl.csproj", "{9970C865-F1C1-4EEF-8355-4BE15691921B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Specifications.EfCore", "src\BuildingBlocks\Ukraine.Infrastructure.Specifications.EfCore\Ukraine.Infrastructure.Specifications.EfCore.csproj", "{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.Specifications.EfCore", "src\BuildingBlocks\Ukraine.Persistence.Specifications.EfCore\Ukraine.Persistence.Specifications.EfCore.csproj", "{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Telemetry", "src\BuildingBlocks\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj", "{7AAA8708-A70E-4917-8474-A00A7B7800B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.EventBus.Dapr", "src\BuildingBlocks\Ukraine.Infrastructure.EventBus.Dapr\Ukraine.Infrastructure.EventBus.Dapr.csproj", "{946BC50C-EB2E-4D4B-97B5-4A59358687C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +78,7 @@ Global
 		{9970C865-F1C1-4EEF-8355-4BE15691921B} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{D8649726-BEF2-43A8-8AC0-296DEEE9EDBE} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{7AAA8708-A70E-4917-8474-A00A7B7800B3} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{946BC50C-EB2E-4D4B-97B5-4A59358687C3} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{92235677-5B49-421C-89A1-5C5312CA3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -122,5 +125,9 @@ Global
 		{7AAA8708-A70E-4917-8474-A00A7B7800B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AAA8708-A70E-4917-8474-A00A7B7800B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AAA8708-A70E-4917-8474-A00A7B7800B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{946BC50C-EB2E-4D4B-97B5-4A59358687C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{946BC50C-EB2E-4D4B-97B5-4A59358687C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{946BC50C-EB2E-4D4B-97B5-4A59358687C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{946BC50C-EB2E-4D4B-97B5-4A59358687C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

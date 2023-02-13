@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Ukraine.Infrastructure.EfCore.Interfaces;
+using Ukraine.Persistence.EfCore.Interfaces;
 
-namespace Ukraine.Infrastructure.EfCore.Contexts;
+namespace Ukraine.Persistence.EfCore.Contexts;
 
 public abstract class UkraineDatabaseContextBase : DbContext, IDatabaseFacadeResolver
 {

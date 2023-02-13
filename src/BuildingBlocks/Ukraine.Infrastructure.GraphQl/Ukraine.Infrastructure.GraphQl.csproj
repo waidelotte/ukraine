@@ -1,18 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <WarningsAsErrors>nullable</WarningsAsErrors>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.1" />
         <PackageReference Include="HotChocolate.AspNetCore.Voyager" Version="10.5.5" />
         <PackageReference Include="HotChocolate.Diagnostics" Version="13.0.1" />
         <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.0.1" />
     </ItemGroup>
-
 </Project>

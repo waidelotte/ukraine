@@ -9,8 +9,8 @@
     </PropertyGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.EfCore\Ukraine.Infrastructure.EfCore.csproj" />
-      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.Specifications.EfCore\Ukraine.Infrastructure.Specifications.EfCore.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Persistence.Specifications.EfCore\Ukraine.Persistence.Specifications.EfCore.csproj" />
       <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
     </ItemGroup>
 

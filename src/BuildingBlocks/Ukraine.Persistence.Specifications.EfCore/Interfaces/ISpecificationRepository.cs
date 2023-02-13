@@ -1,7 +1,7 @@
 ﻿using Ardalis.Specification;
 using Ukraine.Domain.Interfaces;
 
-namespace Ukraine.Infrastructure.Specifications.EfCore.Interfaces;
+namespace Ukraine.Persistence.Specifications.EfCore.Interfaces;
 
 public interface ISpecificationRepository<TEntity> : IRepository
 	where TEntity : class, IAggregateRoot
