@@ -15,10 +15,7 @@ public static class ConfigureHostBuilderExtensions
 			.UseUkraineSerilog(Constants.SERVICE_NAME, options =>
 			{
 				options.MinimumLevel = loggingOptions.MinimumLevel;
-				if (loggingOptions.Override != null)
-				{
-					options.Override(loggingOptions.Override);
-				}
+				options.Override(loggingOptions.Override);
 
 				options.WriteTo = writeOptions =>
 				{

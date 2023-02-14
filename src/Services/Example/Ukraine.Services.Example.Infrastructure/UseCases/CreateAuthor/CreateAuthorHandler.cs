@@ -1,6 +1,7 @@
 ﻿using Dapr.Client;
 using MediatR;
 using Ukraine.Domain.Interfaces;
+using Ukraine.Services.Example.Domain.Enums;
 using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.State;
@@ -29,7 +30,8 @@ public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 		{
 			FullName = request.FullName,
 			Age = request.Age,
-			SuperSecretKey = Guid.NewGuid()
+			SuperSecretKey = Guid.NewGuid(),
+			Status = AuthorStatus.None
 		};
 
 		var repository = _unitOfWork.GetRepository<IRepository<Author>>();

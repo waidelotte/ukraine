@@ -3,7 +3,6 @@ using Bogus;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 
@@ -26,14 +25,8 @@ public class ExampleController : ControllerBase
 
 	[HttpGet("GetOk")]
 	[ProducesResponseType((int)HttpStatusCode.OK)]
-	public async Task<ActionResult> GetOkAsync(CancellationToken cancellationToken)
+	public OkResult GetOk()
 	{
-		_logger.LogDebug($"{nameof(GetOkAsync)} controller start");
-
-		var emptyEvent = new EmptyEvent();
-		await _eventBus.PublishAsync(emptyEvent, cancellationToken);
-
-		_logger.LogDebug($"{nameof(GetOkAsync)} controller end");
 		return Ok();
 	}
 

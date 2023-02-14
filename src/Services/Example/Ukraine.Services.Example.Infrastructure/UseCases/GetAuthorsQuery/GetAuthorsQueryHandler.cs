@@ -4,7 +4,7 @@ using Ukraine.Persistence.Specifications.EfCore.Interfaces;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Persistence.Specifications;
 
-namespace Ukraine.Services.Example.Infrastructure.UseCases.ReadAuthor;
+namespace Ukraine.Services.Example.Infrastructure.UseCases.GetAuthorsQuery;
 
 public class GetAuthorsQueryHandler : IRequestHandler<GetAuthorsQueryRequest, IQueryable<Author>>
 {

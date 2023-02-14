@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
-using Ukraine.Services.Example.Infrastructure.UseCases.ReadAuthor;
+using Ukraine.Services.Example.Infrastructure.UseCases.GetAuthorsQuery;
 
 namespace Ukraine.Services.Example.Api.Graph.Resolvers;
 

@@ -51,6 +51,14 @@ services:
     bindings:
       - port: 7002
 
+  - name: service-example-friend-registrar
+    project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Ukraine.Services.Example.Friends.Registrar.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7003
+
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
     env:

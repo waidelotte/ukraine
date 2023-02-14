@@ -10,8 +10,11 @@ public class UkraineLoggingOptions
 
 	public Dictionary<string, LogEventLevel> OverrideDictionary { get; } = new();
 
-	public void Override(Dictionary<string, LogEventLevel> values)
+	public void Override(Dictionary<string, LogEventLevel>? values)
 	{
+		if (values == null)
+			return;
+
 		foreach (var value in values)
 		{
 			Override(value);
