@@ -2,7 +2,6 @@
 using Bogus;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Ukraine.Domain.Interfaces;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
 
@@ -13,13 +12,11 @@ namespace Ukraine.Services.Example.Api.Controllers;
 public class ExampleController : ControllerBase
 {
 	private readonly IMediator _mediator;
-	private readonly IEventBus _eventBus;
 	private readonly ILogger<ExampleController> _logger;
 
-	public ExampleController(IMediator mediator, IEventBus eventBus, ILogger<ExampleController> logger)
+	public ExampleController(IMediator mediator, ILogger<ExampleController> logger)
 	{
 		_mediator = mediator;
-		_eventBus = eventBus;
 		_logger = logger;
 	}
 
