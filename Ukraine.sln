@@ -15,7 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{3D7ED6A3-561F-49C9-AF87-AC10DCE95A89}"
 	ProjectSection(SolutionItems) = preProject
 		NuGet.config = NuGet.config
-		tye.yaml = tye.yaml
+		tye.example.yaml = tye.example.yaml
 		.dockerignore = .dockerignore
 		.gitignore = .gitignore
 		.gitattributes = .gitattributes
