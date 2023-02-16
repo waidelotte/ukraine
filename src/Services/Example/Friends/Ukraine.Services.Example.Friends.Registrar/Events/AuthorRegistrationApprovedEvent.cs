@@ -2,4 +2,4 @@
 
 namespace Ukraine.Services.Example.Friends.Registrar.Events;
 
-public record AuthorRegisteredEvent(Guid AuthorId) : IntegrationEvent;
+public record AuthorRegistrationApprovedEvent(Guid AuthorId) : IntegrationEvent;

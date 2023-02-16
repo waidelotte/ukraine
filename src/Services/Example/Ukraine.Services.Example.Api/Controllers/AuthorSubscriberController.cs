@@ -20,11 +20,11 @@ public class AuthorSubscriberController : ControllerBase
 		_mediator = mediator;
 	}
 
-	[HttpPost("AuthorRegistered")]
-	[Dapr.Topic(Ukraine.Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorRegisteredEvent))]
-	public async Task HandleAsync(AuthorRegisteredEvent request)
+	[HttpPost("AuthorRegistrationApproved")]
+	[Dapr.Topic(Ukraine.Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorRegistrationApprovedEvent))]
+	public async Task HandleAsync(AuthorRegistrationApprovedEvent request)
 	{
-		_logger.LogDebug("AuthorRegisteredEvent: {@Request}", request);
+		_logger.LogDebug("AuthorRegistrationApprovedEvent: {@Request}", request);
 		await _mediator.Send(new ChangeAuthorStatusRequest(request.AuthorId, AuthorStatus.Registered));
 	}
 }
