@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Domain.Interfaces;
 
-namespace Ukraine.Infrastructure.EventBus.Dapr.Extensions;
+namespace Ukraine.Infrastructure.Dapr.Extensions;
 
 public static class ServiceCollectionExtensions
 {

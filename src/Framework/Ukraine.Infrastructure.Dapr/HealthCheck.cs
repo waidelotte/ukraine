@@ -1,7 +1,7 @@
 ﻿using Dapr.Client;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Ukraine.Infrastructure.EventBus.Dapr;
+namespace Ukraine.Infrastructure.Dapr;
 
 internal sealed class HealthCheck : IHealthCheck
 {

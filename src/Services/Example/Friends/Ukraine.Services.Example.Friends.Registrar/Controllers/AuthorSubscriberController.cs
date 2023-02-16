@@ -19,7 +19,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorCreated")]
-	[Dapr.Topic(Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorCreatedEvent))]
+	[Dapr.Topic(Infrastructure.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorCreatedEvent))]
 	public async Task HandleAsync(AuthorCreatedEvent request)
 	{
 		_logger.LogDebug("Author Created Event: {@Request}", request);

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Infrastructure.EventBus.Dapr.Extensions;
+using Ukraine.Infrastructure.Dapr.Extensions;
 using Ukraine.Infrastructure.Mediator.Extensions;
 using Ukraine.Infrastructure.Telemetry.Extenstion;
 using Ukraine.Infrastructure.Telemetry.Options;

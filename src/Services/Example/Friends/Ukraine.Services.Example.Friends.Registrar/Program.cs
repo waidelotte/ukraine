@@ -1,5 +1,5 @@
 using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.EventBus.Dapr.Extensions;
+using Ukraine.Infrastructure.Dapr.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;

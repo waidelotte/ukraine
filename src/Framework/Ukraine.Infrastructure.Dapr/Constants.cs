@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.EventBus.Dapr;
+﻿namespace Ukraine.Infrastructure.Dapr;
 
 public static class Constants
 {
