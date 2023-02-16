@@ -24,7 +24,18 @@ public class AuthorSubscriberController : ControllerBase
 	{
 		_logger.LogDebug("Author Created Event: {@Request}", request);
 		_logger.LogDebug("Register new Author {Id}", request.AuthorId);
-		await Task.Delay(TimeSpan.FromSeconds(3)); // some work
-		await _eventBus.PublishAsync(new AuthorRegistrationApprovedEvent(request.AuthorId));
+
+		await Task.Delay(TimeSpan.FromSeconds(2)); // some work
+
+		var gen = new Random();
+
+		if (gen.Next(100) < 50)
+		{
+			await _eventBus.PublishAsync(new AuthorRegistrationApprovedEvent(request.AuthorId));
+		}
+		else
+		{
+			await _eventBus.PublishAsync(new AuthorRegistrationDeclinedEvent(request.AuthorId));
+		}
 	}
 }

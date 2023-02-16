@@ -14,4 +14,17 @@ public sealed class Author : AuditableEntityBase<Guid>
 	public Guid SuperSecretKey { get; init; }
 
 	public ICollection<Book> Books { get; init; } = new HashSet<Book>();
+
+	public bool CanChangeStatusTo(AuthorStatus status)
+	{
+		switch (Status)
+		{
+			case AuthorStatus.None:
+				return status is AuthorStatus.Registered or AuthorStatus.RegistrationDeclined;
+			case AuthorStatus.Registered:
+			case AuthorStatus.RegistrationDeclined:
+			default:
+				return false;
+		}
+	}
 }

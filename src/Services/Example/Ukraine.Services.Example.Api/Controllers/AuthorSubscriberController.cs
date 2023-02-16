@@ -27,4 +27,12 @@ public class AuthorSubscriberController : ControllerBase
 		_logger.LogDebug("AuthorRegistrationApprovedEvent: {@Request}", request);
 		await _mediator.Send(new ChangeAuthorStatusRequest(request.AuthorId, AuthorStatus.Registered));
 	}
+
+	[HttpPost("AuthorRegistrationDeclined")]
+	[Dapr.Topic(Ukraine.Infrastructure.EventBus.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorRegistrationDeclinedEvent))]
+	public async Task HandleAsync(AuthorRegistrationDeclinedEvent request)
+	{
+		_logger.LogDebug("AuthorRegistrationDeclinedEvent: {@Request}", request);
+		await _mediator.Send(new ChangeAuthorStatusRequest(request.AuthorId, AuthorStatus.RegistrationDeclined));
+	}
 }

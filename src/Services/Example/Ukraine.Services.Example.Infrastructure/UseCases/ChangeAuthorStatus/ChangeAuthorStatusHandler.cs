@@ -26,6 +26,9 @@ public class ChangeAuthorStatusHandler : IRequestHandler<ChangeAuthorStatusReque
 		if (author == null)
 			throw ExampleException.Exception("Author not exists");
 
+		if (!author.CanChangeStatusTo(request.Status))
+			throw ExampleException.Exception($"Can't change the status from {author.Status} to {request.Status}.");
+
 		author.Status = request.Status;
 
 		await _unitOfWork.SaveChangesAsync(cancellationToken);

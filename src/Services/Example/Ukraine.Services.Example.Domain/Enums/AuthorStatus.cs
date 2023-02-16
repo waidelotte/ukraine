@@ -3,5 +3,6 @@
 public enum AuthorStatus
 {
 	None,
+	RegistrationDeclined,
 	Registered
 }
