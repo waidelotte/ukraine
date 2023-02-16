@@ -6,6 +6,6 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.5" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.5" />
         <PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.5" />
-        <PackageReference Include="HotChocolate.Diagnostics" Version="13.0.1" />
+        <PackageReference Include="HotChocolate.Diagnostics" Version="13.0.2" />
     </ItemGroup>
 </Project>

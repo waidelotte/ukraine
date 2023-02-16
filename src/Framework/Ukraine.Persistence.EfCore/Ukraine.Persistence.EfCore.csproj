@@ -5,7 +5,7 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.2" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.2" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
-      <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.0.1" />
+      <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.0.2" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Ukraine.Domain\Ukraine.Domain.csproj" />
