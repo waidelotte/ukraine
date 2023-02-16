@@ -18,11 +18,11 @@ public class AuthorSubscriberController : ControllerBase
 		_eventBus = eventBus;
 	}
 
-	[HttpPost("AuthorCreated")]
-	[Dapr.Topic(Infrastructure.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorCreatedEvent))]
-	public async Task HandleAsync(AuthorCreatedEvent request)
+	[HttpPost("AuthorRegistered")]
+	[Dapr.Topic(Infrastructure.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorRegisteredEvent))]
+	public async Task HandleAsync(AuthorRegisteredEvent request)
 	{
-		_logger.LogDebug("Author Created Event: {@Request}", request);
+		_logger.LogDebug("Author Registered Event: {@Request}", request);
 		_logger.LogDebug("Register new Author {Id}", request.AuthorId);
 
 		await Task.Delay(TimeSpan.FromSeconds(2)); // some work

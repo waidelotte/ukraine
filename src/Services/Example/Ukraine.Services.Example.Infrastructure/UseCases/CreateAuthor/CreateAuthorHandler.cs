@@ -35,7 +35,7 @@ public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, Author>
 
 		await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-		await _eventBus.PublishAsync(new AuthorCreatedEvent(author.Id), cancellationToken);
+		await _eventBus.PublishAsync(new AuthorRegisteredEvent(author.Id), cancellationToken);
 
 		return author;
 	}
