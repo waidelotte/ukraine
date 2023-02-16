@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Persistence.Specifications.EfCore\Ukraine.Persistence.Specifications.EfCore.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Persistence.Specifications.EfCore\Ukraine.Persistence.Specifications.EfCore.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
   </ItemGroup>
 </Project>

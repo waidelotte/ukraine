@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\BuildingBlocks\Ukraine.Infrastructure.EventBus.Dapr\Ukraine.Infrastructure.EventBus.Dapr.csproj" />
-    <ProjectReference Include="..\..\..\..\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\..\BuildingBlocks\Ukraine.Presentation.HealthChecks\Ukraine.Presentation.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\Ukraine.Infrastructure.EventBus.Dapr\Ukraine.Infrastructure.EventBus.Dapr.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\Ukraine.Presentation.HealthChecks\Ukraine.Presentation.HealthChecks.csproj" />
   </ItemGroup>
 </Project>

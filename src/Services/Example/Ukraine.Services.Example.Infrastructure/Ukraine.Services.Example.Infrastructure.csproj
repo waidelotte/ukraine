@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.EventBus.Dapr\Ukraine.Infrastructure.EventBus.Dapr.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.EventBus.Dapr\Ukraine.Infrastructure.EventBus.Dapr.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Persistence\Ukraine.Services.Example.Persistence.csproj" />
   </ItemGroup>
