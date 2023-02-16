@@ -2,7 +2,7 @@
 using HotChocolate;
 using MediatR;
 using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.EventBus.Dapr.Extensions;
+using Ukraine.Infrastructure.Dapr.Extensions;
 using Ukraine.Presentation.GraphQl.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
 using Ukraine.Presentation.Swagger.Extenstion;
