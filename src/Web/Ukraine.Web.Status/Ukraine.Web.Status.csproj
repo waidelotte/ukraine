@@ -1,12 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
     <ItemGroup>
       <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.0-rc2.7" />
       <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0-rc2.7" />
     </ItemGroup>
-
     <ItemGroup>
-      <ProjectReference Include="..\..\Services\Example\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
     </ItemGroup>
-
 </Project>
