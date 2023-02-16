@@ -18,7 +18,7 @@ public static class ServiceCollectionExtensions
 			.AddUkraineMediatorAndValidators(Assembly.GetExecutingAssembly())
 			.AddUkraineMediatorRequestValidation()
 			.AddUkraineTelemetry(serviceName, telemetryOptions)
-			.AddUkraineDaprEventBus();
+			.AddUkraineDapr();
 
 		return services;
 	}

@@ -8,7 +8,7 @@ using Ukraine.Services.Example.Friends.Registrar.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddUkraineDaprEventBus();
+builder.Services.AddUkraineDapr();
 builder.Services.AddControllers();
 builder.Services
 	.AddUkraineHealthChecks()

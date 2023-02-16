@@ -6,7 +6,7 @@ namespace Ukraine.Infrastructure.Dapr.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddUkraineDaprEventBus(this IServiceCollection services)
+	public static IServiceCollection AddUkraineDapr(this IServiceCollection services)
 	{
 		var options = new JsonSerializerOptions
 		{
