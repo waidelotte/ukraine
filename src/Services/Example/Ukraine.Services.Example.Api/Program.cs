@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Ukraine.Persistence.EfCore.Interfaces;
 using Ukraine.Services.Example.Api;
 using Ukraine.Services.Example.Api.Extensions;
 
@@ -7,6 +9,12 @@ builder.Services.AddExampleApi(builder.Configuration);
 builder.Host.ConfigureHostApi(builder.Configuration);
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+	var context = scope.ServiceProvider.GetRequiredService<IDatabaseFacadeResolver>();
+	await context.Database.MigrateAsync();
+}
 
 app.UseExampleApi();
 

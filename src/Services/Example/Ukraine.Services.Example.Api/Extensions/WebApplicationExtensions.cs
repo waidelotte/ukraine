@@ -1,5 +1,5 @@
 ﻿using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Persistence.EfCore.Interfaces;
+using Ukraine.Infrastructure.Identity.Extenstion;
 using Ukraine.Presentation.GraphQl.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
 using Ukraine.Presentation.Swagger.Extenstion;
@@ -16,15 +16,15 @@ public static class WebApplicationExtensions
 			application.UseDeveloperExceptionPage();
 		}
 
-		using (var serviceScope = application.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-		{
-			var context = serviceScope.ServiceProvider.GetRequiredService<IDatabaseFacadeResolver>();
-			context.Database.EnsureCreated();
-		}
+		var identityOptions = application.Configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
 
 		application
-			.UseUkraineSwagger()
-			.UseAuthorization()
+			.UseUkraineSwagger(options =>
+			{
+				options.OAuthClientId = identityOptions.SwaggerClientId;
+			})
+			.UseUkraineAuthentication()
+			.UseUkraineAuthorization()
 			.UseCloudEvents();
 
 		var graphQlOptions = application.Configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);

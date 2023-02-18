@@ -3,6 +3,7 @@ using HotChocolate;
 using MediatR;
 using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.Dapr.Extensions;
+using Ukraine.Infrastructure.Identity.Extenstion;
 using Ukraine.Presentation.GraphQl.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
 using Ukraine.Presentation.Swagger.Extenstion;
@@ -45,7 +46,22 @@ public static class ServiceCollectionExtensions
 				options.SensitiveDataLogging = databaseOptions.SensitiveDataLogging;
 			});
 
-		services.AddUkraineSwagger(Constants.SERVICE_NAME);
+		var identityOptions = configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
+
+		services.AddUkraineSwagger(options =>
+		{
+			options.Title = Constants.SERVICE_NAME;
+			options.Version = Constants.API_VERSION;
+			options.IdentityServerUrl = identityOptions.Authority;
+
+			foreach (var scope in identityOptions.Scopes)
+			{
+				if (string.IsNullOrEmpty(scope.Name))
+					continue;
+
+				options.AuthScopes.Add(scope.Name, scope.Description);
+			}
+		});
 		services.AddFluentValidationAutoValidation();
 		services.AddControllers();
 
@@ -70,6 +86,20 @@ public static class ServiceCollectionExtensions
 			.AddType<AuthorMutationTypeExtension>()
 			.AddType<BookMutationTypeExtension>()
 			.RegisterService<IMediator>(ServiceKind.Synchronized);
+
+		services
+			.AddUkraineAuthorization(options =>
+			{
+				options.ScopePolicies = identityOptions.Scopes
+					.Where(s => !string.IsNullOrEmpty(s.Name) && !string.IsNullOrEmpty(s.Policy))
+					.ToDictionary(s => s.Name!, s => s.Policy!);
+			})
+			.AddUkraineJwtBearerAuthentication(options =>
+			{
+				options.Authority = identityOptions.Authority;
+				options.RequireHttps = identityOptions.RequireHttps;
+				options.ValidateAudience = identityOptions.ValidateAudience;
+			});
 
 		return services;
 	}

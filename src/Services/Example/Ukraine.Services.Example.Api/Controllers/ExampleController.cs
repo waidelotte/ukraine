@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Bogus;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
@@ -9,6 +10,7 @@ namespace Ukraine.Services.Example.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize("ApiScope")]
 public class ExampleController : ControllerBase
 {
 	private readonly IMediator _mediator;
