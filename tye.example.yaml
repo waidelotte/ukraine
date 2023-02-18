@@ -14,6 +14,8 @@ extensions:
         enabled: false
       web-status:
         enabled: false
+      service-identity:
+        enabled: false
   - name: seq
     logPath: ./.logs
 
@@ -43,22 +45,6 @@ services:
         protocol: amqp
         port: 5672
 
-  - name: service-example-api
-    project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
-    env:
-      - name: ASPNETCORE_ENVIRONMENT
-        value: Development
-    bindings:
-      - port: 7002
-
-  - name: service-example-friend-registrar
-    project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Ukraine.Services.Example.Friends.Registrar.csproj
-    env:
-      - name: ASPNETCORE_ENVIRONMENT
-        value: Development
-    bindings:
-      - port: 7003
-
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
     env:
@@ -66,3 +52,27 @@ services:
         value: Development
     bindings:
       - port: 7001
+
+  - name: service-identity
+    project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7002
+
+  - name: service-example-api
+    project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7003
+
+  - name: service-example-friend-registrar
+    project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Ukraine.Services.Example.Friends.Registrar.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7004
