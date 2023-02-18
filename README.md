@@ -4,7 +4,7 @@
 - Projects use StyleCop to produce style warnings. Please fix all warnings in any code you submit.
 
 # TODO
-- Identity Server
+- Custom Identity Server View
 - API Gateway
 - Mail Sender
 - Secret Store
