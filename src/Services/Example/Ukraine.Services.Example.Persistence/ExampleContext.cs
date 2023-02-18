@@ -15,6 +15,8 @@ public class ExampleContext : UkraineDatabaseContextBase
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+		base.OnModelCreating(modelBuilder);
+
 		modelBuilder.HasDefaultSchema(Constants.SCHEMA_NAME);
 		modelBuilder.HasPostgresExtension(Ukraine.Persistence.EfCore.Constants.Extensions.UUID_GENERATOR);
 		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
