@@ -2,7 +2,7 @@
 
 public class ExampleDatabaseOptions
 {
-	public const string SECTION_NAME = "DatabaseOptions";
+	public const string SECTION_NAME = "Database";
 
 	public int? RetryOnFailureCount { get; set; }
 

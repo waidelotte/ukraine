@@ -5,7 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Ukraine.Presentation.Swagger.Filters;
 
-public class AuthorizeCheckOperationFilter : IOperationFilter
+internal sealed class AuthorizeCheckOperationFilter : IOperationFilter
 {
 	private readonly IEnumerable<string> _scopes;
 
@@ -16,22 +16,25 @@ public class AuthorizeCheckOperationFilter : IOperationFilter
 
 	public void Apply(OpenApiOperation operation, OperationFilterContext context)
 	{
+		var methodAttributes = context.MethodInfo.GetCustomAttributes(true);
+
 		var hasAuthorize = context.MethodInfo.DeclaringType?
 			.GetCustomAttributes(true)
-			.OfType<AuthorizeAttribute>().Any() ??
-						   context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();
+			.OfType<AuthorizeAttribute>().Any() ?? methodAttributes.OfType<AuthorizeAttribute>().Any();
 
-		if (!hasAuthorize)
+		var allowAnonymous = methodAttributes.OfType<AllowAnonymousAttribute>().Any();
+
+		if (!hasAuthorize || allowAnonymous)
 			return;
 
 		operation.Responses.TryAdd(StatusCodes.Status401Unauthorized.ToString(), new OpenApiResponse
 		{
-			Description = "Unauthorized"
+			Description = Constants.Status.UNAUTHORIZED
 		});
 
 		operation.Responses.TryAdd(StatusCodes.Status403Forbidden.ToString(), new OpenApiResponse
 		{
-			Description = "Forbidden"
+			Description = Constants.Status.FORBIDDEN
 		});
 
 		var oAuthScheme = new OpenApiSecurityScheme

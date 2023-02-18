@@ -12,16 +12,19 @@ public static class WebApplicationExtensions
 	public static WebApplication UseExampleApi(this WebApplication application)
 	{
 		if (application.Environment.IsDevelopment())
-		{
 			application.UseDeveloperExceptionPage();
-		}
 
-		var identityOptions = application.Configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
+		var swaggerOptions = application.Configuration.GetRequiredSection<ExampleSwaggerOptions>(ExampleSwaggerOptions.SECTION_NAME);
 
 		application
 			.UseUkraineSwagger(options =>
 			{
-				options.OAuthClientId = identityOptions.SwaggerClientId;
+				options.AddEndpoint();
+
+				if (!string.IsNullOrEmpty(swaggerOptions.OAuthClientId))
+					options.AddOAuthClientId(swaggerOptions.OAuthClientId);
+
+				options.AddOAuthAppName(Constants.SERVICE_NAME);
 			})
 			.UseUkraineAuthentication()
 			.UseUkraineAuthorization()

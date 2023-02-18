@@ -22,6 +22,7 @@ public class ExampleController : ControllerBase
 		_logger = logger;
 	}
 
+	[AllowAnonymous]
 	[HttpGet("GetOk")]
 	[ProducesResponseType((int)HttpStatusCode.OK)]
 	public OkResult GetOk()

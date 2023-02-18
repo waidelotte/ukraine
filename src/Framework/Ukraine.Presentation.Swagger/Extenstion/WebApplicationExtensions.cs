@@ -7,21 +7,12 @@ public static class WebApplicationExtensions
 {
 	public static IApplicationBuilder UseUkraineSwagger(
 		this WebApplication application,
-		Action<UkraineSwaggerWebOptions>? options = null)
+		Action<UkraineSwaggerWebOptionsBuilder>? configure = null)
 	{
-		var opt = new UkraineSwaggerWebOptions();
-		options?.Invoke(opt);
+		var builder = new UkraineSwaggerWebOptionsBuilder();
+		configure?.Invoke(builder);
 
 		application.UseSwagger();
-		return application.UseSwaggerUI(c =>
-		{
-			c.SwaggerEndpoint(opt.EndpointUrl, opt.EndpointName);
-
-			if (!string.IsNullOrEmpty(opt.OAuthClientId))
-				c.OAuthClientId(opt.OAuthClientId);
-
-			if (!string.IsNullOrEmpty(opt.OAuthAppName))
-				c.OAuthAppName(opt.OAuthAppName);
-		});
+		return application.UseSwaggerUI(builder.Build());
 	}
 }

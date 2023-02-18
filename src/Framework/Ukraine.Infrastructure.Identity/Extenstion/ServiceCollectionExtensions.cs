@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Ukraine.Infrastructure.Identity.Options;
 
 namespace Ukraine.Infrastructure.Identity.Extenstion;
@@ -9,42 +8,30 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddUkraineAuthorization(
 		this IServiceCollection serviceCollection,
-		Action<UkraineAuthorizationOptions>? options = null)
+		Action<UkraineAuthorizationOptionsBuilder>? configure = null)
 	{
-		var opt = new UkraineAuthorizationOptions();
-		options?.Invoke(opt);
+		var options = new UkraineAuthorizationOptionsBuilder();
+		configure?.Invoke(options);
 
-		return serviceCollection.AddAuthorization(o =>
-		{
-			foreach (var scopePolicy in opt.ScopePolicies)
-			{
-				o.AddPolicy(scopePolicy.Value, policy =>
-				{
-					policy.RequireAuthenticatedUser();
-					policy.RequireClaim(Constants.SCOPE_NAME, scopePolicy.Key);
-				});
-			}
-		});
+		var build = options.Build();
+
+		return build != null ? serviceCollection.AddAuthorization(build) : serviceCollection.AddAuthorization();
 	}
 
-	public static AuthenticationBuilder AddUkraineJwtBearerAuthentication(
+	public static AuthenticationBuilder AddUkraineJwtAuthentication(
 		this IServiceCollection serviceCollection,
-		Action<UkraineJwtAuthenticationOptions>? options = null)
+		Action<UkraineJwtAuthenticationOptionsBuilder>? configure = null)
 	{
-		var opt = new UkraineJwtAuthenticationOptions();
-		options?.Invoke(opt);
+		var options = new UkraineJwtAuthenticationOptionsBuilder();
+		configure?.Invoke(options);
 
 		return serviceCollection
 			.AddAuthentication(Constants.BEARER_NAME)
 			.AddJwtBearer(Constants.BEARER_NAME, o =>
 			{
-				o.Authority = opt.Authority;
-				o.RequireHttpsMetadata = opt.RequireHttps;
-
-				o.TokenValidationParameters = new TokenValidationParameters
-				{
-					ValidateAudience = opt.ValidateAudience
-				};
+				o.Audience = options.Audience;
+				o.Authority = options.Authority;
+				o.RequireHttpsMetadata = options.RequireHttps;
 			});
 	}
 }

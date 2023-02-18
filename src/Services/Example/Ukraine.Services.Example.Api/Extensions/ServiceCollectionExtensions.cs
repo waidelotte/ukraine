@@ -47,21 +47,18 @@ public static class ServiceCollectionExtensions
 			});
 
 		var identityOptions = configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
+		var swaggerOptions = configuration.GetRequiredSection<ExampleSwaggerOptions>(ExampleSwaggerOptions.SECTION_NAME);
 
 		services.AddUkraineSwagger(options =>
 		{
-			options.Title = Constants.SERVICE_NAME;
-			options.Version = Constants.API_VERSION;
-			options.IdentityServerUrl = identityOptions.Authority;
+			options.AddDoc(Constants.SERVICE_NAME);
 
-			foreach (var scope in identityOptions.Scopes)
-			{
-				if (string.IsNullOrEmpty(scope.Name))
-					continue;
+			if (!string.IsNullOrEmpty(identityOptions.Authority))
+				options.AddOAuth2(identityOptions.Authority, swaggerOptions.AuthScopes);
 
-				options.AuthScopes.Add(scope.Name, scope.Description);
-			}
+			options.AddAuthorizeFilter(swaggerOptions.AuthScopes);
 		});
+
 		services.AddFluentValidationAutoValidation();
 		services.AddControllers();
 
@@ -90,15 +87,19 @@ public static class ServiceCollectionExtensions
 		services
 			.AddUkraineAuthorization(options =>
 			{
-				options.ScopePolicies = identityOptions.Scopes
-					.Where(s => !string.IsNullOrEmpty(s.Name) && !string.IsNullOrEmpty(s.Policy))
-					.ToDictionary(s => s.Name!, s => s.Policy!);
+				foreach (var policy in identityOptions.Policies)
+				{
+					if (string.IsNullOrEmpty(policy.Name))
+						throw ExampleException.Exception("Policy Name is empty");
+
+					options.AddScopePolicy(policy.Name, policy.Scopes);
+				}
 			})
-			.AddUkraineJwtBearerAuthentication(options =>
+			.AddUkraineJwtAuthentication(options =>
 			{
+				options.Audience = identityOptions.Audience;
 				options.Authority = identityOptions.Authority;
 				options.RequireHttps = identityOptions.RequireHttps;
-				options.ValidateAudience = identityOptions.ValidateAudience;
 			});
 
 		return services;

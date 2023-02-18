@@ -2,7 +2,7 @@
 
 public class ExampleGraphQlOptions
 {
-	public const string SECTION_NAME = "GraphQLOptions";
+	public const string SECTION_NAME = "GraphQl";
 
 	public string? Path { get; set; }
 

@@ -20,7 +20,9 @@ public class IdentityOptions
 
 	public IdentityUserOptions User { get; set; } = new();
 
-	public ICollection<IdentityApiScopesOptions> ApiScopes { get; set; } = new HashSet<IdentityApiScopesOptions>();
+	public IEnumerable<IdentityApiResourcesOptions> ApiResources { get; set; } = Array.Empty<IdentityApiResourcesOptions>();
 
-	public ICollection<IdentityClientOptions> Clients { get; set; } = new HashSet<IdentityClientOptions>();
+	public IEnumerable<IdentityApiScopesOptions> ApiScopes { get; set; } = Array.Empty<IdentityApiScopesOptions>();
+
+	public IEnumerable<IdentityClientOptions> Clients { get; set; } = Array.Empty<IdentityClientOptions>();
 }

@@ -2,7 +2,7 @@
 
 public class ExampleTelemetryOptions
 {
-	public const string SECTION_NAME = "TelemetryOptions";
+	public const string SECTION_NAME = "Telemetry";
 
 	public string? ZipkinServerUrl { get; set; }
 

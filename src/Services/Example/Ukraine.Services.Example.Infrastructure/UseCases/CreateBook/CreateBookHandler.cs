@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Persistence.Specifications.EfCore.Interfaces;
+using Ukraine.Persistence.EfCore.Specifications.Interfaces;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Persistence.Specifications;

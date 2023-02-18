@@ -77,6 +77,11 @@ var identitySever = builder.Services.AddIdentityServer(options =>
 		new IdentityResources.OpenId(),
 		new IdentityResources.Profile()
 	})
+	.AddInMemoryApiResources(identityOptions.ApiResources
+		.Select(o => new ApiResource(o.Name, o.DisplayName)
+		{
+			Scopes = new List<string>(o.Scopes)
+		}))
 	.AddInMemoryApiScopes(identityOptions.ApiScopes.Select(o => new ApiScope(o.Name, o.DisplayName)))
 	.AddInMemoryClients(identityOptions.Clients.Select(o => new Client
 	{

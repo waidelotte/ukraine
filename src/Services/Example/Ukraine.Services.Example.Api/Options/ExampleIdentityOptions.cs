@@ -2,15 +2,13 @@
 
 public class ExampleIdentityOptions
 {
-	public const string SECTION_NAME = "IdentityOptions";
+	public const string SECTION_NAME = "Identity";
 
 	public string? Authority { get; set; }
 
-	public string? SwaggerClientId { get; set; }
+	public string? Audience { get; set; }
 
 	public bool RequireHttps { get; set; }
 
-	public bool ValidateAudience { get; set; }
-
-	public IEnumerable<ExampleIdentityScopeOptions> Scopes { get; set; } = Array.Empty<ExampleIdentityScopeOptions>();
+	public IEnumerable<ExampleIdentityPolicyOptions> Policies { get; set; } = Array.Empty<ExampleIdentityPolicyOptions>();
 }
