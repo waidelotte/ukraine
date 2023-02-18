@@ -450,4 +450,5 @@ FodyWeavers.xsd
 **/.idea/
 **/.tye/
 .logs
-
+/src/Services/Identity/Ukraine.Services.Identity/keys
+tempkey.jwk
