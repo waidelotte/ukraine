@@ -8,5 +8,5 @@ public class UkraineSwaggerOptions
 
 	public string? IdentityServerUrl { get; set; }
 
-	public Dictionary<string, string> AuthScopes { get; set; } = new();
+	public Dictionary<string, string?> AuthScopes { get; set; } = new();
 }
