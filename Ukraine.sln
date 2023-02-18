@@ -55,7 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Tele
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.EfCore", "src\Framework\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj", "{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.Specifications.EfCore", "src\Framework\Ukraine.Persistence.Specifications.EfCore\Ukraine.Persistence.Specifications.EfCore.csproj", "{1BBAE91B-216D-4E08-8404-31D3B04C3393}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.EfCore.Specifications", "src\Framework\Ukraine.Persistence.EfCore.Specifications\Ukraine.Persistence.EfCore.Specifications.csproj", "{1BBAE91B-216D-4E08-8404-31D3B04C3393}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Presentation.GraphQl", "src\Framework\Ukraine.Presentation.GraphQl\Ukraine.Presentation.GraphQl.csproj", "{627481DA-3582-4891-A356-D40B7E4514E0}"
 EndProject

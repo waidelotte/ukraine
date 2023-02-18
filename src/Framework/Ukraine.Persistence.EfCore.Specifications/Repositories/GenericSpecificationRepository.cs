@@ -2,9 +2,9 @@
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Persistence.Specifications.EfCore.Interfaces;
+using Ukraine.Persistence.EfCore.Specifications.Interfaces;
 
-namespace Ukraine.Persistence.Specifications.EfCore.Repositories;
+namespace Ukraine.Persistence.EfCore.Specifications.Repositories;
 
 public class GenericSpecificationRepository<TEntity> : ISpecificationRepository<TEntity>
 	where TEntity : class, IAggregateRoot

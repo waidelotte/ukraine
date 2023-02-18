@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Persistence.EfCore.Options;
-using Ukraine.Persistence.Specifications.EfCore.Extensions;
+using Ukraine.Persistence.EfCore.Specifications.Extensions;
 
 namespace Ukraine.Services.Example.Persistence.Extensions;
 
