@@ -1,16 +1,14 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
-using Ukraine.Domain.Exceptions;
-using Ukraine.Infrastructure.Logging.Options;
+using Ukraine.Infrastructure.Serilog.Options;
 
-namespace Ukraine.Infrastructure.Logging.Extenstion;
+namespace Ukraine.Infrastructure.Serilog.Extenstion;
 
 public static class HostBuilderExtensions
 {
 	public static IHostBuilder UseUkraineSerilog(
 		this IHostBuilder hostBuilder,
-		string serviceName,
 		Action<UkraineLoggingOptions>? configure = null)
 	{
 		var options = new UkraineLoggingOptions();
@@ -27,26 +25,18 @@ public static class HostBuilderExtensions
 		var writeOptions = new UkraineLoggingWriteOptions();
 		options.WriteTo?.Invoke(writeOptions);
 
-		if (writeOptions.WriteToConsole)
-		{
-			loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Code);
-		}
+		loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Code);
 
 		if (!string.IsNullOrEmpty(writeOptions.WriteToSeqServerUrl))
-		{
 			loggerConfiguration.WriteTo.Seq(writeOptions.WriteToSeqServerUrl);
-		}
 
-		if (string.IsNullOrEmpty(serviceName))
-		{
-			throw CoreException.NullOrEmpty(nameof(serviceName));
-		}
+		if (!string.IsNullOrEmpty(options.ServiceName))
+			loggerConfiguration.Enrich.WithProperty(Constants.ENRICH_SERVICE_PROPERTY, options.ServiceName);
 
 		loggerConfiguration
 			.Enrich.FromLogContext()
 			.Enrich.WithMachineName()
-			.Enrich.WithEnvironmentName()
-			.Enrich.WithProperty(Constants.ENRICH_SERVICE_PROPERTY, serviceName);
+			.Enrich.WithEnvironmentName();
 
 		Log.Logger = loggerConfiguration.CreateLogger();
 

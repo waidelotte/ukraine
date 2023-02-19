@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Dapr\Ukraine.Infrastructure.Dapr.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Serilog\Ukraine.Infrastructure.Serilog.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />

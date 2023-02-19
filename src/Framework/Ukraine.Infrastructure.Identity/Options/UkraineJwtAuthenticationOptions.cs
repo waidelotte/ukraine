@@ -1,6 +1,6 @@
 ﻿namespace Ukraine.Infrastructure.Identity.Options;
 
-public class UkraineJwtAuthenticationOptionsBuilder
+public class UkraineJwtAuthenticationOptions
 {
 	public string? Authority { get; set; }
 

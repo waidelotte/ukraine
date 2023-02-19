@@ -22,7 +22,7 @@ public class UkraineSwaggerWebOptionsBuilder
 		_action += options => options.OAuthAppName(value);
 	}
 
-	public Action<SwaggerUIOptions>? Build()
+	internal Action<SwaggerUIOptions>? Build()
 	{
 		return _action;
 	}

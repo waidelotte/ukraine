@@ -1,6 +1,7 @@
 ﻿using HotChocolate.Execution.Configuration;
 using HotChocolate.Language;
 using HotChocolate.Types.Pagination;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Presentation.GraphQl.Options;
 
@@ -8,37 +9,58 @@ namespace Ukraine.Presentation.GraphQl.Extenstion;
 
 public static class ServiceCollectionExtensions
 {
-	public static IRequestExecutorBuilder AddUkraineGraphQl(this IServiceCollection services, Action<UkraineGraphQlOptions>? options = null)
+	public static IRequestExecutorBuilder AddUkraineGraphQl<TContext>(
+		this IServiceCollection services,
+		Action<UkraineGraphQlOptions>? configure = null)
+	where TContext : DbContext
 	{
-		var opt = new UkraineGraphQlOptions();
-		options?.Invoke(opt);
+		return AddUkraineGraphQl(services, configure).RegisterDbContext<TContext>();
+	}
 
-		var builder = services
-			.AddGraphQLServer()
-			.ConfigureSchema(schemaBuilder =>
-			{
-				schemaBuilder.TryAddRootType(
-					() => new ObjectType(d =>
+	public static IRequestExecutorBuilder AddUkraineGraphQl(
+		IServiceCollection services,
+		Action<UkraineGraphQlOptions>? configure = null)
+	{
+		var options = new UkraineGraphQlOptions();
+		configure?.Invoke(options);
+
+		var builder = services.AddGraphQLServer();
+
+		builder.ConfigureSchema(schemaBuilder =>
+		{
+			schemaBuilder.TryAddRootType(
+				() => new ObjectType(d =>
 					d.Name(OperationTypeNames.Query)),
-					OperationType.Query);
-				schemaBuilder.TryAddRootType(
-					() => new ObjectType(d =>
+				OperationType.Query);
+			schemaBuilder.TryAddRootType(
+				() => new ObjectType(d =>
 					d.Name(OperationTypeNames.Mutation)),
-					OperationType.Mutation);
-			})
-			.AddMutationConventions()
-			.ModifyRequestOptions(o => o.IncludeExceptionDetails = opt.IncludeExceptionDetails)
-			.SetPagingOptions(new PagingOptions
-			{
-				MaxPageSize = opt.MaxPageSize,
-				DefaultPageSize = opt.DefaultPageSize,
-				IncludeTotalCount = Constants.PAGING_TOTAL_COUNT_ENABLED,
-				AllowBackwardPagination = Constants.PAGING_BACKWARD_ENABLED
-			})
-			.AddFiltering()
-			.AllowIntrospection(opt.UseIntrospection);
+				OperationType.Mutation);
+		});
 
-		if (opt.UseInstrumentation)
+		builder.AddFiltering();
+		builder.AddProjections();
+		builder.AddSorting();
+
+		if (!options.DisableMutationConventions)
+			builder.AddMutationConventions();
+
+		builder.AllowIntrospection(options.AllowIntrospection);
+
+		builder.ModifyRequestOptions(o => o.IncludeExceptionDetails = options.IncludeExceptionDetails);
+
+		builder.SetPagingOptions(new PagingOptions
+		{
+			MaxPageSize = options.Paging.MaxPageSize,
+			DefaultPageSize = options.Paging.DefaultPageSize,
+			IncludeTotalCount = options.Paging.IncludeTotalCount,
+			AllowBackwardPagination = options.Paging.AllowBackwardPagination
+		});
+
+		if (options.ExecutionMaxDepth > 0)
+			builder.AddMaxExecutionDepthRule(options.ExecutionMaxDepth.Value, true);
+
+		if (options.IncludeInstrumentation)
 		{
 			builder.AddInstrumentation(o =>
 			{
@@ -47,11 +69,8 @@ public static class ServiceCollectionExtensions
 			});
 		}
 
-		if (opt.MaxDepth is > 0)
-		{
-			builder.AddMaxExecutionDepthRule(opt.MaxDepth.Value, true);
-		}
+		builder.InitializeOnStartup();
 
-		return builder.InitializeOnStartup();
+		return builder;
 	}
 }

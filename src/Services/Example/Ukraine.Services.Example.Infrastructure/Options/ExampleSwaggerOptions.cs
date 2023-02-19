@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Services.Example.Api.Options;
+﻿namespace Ukraine.Services.Example.Infrastructure.Options;
 
 public class ExampleSwaggerOptions
 {

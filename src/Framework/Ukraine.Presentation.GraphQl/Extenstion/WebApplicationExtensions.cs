@@ -1,5 +1,4 @@
 using HotChocolate.AspNetCore;
-using HotChocolate.AspNetCore.Voyager;
 using Microsoft.AspNetCore.Builder;
 using Ukraine.Presentation.GraphQl.Options;
 
@@ -7,27 +6,20 @@ namespace Ukraine.Presentation.GraphQl.Extenstion;
 
 public static class WebApplicationExtensions
 {
-	public static void UseUkraineGraphQl(this WebApplication application, Action<UkraineGraphQlWebOptions>? options = null)
+	public static void UseUkraineGraphQl(
+		this WebApplication application,
+		Action<UkraineGraphQlWebOptions>? configure = null)
 	{
-		var opt = new UkraineGraphQlWebOptions();
-		options?.Invoke(opt);
+		var options = new UkraineGraphQlWebOptions();
+		configure?.Invoke(options);
 
-		application.MapGraphQL(opt.Path).WithOptions(new GraphQLServerOptions
+		application.MapGraphQL(options.Path).WithOptions(new GraphQLServerOptions
 		{
-			EnableSchemaRequests = Constants.SCHEMA_REQUESTS,
-			EnableGetRequests = Constants.GET_REQUESTS,
-			EnableMultipartRequests = Constants.MULTIPART_REQUESTS,
-			Tool = { Enable = opt.UseBananaCakePopTool },
-			EnableBatching = Constants.BATCHING
+			EnableSchemaRequests = options.EnableSchemaRequests,
+			EnableGetRequests = options.EnableGetRequests,
+			EnableMultipartRequests = options.EnableMultipartRequests,
+			Tool = { Enable = options.EnableBananaCakePop },
+			EnableBatching = options.EnableBatching
 		});
-
-		if (!string.IsNullOrEmpty(opt.VoyagerPath))
-		{
-			application.UseVoyager(new VoyagerOptions
-			{
-				QueryPath = opt.Path,
-				Path = opt.VoyagerPath
-			});
-		}
 	}
 }

@@ -1,12 +1,8 @@
 ﻿namespace Ukraine.Persistence.EfCore.Options;
 
-public class UkrainePostgresOptions
+public class UkrainePostgresOptions : UkraineDatabaseOptions
 {
 	public int? RetryOnFailureCount { get; set; }
 
 	public TimeSpan? RetryOnFailureDelay { get; set; }
-
-	public bool SensitiveDataLogging { get; set; }
-
-	public bool DetailedErrors { get; set; }
 }

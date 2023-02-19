@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Identity", "src\Framework\Ukraine.Infrastructure.Identity\Ukraine.Infrastructure.Identity.csproj", "{1EF73394-435C-46F6-B829-5A97D3496E7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Serilog", "src\Framework\Ukraine.Infrastructure.Serilog\Ukraine.Infrastructure.Serilog.csproj", "{54AEB630-72F7-4BCD-AE15-23A776DF0937}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,7 @@ Global
 		{6BB857AE-11A7-4560-AE8A-18C93CF54D2C} = {52761B76-4E59-47CB-8734-1B42FCF4F7AC}
 		{AA59B7E4-E649-40E9-8F9F-5955C5595D06} = {6BB857AE-11A7-4560-AE8A-18C93CF54D2C}
 		{1EF73394-435C-46F6-B829-5A97D3496E7E} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
+		{54AEB630-72F7-4BCD-AE15-23A776DF0937} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3C0450E-105B-47C6-AC24-12A4C44174E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -169,5 +172,9 @@ Global
 		{1EF73394-435C-46F6-B829-5A97D3496E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EF73394-435C-46F6-B829-5A97D3496E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EF73394-435C-46F6-B829-5A97D3496E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54AEB630-72F7-4BCD-AE15-23A776DF0937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54AEB630-72F7-4BCD-AE15-23A776DF0937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54AEB630-72F7-4BCD-AE15-23A776DF0937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54AEB630-72F7-4BCD-AE15-23A776DF0937}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

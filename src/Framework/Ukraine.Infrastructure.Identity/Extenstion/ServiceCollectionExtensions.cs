@@ -20,9 +20,9 @@ public static class ServiceCollectionExtensions
 
 	public static AuthenticationBuilder AddUkraineJwtAuthentication(
 		this IServiceCollection serviceCollection,
-		Action<UkraineJwtAuthenticationOptionsBuilder>? configure = null)
+		Action<UkraineJwtAuthenticationOptions>? configure = null)
 	{
-		var options = new UkraineJwtAuthenticationOptionsBuilder();
+		var options = new UkraineJwtAuthenticationOptions();
 		configure?.Invoke(options);
 
 		return serviceCollection

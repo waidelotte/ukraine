@@ -1,14 +1,16 @@
 ﻿using Serilog.Events;
 
-namespace Ukraine.Infrastructure.Logging.Options;
+namespace Ukraine.Infrastructure.Serilog.Options;
 
 public class UkraineLoggingOptions
 {
+	public string? ServiceName { get; set; }
+
 	public LogEventLevel MinimumLevel { get; set; } = LogEventLevel.Information;
 
 	public Action<UkraineLoggingWriteOptions>? WriteTo { get; set; }
 
-	public Dictionary<string, LogEventLevel> OverrideDictionary { get; } = new();
+	internal Dictionary<string, LogEventLevel> OverrideDictionary { get; } = new();
 
 	public void Override(Dictionary<string, LogEventLevel>? values)
 	{

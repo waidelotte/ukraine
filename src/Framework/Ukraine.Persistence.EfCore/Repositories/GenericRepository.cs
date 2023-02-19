@@ -3,7 +3,7 @@ using Ukraine.Domain.Interfaces;
 
 namespace Ukraine.Persistence.EfCore.Repositories;
 
-public class GenericRepository<TEntity> : IRepository<TEntity>
+internal class GenericRepository<TEntity> : IRepository<TEntity>
 	where TEntity : class, IAggregateRoot
 {
 	public GenericRepository(DbContext dbContext)

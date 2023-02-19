@@ -1,7 +1,7 @@
 ﻿using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
-using Ukraine.Infrastructure.Logging.Extenstion;
-using Ukraine.Services.Example.Api.Options;
+using Ukraine.Infrastructure.Serilog.Extenstion;
+using Ukraine.Services.Example.Infrastructure.Options;
 
 namespace Ukraine.Services.Example.Api.Extensions;
 
@@ -12,14 +12,14 @@ public static class ConfigureHostBuilderExtensions
 		var loggingOptions = configuration.GetRequiredSection<ExampleLoggingOptions>(ExampleLoggingOptions.SECTION_NAME);
 
 		configureWebHostBuilder
-			.UseUkraineSerilog(Constants.SERVICE_NAME, options =>
+			.UseUkraineSerilog(options =>
 			{
+				options.ServiceName = Constants.SERVICE_NAME;
 				options.MinimumLevel = loggingOptions.MinimumLevel;
 				options.Override(loggingOptions.Override);
 
 				options.WriteTo = writeOptions =>
 				{
-					writeOptions.WriteToConsole = loggingOptions.WriteToConsole;
 					writeOptions.WriteToSeqServerUrl = loggingOptions.WriteToSeqServerUrl;
 				};
 			})

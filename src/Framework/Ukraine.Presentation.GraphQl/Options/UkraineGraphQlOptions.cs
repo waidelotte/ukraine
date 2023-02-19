@@ -2,15 +2,15 @@
 
 public class UkraineGraphQlOptions
 {
+	public int? ExecutionMaxDepth { get; set; }
+
 	public bool IncludeExceptionDetails { get; set; }
 
-	public bool UseIntrospection { get; set; }
+	public bool DisableMutationConventions { get; set; }
 
-	public bool UseInstrumentation { get; set; }
+	public bool AllowIntrospection { get; set; }
 
-	public int MaxPageSize { get; set; } = 100;
+	public bool IncludeInstrumentation { get; set; }
 
-	public int DefaultPageSize { get; set; } = 10;
-
-	public int? MaxDepth { get; set; }
+	public UkraineGraphQlPagingOptions Paging { get; } = new();
 }

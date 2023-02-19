@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
-using Ukraine.Infrastructure.Logging.Extenstion;
+using Ukraine.Infrastructure.Serilog.Extenstion;
 using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Persistence.EfCore.Interfaces;
 using Ukraine.Presentation.HealthChecks.Extenstion;
@@ -26,17 +26,17 @@ var loggingOptions = builder.Configuration.GetRequiredSection<IdentityLoggingOpt
 var databaseOptions = builder.Configuration.GetRequiredSection<IdentityDatabaseOptions>(IdentityDatabaseOptions.SECTION_NAME);
 var identityOptions = builder.Configuration.GetRequiredSection<IdentityOptions>(IdentityOptions.SECTION_NAME);
 
-builder.Host.UseUkraineSerilog(Constants.SERVICE_NAME, options =>
-	{
-		options.MinimumLevel = loggingOptions.MinimumLevel;
-		options.Override(loggingOptions.Override);
+builder.Host.UseUkraineSerilog(options =>
+{
+	options.ServiceName = Constants.SERVICE_NAME;
+	options.MinimumLevel = loggingOptions.MinimumLevel;
+	options.Override(loggingOptions.Override);
 
-		options.WriteTo = writeOptions =>
-		{
-			writeOptions.WriteToConsole = loggingOptions.WriteToConsole;
-			writeOptions.WriteToSeqServerUrl = loggingOptions.WriteToSeqServerUrl;
-		};
-	});
+	options.WriteTo = writeOptions =>
+	{
+		writeOptions.WriteToSeqServerUrl = loggingOptions.WriteToSeqServerUrl;
+	};
+});
 
 builder.Host.UseUkraineServicesValidationOnBuild();
 

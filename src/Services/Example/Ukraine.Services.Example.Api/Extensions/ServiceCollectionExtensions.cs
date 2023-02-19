@@ -9,9 +9,9 @@ using Ukraine.Presentation.HealthChecks.Extenstion;
 using Ukraine.Presentation.Swagger.Extenstion;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
-using Ukraine.Services.Example.Api.Options;
 using Ukraine.Services.Example.Domain.Exceptions;
 using Ukraine.Services.Example.Infrastructure.Extensions;
+using Ukraine.Services.Example.Infrastructure.Options;
 using Ukraine.Services.Example.Persistence;
 using Ukraine.Services.Example.Persistence.Extensions;
 
@@ -21,30 +21,14 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddExampleApi(this IServiceCollection services, IConfiguration configuration)
 	{
-		var databaseOptions = configuration.GetRequiredSection<ExampleDatabaseOptions>(ExampleDatabaseOptions.SECTION_NAME);
-
 		var connectionString = configuration.GetConnectionString("Postgres");
 
 		if (string.IsNullOrEmpty(connectionString))
-		{
 			throw ExampleException.Exception("Configuration: Postgres Connection String is null or empty");
-		}
-
-		var telemetryOptions = configuration.GetRequiredSection<ExampleTelemetryOptions>(ExampleTelemetryOptions.SECTION_NAME);
 
 		services
-			.AddInfrastructure(Constants.SERVICE_NAME, telemetry =>
-			{
-				telemetry.ZipkinServerUrl = telemetryOptions.ZipkinServerUrl;
-				telemetry.RecordSqlException = telemetryOptions.RecordSqlException;
-			})
-			.AddPersistence(connectionString, options =>
-			{
-				options.RetryOnFailureDelay = databaseOptions.RetryOnFailureDelay;
-				options.RetryOnFailureCount = databaseOptions.RetryOnFailureCount;
-				options.DetailedErrors = databaseOptions.DetailedErrors;
-				options.SensitiveDataLogging = databaseOptions.SensitiveDataLogging;
-			});
+			.AddInfrastructure(Constants.SERVICE_NAME, configuration)
+			.AddPersistence(connectionString, configuration);
 
 		var identityOptions = configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
 		var swaggerOptions = configuration.GetRequiredSection<ExampleSwaggerOptions>(ExampleSwaggerOptions.SECTION_NAME);
@@ -69,16 +53,13 @@ public static class ServiceCollectionExtensions
 
 		var graphQlOptions = configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);
 
-		services.AddUkraineGraphQl(options =>
+		services.AddUkraineGraphQl<ExampleContext>(options =>
 			{
 				options.IncludeExceptionDetails = graphQlOptions.IncludeExceptionDetails;
-				options.UseIntrospection = graphQlOptions.UseIntrospection;
-				options.UseInstrumentation = graphQlOptions.UseInstrumentation;
-				options.DefaultPageSize = graphQlOptions.DefaultPageSize;
-				options.MaxPageSize = graphQlOptions.MaxPageSize;
-				options.MaxDepth = graphQlOptions.MaxDepth;
+				options.AllowIntrospection = graphQlOptions.AllowIntrospection;
+				options.IncludeInstrumentation = graphQlOptions.IncludeInstrumentation;
+				options.ExecutionMaxDepth = graphQlOptions.ExecutionMaxDepth;
 			})
-			.AddUkraineEfCore<ExampleContext>()
 			.AddType<AuthorQueryTypeExtension>()
 			.AddType<AuthorMutationTypeExtension>()
 			.AddType<BookMutationTypeExtension>()

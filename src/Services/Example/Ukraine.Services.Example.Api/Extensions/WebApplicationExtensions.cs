@@ -3,7 +3,7 @@ using Ukraine.Infrastructure.Identity.Extenstion;
 using Ukraine.Presentation.GraphQl.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
 using Ukraine.Presentation.Swagger.Extenstion;
-using Ukraine.Services.Example.Api.Options;
+using Ukraine.Services.Example.Infrastructure.Options;
 
 namespace Ukraine.Services.Example.Api.Extensions;
 
@@ -32,19 +32,12 @@ public static class WebApplicationExtensions
 
 		var graphQlOptions = application.Configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);
 
-		application.MapGet("/", () => Results.LocalRedirect($"~{graphQlOptions.Path}"));
-
 		application.MapSubscribeHandler();
 
-		if (!string.IsNullOrEmpty(graphQlOptions.Path))
+		application.UseUkraineGraphQl(options =>
 		{
-			application.UseUkraineGraphQl(options =>
-			{
-				options.Path = graphQlOptions.Path;
-				options.VoyagerPath = graphQlOptions.VoyagerPath;
-				options.UseBananaCakePopTool = true;
-			});
-		}
+			options.EnableBananaCakePop = graphQlOptions.EnableBananaCakePop;
+		});
 
 		application.MapControllers();
 

@@ -6,7 +6,7 @@ using Ukraine.Persistence.EfCore.Specifications.Interfaces;
 
 namespace Ukraine.Persistence.EfCore.Specifications.Repositories;
 
-public class GenericSpecificationRepository<TEntity> : ISpecificationRepository<TEntity>
+internal class GenericSpecificationRepository<TEntity> : ISpecificationRepository<TEntity>
 	where TEntity : class, IAggregateRoot
 {
 	private readonly DbSet<TEntity> _dbSet;

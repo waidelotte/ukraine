@@ -45,7 +45,7 @@ public class UkraineSwaggerOptionsBuilder
 		_action += options => options.OperationFilter<AuthorizeCheckOperationFilter>(scopes);
 	}
 
-	public Action<SwaggerGenOptions>? Build()
+	internal Action<SwaggerGenOptions>? Build()
 	{
 		return _action;
 	}

@@ -6,11 +6,11 @@ namespace Ukraine.Infrastructure.Dapr.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddUkraineDapr(this IServiceCollection services)
+	public static IServiceCollection AddUkraineDaprEventBus(this IServiceCollection services)
 	{
 		var options = new JsonSerializerOptions
 		{
-			PropertyNameCaseInsensitive = Constants.Serialization.CaseInsensitive,
+			PropertyNameCaseInsensitive = true,
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
 

@@ -20,7 +20,7 @@ public class UkraineAuthorizationOptionsBuilder
 		});
 	}
 
-	public Action<AuthorizationOptions>? Build()
+	internal Action<AuthorizationOptions>? Build()
 	{
 		return _action;
 	}

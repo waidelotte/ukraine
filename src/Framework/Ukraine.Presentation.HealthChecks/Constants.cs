@@ -1,6 +1,6 @@
 ﻿namespace Ukraine.Presentation.HealthChecks;
 
-public static class Constants
+internal static class Constants
 {
 	public const string DEFAULT_SERVICE_NAME = "service";
 

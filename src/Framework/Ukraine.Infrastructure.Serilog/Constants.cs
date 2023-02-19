@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Infrastructure.Logging;
+﻿namespace Ukraine.Infrastructure.Serilog;
 
 public static class Constants
 {
