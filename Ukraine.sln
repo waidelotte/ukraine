@@ -69,7 +69,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Identity", "src\Framework\Ukraine.Infrastructure.Identity\Ukraine.Infrastructure.Identity.csproj", "{1EF73394-435C-46F6-B829-5A97D3496E7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Serilog", "src\Framework\Ukraine.Infrastructure.Serilog\Ukraine.Infrastructure.Serilog.csproj", "{54AEB630-72F7-4BCD-AE15-23A776DF0937}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Logging", "src\Framework\Ukraine.Infrastructure.Logging\Ukraine.Infrastructure.Logging.csproj", "{54AEB630-72F7-4BCD-AE15-23A776DF0937}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

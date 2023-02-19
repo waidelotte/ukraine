@@ -1,34 +1,21 @@
-using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.Dapr.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
-using Ukraine.Infrastructure.Serilog.Extenstion;
+using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
 using Ukraine.Services.Example.Friends.Registrar;
-using Ukraine.Services.Example.Friends.Registrar.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+var services = builder.Services;
+
+builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
+builder.Host.AddUkraineServicesValidationOnBuild();
 
 builder.Services.AddUkraineDaprEventBus();
 builder.Services.AddControllers();
 builder.Services
 	.AddUkraineHealthChecks()
 	.AddUkraineDaprHealthCheck();
-
-var loggingOptions = builder.Configuration.GetRequiredSection<RegistrarLoggingOptions>(RegistrarLoggingOptions.SECTION_NAME);
-
-builder.Host
-	.UseUkraineSerilog(options =>
-	{
-		options.ServiceName = Constants.SERVICE_NAME;
-		options.MinimumLevel = loggingOptions.MinimumLevel;
-		options.Override(loggingOptions.Override);
-
-		options.WriteTo = writeOptions =>
-		{
-			writeOptions.WriteToSeqServerUrl = loggingOptions.WriteToSeqServerUrl;
-		};
-	})
-	.UseUkraineServicesValidationOnBuild();
 
 var app = builder.Build();
 

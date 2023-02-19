@@ -6,7 +6,7 @@ using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.Dapr.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Identity.Extenstion;
-using Ukraine.Infrastructure.Serilog.Extenstion;
+using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Persistence.EfCore.Interfaces;
 using Ukraine.Presentation.GraphQl.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
@@ -21,22 +21,11 @@ using Ukraine.Services.Example.Persistence;
 using Ukraine.Services.Example.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+var services = builder.Services;
 
-var loggingOptions = builder.Configuration.GetRequiredSection<ExampleLoggingOptions>(ExampleLoggingOptions.SECTION_NAME);
-
-builder.Host
-	.UseUkraineSerilog(options =>
-	{
-		options.ServiceName = Constants.SERVICE_NAME;
-		options.MinimumLevel = loggingOptions.MinimumLevel;
-		options.Override(loggingOptions.Override);
-
-		options.WriteTo = writeOptions =>
-		{
-			writeOptions.WriteToSeqServerUrl = loggingOptions.WriteToSeqServerUrl;
-		};
-	})
-	.UseUkraineServicesValidationOnBuild();
+builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
+builder.Host.AddUkraineServicesValidationOnBuild();
 
 var connectionString = builder.Configuration.GetConnectionString("Postgres");
 

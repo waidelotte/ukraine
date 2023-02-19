@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.Configuration.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
-using Ukraine.Infrastructure.Serilog.Extenstion;
+using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Persistence.EfCore.Interfaces;
 using Ukraine.Presentation.HealthChecks.Extenstion;
@@ -15,30 +15,20 @@ using Ukraine.Services.Identity.Persistence;
 using IdentityOptions = Ukraine.Services.Identity.Options.IdentityOptions;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+var services = builder.Services;
 var isDevelopment = builder.Environment.IsDevelopment();
+
+builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
+builder.Host.AddUkraineServicesValidationOnBuild();
 
 var connectionString = builder.Configuration.GetConnectionString("Postgres");
 
 if (string.IsNullOrEmpty(connectionString))
 	throw IdentityException.Exception("Configuration: Postgres Connection String is null or empty");
 
-var loggingOptions = builder.Configuration.GetRequiredSection<IdentityLoggingOptions>(IdentityLoggingOptions.SECTION_NAME);
 var databaseOptions = builder.Configuration.GetRequiredSection<IdentityDatabaseOptions>(IdentityDatabaseOptions.SECTION_NAME);
 var identityOptions = builder.Configuration.GetRequiredSection<IdentityOptions>(IdentityOptions.SECTION_NAME);
-
-builder.Host.UseUkraineSerilog(options =>
-{
-	options.ServiceName = Constants.SERVICE_NAME;
-	options.MinimumLevel = loggingOptions.MinimumLevel;
-	options.Override(loggingOptions.Override);
-
-	options.WriteTo = writeOptions =>
-	{
-		writeOptions.WriteToSeqServerUrl = loggingOptions.WriteToSeqServerUrl;
-	};
-});
-
-builder.Host.UseUkraineServicesValidationOnBuild();
 
 builder.Services.AddRazorPages();
 builder.Services.AddUkrainePostgresContext<UkraineIdentityContext, UkraineIdentityContext>(connectionString, options =>

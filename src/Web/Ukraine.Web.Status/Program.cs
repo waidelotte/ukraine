@@ -25,7 +25,7 @@ if (seqOptions == null)
 	throw CoreException.Exception($"Unable to initialize section: {SeqOptions.SectionName}");
 }
 
-// builder.Host.UseUkraineSerilog(statusOptions.ServiceName!, builder.Configuration.GetSection("ApplicationLogging"));
+// builder.Host.AddUkraineSerilog(statusOptions.ServiceName!, builder.Configuration.GetSection("ApplicationLogging"));
 builder.Services
 	.AddHealthChecksUI(settings =>
 	{

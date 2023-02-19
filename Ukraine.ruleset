@@ -3,6 +3,7 @@
         <Rule Id="SA1101" Action="None" />
         <Rule Id="SA1128" Action="None" />
         <Rule Id="SA1137" Action="Error" />
+        <Rule Id="SA1206" Action="None" />
         <Rule Id="SA1502" Action="None" />
         <Rule Id="SA1309" Action="None" />
         <Rule Id="SA1310" Action="None" />
