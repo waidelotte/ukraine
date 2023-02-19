@@ -1,16 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Ukraine.Infrastructure.Dapr.Extensions;
+namespace Ukraine.Infrastructure.EventBus.Extensions;
 
 public static class HealthChecksBuilderExtensions
 {
 	public static IHealthChecksBuilder AddUkraineDaprHealthCheck(this IHealthChecksBuilder builder)
 	{
-		builder.AddCheck<HealthCheck>(Constants.SERVICE_NAME, tags: new[]
+		return builder.AddCheck<DaprHealthCheck>("dapr", tags: new[]
 		{
-			Constants.Tags.READY, Constants.SERVICE_NAME
+			"ready", "dapr"
 		});
-
-		return builder;
 	}
 }

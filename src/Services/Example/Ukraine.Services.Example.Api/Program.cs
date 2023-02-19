@@ -3,7 +3,7 @@ using HotChocolate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.Dapr.Extensions;
+using Ukraine.Infrastructure.EventBus.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Identity.Extenstion;
 using Ukraine.Infrastructure.Logging.Extenstion;
@@ -33,7 +33,7 @@ if (string.IsNullOrEmpty(connectionString))
 	throw ExampleException.Exception("Configuration: Postgres Connection String is null or empty");
 
 builder.Services
-	.AddInfrastructure(Constants.SERVICE_NAME, builder.Configuration)
+	.AddInfrastructure(configuration)
 	.AddPersistence(connectionString, builder.Configuration);
 
 var identityOptions = builder.Configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);

@@ -19,30 +19,30 @@ public static class ConfigureHostBuilderExtensions
 			.ValidateDataAnnotations()
 			.ValidateOnStart();
 
-		var loggingOptions = configurationSection.Get<UkraineLoggingOptions>(options =>
+		var options = configurationSection.Get<UkraineLoggingOptions>(options =>
 		{
 			options.ErrorOnUnknownConfiguration = true;
 		});
 
-		if (loggingOptions == null)
+		if (options == null)
 			throw new ArgumentNullException(nameof(configurationSection), $"Configuration Section [{configurationSection.Key}] is empty");
 
 		var loggerConfiguration = new LoggerConfiguration();
 
-		loggerConfiguration.MinimumLevel.Is(loggingOptions.MinimumLevel);
+		loggerConfiguration.MinimumLevel.Is(options.MinimumLevel);
 
-		foreach (var minLevelOverride in loggingOptions.Override)
+		foreach (var minLevelOverride in options.Override)
 		{
 			loggerConfiguration.MinimumLevel.Override(minLevelOverride.Key, minLevelOverride.Value);
 		}
 
-		if (loggingOptions.WriteTo.Console)
+		if (options.WriteTo.Console)
 			loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Code);
 
-		if (!string.IsNullOrEmpty(loggingOptions.WriteTo.SeqServerUrl))
-			loggerConfiguration.WriteTo.Seq(loggingOptions.WriteTo.SeqServerUrl);
+		if (!string.IsNullOrEmpty(options.WriteTo.SeqServerUrl))
+			loggerConfiguration.WriteTo.Seq(options.WriteTo.SeqServerUrl);
 
-		loggerConfiguration.Enrich.WithProperty("ServiceName", loggingOptions.ServiceName);
+		loggerConfiguration.Enrich.WithProperty("ServiceName", options.ServiceName);
 
 		loggerConfiguration
 			.Enrich.FromLogContext()

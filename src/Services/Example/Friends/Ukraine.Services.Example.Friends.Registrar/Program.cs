@@ -1,4 +1,4 @@
-using Ukraine.Infrastructure.Dapr.Extensions;
+using Ukraine.Infrastructure.EventBus.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
@@ -10,8 +10,8 @@ var services = builder.Services;
 
 builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
 builder.Host.AddUkraineServicesValidationOnBuild();
+services.AddUkraineDaprEventBus(configuration.GetSection("UkraineEventBus"));
 
-builder.Services.AddUkraineDaprEventBus();
 builder.Services.AddControllers();
 builder.Services
 	.AddUkraineHealthChecks()

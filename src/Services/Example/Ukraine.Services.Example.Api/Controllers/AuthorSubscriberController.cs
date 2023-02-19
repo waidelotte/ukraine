@@ -21,7 +21,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistrationApproved")]
-	[Dapr.Topic(Ukraine.Infrastructure.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorRegistrationApprovedEvent))]
+	[Dapr.Topic(Constants.PUBSUB_NAME, nameof(AuthorRegistrationApprovedEvent))]
 	public async Task HandleAsync(AuthorRegistrationApprovedEvent request)
 	{
 		_logger.LogDebug("AuthorRegistrationApprovedEvent: {@Request}", request);
@@ -29,7 +29,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistrationDeclined")]
-	[Dapr.Topic(Ukraine.Infrastructure.Dapr.Constants.PUB_SUB_NAME, nameof(AuthorRegistrationDeclinedEvent))]
+	[Dapr.Topic(Constants.PUBSUB_NAME, nameof(AuthorRegistrationDeclinedEvent))]
 	public async Task HandleAsync(AuthorRegistrationDeclinedEvent request)
 	{
 		_logger.LogDebug("AuthorRegistrationDeclinedEvent: {@Request}", request);
