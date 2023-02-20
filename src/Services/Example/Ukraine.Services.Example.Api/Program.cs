@@ -3,7 +3,6 @@ using HotChocolate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.EventBus.Extensions;
 using Ukraine.Infrastructure.Hosting.Extensions;
 using Ukraine.Infrastructure.Identity.Extenstion;
 using Ukraine.Infrastructure.Logging.Extenstion;
@@ -27,35 +26,17 @@ var services = builder.Services;
 builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
 builder.Host.AddUkraineServicesValidationOnBuild();
 
-var connectionString = builder.Configuration.GetConnectionString("Postgres");
+services.AddInfrastructure(configuration);
+services.AddPersistence(configuration);
 
-if (string.IsNullOrEmpty(connectionString))
-	throw ExampleException.Exception("Configuration: Postgres Connection String is null or empty");
-
-builder.Services
-	.AddInfrastructure(configuration)
-	.AddPersistence(connectionString, builder.Configuration);
+services.AddUkraineSwagger(configuration.GetSection("UkraineSwagger"));
 
 var identityOptions = builder.Configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
-var swaggerOptions = builder.Configuration.GetRequiredSection<ExampleSwaggerOptions>(ExampleSwaggerOptions.SECTION_NAME);
-
-builder.Services.AddUkraineSwagger(options =>
-{
-	options.AddDoc(Constants.SERVICE_NAME);
-
-	if (!string.IsNullOrEmpty(identityOptions.Authority))
-		options.AddOAuth2(identityOptions.Authority, swaggerOptions.AuthScopes);
-
-	options.AddAuthorizeFilter(swaggerOptions.AuthScopes);
-});
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddControllers();
 
-builder.Services
-	.AddUkraineHealthChecks()
-	.AddUkraineDaprHealthCheck()
-	.AddUkrainePostgresHealthCheck(connectionString);
+builder.Services.AddUkraineHealthChecks().AddUkraineServiceCheck(); // todo
 
 var graphQlOptions = builder.Configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);
 
@@ -101,15 +82,7 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 
 app
-	.UseUkraineSwagger(options =>
-	{
-		options.AddEndpoint();
-
-		if (!string.IsNullOrEmpty(swaggerOptions.OAuthClientId))
-			options.AddOAuthClientId(swaggerOptions.OAuthClientId);
-
-		options.AddOAuthAppName(Constants.SERVICE_NAME);
-	})
+	.UseUkraineSwagger()
 	.UseUkraineAuthentication()
 	.UseUkraineAuthorization()
 	.UseCloudEvents();

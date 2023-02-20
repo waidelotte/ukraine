@@ -2,9 +2,7 @@
 
 public class UkraineDatabaseOptions
 {
-	public bool SensitiveDataLogging { get; set; }
+	public bool EnableDetailedErrors { get; set; }
 
-	public bool DetailedErrors { get; set; }
-
-	public bool UseAuditSave { get; set; }
+	public bool EnableSensitiveDataLogging { get; set; }
 }

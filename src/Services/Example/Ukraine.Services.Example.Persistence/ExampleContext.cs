@@ -14,6 +14,13 @@ public class ExampleContext : UkraineDatabaseContextBase
 
 	public DbSet<Book> Books => Set<Book>();
 
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		base.OnConfiguring(optionsBuilder);
+
+		optionsBuilder.AddAudit();
+	}
+
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		base.OnModelCreating(modelBuilder);

@@ -4,6 +4,7 @@
     <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Logging\Ukraine.Infrastructure.Logging.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Presentation.HealthChecks\Ukraine.Presentation.HealthChecks.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Persistence\Ukraine.Services.Example.Persistence.csproj" />
   </ItemGroup>

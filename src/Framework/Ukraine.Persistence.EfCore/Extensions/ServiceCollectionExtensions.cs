@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Domain.Interfaces;
-using Ukraine.Persistence.EfCore.Interceptors;
 using Ukraine.Persistence.EfCore.Interfaces;
 using Ukraine.Persistence.EfCore.Options;
 using Ukraine.Persistence.EfCore.Repositories;
@@ -11,11 +11,11 @@ namespace Ukraine.Persistence.EfCore.Extensions;
 public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection UseUkraineInMemoryDatabase<TContext>(
-		this IServiceCollection services, Action<UkraineDatabaseOptions>? configure)
+		this IServiceCollection services,
+		IConfigurationSection configurationSection)
 		where TContext : DbContext, IDatabaseFacadeResolver
 	{
-		var options = new UkrainePostgresOptions();
-		configure?.Invoke(options);
+		var options = BindOptions<UkraineDatabaseOptions>(services, configurationSection);
 
 		return ConfigureContext<TContext>(services, options, dbBuilder =>
 		{
@@ -26,11 +26,10 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddUkrainePostgresContext<TContext, TMigrationAssembly>(
 		this IServiceCollection services,
 		string connectionString,
-		Action<UkrainePostgresOptions>? configure)
+		IConfigurationSection configurationSection)
 		where TContext : DbContext, IDatabaseFacadeResolver
 	{
-		var options = new UkrainePostgresOptions();
-		configure?.Invoke(options);
+		var options = BindOptions<UkrainePostgresOptions>(services, configurationSection);
 
 		return ConfigureContext<TContext>(services, options, dbBuilder =>
 		{
@@ -56,6 +55,27 @@ public static class ServiceCollectionExtensions
 		return services;
 	}
 
+	private static TOptions BindOptions<TOptions>(
+		IServiceCollection serviceCollection,
+		IConfigurationSection configurationSection)
+		where TOptions : class
+	{
+		serviceCollection.AddOptions<TOptions>()
+			.Bind(configurationSection)
+			.ValidateDataAnnotations()
+			.ValidateOnStart();
+
+		var options = configurationSection.Get<TOptions>(options =>
+		{
+			options.ErrorOnUnknownConfiguration = true;
+		});
+
+		if (options == null)
+			throw new ArgumentNullException(nameof(configurationSection), $"Configuration Section [{configurationSection.Key}] is empty");
+
+		return options;
+	}
+
 	private static IServiceCollection ConfigureContext<TContext>(
 		IServiceCollection services,
 		UkraineDatabaseOptions options,
@@ -64,12 +84,8 @@ public static class ServiceCollectionExtensions
 	{
 		services.AddDbContextPool<TContext>(dbBuilder =>
 		{
-			dbBuilder.EnableDetailedErrors(options.DetailedErrors);
-			dbBuilder.EnableSensitiveDataLogging(options.SensitiveDataLogging);
-
-			if (options.UseAuditSave)
-				dbBuilder.AddInterceptors(new AuditEntitiesSaveInterceptor());
-
+			dbBuilder.EnableDetailedErrors(options.EnableDetailedErrors);
+			dbBuilder.EnableSensitiveDataLogging(options.EnableSensitiveDataLogging);
 			dbBuilder.UseSnakeCaseNamingConvention();
 
 			configureContext.Invoke(dbBuilder);

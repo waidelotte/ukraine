@@ -29,12 +29,12 @@ internal sealed class AuthorizeCheckOperationFilter : IOperationFilter
 
 		operation.Responses.TryAdd(StatusCodes.Status401Unauthorized.ToString(), new OpenApiResponse
 		{
-			Description = Constants.Status.UNAUTHORIZED
+			Description = "Unauthorized"
 		});
 
 		operation.Responses.TryAdd(StatusCodes.Status403Forbidden.ToString(), new OpenApiResponse
 		{
-			Description = Constants.Status.FORBIDDEN
+			Description = "Forbidden"
 		});
 
 		var oAuthScheme = new OpenApiSecurityScheme
