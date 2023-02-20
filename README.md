@@ -9,3 +9,4 @@
 - Mail Sender
 - Secret Store
 - Blazor Server/Client
+- Script Migrations
