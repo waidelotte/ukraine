@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Ukraine.Domain.Exceptions;
 
-namespace Ukraine.Infrastructure.Configuration.Extensions;
+namespace Ukraine.Infrastructure.Extensions;
 
 public static class ConfigurationExtensions
 {

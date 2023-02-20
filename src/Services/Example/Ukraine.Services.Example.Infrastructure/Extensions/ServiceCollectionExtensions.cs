@@ -18,7 +18,7 @@ public static class ServiceCollectionExtensions
 		services.AddUkraineMediatorRequestValidation();
 		services.AddUkraineTelemetry(configuration.GetSection("UkraineTelemetry"));
 		services.AddUkraineDaprEventBus(configuration.GetSection("UkraineEventBus"));
-		services.AddUkraineHealthChecks().AddUkraineDaprHealthCheck();
+		services.AddUkraineHealthChecks().AddUkraineDaprHealthCheck().AddUkraineServiceCheck();
 
 		return services;
 	}

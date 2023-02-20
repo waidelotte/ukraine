@@ -1,8 +1,7 @@
 ﻿using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.Hosting.Extensions;
+using Ukraine.Infrastructure.Extensions;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Persistence.EfCore.Interfaces;

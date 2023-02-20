@@ -82,7 +82,7 @@ public static class ServiceCollectionExtensions
 		Action<DbContextOptionsBuilder> configureContext)
 		where TContext : DbContext, IDatabaseFacadeResolver
 	{
-		services.AddDbContextPool<TContext>(dbBuilder =>
+		services.AddDbContext<TContext>(dbBuilder =>
 		{
 			dbBuilder.EnableDetailedErrors(options.EnableDetailedErrors);
 			dbBuilder.EnableSensitiveDataLogging(options.EnableSensitiveDataLogging);

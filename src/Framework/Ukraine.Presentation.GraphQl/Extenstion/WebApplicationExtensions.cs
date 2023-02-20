@@ -1,25 +1,24 @@
 using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Ukraine.Presentation.GraphQl.Options;
 
 namespace Ukraine.Presentation.GraphQl.Extenstion;
 
 public static class WebApplicationExtensions
 {
-	public static void UseUkraineGraphQl(
-		this WebApplication application,
-		Action<UkraineGraphQlWebOptions>? configure = null)
+	public static void UseUkraineGraphQl(this WebApplication application)
 	{
-		var options = new UkraineGraphQlWebOptions();
-		configure?.Invoke(options);
+		var options = application.Services.GetRequiredService<IOptions<UkraineGraphQlOptions>>();
 
-		application.MapGraphQL(options.Path).WithOptions(new GraphQLServerOptions
+		application.MapGraphQL(options.Value.Path).WithOptions(new GraphQLServerOptions
 		{
-			EnableSchemaRequests = options.EnableSchemaRequests,
-			EnableGetRequests = options.EnableGetRequests,
-			EnableMultipartRequests = options.EnableMultipartRequests,
-			Tool = { Enable = options.EnableBananaCakePop },
-			EnableBatching = options.EnableBatching
+			EnableSchemaRequests = options.Value.EnableSchemaRequests,
+			EnableGetRequests = options.Value.EnableGetRequests,
+			EnableMultipartRequests = options.Value.EnableMultipartRequests,
+			Tool = { Enable = options.Value.EnableBananaCakePop },
+			EnableBatching = options.Value.EnableBatching
 		});
 	}
 }

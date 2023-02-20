@@ -9,7 +9,7 @@ public static class HealthChecksBuilderExtensions
 		string connectionString)
 	{
 		return healthChecksBuilder
-			.AddNpgSql(connectionString, name: Constants.Tags.POSTGRES, tags: new[]
+			.AddNpgSql(connectionString, name: Constants.Tags.DATABASE, tags: new[]
 			{
 				Constants.Tags.READY, Constants.Tags.DATABASE, Constants.Tags.POSTGRES
 			});

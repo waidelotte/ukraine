@@ -1,16 +1,38 @@
-﻿namespace Ukraine.Presentation.GraphQl.Options;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Ukraine.Presentation.GraphQl.Options;
 
 public class UkraineGraphQlOptions
 {
+	[Required]
+	public required string Path { get; set; } = "/graphql";
+
+	public bool EnableFiltering { get; set; } = true;
+
+	public bool EnableProjections { get; set; } = true;
+
+	public bool EnableSorting { get; set; } = true;
+
+	public bool EnableMutationConventions { get; set; } = true;
+
+	public bool EnableIntrospection { get; set; } = true;
+
+	public bool EnableExceptionDetails { get; set; } = true;
+
+	public bool EnableInstrumentation { get; set; }
+
 	public int? ExecutionMaxDepth { get; set; }
 
-	public bool IncludeExceptionDetails { get; set; }
+	public bool EnableSchemaRequests { get; set; } = true;
 
-	public bool DisableMutationConventions { get; set; }
+	public bool EnableGetRequests { get; set; } = true;
 
-	public bool AllowIntrospection { get; set; }
+	public bool EnableMultipartRequests { get; set; }
 
-	public bool IncludeInstrumentation { get; set; }
+	public bool EnableBananaCakePop { get; set; }
 
-	public UkraineGraphQlPagingOptions Paging { get; } = new();
+	public bool EnableBatching { get; set; }
+
+	[Required]
+	public required UkraineGraphQlPagingOptions Paging { get; set; } = new();
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace Ukraine.Infrastructure.Hosting.Extensions;
+namespace Ukraine.Infrastructure.Extensions;
 
 public static class HostBuilderExtensions
 {

@@ -1,9 +1,7 @@
-using FluentValidation.AspNetCore;
 using HotChocolate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Infrastructure.Configuration.Extensions;
-using Ukraine.Infrastructure.Hosting.Extensions;
+using Ukraine.Infrastructure.Extensions;
 using Ukraine.Infrastructure.Identity.Extenstion;
 using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Persistence.EfCore.Interfaces;
@@ -23,34 +21,22 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
 
-builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
-builder.Host.AddUkraineServicesValidationOnBuild();
-
 services.AddInfrastructure(configuration);
 services.AddPersistence(configuration);
 
+builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
+builder.Host.AddUkraineServicesValidationOnBuild();
+
+services.AddUkraineControllers();
 services.AddUkraineSwagger(configuration.GetSection("UkraineSwagger"));
 
-var identityOptions = builder.Configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
-
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddControllers();
-
-builder.Services.AddUkraineHealthChecks().AddUkraineServiceCheck(); // todo
-
-var graphQlOptions = builder.Configuration.GetRequiredSection<ExampleGraphQlOptions>(ExampleGraphQlOptions.SECTION_NAME);
-
-builder.Services.AddUkraineGraphQl<ExampleContext>(options =>
-	{
-		options.IncludeExceptionDetails = graphQlOptions.IncludeExceptionDetails;
-		options.AllowIntrospection = graphQlOptions.AllowIntrospection;
-		options.IncludeInstrumentation = graphQlOptions.IncludeInstrumentation;
-		options.ExecutionMaxDepth = graphQlOptions.ExecutionMaxDepth;
-	})
+builder.Services.AddUkraineGraphQl<ExampleContext>(configuration.GetSection("UkraineGraphQl"))
 	.AddType<AuthorQueryTypeExtension>()
 	.AddType<AuthorMutationTypeExtension>()
 	.AddType<BookMutationTypeExtension>()
 	.RegisterService<IMediator>(ServiceKind.Synchronized);
+
+var identityOptions = builder.Configuration.GetRequiredSection<ExampleIdentityOptions>(ExampleIdentityOptions.SECTION_NAME);
 
 builder.Services
 	.AddUkraineAuthorization(options =>
@@ -88,11 +74,7 @@ app
 	.UseCloudEvents();
 
 app.MapSubscribeHandler();
-app.UseUkraineGraphQl(options =>
-{
-	options.EnableBananaCakePop = graphQlOptions.EnableBananaCakePop;
-});
-
+app.UseUkraineGraphQl();
 app.MapControllers();
 app.UseUkraineHealthChecks();
 app.UseUkraineDatabaseHealthChecks();

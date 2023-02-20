@@ -2,6 +2,7 @@
 using HotChocolate.Language;
 using HotChocolate.Types.Pagination;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Presentation.GraphQl.Options;
 
@@ -11,20 +12,30 @@ public static class ServiceCollectionExtensions
 {
 	public static IRequestExecutorBuilder AddUkraineGraphQl<TContext>(
 		this IServiceCollection services,
-		Action<UkraineGraphQlOptions>? configure = null)
+		IConfigurationSection configurationSection)
 	where TContext : DbContext
 	{
-		return AddUkraineGraphQl(services, configure).RegisterDbContext<TContext>();
+		return AddUkraineGraphQl(services, configurationSection).RegisterDbContext<TContext>();
 	}
 
 	public static IRequestExecutorBuilder AddUkraineGraphQl(
-		IServiceCollection services,
-		Action<UkraineGraphQlOptions>? configure = null)
+		IServiceCollection serviceCollection,
+		IConfigurationSection configurationSection)
 	{
-		var options = new UkraineGraphQlOptions();
-		configure?.Invoke(options);
+		serviceCollection.AddOptions<UkraineGraphQlOptions>()
+			.Bind(configurationSection)
+			.ValidateDataAnnotations()
+			.ValidateOnStart();
 
-		var builder = services.AddGraphQLServer();
+		var options = configurationSection.Get<UkraineGraphQlOptions>(options =>
+		{
+			options.ErrorOnUnknownConfiguration = true;
+		});
+
+		if (options == null)
+			throw new ArgumentNullException(nameof(configurationSection), $"Configuration Section [{configurationSection.Key}] is empty");
+
+		var builder = serviceCollection.AddGraphQLServer();
 
 		builder.ConfigureSchema(schemaBuilder =>
 		{
@@ -38,16 +49,20 @@ public static class ServiceCollectionExtensions
 				OperationType.Mutation);
 		});
 
-		builder.AddFiltering();
-		builder.AddProjections();
-		builder.AddSorting();
+		if (options.EnableFiltering)
+			builder.AddFiltering();
 
-		if (!options.DisableMutationConventions)
+		if (options.EnableProjections)
+			builder.AddProjections();
+
+		if (options.EnableSorting)
+			builder.AddSorting();
+
+		if (options.EnableMutationConventions)
 			builder.AddMutationConventions();
 
-		builder.AllowIntrospection(options.AllowIntrospection);
-
-		builder.ModifyRequestOptions(o => o.IncludeExceptionDetails = options.IncludeExceptionDetails);
+		builder.AllowIntrospection(options.EnableIntrospection);
+		builder.ModifyRequestOptions(o => o.IncludeExceptionDetails = options.EnableExceptionDetails);
 
 		builder.SetPagingOptions(new PagingOptions
 		{
@@ -60,7 +75,7 @@ public static class ServiceCollectionExtensions
 		if (options.ExecutionMaxDepth > 0)
 			builder.AddMaxExecutionDepthRule(options.ExecutionMaxDepth.Value, true);
 
-		if (options.IncludeInstrumentation)
+		if (options.EnableInstrumentation)
 		{
 			builder.AddInstrumentation(o =>
 			{

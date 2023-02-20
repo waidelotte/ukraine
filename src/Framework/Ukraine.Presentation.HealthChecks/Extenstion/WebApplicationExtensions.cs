@@ -17,7 +17,7 @@ public static class WebApplicationExtensions
 
 	public static void UseUkraineDatabaseHealthChecks(this WebApplication webApplication)
 	{
-		webApplication.MapHealthChecks(Constants.Endpoints.DATABASE, new HealthCheckOptions
+		webApplication.MapHealthChecks(Constants.Endpoints.READY_DATABASE, new HealthCheckOptions
 		{
 			Predicate = r => r.Tags.Contains(Constants.Tags.DATABASE),
 			ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
