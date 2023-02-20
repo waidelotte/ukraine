@@ -8,7 +8,7 @@ public static class WebApplicationExtensions
 {
 	public static void UseUkraineHealthChecks(this WebApplication webApplication)
 	{
-		webApplication.MapHealthChecks(Constants.Endpoints.READY, new HealthCheckOptions
+		webApplication.MapHealthChecks("/health/ready", new HealthCheckOptions
 		{
 			Predicate = reg => reg.Tags.Contains(Constants.Tags.READY),
 			ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
@@ -17,7 +17,7 @@ public static class WebApplicationExtensions
 
 	public static void UseUkraineDatabaseHealthChecks(this WebApplication webApplication)
 	{
-		webApplication.MapHealthChecks(Constants.Endpoints.READY_DATABASE, new HealthCheckOptions
+		webApplication.MapHealthChecks("/health/ready/db", new HealthCheckOptions
 		{
 			Predicate = r => r.Tags.Contains(Constants.Tags.DATABASE),
 			ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse

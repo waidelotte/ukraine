@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Infrastructure.Identity.Options;
 
@@ -8,26 +9,62 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddUkraineAuthorization(
 		this IServiceCollection serviceCollection,
-		Action<UkraineAuthorizationOptionsBuilder>? configure = null)
+		IConfigurationSection configurationSection)
 	{
-		var options = new UkraineAuthorizationOptionsBuilder();
-		configure?.Invoke(options);
+		serviceCollection.AddOptions<UkraineAuthorizationOptions>()
+			.Bind(configurationSection)
+			.ValidateDataAnnotations()
+			.ValidateOnStart();
 
-		var build = options.Build();
+		var options = configurationSection.Get<UkraineAuthorizationOptions>(options =>
+		{
+			options.ErrorOnUnknownConfiguration = true;
+		});
 
-		return build != null ? serviceCollection.AddAuthorization(build) : serviceCollection.AddAuthorization();
+		if (options == null)
+			throw new ArgumentNullException(nameof(configurationSection), $"Configuration Section [{configurationSection.Key}] is empty");
+
+		return serviceCollection.AddAuthorization(o =>
+		{
+			if (options.Policies != null)
+			{
+				foreach (var policy in options.Policies)
+				{
+					o.AddPolicy(policy.Name, builder =>
+					{
+						if (policy.RequireAuthenticatedUser)
+							builder.RequireAuthenticatedUser();
+
+						foreach (var scope in policy.Scopes)
+						{
+							builder.RequireClaim("scope", scope);
+						}
+					});
+				}
+			}
+		});
 	}
 
 	public static AuthenticationBuilder AddUkraineJwtAuthentication(
 		this IServiceCollection serviceCollection,
-		Action<UkraineJwtAuthenticationOptions>? configure = null)
+		IConfigurationSection configurationSection)
 	{
-		var options = new UkraineJwtAuthenticationOptions();
-		configure?.Invoke(options);
+		serviceCollection.AddOptions<UkraineJwtAuthenticationOptions>()
+			.Bind(configurationSection)
+			.ValidateDataAnnotations()
+			.ValidateOnStart();
+
+		var options = configurationSection.Get<UkraineJwtAuthenticationOptions>(options =>
+		{
+			options.ErrorOnUnknownConfiguration = true;
+		});
+
+		if (options == null)
+			throw new ArgumentNullException(nameof(configurationSection), $"Configuration Section [{configurationSection.Key}] is empty");
 
 		return serviceCollection
-			.AddAuthentication(Constants.BEARER_NAME)
-			.AddJwtBearer(Constants.BEARER_NAME, o =>
+			.AddAuthentication("Bearer")
+			.AddJwtBearer("Bearer", o =>
 			{
 				o.Audience = options.Audience;
 				o.Authority = options.Authority;

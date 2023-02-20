@@ -6,6 +6,6 @@ public static class ModelBuilderExtensions
 {
 	public static ModelBuilder HasPostgresUuidGenerator(this ModelBuilder modelBuilder)
 	{
-		return modelBuilder.HasPostgresExtension(Constants.Extensions.UUID_GENERATOR);
+		return modelBuilder.HasPostgresExtension("uuid-ossp");
 	}
 }

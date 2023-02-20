@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
 
 		return ConfigureContext<TContext>(services, options, dbBuilder =>
 		{
-			dbBuilder.UseInMemoryDatabase(Constants.IN_MEMORY_DATABASE_NAME);
+			dbBuilder.UseInMemoryDatabase("in_memory_database");
 		});
 	}
 

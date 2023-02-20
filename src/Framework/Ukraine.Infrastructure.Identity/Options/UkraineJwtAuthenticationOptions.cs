@@ -1,10 +1,14 @@
-﻿namespace Ukraine.Infrastructure.Identity.Options;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Ukraine.Infrastructure.Identity.Options;
 
 public class UkraineJwtAuthenticationOptions
 {
-	public string? Authority { get; set; }
+	[Required]
+	public required string Authority { get; set; }
 
-	public string? Audience { get; set; }
+	[Required]
+	public required string Audience { get; set; }
 
-	public bool RequireHttps { get; set; }
+	public bool RequireHttps { get; set; } = true;
 }
