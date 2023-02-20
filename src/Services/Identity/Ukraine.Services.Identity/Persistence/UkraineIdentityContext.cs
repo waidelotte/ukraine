@@ -13,6 +13,6 @@ public class UkraineIdentityContext : IdentityDbContext<UkraineUser>, IDatabaseF
 	{
 		base.OnModelCreating(modelBuilder);
 
-		modelBuilder.HasDefaultSchema(Constants.SCHEMA_NAME);
+		modelBuilder.HasDefaultSchema("ukraine_identity");
 	}
 }

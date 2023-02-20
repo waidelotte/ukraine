@@ -8,7 +8,6 @@ using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Presentation.GraphQl.Extenstion;
 using Ukraine.Presentation.HealthChecks.Extenstion;
 using Ukraine.Presentation.Swagger.Extenstion;
-using Ukraine.Services.Example.Api;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Infrastructure.Extensions;
@@ -56,12 +55,12 @@ app.UseUkraineDatabaseHealthChecks();
 
 try
 {
-	app.Logger.LogInformation("Starting Web Host [{ServiceName}]", Constants.SERVICE_NAME);
+	app.Logger.LogInformation("Starting Web Host [service-example-api]");
 	app.Run();
 }
 catch (Exception ex)
 {
-	app.Logger.LogCritical(ex, "Host terminated unexpectedly [{ServiceName}]", Constants.SERVICE_NAME);
+	app.Logger.LogCritical(ex, "Host terminated unexpectedly [service-example-api]");
 }
 finally
 {

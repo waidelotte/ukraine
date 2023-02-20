@@ -6,7 +6,6 @@ using Ukraine.Infrastructure.Logging.Extenstion;
 using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Persistence.EfCore.Interfaces;
 using Ukraine.Presentation.HealthChecks.Extenstion;
-using Ukraine.Services.Identity;
 using Ukraine.Services.Identity.Exceptions;
 using Ukraine.Services.Identity.Models;
 using Ukraine.Services.Identity.Persistence;
@@ -23,14 +22,19 @@ builder.Host.AddUkraineServicesValidationOnBuild();
 var connectionString = builder.Configuration.GetConnectionString("Postgres");
 
 if (string.IsNullOrEmpty(connectionString))
-	throw IdentityException.Exception("Configuration: Postgres Connection String is null or empty");
+	throw IdentityException.Exception("Postgres Connection String is null or empty");
 
-var identityOptions = builder.Configuration.GetRequiredSection<IdentityOptions>(IdentityOptions.SECTION_NAME);
+services.AddRazorPages();
+services.AddUkrainePostgresContext<UkraineIdentityContext, UkraineIdentityContext>(
+	connectionString,
+	configuration.GetSection("UkrainePostgres"));
 
-builder.Services.AddRazorPages();
-builder.Services.AddUkrainePostgresContext<UkraineIdentityContext, UkraineIdentityContext>(connectionString, configuration.GetSection("UkrainePostgres"));
+var identityOptions = builder.Configuration.GetRequiredSection(IdentityOptions.SECTION_NAME).Get<IdentityOptions>();
 
-builder.Services
+if (identityOptions == null)
+	throw IdentityException.Exception($"Configuration Section [{IdentityOptions.SECTION_NAME}] is empty");
+
+services
 	.AddIdentity<UkraineUser, IdentityRole>(options =>
 	{
 		options.SignIn.RequireConfirmedEmail = identityOptions.User.Email.RequireConfirmed;
@@ -79,9 +83,9 @@ var identitySever = builder.Services.AddIdentityServer(options =>
 if (isDevelopment)
 	 identitySever.AddDeveloperSigningCredential();
 
-builder.Services.AddAuthentication();
+services.AddAuthentication();
 
-builder.Services
+services
 	.AddUkraineHealthChecks()
 	.AddUkrainePostgresHealthCheck(connectionString);
 
@@ -112,12 +116,12 @@ app.UseUkraineDatabaseHealthChecks();
 
 try
 {
-	app.Logger.LogInformation("Starting Web Host [{ServiceName}]", Constants.SERVICE_NAME);
+	app.Logger.LogInformation("Starting Web Host [service-identity]");
 	app.Run();
 }
 catch (Exception ex)
 {
-	app.Logger.LogCritical(ex, "Host terminated unexpectedly [{ServiceName}]", Constants.SERVICE_NAME);
+	app.Logger.LogCritical(ex, "Host terminated unexpectedly [service-identity]");
 }
 finally
 {

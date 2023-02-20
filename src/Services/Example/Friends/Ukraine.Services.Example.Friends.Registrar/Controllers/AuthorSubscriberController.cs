@@ -19,7 +19,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistered")]
-	[Dapr.Topic(Constants.PUBSUB_NAME, nameof(AuthorRegisteredEvent))]
+	[Dapr.Topic("ukraine-pubsub", nameof(AuthorRegisteredEvent))]
 	public async Task HandleAsync(AuthorRegisteredEvent request)
 	{
 		_logger.LogDebug("Author Registered Event: {@Request}", request);

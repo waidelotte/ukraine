@@ -1,10 +1,15 @@
-﻿namespace Ukraine.Services.Identity.Options;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Ukraine.Services.Identity.Options;
 
 public class IdentityApiResourcesOptions
 {
-	public string? Name { get; set; }
+	[Required]
+	public required string Name { get; set; }
 
-	public string? DisplayName { get; set; }
+	[Required]
+	public required string DisplayName { get; set; }
 
-	public IEnumerable<string> Scopes { get; set; } = Array.Empty<string>();
+	[Required]
+	public required IEnumerable<string> Scopes { get; set; } = Array.Empty<string>();
 }

@@ -1,10 +1,13 @@
-﻿namespace Ukraine.Services.Identity.Options;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Ukraine.Services.Identity.Options;
 
 public class IdentityOptions
 {
 	public const string SECTION_NAME = "IdentityOptions";
 
-	public string? IssuerUri { get; set; }
+	[Required]
+	public required string IssuerUri { get; set; }
 
 	public TimeSpan CookieLifetime { get; set; } = TimeSpan.FromHours(2);
 
@@ -18,11 +21,15 @@ public class IdentityOptions
 
 	public bool RaiseSuccessEvents { get; set; }
 
-	public IdentityUserOptions User { get; set; } = new();
+	[Required]
+	public required IdentityUserOptions User { get; set; } = new();
 
-	public IEnumerable<IdentityApiResourcesOptions> ApiResources { get; set; } = Array.Empty<IdentityApiResourcesOptions>();
+	[Required]
+	public required IEnumerable<IdentityApiResourcesOptions> ApiResources { get; set; } = Array.Empty<IdentityApiResourcesOptions>();
 
-	public IEnumerable<IdentityApiScopesOptions> ApiScopes { get; set; } = Array.Empty<IdentityApiScopesOptions>();
+	[Required]
+	public required IEnumerable<IdentityApiScopesOptions> ApiScopes { get; set; } = Array.Empty<IdentityApiScopesOptions>();
 
-	public IEnumerable<IdentityClientOptions> Clients { get; set; } = Array.Empty<IdentityClientOptions>();
+	[Required]
+	public required IEnumerable<IdentityClientOptions> Clients { get; set; } = Array.Empty<IdentityClientOptions>();
 }
