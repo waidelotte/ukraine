@@ -18,7 +18,7 @@ public static class ServiceCollectionExtensions
 
 	public static IServiceCollection AddUkraineMediatorAndValidators(this IServiceCollection services, Assembly assembly)
 	{
-		services.AddMediatR(assembly);
+		services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
 		services.AddValidatorsFromAssembly(assembly);
 
 		return services;
