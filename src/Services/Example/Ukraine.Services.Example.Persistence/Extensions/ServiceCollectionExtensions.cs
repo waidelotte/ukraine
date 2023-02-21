@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Persistence.EfCore.Extensions;
-using Ukraine.Persistence.EfCore.Specifications.Extensions;
+using Ukraine.EfCore.Extensions;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Services.Example.Domain.Exceptions;
 
@@ -19,7 +18,7 @@ public static class ServiceCollectionExtensions
 			throw ExampleException.Exception("Postgres Connection String is null or empty");
 
 		services.AddUkrainePostgresContext<ExampleContext, ExampleContext>(connectionString, configuration.GetSection("UkrainePostgres"));
-		services.AddUkraineEfCoreSpecifications();
+		services.AddUkraineSpecificationRepositories();
 		services.AddUkraineUnitOfWork();
 		services.AddUkraineHealthChecks().AddUkrainePostgresHealthCheck(connectionString);
 

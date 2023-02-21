@@ -47,15 +47,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Domain", "src\Framework\Ukraine.Domain\Ukraine.Domain.csproj", "{4367280D-F79D-463F-B1D4-25EFF02FFF87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure", "src\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj", "{338ACDB0-F071-47CB-A210-47A2163F7872}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Core", "src\Framework\Ukraine.Core\Ukraine.Core.csproj", "{338ACDB0-F071-47CB-A210-47A2163F7872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.EventBus", "src\Framework\Ukraine.Infrastructure.EventBus\Ukraine.Infrastructure.EventBus.csproj", "{6C31F2CA-1DF7-4021-9942-3A0ECD7C4EF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.EventBus", "src\Framework\Ukraine.EventBus\Ukraine.EventBus.csproj", "{6C31F2CA-1DF7-4021-9942-3A0ECD7C4EF0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Telemetry", "src\Framework\Ukraine.Telemetry\Ukraine.Telemetry.csproj", "{135D0ADF-3696-42FA-BC1A-BFE5DEC5D03D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.EfCore", "src\Framework\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj", "{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.EfCore.Specifications", "src\Framework\Ukraine.Persistence.EfCore.Specifications\Ukraine.Persistence.EfCore.Specifications.csproj", "{1BBAE91B-216D-4E08-8404-31D3B04C3393}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.EfCore", "src\Framework\Ukraine.EfCore\Ukraine.EfCore.csproj", "{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.GraphQl", "src\Framework\Ukraine.GraphQl\Ukraine.GraphQl.csproj", "{627481DA-3582-4891-A356-D40B7E4514E0}"
 EndProject
@@ -94,7 +92,6 @@ Global
 		{6C31F2CA-1DF7-4021-9942-3A0ECD7C4EF0} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{135D0ADF-3696-42FA-BC1A-BFE5DEC5D03D} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
-		{1BBAE91B-216D-4E08-8404-31D3B04C3393} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{627481DA-3582-4891-A356-D40B7E4514E0} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{C436F75F-A0C4-4BE8-ABF6-7F93A4217633} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
 		{A7597556-A501-4813-826E-58082BC39B19} = {AD6F600B-86F3-46EC-A6AC-CDB6AEBD68EE}
@@ -148,10 +145,6 @@ Global
 		{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BBAE91B-216D-4E08-8404-31D3B04C3393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BBAE91B-216D-4E08-8404-31D3B04C3393}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BBAE91B-216D-4E08-8404-31D3B04C3393}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BBAE91B-216D-4E08-8404-31D3B04C3393}.Release|Any CPU.Build.0 = Release|Any CPU
 		{627481DA-3582-4891-A356-D40B7E4514E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{627481DA-3582-4891-A356-D40B7E4514E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{627481DA-3582-4891-A356-D40B7E4514E0}.Release|Any CPU.ActiveCfg = Release|Any CPU

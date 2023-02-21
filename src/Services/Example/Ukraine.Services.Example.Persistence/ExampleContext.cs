@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Persistence.EfCore.Contexts;
-using Ukraine.Persistence.EfCore.Extensions;
+using Ukraine.EfCore.Contexts;
+using Ukraine.EfCore.Extensions;
 using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Persistence;

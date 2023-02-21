@@ -1,12 +1,12 @@
 using HotChocolate;
 using MediatR;
+using Ukraine.Core.Extensions;
+using Ukraine.EfCore.Extensions;
+using Ukraine.EventBus.Extensions;
 using Ukraine.GraphQl.Extenstion;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Identity.Extenstion;
-using Ukraine.Infrastructure.EventBus.Extensions;
-using Ukraine.Infrastructure.Extensions;
 using Ukraine.Logging.Extenstion;
-using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Infrastructure.Extensions;

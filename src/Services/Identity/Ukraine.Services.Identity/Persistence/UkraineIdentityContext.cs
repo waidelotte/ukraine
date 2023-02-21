@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Persistence.EfCore.Interfaces;
+using Ukraine.EfCore.Interfaces;
 using Ukraine.Services.Identity.Models;
 
 namespace Ukraine.Services.Identity.Persistence;

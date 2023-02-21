@@ -1,5 +1,5 @@
-using Ukraine.Infrastructure.EventBus.Extensions;
-using Ukraine.Infrastructure.Extensions;
+using Ukraine.EventBus.Extensions;
+using Ukraine.Core.Extensions;
 using Ukraine.Logging.Extenstion;
 using Ukraine.HealthChecks.Extenstion;
 

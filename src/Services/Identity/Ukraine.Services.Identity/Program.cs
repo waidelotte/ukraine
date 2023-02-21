@@ -1,10 +1,10 @@
 ﻿using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Infrastructure.Extensions;
+using Ukraine.Core.Extensions;
 using Ukraine.Logging.Extenstion;
-using Ukraine.Persistence.EfCore.Extensions;
-using Ukraine.Persistence.EfCore.Interfaces;
+using Ukraine.EfCore.Extensions;
+using Ukraine.EfCore.Interfaces;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Services.Identity.Exceptions;
 using Ukraine.Services.Identity.Models;

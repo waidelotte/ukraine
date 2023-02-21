@@ -5,6 +5,6 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Framework\Ukraine.Logging\Ukraine.Logging.csproj" />
-      <ProjectReference Include="..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Framework\Ukraine.Core\Ukraine.Core.csproj" />
     </ItemGroup>
 </Project>
