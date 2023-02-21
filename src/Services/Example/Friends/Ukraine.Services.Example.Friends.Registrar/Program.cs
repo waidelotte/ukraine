@@ -23,6 +23,7 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 
 app.UseUkraineDaprEventBus();
+app.UseUkraineControllers();
 app.UseUkraineHealthChecks();
 
 try
