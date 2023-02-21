@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.EventBus.Extensions;
 using Ukraine.Core.Mediator.Extensions;
-using Ukraine.Telemetry.Extenstion;
+using Ukraine.EventBus.Extensions;
 using Ukraine.HealthChecks.Extenstion;
+using Ukraine.Telemetry.Extenstion;
 
 namespace Ukraine.Services.Example.Infrastructure.Extensions;
 
