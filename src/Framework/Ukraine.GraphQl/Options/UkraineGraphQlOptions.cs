@@ -33,6 +33,8 @@ public class UkraineGraphQlOptions
 
 	public bool EnableBatching { get; set; }
 
+	public bool EnableAuthorization { get; set; }
+
 	[Required]
 	public required TimeSpan ExecutionTimeout { get; set; } = TimeSpan.FromSeconds(30);
 

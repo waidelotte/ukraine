@@ -12,6 +12,8 @@ public class BookMutationTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Mutation);
 
+		descriptor.Authorize("ApiScope");
+
 		descriptor
 			.Field<BookResolver>(f => f.CreateBookAsync(default!, default!, default))
 			.Argument("input", a => a.Type<NonNullType<CreateBookInputType>>())

@@ -49,6 +49,9 @@ public static class ServiceCollectionExtensions
 				OperationType.Mutation);
 		});
 
+		if (options.EnableAuthorization)
+			builder.AddAuthorization();
+
 		if (options.EnableFiltering)
 			builder.AddFiltering();
 

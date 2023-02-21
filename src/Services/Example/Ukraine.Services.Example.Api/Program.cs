@@ -27,15 +27,15 @@ builder.Host.AddUkraineServicesValidationOnBuild();
 services.AddUkraineControllers();
 services.AddUkraineSwagger(configuration.GetSection("UkraineSwagger"));
 
+services
+	.AddUkraineAuthorization(configuration.GetSection("UkraineAuthorization"))
+	.AddUkraineJwtAuthentication(configuration.GetSection("UkraineJwtAuthentication"));
+
 services.AddUkraineGraphQl<ExampleContext>(configuration.GetSection("UkraineGraphQl"))
 	.AddType<AuthorQueryTypeExtension>()
 	.AddType<AuthorMutationTypeExtension>()
 	.AddType<BookMutationTypeExtension>()
 	.RegisterService<IMediator>(ServiceKind.Synchronized);
-
-services
-	.AddUkraineAuthorization(configuration.GetSection("UkraineAuthorization"))
-	.AddUkraineJwtAuthentication(configuration.GetSection("UkraineJwtAuthentication"));
 
 var app = builder.Build();
 

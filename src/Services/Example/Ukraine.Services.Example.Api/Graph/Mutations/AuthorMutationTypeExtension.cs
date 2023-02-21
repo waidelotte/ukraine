@@ -12,6 +12,8 @@ public class AuthorMutationTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Mutation);
 
+		descriptor.Authorize("ApiScope");
+
 		descriptor
 			.Field<AuthorResolver>(f => f.CreateAuthorAsync(default!, default!, default))
 			.Argument("input", a => a.Type<NonNullType<CreateAuthorInputType>>())
