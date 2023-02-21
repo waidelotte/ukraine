@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ukraine.Domain.Interfaces;
 using Ukraine.EventBus.Options;
 
@@ -28,7 +29,7 @@ public static class ServiceCollectionExtensions
 			client.UseJsonSerializationOptions(serializerOptions);
 		});
 
-		services.AddScoped<IEventBus, DaprEventBus>();
+		services.TryAddScoped<IEventBus, DaprEventBus>();
 
 		return services;
 	}

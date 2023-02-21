@@ -104,8 +104,8 @@ public static class ServiceCollectionExtensions
 			configureContext.Invoke(dbBuilder);
 		});
 
-		services.AddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
-		services.AddScoped<DbContext, TContext>();
+		services.TryAddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());
+		services.TryAddScoped<DbContext, TContext>();
 
 		return services;
 	}

@@ -2,6 +2,7 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ukraine.Core.Mediator.Behaviors;
 
 namespace Ukraine.Core.Mediator.Extensions;
@@ -10,7 +11,7 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddUkraineMediatorRequestValidation(this IServiceCollection services)
 	{
-		services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+		services.TryAddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
 		return services;
 	}
