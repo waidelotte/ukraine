@@ -1,9 +1,5 @@
 # Ukraine
 .NET Core microservices with Dapr and Tye.
-- TODO
-- Distributed Tracing with [Zipkin](https://zipkin.io/).
-- Distributed Logging with [Seq](https://datalust.co/seq).
-- Event bus. Publish/Subscribe messaging across microservices.
 
 ## Prerequisites
 
@@ -23,3 +19,7 @@
 - Blazor Server/Client
 - Script Migrations
 - GraphQL Token Validation
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
