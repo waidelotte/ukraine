@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Identity.Options;
@@ -63,8 +64,8 @@ public static class ServiceCollectionExtensions
 			throw new ArgumentNullException(nameof(configurationSection), $"Configuration Section [{configurationSection.Key}] is empty");
 
 		return serviceCollection
-			.AddAuthentication("Bearer")
-			.AddJwtBearer("Bearer", o =>
+			.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+			.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
 			{
 				o.Audience = options.Audience;
 				o.Authority = options.Authority;
