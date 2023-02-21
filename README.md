@@ -10,3 +10,4 @@
 - Secret Store
 - Blazor Server/Client
 - Script Migrations
+- GraphQL Token Validation
