@@ -14,9 +14,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Identity\Ukraine.Infrastructure.Identity.csproj" />
-      <ProjectReference Include="..\..\..\Framework\Ukraine.Presentation.GraphQl\Ukraine.Presentation.GraphQl.csproj" />
-      <ProjectReference Include="..\..\..\Framework\Ukraine.Presentation.Swagger\Ukraine.Presentation.Swagger.csproj" />
+      <ProjectReference Include="..\..\..\Framework\Ukraine.Identity\Ukraine.Identity.csproj" />
+      <ProjectReference Include="..\..\..\Framework\Ukraine.GraphQl\Ukraine.GraphQl.csproj" />
+      <ProjectReference Include="..\..\..\Framework\Ukraine.Swagger\Ukraine.Swagger.csproj" />
       <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
     </ItemGroup>
 

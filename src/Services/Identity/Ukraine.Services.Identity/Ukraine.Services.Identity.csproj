@@ -9,9 +9,9 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure.Logging\Ukraine.Infrastructure.Logging.csproj" />
+      <ProjectReference Include="..\..\..\Framework\Ukraine.Logging\Ukraine.Logging.csproj" />
       <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
       <ProjectReference Include="..\..\..\Framework\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj" />
-      <ProjectReference Include="..\..\..\Framework\Ukraine.Presentation.HealthChecks\Ukraine.Presentation.HealthChecks.csproj" />
+      <ProjectReference Include="..\..\..\Framework\Ukraine.HealthChecks\Ukraine.HealthChecks.csproj" />
     </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
     <ProjectReference Include="..\..\..\Framework\Ukraine.Infrastructure\Ukraine.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Persistence.EfCore.Specifications\Ukraine.Persistence.EfCore.Specifications.csproj" />
-    <ProjectReference Include="..\..\..\Framework\Ukraine.Presentation.HealthChecks\Ukraine.Presentation.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.HealthChecks\Ukraine.HealthChecks.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
   </ItemGroup>
 </Project>

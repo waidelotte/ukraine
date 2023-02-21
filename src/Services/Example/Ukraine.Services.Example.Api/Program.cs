@@ -1,18 +1,18 @@
 using HotChocolate;
 using MediatR;
+using Ukraine.GraphQl.Extenstion;
+using Ukraine.HealthChecks.Extenstion;
+using Ukraine.Identity.Extenstion;
 using Ukraine.Infrastructure.EventBus.Extensions;
 using Ukraine.Infrastructure.Extensions;
-using Ukraine.Infrastructure.Identity.Extenstion;
-using Ukraine.Infrastructure.Logging.Extenstion;
+using Ukraine.Logging.Extenstion;
 using Ukraine.Persistence.EfCore.Extensions;
-using Ukraine.Presentation.GraphQl.Extenstion;
-using Ukraine.Presentation.HealthChecks.Extenstion;
-using Ukraine.Presentation.Swagger.Extenstion;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Infrastructure.Extensions;
 using Ukraine.Services.Example.Persistence;
 using Ukraine.Services.Example.Persistence.Extensions;
+using Ukraine.Swagger.Extenstion;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;

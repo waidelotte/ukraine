@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Infrastructure.EventBus.Extensions;
 using Ukraine.Infrastructure.Mediator.Extensions;
-using Ukraine.Infrastructure.Telemetry.Extenstion;
-using Ukraine.Presentation.HealthChecks.Extenstion;
+using Ukraine.Telemetry.Extenstion;
+using Ukraine.HealthChecks.Extenstion;
 
 namespace Ukraine.Services.Example.Infrastructure.Extensions;
 

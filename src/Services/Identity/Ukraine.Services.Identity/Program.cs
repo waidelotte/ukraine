@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Infrastructure.Extensions;
-using Ukraine.Infrastructure.Logging.Extenstion;
+using Ukraine.Logging.Extenstion;
 using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Persistence.EfCore.Interfaces;
-using Ukraine.Presentation.HealthChecks.Extenstion;
+using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Services.Identity.Exceptions;
 using Ukraine.Services.Identity.Models;
 using Ukraine.Services.Identity.Persistence;

@@ -1,7 +1,7 @@
 using Ukraine.Infrastructure.EventBus.Extensions;
 using Ukraine.Infrastructure.Extensions;
-using Ukraine.Infrastructure.Logging.Extenstion;
-using Ukraine.Presentation.HealthChecks.Extenstion;
+using Ukraine.Logging.Extenstion;
+using Ukraine.HealthChecks.Extenstion;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;

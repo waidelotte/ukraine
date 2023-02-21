@@ -51,25 +51,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.EventBus", "src\Framework\Ukraine.Infrastructure.EventBus\Ukraine.Infrastructure.EventBus.csproj", "{6C31F2CA-1DF7-4021-9942-3A0ECD7C4EF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Telemetry", "src\Framework\Ukraine.Infrastructure.Telemetry\Ukraine.Infrastructure.Telemetry.csproj", "{135D0ADF-3696-42FA-BC1A-BFE5DEC5D03D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Telemetry", "src\Framework\Ukraine.Telemetry\Ukraine.Telemetry.csproj", "{135D0ADF-3696-42FA-BC1A-BFE5DEC5D03D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.EfCore", "src\Framework\Ukraine.Persistence.EfCore\Ukraine.Persistence.EfCore.csproj", "{9CBA71B4-842A-48B5-B5E7-4D0AB5ABAD30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Persistence.EfCore.Specifications", "src\Framework\Ukraine.Persistence.EfCore.Specifications\Ukraine.Persistence.EfCore.Specifications.csproj", "{1BBAE91B-216D-4E08-8404-31D3B04C3393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Presentation.GraphQl", "src\Framework\Ukraine.Presentation.GraphQl\Ukraine.Presentation.GraphQl.csproj", "{627481DA-3582-4891-A356-D40B7E4514E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.GraphQl", "src\Framework\Ukraine.GraphQl\Ukraine.GraphQl.csproj", "{627481DA-3582-4891-A356-D40B7E4514E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Presentation.HealthChecks", "src\Framework\Ukraine.Presentation.HealthChecks\Ukraine.Presentation.HealthChecks.csproj", "{C436F75F-A0C4-4BE8-ABF6-7F93A4217633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.HealthChecks", "src\Framework\Ukraine.HealthChecks\Ukraine.HealthChecks.csproj", "{C436F75F-A0C4-4BE8-ABF6-7F93A4217633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Presentation.Swagger", "src\Framework\Ukraine.Presentation.Swagger\Ukraine.Presentation.Swagger.csproj", "{A7597556-A501-4813-826E-58082BC39B19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Swagger", "src\Framework\Ukraine.Swagger\Ukraine.Swagger.csproj", "{A7597556-A501-4813-826E-58082BC39B19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{6BB857AE-11A7-4560-AE8A-18C93CF54D2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity", "src\Services\Identity\Ukraine.Services.Identity\Ukraine.Services.Identity.csproj", "{AA59B7E4-E649-40E9-8F9F-5955C5595D06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Identity", "src\Framework\Ukraine.Infrastructure.Identity\Ukraine.Infrastructure.Identity.csproj", "{1EF73394-435C-46F6-B829-5A97D3496E7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Identity", "src\Framework\Ukraine.Identity\Ukraine.Identity.csproj", "{1EF73394-435C-46F6-B829-5A97D3496E7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Infrastructure.Logging", "src\Framework\Ukraine.Infrastructure.Logging\Ukraine.Infrastructure.Logging.csproj", "{54AEB630-72F7-4BCD-AE15-23A776DF0937}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Logging", "src\Framework\Ukraine.Logging\Ukraine.Logging.csproj", "{54AEB630-72F7-4BCD-AE15-23A776DF0937}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

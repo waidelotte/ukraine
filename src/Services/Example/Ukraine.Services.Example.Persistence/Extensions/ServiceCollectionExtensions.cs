@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Persistence.EfCore.Extensions;
 using Ukraine.Persistence.EfCore.Specifications.Extensions;
-using Ukraine.Presentation.HealthChecks.Extenstion;
+using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Services.Example.Domain.Exceptions;
 
 namespace Ukraine.Services.Example.Persistence.Extensions;
