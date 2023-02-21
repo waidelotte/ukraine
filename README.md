@@ -1,9 +1,21 @@
 # Ukraine
+.NET Core microservices with Dapr and Tye.
+- TODO
+- Distributed Tracing with Zipkin.
+- Distributed logging with Seq.
+- Event bus. Publish/Subscribe messaging across microservices.
 
-# Coding Guidelines
+## Prerequisites
+
+1. NET 7.0
+2. Docker
+3. Dapr
+4. Tye
+
+## Coding Guidelines
 - Projects use StyleCop to produce style warnings. Please fix all warnings in any code you submit.
 
-# TODO
+### TODO
 - Custom Identity Server View
 - API Gateway
 - Mail Sender
@@ -11,3 +23,8 @@
 - Blazor Server/Client
 - Script Migrations
 - GraphQL Token Validation
+
+### Resources
+
+- [Project Tye](https://github.com/dotnet/tye)
+- [Dapr](https://github.com/dapr/dapr)
