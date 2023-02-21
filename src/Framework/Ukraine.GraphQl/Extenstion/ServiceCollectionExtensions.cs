@@ -62,7 +62,11 @@ public static class ServiceCollectionExtensions
 			builder.AddMutationConventions();
 
 		builder.AllowIntrospection(options.EnableIntrospection);
-		builder.ModifyRequestOptions(o => o.IncludeExceptionDetails = options.EnableExceptionDetails);
+		builder.ModifyRequestOptions(o =>
+		{
+			o.IncludeExceptionDetails = options.EnableExceptionDetails;
+			o.ExecutionTimeout = options.ExecutionTimeout;
+		});
 
 		builder.SetPagingOptions(new PagingOptions
 		{

@@ -34,5 +34,8 @@ public class UkraineGraphQlOptions
 	public bool EnableBatching { get; set; }
 
 	[Required]
+	public required TimeSpan ExecutionTimeout { get; set; } = TimeSpan.FromSeconds(30);
+
+	[Required]
 	public required UkraineGraphQlPagingOptions Paging { get; set; } = new();
 }
