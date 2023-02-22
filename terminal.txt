@@ -1,3 +1,3 @@
-﻿tye run .\tye.example.yaml
-tye run .\tye.example.yaml --dashboard
-tye run .\tye.example.yaml --dashboard --debug *
+﻿tye run .\tye.yaml --tags example
+tye run .\tye.yaml --tags example --watch
+tye run .\tye.yaml --tags example --watch --dashboard

@@ -29,6 +29,8 @@ services:
     bindings:
       - port: 5432
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
+    tags:
+      - example
 
   - name: component-rabbitmq
     image: rabbitmq:3-management
@@ -40,6 +42,8 @@ services:
       - name: amqp
         protocol: amqp
         port: 5672
+    tags:
+      - example
 
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
@@ -48,6 +52,8 @@ services:
         value: Development
     bindings:
       - port: 7001
+    tags:
+      - example
 
   - name: service-identity
     project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
@@ -56,6 +62,8 @@ services:
         value: Development
     bindings:
       - port: 7002
+    tags:
+      - example
 
   - name: service-example-api
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
@@ -64,6 +72,8 @@ services:
         value: Development
     bindings:
       - port: 7003
+    tags:
+      - example
 
   - name: service-example-friend-registrar
     project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Ukraine.Services.Example.Friends.Registrar.csproj
@@ -72,3 +82,5 @@ services:
         value: Development
     bindings:
       - port: 7004
+    tags:
+      - example
