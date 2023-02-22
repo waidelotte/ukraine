@@ -9,6 +9,8 @@ namespace Ukraine.Services.Example.Friends.Registrar.Controllers;
 [Route("[controller]")]
 public class AuthorSubscriberController : ControllerBase
 {
+	private const string PUBSUB_NAME = "ukraine-pubsub";
+
 	private readonly ILogger<AuthorSubscriberController> _logger;
 	private readonly IEventBus _eventBus;
 
@@ -19,7 +21,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistered")]
-	[Dapr.Topic("ukraine-pubsub", nameof(AuthorRegisteredEvent))]
+	[Dapr.Topic(PUBSUB_NAME, nameof(AuthorRegisteredEvent))]
 	public async Task HandleAsync(AuthorRegisteredEvent request)
 	{
 		_logger.LogDebug("Author Registered Event: {@Request}", request);

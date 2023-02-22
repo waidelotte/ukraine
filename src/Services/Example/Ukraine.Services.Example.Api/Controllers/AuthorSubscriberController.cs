@@ -11,6 +11,8 @@ namespace Ukraine.Services.Example.Api.Controllers;
 [Route("[controller]")]
 public class AuthorSubscriberController : ControllerBase
 {
+	private const string PUBSUB_NAME = "ukraine-pubsub";
+
 	private readonly ILogger<AuthorSubscriberController> _logger;
 	private readonly IMediator _mediator;
 
@@ -21,7 +23,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistrationApproved")]
-	[Dapr.Topic("ukraine-pubsub", nameof(AuthorRegistrationApprovedEvent))]
+	[Dapr.Topic(PUBSUB_NAME, nameof(AuthorRegistrationApprovedEvent))]
 	public async Task HandleAsync(AuthorRegistrationApprovedEvent request)
 	{
 		_logger.LogDebug("AuthorRegistrationApprovedEvent: {@Request}", request);
@@ -29,7 +31,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistrationDeclined")]
-	[Dapr.Topic("ukraine-pubsub", nameof(AuthorRegistrationDeclinedEvent))]
+	[Dapr.Topic(PUBSUB_NAME, nameof(AuthorRegistrationDeclinedEvent))]
 	public async Task HandleAsync(AuthorRegistrationDeclinedEvent request)
 	{
 		_logger.LogDebug("AuthorRegistrationDeclinedEvent: {@Request}", request);
