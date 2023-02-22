@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ukraine.Domain.Interfaces;
-using Ukraine.EventBus.Options;
+using Ukraine.EventBus.Dapr.Options;
 
-namespace Ukraine.EventBus.Extensions;
+namespace Ukraine.EventBus.Dapr.Extensions;
 
 public static class ServiceCollectionExtensions
 {

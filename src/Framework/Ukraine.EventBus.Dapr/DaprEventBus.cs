@@ -2,9 +2,9 @@ using Dapr.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Ukraine.Domain.Interfaces;
-using Ukraine.EventBus.Options;
+using Ukraine.EventBus.Dapr.Options;
 
-namespace Ukraine.EventBus;
+namespace Ukraine.EventBus.Dapr;
 
 internal sealed class DaprEventBus : IEventBus
 {

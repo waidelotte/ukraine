@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 
-namespace Ukraine.EventBus.Extensions;
+namespace Ukraine.EventBus.Dapr.Extensions;
 
 public static class WebApplicationExtensions
 {

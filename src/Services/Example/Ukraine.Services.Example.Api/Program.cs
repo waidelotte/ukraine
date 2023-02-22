@@ -2,7 +2,7 @@ using HotChocolate;
 using MediatR;
 using Ukraine.Core.Extensions;
 using Ukraine.EfCore.Extensions;
-using Ukraine.EventBus.Extensions;
+using Ukraine.EventBus.Dapr.Extensions;
 using Ukraine.GraphQl.Extenstion;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Identity.Extenstion;
