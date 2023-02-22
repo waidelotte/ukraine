@@ -18,6 +18,7 @@
 - Blazor Server/Client
 - Script Migrations
 - GraphQL Token Validation
+- ReadOnlyDictionary.Empty (after .NET 8)
 
 ## License
 
