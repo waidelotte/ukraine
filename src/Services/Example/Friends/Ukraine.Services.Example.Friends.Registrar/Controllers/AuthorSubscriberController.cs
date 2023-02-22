@@ -1,3 +1,4 @@
+using Dapr;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Domain.Interfaces;
 using Ukraine.Services.Example.Friends.Registrar.Events;
@@ -21,7 +22,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistered")]
-	[Dapr.Topic(PUBSUB_NAME, nameof(AuthorRegisteredEvent))]
+	[Topic(PUBSUB_NAME, nameof(AuthorRegisteredEvent))]
 	public async Task HandleAsync(AuthorRegisteredEvent request)
 	{
 		_logger.LogDebug("Author Registered Event: {@Request}", request);

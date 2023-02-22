@@ -1,3 +1,4 @@
+using Dapr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Services.Example.Domain.Enums;
@@ -23,7 +24,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistrationApproved")]
-	[Dapr.Topic(PUBSUB_NAME, nameof(AuthorRegistrationApprovedEvent))]
+	[Topic(PUBSUB_NAME, nameof(AuthorRegistrationApprovedEvent))]
 	public async Task HandleAsync(AuthorRegistrationApprovedEvent request)
 	{
 		_logger.LogDebug("AuthorRegistrationApprovedEvent: {@Request}", request);
@@ -31,7 +32,7 @@ public class AuthorSubscriberController : ControllerBase
 	}
 
 	[HttpPost("AuthorRegistrationDeclined")]
-	[Dapr.Topic(PUBSUB_NAME, nameof(AuthorRegistrationDeclinedEvent))]
+	[Topic(PUBSUB_NAME, nameof(AuthorRegistrationDeclinedEvent))]
 	public async Task HandleAsync(AuthorRegistrationDeclinedEvent request)
 	{
 		_logger.LogDebug("AuthorRegistrationDeclinedEvent: {@Request}", request);

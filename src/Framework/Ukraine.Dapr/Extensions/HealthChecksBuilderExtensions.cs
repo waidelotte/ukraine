@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Ukraine.EventBus.Dapr.Extensions;
+namespace Ukraine.Dapr.Extensions;
 
 public static class HealthChecksBuilderExtensions
 {

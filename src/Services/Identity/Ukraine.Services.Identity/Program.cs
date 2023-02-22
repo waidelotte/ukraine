@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Ukraine.Core.Extensions;
-using Ukraine.Logging.Extenstion;
+using Ukraine.Dapr.Extensions;
 using Ukraine.EfCore.Extensions;
 using Ukraine.EfCore.Interfaces;
 using Ukraine.HealthChecks.Extenstion;
+using Ukraine.Logging.Extenstion;
 using Ukraine.Services.Identity.Exceptions;
 using Ukraine.Services.Identity.Models;
 using Ukraine.Services.Identity.Persistence;
@@ -15,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
 var isDevelopment = builder.Environment.IsDevelopment();
+
+configuration.AddUkraineDaprSecretStore("ukraine-secretstore");
 
 builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
 builder.Host.AddUkraineServicesValidationOnBuild();

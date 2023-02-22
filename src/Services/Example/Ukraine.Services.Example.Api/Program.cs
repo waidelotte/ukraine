@@ -1,8 +1,8 @@
 using HotChocolate;
 using MediatR;
 using Ukraine.Core.Extensions;
+using Ukraine.Dapr.Extensions;
 using Ukraine.EfCore.Extensions;
-using Ukraine.EventBus.Dapr.Extensions;
 using Ukraine.GraphQl.Extenstion;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Identity.Extenstion;
@@ -17,6 +17,8 @@ using Ukraine.Swagger.Extenstion;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
+
+configuration.AddUkraineDaprSecretStore("ukraine-secretstore");
 
 services.AddInfrastructure(configuration);
 services.AddPersistence(configuration);

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\Ukraine.EventBus.Dapr\Ukraine.EventBus.Dapr.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Dapr\Ukraine.Dapr.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Logging\Ukraine.Logging.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Telemetry\Ukraine.Telemetry.csproj" />
     <ProjectReference Include="..\..\..\Framework\Ukraine.Core\Ukraine.Core.csproj" />

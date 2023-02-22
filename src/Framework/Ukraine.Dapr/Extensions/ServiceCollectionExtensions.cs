@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Ukraine.Dapr.Options;
 using Ukraine.Domain.Interfaces;
-using Ukraine.EventBus.Dapr.Options;
 
-namespace Ukraine.EventBus.Dapr.Extensions;
+namespace Ukraine.Dapr.Extensions;
 
 public static class ServiceCollectionExtensions
 {

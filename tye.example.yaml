@@ -8,13 +8,9 @@ extensions:
     components-path: ./dapr/components
     app-max-concurrency: 1
     services:
-      service-test-first-api:
-        enabled: true
       gateway-http:
         enabled: false
       web-status:
-        enabled: false
-      service-identity:
         enabled: false
   - name: seq
     logPath: ./.logs

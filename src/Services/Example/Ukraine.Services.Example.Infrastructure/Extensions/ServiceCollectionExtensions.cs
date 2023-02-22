@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ukraine.Core.Mediator.Extensions;
-using Ukraine.EventBus.Dapr.Extensions;
+using Ukraine.Dapr.Extensions;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Telemetry.Extenstion;
 

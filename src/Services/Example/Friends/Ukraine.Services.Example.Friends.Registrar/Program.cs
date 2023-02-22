@@ -1,5 +1,5 @@
 using Ukraine.Core.Extensions;
-using Ukraine.EventBus.Dapr.Extensions;
+using Ukraine.Dapr.Extensions;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Logging.Extenstion;
 

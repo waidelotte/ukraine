@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Ukraine.EventBus.Dapr.Options;
+namespace Ukraine.Dapr.Options;
 
 public class UkraineDaprOptions
 {
