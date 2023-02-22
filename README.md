@@ -15,7 +15,6 @@
 - Custom Identity Server View
 - API Gateway
 - Mail Sender
-- Secret Store
 - Blazor Server/Client
 - Script Migrations
 - GraphQL Token Validation
