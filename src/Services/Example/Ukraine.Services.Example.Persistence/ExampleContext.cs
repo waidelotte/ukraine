@@ -18,7 +18,7 @@ public class ExampleContext : UkraineDatabaseContextBase
 	{
 		base.OnConfiguring(optionsBuilder);
 
-		optionsBuilder.AddAudit();
+		optionsBuilder.AddUkraineAudit();
 	}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
