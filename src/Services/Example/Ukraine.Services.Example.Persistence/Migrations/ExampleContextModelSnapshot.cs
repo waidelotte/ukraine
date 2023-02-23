@@ -17,8 +17,8 @@ namespace Ukraine.Services.Example.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("example_schema")
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasDefaultSchema("ukraine_example")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
@@ -59,7 +59,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_authors");
 
-                    b.ToTable("authors", "example_schema");
+                    b.ToTable("authors", "ukraine_example");
                 });
 
             modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.Book", b =>
@@ -96,7 +96,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     b.HasIndex("AuthorId")
                         .HasDatabaseName("ix_books_author_id");
 
-                    b.ToTable("books", "example_schema");
+                    b.ToTable("books", "ukraine_example");
                 });
 
             modelBuilder.Entity("Ukraine.Services.Example.Domain.Models.Book", b =>

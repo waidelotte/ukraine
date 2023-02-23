@@ -8,7 +8,7 @@ using Ukraine.Services.Identity.Persistence;
 
 #nullable disable
 
-namespace Ukraine.Services.Identity.Persistence.Migrations
+namespace Ukraine.Services.Identity.Persistence.Migrations.Identity
 {
     [DbContext(typeof(UkraineIdentityContext))]
     partial class UkraineIdentityContextModelSnapshot : ModelSnapshot
@@ -187,7 +187,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", "ukraine_identity");
                 });
 
-            modelBuilder.Entity("Ukraine.Identity.Models.UkraineUser", b =>
+            modelBuilder.Entity("Ukraine.Services.Identity.Models.UkraineUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
@@ -279,7 +279,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Ukraine.Identity.Models.UkraineUser", null)
+                    b.HasOne("Ukraine.Services.Identity.Models.UkraineUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -289,7 +289,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Ukraine.Identity.Models.UkraineUser", null)
+                    b.HasOne("Ukraine.Services.Identity.Models.UkraineUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -306,7 +306,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_asp_net_user_roles_asp_net_roles_role_id");
 
-                    b.HasOne("Ukraine.Identity.Models.UkraineUser", null)
+                    b.HasOne("Ukraine.Services.Identity.Models.UkraineUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -316,7 +316,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Ukraine.Identity.Models.UkraineUser", null)
+                    b.HasOne("Ukraine.Services.Identity.Models.UkraineUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

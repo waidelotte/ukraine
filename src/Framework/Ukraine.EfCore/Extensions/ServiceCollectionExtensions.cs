@@ -17,12 +17,12 @@ public static class ServiceCollectionExtensions
 		IConfigurationSection configurationSection)
 		where TContext : DbContext, IDatabaseFacadeResolver
 	{
-		services.AddOptions<UkrainePostgresOptions>()
+		services.AddOptions<UkrainePostgresContextOptions>()
 			.Bind(configurationSection)
 			.ValidateDataAnnotations()
 			.ValidateOnStart();
 
-		var options = configurationSection.Get<UkrainePostgresOptions>(options =>
+		var options = configurationSection.Get<UkrainePostgresContextOptions>(options =>
 		{
 			options.ErrorOnUnknownConfiguration = true;
 		});
@@ -34,12 +34,8 @@ public static class ServiceCollectionExtensions
 		{
 			dbBuilder.EnableDetailedErrors(options.EnableDetailedErrors);
 			dbBuilder.EnableSensitiveDataLogging(options.EnableSensitiveDataLogging);
-			dbBuilder.UseSnakeCaseNamingConvention();
-
-			dbBuilder.UseUkrainePostgres<TMigrationAssembly>(connectionString, o =>
-			{
-				o.SetOptions(options);
-			});
+			dbBuilder.UseUkrainePostgres<TMigrationAssembly>(connectionString, options.MigrationsSchema);
+			dbBuilder.UseUkraineNamingConvention();
 		});
 
 		services.TryAddScoped<IDatabaseFacadeResolver>(provider => provider.GetRequiredService<TContext>());

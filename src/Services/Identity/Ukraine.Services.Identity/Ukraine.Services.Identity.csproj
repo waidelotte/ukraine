@@ -2,7 +2,12 @@
     <ItemGroup>
         <PackageReference Include="Duende.IdentityServer" Version="6.2.3" />
         <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.2.3" />
+        <PackageReference Include="Duende.IdentityServer.EntityFramework" Version="6.2.3" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -14,5 +19,8 @@
       <ProjectReference Include="..\..\..\Framework\Ukraine.Core\Ukraine.Core.csproj" />
       <ProjectReference Include="..\..\..\Framework\Ukraine.EfCore\Ukraine.EfCore.csproj" />
       <ProjectReference Include="..\..\..\Framework\Ukraine.HealthChecks\Ukraine.HealthChecks.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Persistence\Migrations" />
     </ItemGroup>
 </Project>

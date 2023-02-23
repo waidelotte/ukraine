@@ -34,6 +34,7 @@ services
 	.AddUkraineJwtAuthentication(configuration.GetSection("UkraineJwtAuthentication"));
 
 services.AddUkraineGraphQl<ExampleContext>(configuration.GetSection("UkraineGraphQl"))
+	.AddType<UserQueryTypeExtension>()
 	.AddType<AuthorQueryTypeExtension>()
 	.AddType<AuthorMutationTypeExtension>()
 	.AddType<BookMutationTypeExtension>()
@@ -41,7 +42,7 @@ services.AddUkraineGraphQl<ExampleContext>(configuration.GetSection("UkraineGrap
 
 var app = builder.Build();
 
-await app.Services.MigrateDatabaseAsync();
+await app.Services.MigrateDatabaseAsync<ExampleContext>();
 
 if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();

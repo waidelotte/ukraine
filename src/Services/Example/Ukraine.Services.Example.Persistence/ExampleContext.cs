@@ -25,8 +25,8 @@ public class ExampleContext : UkraineDatabaseContextBase
 	{
 		base.OnModelCreating(modelBuilder);
 
-		modelBuilder.HasDefaultSchema(Constants.SCHEMA_NAME);
-		modelBuilder.HasPostgresUuidGenerator();
+		modelBuilder.HasDefaultSchema("ukraine_example");
+		modelBuilder.HasUkrainePostgresUuidGenerator();
 		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 	}
 }

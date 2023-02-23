@@ -1,10 +1,8 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Ukraine.Core.Extensions;
 using Ukraine.Dapr.Extensions;
 using Ukraine.EfCore.Extensions;
-using Ukraine.EfCore.Interfaces;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Logging.Extenstion;
 using Ukraine.Services.Identity.Exceptions;
@@ -62,28 +60,25 @@ var identitySever = builder.Services
 		options.Events.RaiseFailureEvents = identityOptions.RaiseFailureEvents;
 		options.Events.RaiseSuccessEvents = identityOptions.RaiseSuccessEvents;
 	})
-	.AddInMemoryIdentityResources(new IdentityResource[]
+	.AddAspNetIdentity<UkraineUser>()
+	.AddConfigurationStore(configurationStoreOptions =>
 	{
-		new IdentityResources.OpenId(),
-		new IdentityResources.Profile()
-	})
-	.AddInMemoryApiResources(identityOptions.ApiResources
-		.Select(o => new ApiResource(o.Name, o.DisplayName)
+		configurationStoreOptions.DefaultSchema = identityOptions.ConfigurationSchema;
+		configurationStoreOptions.ConfigureDbContext = b =>
 		{
-			Scopes = new List<string>(o.Scopes)
-		}))
-	.AddInMemoryApiScopes(identityOptions.ApiScopes.Select(o => new ApiScope(o.Name, o.DisplayName)))
-	.AddInMemoryClients(identityOptions.Clients.Select(o => new Client
+			b.UseUkraineNamingConvention();
+			b.UseUkrainePostgres<Program>(connectionString, identityOptions.ConfigurationSchema);
+		};
+	})
+	.AddOperationalStore(operationalStoreOptions =>
 	{
-		ClientId = o.ClientId,
-		ClientName = o.ClientName,
-		AllowedGrantTypes = o.AllowedGrantTypes,
-		AllowedScopes = o.AllowedScopes,
-		AllowAccessTokensViaBrowser = o.AllowAccessTokensViaBrowser,
-		RedirectUris = o.RedirectUris,
-		PostLogoutRedirectUris = o.PostLogoutRedirectUris
-	}))
-	.AddAspNetIdentity<UkraineUser>();
+		operationalStoreOptions.DefaultSchema = identityOptions.OperationalSchema;
+		operationalStoreOptions.ConfigureDbContext = b =>
+		{
+			b.UseUkraineNamingConvention();
+			b.UseUkrainePostgres<Program>(connectionString, identityOptions.OperationalSchema);
+		};
+	});
 
 if (isDevelopment)
 	 identitySever.AddDeveloperSigningCredential();
@@ -98,11 +93,19 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-	var context = scope.ServiceProvider.GetRequiredService<IDatabaseFacadeResolver>();
-	await context.Database.MigrateAsync();
+	await scope.MigrateDatabaseAsync<UkraineIdentityContext>();
+	await scope.MigrateDatabaseAsync<ConfigurationDbContext>();
+	await scope.MigrateDatabaseAsync<PersistedGrantDbContext>();
 
 	if (isDevelopment)
-		await Seed.SeedDevAsync(scope);
+	{
+		await scope.SeedAdminRoleAsync();
+		await scope.SeedDevUserAsync();
+		await scope.SeedApiScopesAsync();
+		await scope.SeedApiResourcesAsync();
+		await scope.SeedIdentityResourcesAsync();
+		await scope.SeedClientsAsync();
+	}
 }
 
 if (isDevelopment)

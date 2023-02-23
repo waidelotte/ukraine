@@ -70,6 +70,10 @@ public static class ServiceCollectionExtensions
 				o.Audience = options.Audience;
 				o.Authority = options.Authority;
 				o.RequireHttpsMetadata = options.RequireHttps;
+
+				o.TokenValidationParameters.ValidateAudience = true;
+				o.TokenValidationParameters.ValidateIssuer = true;
+				o.TokenValidationParameters.ValidateIssuerSigningKey = true;
 			});
 	}
 }

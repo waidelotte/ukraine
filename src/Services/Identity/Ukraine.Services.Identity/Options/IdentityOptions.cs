@@ -21,15 +21,10 @@ public class IdentityOptions
 
 	public bool RaiseSuccessEvents { get; set; }
 
+	public string? ConfigurationSchema { get; set; }
+
+	public string? OperationalSchema { get; set; }
+
 	[Required]
 	public required IdentityUserOptions User { get; set; } = new();
-
-	[Required]
-	public required IEnumerable<IdentityApiResourcesOptions> ApiResources { get; set; } = Array.Empty<IdentityApiResourcesOptions>();
-
-	[Required]
-	public required IEnumerable<IdentityApiScopesOptions> ApiScopes { get; set; } = Array.Empty<IdentityApiScopesOptions>();
-
-	[Required]
-	public required IEnumerable<IdentityClientOptions> Clients { get; set; } = Array.Empty<IdentityClientOptions>();
 }

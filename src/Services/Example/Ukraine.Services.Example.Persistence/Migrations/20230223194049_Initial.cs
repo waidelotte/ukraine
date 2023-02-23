@@ -12,14 +12,14 @@ namespace Ukraine.Services.Example.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "example_schema");
+                name: "ukraine_example");
 
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
 
             migrationBuilder.CreateTable(
                 name: "authors",
-                schema: "example_schema",
+                schema: "ukraine_example",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -37,7 +37,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "books",
-                schema: "example_schema",
+                schema: "ukraine_example",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -53,7 +53,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     table.ForeignKey(
                         name: "fk_books_authors_author_id",
                         column: x => x.authorid,
-                        principalSchema: "example_schema",
+                        principalSchema: "ukraine_example",
                         principalTable: "authors",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -61,7 +61,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_books_author_id",
-                schema: "example_schema",
+                schema: "ukraine_example",
                 table: "books",
                 column: "author_id");
         }
@@ -71,11 +71,11 @@ namespace Ukraine.Services.Example.Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "books",
-                schema: "example_schema");
+                schema: "ukraine_example");
 
             migrationBuilder.DropTable(
                 name: "authors",
-                schema: "example_schema");
+                schema: "ukraine_example");
         }
     }
 }

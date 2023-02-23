@@ -1,15 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.EfCore.Interfaces;
 
 namespace Ukraine.EfCore.Extensions;
 
 public static class ServiceProviderExtensions
 {
-	public static async Task MigrateDatabaseAsync(this IServiceProvider serviceProvider)
+	public static async Task MigrateDatabaseAsync<TContext>(this IServiceProvider serviceProvider)
+		where TContext : DbContext
 	{
 		using var scope = serviceProvider.CreateScope();
-		var context = scope.ServiceProvider.GetRequiredService<IDatabaseFacadeResolver>();
+		await MigrateDatabaseAsync<TContext>(scope);
+	}
+
+	public static async Task MigrateDatabaseAsync<TContext>(this IServiceScope scope)
+		where TContext : DbContext
+	{
+		var context = scope.ServiceProvider.GetRequiredService<TContext>();
 		await context.Database.MigrateAsync();
 	}
 }

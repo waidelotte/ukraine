@@ -31,6 +31,7 @@ services:
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
     tags:
       - example
+      - identity
 
   - name: component-rabbitmq
     image: rabbitmq:3-management
@@ -64,6 +65,7 @@ services:
       - port: 7002
     tags:
       - example
+      - identity
 
   - name: service-example-api
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
