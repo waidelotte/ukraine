@@ -12,7 +12,7 @@ public class BookMutationTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Mutation);
 
-		descriptor.Authorize("ApiGraphQlScope");
+		descriptor.Authorize(Constants.Policy.GRAPHQL_API);
 
 		descriptor
 			.Field<BookResolver>(f => f.CreateBookAsync(default!, default!, default))

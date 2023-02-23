@@ -11,7 +11,7 @@ builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLoggin
 builder.Host.AddUkraineServicesValidationOnBuild();
 
 services.AddUkraineDaprEventBus(configuration.GetSection("UkraineEventBus"));
-services.AddUkraineControllers();
+services.AddControllers();
 services
 	.AddUkraineHealthChecks()
 	.AddUkraineDaprHealthCheck()

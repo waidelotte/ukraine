@@ -9,7 +9,7 @@ public class UserQueryTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Query);
 
-		descriptor.Authorize("ApiGraphQlScope");
+		descriptor.Authorize();
 
 		descriptor
 			.Field<UserResolver>(f => f.GetMyIdentifier(default!))

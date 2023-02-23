@@ -7,9 +7,11 @@ using Ukraine.GraphQl.Extenstion;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Identity.Extenstion;
 using Ukraine.Logging.Extenstion;
+using Ukraine.Services.Example.Api;
 using Ukraine.Services.Example.Api.Graph.Mutations;
 using Ukraine.Services.Example.Api.Graph.Queries;
 using Ukraine.Services.Example.Infrastructure.Extensions;
+using Ukraine.Services.Example.Infrastructure.Options;
 using Ukraine.Services.Example.Persistence;
 using Ukraine.Services.Example.Persistence.Extensions;
 using Ukraine.Swagger.Extenstion;
@@ -17,6 +19,7 @@ using Ukraine.Swagger.Extenstion;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
+var isDevelopment = builder.Environment.IsDevelopment();
 
 configuration.AddUkraineDaprSecretStore("ukraine-secretstore");
 
@@ -26,12 +29,28 @@ services.AddPersistence(configuration);
 builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
 builder.Host.AddUkraineServicesValidationOnBuild();
 
-services.AddUkraineControllers();
+services.AddControllers();
 services.AddUkraineSwagger(configuration.GetSection("UkraineSwagger"));
 
-services
-	.AddUkraineAuthorization(configuration.GetSection("UkraineAuthorization"))
-	.AddUkraineJwtAuthentication(configuration.GetSection("UkraineJwtAuthentication"));
+services.AddAuthorization(o =>
+{
+	o.AddScopePolicy(Constants.Policy.REST_API, new[] { Constants.Scope.REST_SCOPE });
+	o.AddScopePolicy(Constants.Policy.GRAPHQL_API, new[] { Constants.Scope.GRAPHQL_SCOPE });
+});
+
+var authenticationOptions = services
+	.BindAndGetOptions<AuthenticationOptions>(configuration.GetSection(Constants.ConfigurationSection.AUTHENTICATION));
+
+services.AddJwtBearerAuthentication(o =>
+{
+	o.Audience = Constants.SERVICE_ID;
+	o.Authority = authenticationOptions.Authority;
+	o.RequireHttpsMetadata = !isDevelopment;
+
+	o.TokenValidationParameters.ValidateAudience = true;
+	o.TokenValidationParameters.ValidateIssuer = true;
+	o.TokenValidationParameters.ValidateIssuerSigningKey = true;
+});
 
 services.AddUkraineGraphQl<ExampleContext>(configuration.GetSection("UkraineGraphQl"))
 	.AddType<UserQueryTypeExtension>()
@@ -48,8 +67,8 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 
 app.UseUkraineSwagger();
-app.UseUkraineAuthentication();
-app.UseUkraineAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseUkraineDaprEventBus();
 app.UseUkraineGraphQl();
 app.UseUkraineControllers();

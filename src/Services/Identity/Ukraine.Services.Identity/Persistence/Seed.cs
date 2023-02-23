@@ -61,7 +61,7 @@ public static class Seed
 				DisplayName = "Example API",
 				Scopes = new List<string>
 				{
-					"API_SWAGGER_EXAMPLE_SCOPE",
+					"API_REST_EXAMPLE_SCOPE",
 					"API_GRAPHQL_EXAMPLE_SCOPE"
 				}
 			}.ToEntity());
@@ -79,7 +79,7 @@ public static class Seed
 			await configurationDbContext.ApiScopes.AddRangeAsync(
 				new ApiScope
 				{
-					Name = "API_SWAGGER_EXAMPLE_SCOPE",
+					Name = "API_REST_EXAMPLE_SCOPE",
 					DisplayName = "Access to Example API from Swagger"
 				}.ToEntity(),
 				new ApiScope
@@ -120,7 +120,8 @@ public static class Seed
 					AllowAccessTokensViaBrowser = true,
 					AllowedScopes = new List<string>
 					{
-						"API_SWAGGER_EXAMPLE_SCOPE"
+						"openid",
+						"API_REST_EXAMPLE_SCOPE"
 					},
 					PostLogoutRedirectUris = new List<string>
 					{
@@ -134,8 +135,8 @@ public static class Seed
 				new Client
 				{
 					ClientId = "service-example-api-banana",
-					ClientSecrets = new List<Secret> { new("localhostSecret".Sha512()) },
 					ClientName = "Example API Banana",
+					ClientSecrets = new List<Secret> { new("localhostSecret".Sha512()) },
 					AllowedGrantTypes = GrantTypes.Code,
 					AllowedScopes = new List<string>
 					{
