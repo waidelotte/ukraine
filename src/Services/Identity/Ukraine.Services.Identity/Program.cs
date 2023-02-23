@@ -48,9 +48,11 @@ services
 		options.Password.RequireLowercase = identityOptions.User.Password.RequireLowercase;
 		options.Password.RequireNonAlphanumeric = identityOptions.User.Password.RequireNonAlphanumeric;
 	})
+	.AddDefaultTokenProviders()
 	.AddEntityFrameworkStores<UkraineIdentityContext>();
 
-var identitySever = builder.Services.AddIdentityServer(options =>
+var identitySever = builder.Services
+	.AddIdentityServer(options =>
 	{
 		options.IssuerUri = identityOptions.IssuerUri;
 		options.Authentication.CookieLifetime = identityOptions.CookieLifetime;

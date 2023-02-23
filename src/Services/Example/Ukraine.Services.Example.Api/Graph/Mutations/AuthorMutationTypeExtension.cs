@@ -12,7 +12,7 @@ public class AuthorMutationTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Mutation);
 
-		descriptor.Authorize("ApiScope");
+		descriptor.Authorize("ApiGraphQlScope");
 
 		descriptor
 			.Field<AuthorResolver>(f => f.CreateAuthorAsync(default!, default!, default))

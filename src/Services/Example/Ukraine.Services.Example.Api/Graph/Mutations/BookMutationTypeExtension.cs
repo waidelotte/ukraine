@@ -12,7 +12,7 @@ public class BookMutationTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Mutation);
 
-		descriptor.Authorize("ApiScope");
+		descriptor.Authorize("ApiGraphQlScope");
 
 		descriptor
 			.Field<BookResolver>(f => f.CreateBookAsync(default!, default!, default))

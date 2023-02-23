@@ -11,7 +11,7 @@ public class AuthorQueryTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Query);
 
-		descriptor.Authorize("ApiScope");
+		descriptor.Authorize("ApiGraphQlScope");
 
 		descriptor
 			.Field<AuthorResolver>(f => f.GetAuthorsAsync(default!, default))
