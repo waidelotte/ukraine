@@ -10,7 +10,7 @@ namespace Ukraine.Services.Example.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize("ApiScope")]
+[Authorize("ApiSwaggerScope")]
 public class ExampleController : ControllerBase
 {
 	private readonly IMediator _mediator;
