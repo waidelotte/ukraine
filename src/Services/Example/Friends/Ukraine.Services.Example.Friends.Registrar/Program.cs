@@ -8,7 +8,7 @@ var configuration = builder.Configuration;
 var services = builder.Services;
 
 builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
-builder.Host.AddUkraineServicesValidationOnBuild();
+builder.Host.AddServicesValidationOnBuild();
 
 services.AddUkraineDaprEventBus(configuration.GetSection("UkraineEventBus"));
 services.AddControllers();
@@ -23,7 +23,7 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 
 app.UseUkraineDaprEventBus();
-app.UseUkraineControllers();
+app.MapControllers();
 app.UseUkraineHealthChecks();
 
 try

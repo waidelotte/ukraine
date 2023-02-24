@@ -27,7 +27,7 @@ services.AddInfrastructure(configuration);
 services.AddPersistence(configuration);
 
 builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
-builder.Host.AddUkraineServicesValidationOnBuild();
+builder.Host.AddServicesValidationOnBuild();
 
 services.AddControllers();
 services.AddUkraineSwagger(configuration.GetSection("UkraineSwagger"));
@@ -71,7 +71,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseUkraineDaprEventBus();
 app.UseUkraineGraphQl();
-app.UseUkraineControllers();
+app.MapControllers();
 app.UseUkraineHealthChecks();
 app.UseUkraineDatabaseHealthChecks();
 

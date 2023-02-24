@@ -18,7 +18,7 @@ var isDevelopment = builder.Environment.IsDevelopment();
 configuration.AddUkraineDaprSecretStore("ukraine-secretstore");
 
 builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
-builder.Host.AddUkraineServicesValidationOnBuild();
+builder.Host.AddServicesValidationOnBuild();
 
 var connectionString = builder.Configuration.GetConnectionString("Postgres");
 

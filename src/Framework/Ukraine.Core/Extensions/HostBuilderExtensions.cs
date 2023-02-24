@@ -4,7 +4,7 @@ namespace Ukraine.Core.Extensions;
 
 public static class HostBuilderExtensions
 {
-	public static IHostBuilder AddUkraineServicesValidationOnBuild(this IHostBuilder hostBuilder)
+	public static IHostBuilder AddServicesValidationOnBuild(this IHostBuilder hostBuilder)
 	{
 		hostBuilder.UseDefaultServiceProvider((_, options) =>
 		{
