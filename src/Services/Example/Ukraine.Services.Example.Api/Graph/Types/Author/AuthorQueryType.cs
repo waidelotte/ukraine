@@ -1,17 +1,13 @@
 ﻿using HotChocolate.Types;
 using Ukraine.Services.Example.Api.Graph.Resolvers;
-using Ukraine.Services.Example.Api.Graph.Sort;
-using Ukraine.Services.Example.Api.Graph.Types;
 
-namespace Ukraine.Services.Example.Api.Graph.Queries;
+namespace Ukraine.Services.Example.Api.Graph.Types.Author;
 
-public class AuthorQueryTypeExtension : ObjectTypeExtension
+public class AuthorQueryType : ObjectTypeExtension
 {
 	protected override void Configure(IObjectTypeDescriptor descriptor)
 	{
 		descriptor.Name(OperationTypeNames.Query);
-
-		descriptor.Authorize(Constants.Policy.GRAPHQL_API);
 
 		descriptor
 			.Field<AuthorResolver>(f => f.GetAuthorsAsync(default!, default))
@@ -19,6 +15,7 @@ public class AuthorQueryTypeExtension : ObjectTypeExtension
 			.UsePaging()
 			.UseProjection()
 			.UseFiltering()
-			.UseSorting<AuthorSortType>();
+			.UseSorting<AuthorSortType>()
+			.Authorize(Constants.Policy.GRAPHQL_API);
 	}
 }

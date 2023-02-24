@@ -1,24 +1,20 @@
 ﻿using HotChocolate.Types;
-using Ukraine.Services.Example.Api.Graph.Errors;
-using Ukraine.Services.Example.Api.Graph.Inputs;
 using Ukraine.Services.Example.Api.Graph.Resolvers;
-using Ukraine.Services.Example.Api.Graph.Types;
+using Ukraine.Services.Example.Api.Graph.Types.Book.Inputs;
 
-namespace Ukraine.Services.Example.Api.Graph.Mutations;
+namespace Ukraine.Services.Example.Api.Graph.Types.Book;
 
-public class BookMutationTypeExtension : ObjectTypeExtension
+public class BookMutationType : ObjectTypeExtension
 {
 	protected override void Configure(IObjectTypeDescriptor descriptor)
 	{
 		descriptor.Name(OperationTypeNames.Mutation);
-
-		descriptor.Authorize(Constants.Policy.GRAPHQL_API);
 
 		descriptor
 			.Field<BookResolver>(f => f.CreateBookAsync(default!, default!, default))
 			.Argument("input", a => a.Type<NonNullType<CreateBookInputType>>())
 			.Type<BookType>()
 			.Error<PayloadError>()
-			.UseMutationConvention();
+			.Authorize(Constants.Policy.GRAPHQL_API);
 	}
 }

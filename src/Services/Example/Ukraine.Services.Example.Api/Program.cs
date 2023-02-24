@@ -1,4 +1,6 @@
 using HotChocolate;
+using HotChocolate.AspNetCore;
+using HotChocolate.Types.Pagination;
 using MediatR;
 using Ukraine.Core.Extensions;
 using Ukraine.Dapr.Extensions;
@@ -8,8 +10,9 @@ using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Identity.Extenstion;
 using Ukraine.Logging.Extenstion;
 using Ukraine.Services.Example.Api;
-using Ukraine.Services.Example.Api.Graph.Mutations;
-using Ukraine.Services.Example.Api.Graph.Queries;
+using Ukraine.Services.Example.Api.Graph.Types.Author;
+using Ukraine.Services.Example.Api.Graph.Types.Book;
+using Ukraine.Services.Example.Api.Graph.Types.User;
 using Ukraine.Services.Example.Infrastructure.Extensions;
 using Ukraine.Services.Example.Infrastructure.Options;
 using Ukraine.Services.Example.Persistence;
@@ -52,12 +55,41 @@ services.AddJwtBearerAuthentication(o =>
 	o.TokenValidationParameters.ValidateIssuerSigningKey = true;
 });
 
-services.AddUkraineGraphQl<ExampleContext>(configuration.GetSection("UkraineGraphQl"))
-	.AddType<UserQueryTypeExtension>()
-	.AddType<AuthorQueryTypeExtension>()
+var graphQlOptions = services
+	.BindAndGetOptions<GraphQlOptions>(configuration.GetSection(Constants.ConfigurationSection.GRAPHQL));
+
+services
+	.AddGraphQlServer<ExampleContext>()
+	.ConfigureDefaultRoot()
+	.AddAuthorization()
+	.AddFiltering()
+	.AddProjections()
+	.AddSorting()
+	.AllowIntrospection(graphQlOptions.EnableIntrospection)
+	.ModifyRequestOptions(o =>
+	{
+		o.IncludeExceptionDetails = graphQlOptions.EnableExceptionDetails;
+		o.ExecutionTimeout = graphQlOptions.ExecutionTimeout;
+	})
+	.SetPagingOptions(new PagingOptions
+	{
+		MaxPageSize = graphQlOptions.Paging?.MaxPageSize,
+		DefaultPageSize = graphQlOptions.Paging?.DefaultPageSize,
+		IncludeTotalCount = graphQlOptions.Paging?.IncludeTotalCount,
+		AllowBackwardPagination = graphQlOptions.Paging?.AllowBackwardPagination
+	})
+	.AddMaxExecutionDepthRule(graphQlOptions.ExecutionMaxDepth, true)
+	.AddInstrumentation(o =>
+	{
+		o.IncludeDataLoaderKeys = true;
+		o.RenameRootActivity = true;
+	})
+	.AddType<UserQueryType>()
+	.AddType<AuthorQueryType>()
 	.AddType<AuthorMutationTypeExtension>()
-	.AddType<BookMutationTypeExtension>()
-	.RegisterService<IMediator>(ServiceKind.Synchronized);
+	.AddType<BookMutationType>()
+	.RegisterService<IMediator>(ServiceKind.Synchronized)
+	.InitializeOnStartup();
 
 var app = builder.Build();
 
@@ -70,7 +102,16 @@ app.UseUkraineSwagger();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseUkraineDaprEventBus();
-app.UseUkraineGraphQl();
+
+app.MapGraphQL(graphQlOptions.Path).WithOptions(new GraphQLServerOptions
+{
+	EnableSchemaRequests = graphQlOptions.EnableSchemaRequests,
+	EnableGetRequests = graphQlOptions.EnableGetRequests,
+	EnableMultipartRequests = graphQlOptions.EnableMultipartRequests,
+	Tool = { Enable = graphQlOptions.EnableBananaCakePop },
+	EnableBatching = graphQlOptions.EnableBatching
+});
+
 app.MapControllers();
 app.UseUkraineHealthChecks();
 app.UseUkraineDatabaseHealthChecks();

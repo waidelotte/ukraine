@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Ukraine.Services.Example.Domain.Exceptions;
 
-namespace Ukraine.Services.Example.Api.Graph.Errors;
+namespace Ukraine.Services.Example.Api.Graph;
 
 public class PayloadError
 {

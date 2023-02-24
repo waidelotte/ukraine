@@ -20,5 +20,6 @@ internal static class Constants
 	public static class ConfigurationSection
 	{
 		public const string AUTHENTICATION = "Authentication";
+		public const string GRAPHQL = "GraphQl";
 	}
 }

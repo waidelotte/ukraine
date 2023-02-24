@@ -1,10 +1,8 @@
 ﻿using HotChocolate.Types;
-using Ukraine.Services.Example.Api.Graph.Errors;
-using Ukraine.Services.Example.Api.Graph.Inputs;
 using Ukraine.Services.Example.Api.Graph.Resolvers;
-using Ukraine.Services.Example.Api.Graph.Types;
+using Ukraine.Services.Example.Api.Graph.Types.Author.Inputs;
 
-namespace Ukraine.Services.Example.Api.Graph.Mutations;
+namespace Ukraine.Services.Example.Api.Graph.Types.Author;
 
 public class AuthorMutationTypeExtension : ObjectTypeExtension
 {
@@ -12,14 +10,12 @@ public class AuthorMutationTypeExtension : ObjectTypeExtension
 	{
 		descriptor.Name(OperationTypeNames.Mutation);
 
-		descriptor.Authorize(Constants.Policy.GRAPHQL_API);
-
 		descriptor
 			.Field<AuthorResolver>(f => f.CreateAuthorAsync(default!, default!, default))
 			.Argument("input", a => a.Type<NonNullType<CreateAuthorInputType>>())
 			.Type<AuthorType>()
 			.Error<PayloadError>()
-			.UseMutationConvention();
+			.Authorize(Constants.Policy.GRAPHQL_API);
 
 		descriptor
 			.Field<AuthorResolver>(f => f.DeprecatedCreateAuthorAsync(default!, default!, default))
@@ -27,6 +23,6 @@ public class AuthorMutationTypeExtension : ObjectTypeExtension
 			.Argument("input", a => a.Type<NonNullType<CreateAuthorInputType>>())
 			.Type<AuthorType>()
 			.Error<PayloadError>()
-			.UseMutationConvention();
+			.Authorize(Constants.Policy.GRAPHQL_API);
 	}
 }

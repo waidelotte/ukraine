@@ -1,9 +1,9 @@
 ﻿using HotChocolate.Types;
 using Ukraine.Services.Example.Api.Graph.Resolvers;
 
-namespace Ukraine.Services.Example.Api.Graph.Queries;
+namespace Ukraine.Services.Example.Api.Graph.Types.User;
 
-public class UserQueryTypeExtension : ObjectTypeExtension
+public class UserQueryType : ObjectTypeExtension
 {
 	protected override void Configure(IObjectTypeDescriptor descriptor)
 	{
