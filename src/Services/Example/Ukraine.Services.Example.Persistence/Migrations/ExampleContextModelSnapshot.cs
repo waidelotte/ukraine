@@ -52,10 +52,6 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
-                    b.Property<Guid>("SuperSecretKey")
-                        .HasColumnType("uuid")
-                        .HasColumnName("super_secret_key");
-
                     b.HasKey("Id")
                         .HasName("pk_authors");
 

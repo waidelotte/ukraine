@@ -4,4 +4,4 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.ChangeAuthorStatus;
 
-public record ChangeAuthorStatusRequest(Guid AuthorId, AuthorStatus Status) : IRequest<Author>;
+public record ChangeAuthorStatusRequest(Guid AuthorId, AuthorStatus Status) : IRequest<bool>;

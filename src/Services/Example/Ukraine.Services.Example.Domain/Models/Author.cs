@@ -5,15 +5,21 @@ namespace Ukraine.Services.Example.Domain.Models;
 
 public sealed class Author : AuditableEntityBase<Guid>
 {
-	public string FullName { get; init; } = null!;
+	public required string FullName { get; init; }
 
 	public int? Age { get; init; }
 
-	public AuthorStatus Status { get; set; }
+	public AuthorStatus Status { get; private set; }
 
-	public Guid SuperSecretKey { get; init; }
+	public ICollection<Book> Books { get; private set; } = new HashSet<Book>();
 
-	public ICollection<Book> Books { get; init; } = new HashSet<Book>();
+	public void ChangeStatus(AuthorStatus status)
+	{
+		if (!CanChangeStatusTo(status))
+			throw new ArgumentException($"Can't change the status from {Status} to {status}.", nameof(status));
+
+		Status = status;
+	}
 
 	public bool CanChangeStatusTo(AuthorStatus status)
 	{

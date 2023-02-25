@@ -9,4 +9,6 @@ public interface ISpecificationRepository<TEntity> : IRepository
 	IQueryable<TEntity> GetQuery(ISpecification<TEntity> specification);
 
 	Task<TEntity?> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
+
+	Task<TProject?> GetProjectAsync<TProject>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
 }

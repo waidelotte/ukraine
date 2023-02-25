@@ -15,7 +15,6 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\..\Framework\Ukraine.Dapr\Ukraine.Dapr.csproj" />
-      <ProjectReference Include="..\..\..\Framework\Ukraine.Logging\Ukraine.Logging.csproj" />
       <ProjectReference Include="..\..\..\Framework\Ukraine.Core\Ukraine.Core.csproj" />
       <ProjectReference Include="..\..\..\Framework\Ukraine.EfCore\Ukraine.EfCore.csproj" />
       <ProjectReference Include="..\..\..\Framework\Ukraine.HealthChecks\Ukraine.HealthChecks.csproj" />

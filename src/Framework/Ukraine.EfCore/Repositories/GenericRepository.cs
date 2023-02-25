@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ukraine.Domain.Interfaces;
+using Ukraine.EfCore.Interfaces;
 
 namespace Ukraine.EfCore.Repositories;
 

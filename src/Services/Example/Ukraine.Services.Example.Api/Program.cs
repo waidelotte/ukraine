@@ -2,17 +2,18 @@ using HotChocolate;
 using HotChocolate.AspNetCore;
 using HotChocolate.Types.Pagination;
 using MediatR;
-using Ukraine.Core.Extensions;
+using Ukraine.Core.Host.Extensions;
+using Ukraine.Core.Logging.Extenstion;
+using Ukraine.Core.Options.Extensions;
 using Ukraine.Dapr.Extensions;
 using Ukraine.EfCore.Extensions;
 using Ukraine.GraphQl.Extenstion;
 using Ukraine.HealthChecks.Extenstion;
 using Ukraine.Identity.Extenstion;
-using Ukraine.Logging.Extenstion;
 using Ukraine.Services.Example.Api;
-using Ukraine.Services.Example.Api.Graph.Types.Author;
-using Ukraine.Services.Example.Api.Graph.Types.Book;
-using Ukraine.Services.Example.Api.Graph.Types.User;
+using Ukraine.Services.Example.Api.GraphQl.Authors;
+using Ukraine.Services.Example.Api.GraphQl.Authors.CreateAuthor;
+using Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthorById;
 using Ukraine.Services.Example.Infrastructure.Extensions;
 using Ukraine.Services.Example.Infrastructure.Options;
 using Ukraine.Services.Example.Persistence;
@@ -33,6 +34,7 @@ builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLoggin
 builder.Host.AddServicesValidationOnBuild();
 
 services.AddControllers();
+services.AddHttpContextAccessor();
 services.AddUkraineSwagger(configuration.GetSection("UkraineSwagger"));
 
 services.AddAuthorization(o =>
@@ -71,6 +73,7 @@ services
 		o.IncludeExceptionDetails = graphQlOptions.EnableExceptionDetails;
 		o.ExecutionTimeout = graphQlOptions.ExecutionTimeout;
 	})
+	.ModifyOptions(opt => opt.UseXmlDocumentation = true)
 	.SetPagingOptions(new PagingOptions
 	{
 		MaxPageSize = graphQlOptions.Paging?.MaxPageSize,
@@ -84,11 +87,15 @@ services
 		o.IncludeDataLoaderKeys = true;
 		o.RenameRootActivity = true;
 	})
-	.AddType<UserQueryType>()
-	.AddType<AuthorQueryType>()
-	.AddType<AuthorMutationTypeExtension>()
-	.AddType<BookMutationType>()
+	.AddMutationConventions(applyToAllMutations: true)
 	.RegisterService<IMediator>(ServiceKind.Synchronized)
+	.AddType<AuthorType>()
+	.AddTypeExtension<AuthorExtensions>()
+	.AddType<CreateAuthorMutation>()
+	.AddType<CreateAuthorInputType>()
+	.AddType<CreateAuthorPayloadType>()
+	.AddType<GetAuthorByIdQuery>()
+	.AddType<GetAuthorByIdPayloadType>()
 	.InitializeOnStartup();
 
 var app = builder.Build();

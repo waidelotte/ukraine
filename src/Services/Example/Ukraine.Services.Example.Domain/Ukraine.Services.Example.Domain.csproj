@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\Framework\Ukraine.Domain\Ukraine.Domain.csproj" />
-    </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Domain\Ukraine.Domain.csproj" />
+  </ItemGroup>
 </Project>

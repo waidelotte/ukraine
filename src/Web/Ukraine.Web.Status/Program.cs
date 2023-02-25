@@ -1,4 +1,3 @@
-using Ukraine.Domain.Exceptions;
 using Ukraine.Web.Status.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 var webStatusOptions = builder.Configuration.Get<WebStatusOptions>();
 
 if (webStatusOptions == null)
-	throw CoreException.Exception("Unable to initialize section: root");
+	throw new Exception("Unable to initialize section: root");
 
 builder.Services
 	.AddHealthChecksUI(settings =>

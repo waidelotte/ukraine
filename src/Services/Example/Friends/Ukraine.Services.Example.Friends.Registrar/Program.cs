@@ -1,7 +1,7 @@
-using Ukraine.Core.Extensions;
+using Ukraine.Core.Host.Extensions;
+using Ukraine.Core.Logging.Extenstion;
 using Ukraine.Dapr.Extensions;
 using Ukraine.HealthChecks.Extenstion;
-using Ukraine.Logging.Extenstion;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;

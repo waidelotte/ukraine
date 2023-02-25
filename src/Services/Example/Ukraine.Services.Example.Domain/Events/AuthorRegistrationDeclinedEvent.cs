@@ -1,4 +1,4 @@
-﻿using Ukraine.Domain.Events;
+﻿using Ukraine.Domain.Models;
 
 namespace Ukraine.Services.Example.Domain.Events;
 

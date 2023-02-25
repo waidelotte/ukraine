@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Domain.Exceptions;
 using Ukraine.Domain.Interfaces;
+using Ukraine.EfCore.Interfaces;
 
 namespace Ukraine.EfCore;
 
@@ -29,20 +29,11 @@ internal sealed class UnitOfWork : IUnitOfWork
 			return (TRepository)repository;
 		}
 
-		var serviceRepository = _serviceProvider.GetService<TRepository>();
-		if (serviceRepository == null)
-		{
-			throw CoreException.Exception($"Repository of type {typeof(TRepository)} not found.");
-		}
+		var serviceRepository = _serviceProvider.GetRequiredService<TRepository>();
 
 		_repositories.TryAdd(type, serviceRepository);
 
 		return serviceRepository;
-	}
-
-	public bool SaveChanges()
-	{
-		return _context.SaveChanges(false) > 0;
 	}
 
 	public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
