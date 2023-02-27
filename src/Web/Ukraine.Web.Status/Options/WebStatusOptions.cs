@@ -1,6 +1,6 @@
 namespace Ukraine.Web.Status.Options;
 
-public class WebStatusOptions
+internal sealed class WebStatusOptions
 {
 	public int EvaluationTimeInSeconds { get; set; } = 30;
 

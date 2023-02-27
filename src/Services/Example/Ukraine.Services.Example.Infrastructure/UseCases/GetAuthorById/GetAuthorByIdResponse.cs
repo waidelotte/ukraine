@@ -2,4 +2,4 @@
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.GetAuthorById;
 
-public record GetAuthorByIdResponse(AuthorDTO? Author);
+public sealed record GetAuthorByIdResponse(AuthorDTO? Author);

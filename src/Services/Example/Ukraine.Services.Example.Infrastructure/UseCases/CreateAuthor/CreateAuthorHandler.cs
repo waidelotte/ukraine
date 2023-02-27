@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
-using Ukraine.Domain.Interfaces;
-using Ukraine.EfCore.Interfaces;
+using Ukraine.Framework.Abstractions;
 using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.DTOs;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
-public class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, CreateAuthorResponse>
+internal sealed class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest, CreateAuthorResponse>
 {
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly IEventBus _eventBus;

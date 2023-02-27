@@ -1,14 +1,14 @@
-﻿using Ukraine.Domain.Models;
+﻿using Ukraine.Framework.Abstractions;
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public sealed class Book : AuditableEntityBase<Guid>
+public sealed class Book : AuditableBase<Guid>
 {
 	public required string Name { get; init; }
 
-	public required int Rating { get; init; }
+	public int Rating { get; private set; }
 
-	public required Guid AuthorId { get; init; }
+	public Guid AuthorId { get; private set; }
 
-	public required Author Author { get; init; }
+	public Author Author { get; private set; } = null!;
 }

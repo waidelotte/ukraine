@@ -3,7 +3,6 @@ using Duende.IdentityServer.EntityFramework.Mappers;
 using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.Services.Identity.Exceptions;
 using Ukraine.Services.Identity.Models;
 
 namespace Ukraine.Services.Identity.Persistence;
@@ -42,7 +41,7 @@ public static class Seed
 
 			if (!result.Succeeded)
 			{
-				throw IdentityException.Exception(result.Errors.First().Description);
+				throw new Exception(result.Errors.First().Description);
 			}
 
 			await userManager.AddToRoleAsync(devUser, "admin");

@@ -1,6 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-    <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="7.0.0-rc2.6" />
-        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.0.0-rc2.7" />
-    </ItemGroup>
-</Project>

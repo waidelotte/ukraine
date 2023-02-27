@@ -2,7 +2,7 @@
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
-public class CreateAuthorValidator : AbstractValidator<CreateAuthorRequest>
+internal sealed class CreateAuthorValidator : AbstractValidator<CreateAuthorRequest>
 {
 	public CreateAuthorValidator()
 	{

@@ -2,4 +2,4 @@
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
-public record CreateAuthorResponse(AuthorDTO Author);
+public sealed record CreateAuthorResponse(AuthorDTO Author);

@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\Ukraine.Domain\Ukraine.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Framework.Abstractions\Ukraine.Framework.Abstractions.csproj" />
   </ItemGroup>
 </Project>

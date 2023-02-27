@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Domain.Models;
 
 namespace Ukraine.Services.Example.Persistence.Configurations;
 
-internal class AuthorConfiguration : IEntityTypeConfiguration<Author>
+internal sealed class AuthorConfiguration : IEntityTypeConfiguration<Author>
 {
 	public void Configure(EntityTypeBuilder<Author> builder)
 	{

@@ -4,6 +4,6 @@
       <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0-rc2.7" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\Framework\Ukraine.Core\Ukraine.Core.csproj" />
+      <ProjectReference Include="..\..\Framework\Ukraine.Framework.Core\Ukraine.Framework.Core.csproj" />
     </ItemGroup>
 </Project>

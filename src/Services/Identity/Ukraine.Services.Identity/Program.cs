@@ -1,11 +1,15 @@
 ﻿using Duende.IdentityServer.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Identity;
-using Ukraine.Core.Host.Extensions;
-using Ukraine.Core.Logging.Extenstion;
-using Ukraine.Dapr.Extensions;
-using Ukraine.EfCore.Extensions;
-using Ukraine.HealthChecks.Extenstion;
-using Ukraine.Services.Identity.Exceptions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core.HealthChecks;
+using Ukraine.Framework.Core.Host;
+using Ukraine.Framework.Core.Options;
+using Ukraine.Framework.Core.Serilog;
+using Ukraine.Framework.Dapr;
+using Ukraine.Framework.EFCore;
 using Ukraine.Services.Identity.Models;
 using Ukraine.Services.Identity.Persistence;
 using IdentityOptions = Ukraine.Services.Identity.Options.IdentityOptions;
@@ -15,25 +19,30 @@ var configuration = builder.Configuration;
 var services = builder.Services;
 var isDevelopment = builder.Environment.IsDevelopment();
 
-configuration.AddUkraineDaprSecretStore("ukraine-secretstore");
+configuration.AddDaprSecretStore("ukraine-secretstore");
 
-builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
+builder.Host.UseSerilog(configuration);
 builder.Host.AddServicesValidationOnBuild();
 
-var connectionString = builder.Configuration.GetConnectionString("Postgres");
-
-if (string.IsNullOrEmpty(connectionString))
-	throw IdentityException.Exception("Postgres Connection String is null or empty");
+var connectionString = builder.Configuration.GetRequiredConnectionString("Postgres");
 
 services.AddRazorPages();
-services.AddUkrainePostgresContext<UkraineIdentityContext, UkraineIdentityContext>(
-	connectionString,
-	configuration.GetSection("UkrainePostgres"));
 
-var identityOptions = builder.Configuration.GetRequiredSection(IdentityOptions.SECTION_NAME).Get<IdentityOptions>();
+services.AddDbContext<UkraineIdentityContext>(dbBuilder =>
+{
+	dbBuilder.UseNpgsql(connectionString, sqlOptions =>
+	{
+		sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
+		sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_example");
+	});
 
-if (identityOptions == null)
-	throw IdentityException.Exception($"Configuration Section [{IdentityOptions.SECTION_NAME}] is empty");
+	dbBuilder.UseSnakeCaseNamingConvention();
+});
+
+services.AddDatabaseFacadeResolver<UkraineIdentityContext>();
+services.TryAddScoped<DbContext, UkraineIdentityContext>();
+
+var identityOptions = builder.Configuration.GetRequiredSection(IdentityOptions.SECTION_NAME).GetOptions<IdentityOptions>();
 
 services
 	.AddIdentity<UkraineUser, IdentityRole>(options =>
@@ -63,20 +72,28 @@ var identitySever = builder.Services
 	.AddAspNetIdentity<UkraineUser>()
 	.AddConfigurationStore(configurationStoreOptions =>
 	{
-		configurationStoreOptions.DefaultSchema = identityOptions.ConfigurationSchema;
+		configurationStoreOptions.DefaultSchema = "ukraine_identity_configuration";
 		configurationStoreOptions.ConfigureDbContext = b =>
 		{
-			b.UseUkraineNamingConvention();
-			b.UseUkrainePostgres<Program>(connectionString, identityOptions.ConfigurationSchema);
+			b.UseSnakeCaseNamingConvention();
+			b.UseNpgsql(connectionString, sqlOptions =>
+			{
+				sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
+				sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_configuration");
+			});
 		};
 	})
 	.AddOperationalStore(operationalStoreOptions =>
 	{
-		operationalStoreOptions.DefaultSchema = identityOptions.OperationalSchema;
+		operationalStoreOptions.DefaultSchema = "ukraine_identity_operational";
 		operationalStoreOptions.ConfigureDbContext = b =>
 		{
-			b.UseUkraineNamingConvention();
-			b.UseUkrainePostgres<Program>(connectionString, identityOptions.OperationalSchema);
+			b.UseSnakeCaseNamingConvention();
+			b.UseNpgsql(connectionString, sqlOptions =>
+			{
+				sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
+				sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_operational");
+			});
 		};
 	});
 
@@ -86,30 +103,41 @@ if (isDevelopment)
 services.AddAuthentication();
 
 services
-	.AddUkraineHealthChecks()
-	.AddUkrainePostgresHealthCheck(connectionString);
+	.AddHealthChecks()
+	.AddCheck(
+		"Identity Server",
+		() => HealthCheckResult.Healthy(),
+		new[] { "service", "identity" })
+	.AddNpgSql(
+		connectionString,
+		name: "Postgres Database",
+		tags: new[] { "database", "postgres" });
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-	await scope.MigrateDatabaseAsync<UkraineIdentityContext>();
-	await scope.MigrateDatabaseAsync<ConfigurationDbContext>();
-	await scope.MigrateDatabaseAsync<PersistedGrantDbContext>();
-
-	if (isDevelopment)
-	{
-		await scope.SeedAdminRoleAsync();
-		await scope.SeedDevUserAsync();
-		await scope.SeedApiScopesAsync();
-		await scope.SeedApiResourcesAsync();
-		await scope.SeedIdentityResourcesAsync();
-		await scope.SeedClientsAsync();
-	}
-}
-
 if (isDevelopment)
+{
 	app.UseDeveloperExceptionPage();
+
+	using (var scope = app.Services.CreateScope())
+	{
+		await scope.MigrateDatabaseAsync<UkraineIdentityContext>();
+		await scope.MigrateDatabaseAsync<ConfigurationDbContext>();
+		await scope.MigrateDatabaseAsync<PersistedGrantDbContext>();
+
+		if (isDevelopment)
+		{
+			await scope.SeedAdminRoleAsync();
+			await scope.SeedDevUserAsync();
+			await scope.SeedApiScopesAsync();
+			await scope.SeedApiResourcesAsync();
+			await scope.SeedIdentityResourcesAsync();
+			await scope.SeedClientsAsync();
+		}
+	}
+
+	app.UseDeveloperExceptionPage();
+}
 
 app.UseStaticFiles();
 
@@ -119,8 +147,7 @@ app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
 app.MapRazorPages().RequireAuthorization();
-app.UseUkraineHealthChecks();
-app.UseUkraineDatabaseHealthChecks();
+app.MapDefaultHealthChecks();
 
 try
 {

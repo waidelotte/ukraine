@@ -2,7 +2,7 @@
 
 namespace Ukraine.Services.Identity.Options;
 
-public class IdentityOptions
+internal sealed class IdentityOptions
 {
 	public const string SECTION_NAME = "IdentityOptions";
 
@@ -20,10 +20,6 @@ public class IdentityOptions
 	public bool RaiseFailureEvents { get; set; }
 
 	public bool RaiseSuccessEvents { get; set; }
-
-	public string? ConfigurationSchema { get; set; }
-
-	public string? OperationalSchema { get; set; }
 
 	[Required]
 	public required IdentityUserOptions User { get; set; } = new();

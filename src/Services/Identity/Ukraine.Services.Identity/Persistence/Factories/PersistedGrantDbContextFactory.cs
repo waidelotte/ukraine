@@ -1,11 +1,10 @@
 using Duende.IdentityServer.EntityFramework.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Ukraine.EfCore.Extensions;
 
 namespace Ukraine.Services.Identity.Persistence.Factories;
 
-public class PersistedGrantDbContextFactory : IDesignTimeDbContextFactory<PersistedGrantDbContext>
+internal sealed class PersistedGrantDbContextFactory : IDesignTimeDbContextFactory<PersistedGrantDbContext>
 {
 	public PersistedGrantDbContext CreateDbContext(string[] args)
 	{
@@ -13,8 +12,12 @@ public class PersistedGrantDbContextFactory : IDesignTimeDbContextFactory<Persis
 
 		var optionsBuilder = new DbContextOptionsBuilder<PersistedGrantDbContext>();
 
-		optionsBuilder.UseUkraineNamingConvention();
-		optionsBuilder.UseUkrainePostgres<Program>(connectionString, "ukraine_identity_operational");
+		optionsBuilder.UseSnakeCaseNamingConvention();
+		optionsBuilder.UseNpgsql(connectionString, sqlOptions =>
+		{
+			sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
+			sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_operational");
+		});
 
 		IServiceCollection services = new ServiceCollection();
 
@@ -24,8 +27,12 @@ public class PersistedGrantDbContextFactory : IDesignTimeDbContextFactory<Persis
 				options.DefaultSchema = "ukraine_identity_operational";
 				options.ConfigureDbContext = b =>
 				{
-					b.UseUkraineNamingConvention();
-					b.UseUkrainePostgres<Program>(connectionString, "ukraine_identity_operational");
+					b.UseUpperSnakeCaseNamingConvention();
+					b.UseNpgsql(connectionString, sqlOptions =>
+						{
+							sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
+							sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_operational");
+						});
 				};
 			});
 

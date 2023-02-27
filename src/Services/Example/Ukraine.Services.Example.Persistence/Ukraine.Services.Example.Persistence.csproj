@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\Ukraine.Core\Ukraine.Core.csproj" />
-    <ProjectReference Include="..\..\..\Framework\Ukraine.EfCore\Ukraine.EfCore.csproj" />
-    <ProjectReference Include="..\..\..\Framework\Ukraine.HealthChecks\Ukraine.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Framework.Core\Ukraine.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Ukraine.Framework.EFCore\Ukraine.Framework.EFCore.csproj" />
     <ProjectReference Include="..\Ukraine.Services.Example.Domain\Ukraine.Services.Example.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using Ukraine.Services.Example.Domain.Enums;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.ChangeAuthorStatus;
 
-public class ChangeAuthorStatusValidator : AbstractValidator<ChangeAuthorStatusRequest>
+internal sealed class ChangeAuthorStatusValidator : AbstractValidator<ChangeAuthorStatusRequest>
 {
 	public ChangeAuthorStatusValidator()
 	{

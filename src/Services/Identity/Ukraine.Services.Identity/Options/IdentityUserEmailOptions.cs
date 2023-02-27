@@ -1,6 +1,6 @@
 ﻿namespace Ukraine.Services.Identity.Options;
 
-public class IdentityUserEmailOptions
+internal sealed class IdentityUserEmailOptions
 {
 	public bool RequireConfirmed { get; set; } = true;
 

@@ -1,27 +1,46 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.EfCore.Extensions;
-using Ukraine.HealthChecks.Extenstion;
-using Ukraine.Services.Example.Domain.Exceptions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core.Options;
+using Ukraine.Framework.EFCore;
+using Ukraine.Services.Example.Persistence.Options;
 
 namespace Ukraine.Services.Example.Persistence.Extensions;
 
 public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddPersistence(
-		this IServiceCollection services,
+		this IServiceCollection serviceCollection,
 		IConfiguration configuration)
 	{
-		var connectionString = configuration.GetConnectionString("Postgres");
+		var connectionString = configuration.GetRequiredConnectionString("Postgres");
 
-		if (string.IsNullOrEmpty(connectionString))
-			throw ExampleException.Exception("Postgres Connection String is null or empty");
+		var databaseOptions = serviceCollection
+			.BindAndGetOptions<ServiceDatabaseOptions>(configuration.GetSection(ServiceDatabaseOptions.CONFIGURATION_SECTION));
 
-		services.AddUkrainePostgresContext<ExampleContext, ExampleContext>(connectionString, configuration.GetSection("UkrainePostgres"));
-		services.AddUkraineSpecificationRepositories();
-		services.AddUkraineUnitOfWork();
-		services.AddUkraineHealthChecks().AddUkrainePostgresHealthCheck(connectionString);
+		serviceCollection.AddDbContext<ExampleContext>(dbBuilder =>
+		{
+			dbBuilder.EnableDetailedErrors(databaseOptions.EnableDetailedErrors);
+			dbBuilder.EnableSensitiveDataLogging(databaseOptions.EnableSensitiveDataLogging);
+			dbBuilder.UseNpgsql(connectionString, sqlOptions =>
+			{
+				sqlOptions.MigrationsAssembly(typeof(ExampleContext).Assembly.GetName().Name);
+				sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_example");
+			});
 
-		return services;
+			dbBuilder.UseSnakeCaseNamingConvention();
+			dbBuilder.AddAuditSaveInterceptor();
+		});
+
+		serviceCollection.AddDatabaseFacadeResolver<ExampleContext>();
+		serviceCollection.TryAddScoped<DbContext, ExampleContext>();
+
+		serviceCollection.AddGenericRepository();
+		serviceCollection.AddSpecificationRepository();
+		serviceCollection.AddUnitOfWork();
+
+		return serviceCollection;
 	}
 }

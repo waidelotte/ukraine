@@ -1,30 +1,43 @@
-using Ukraine.Core.Host.Extensions;
-using Ukraine.Core.Logging.Extenstion;
-using Ukraine.Dapr.Extensions;
-using Ukraine.HealthChecks.Extenstion;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Ukraine.Framework.Core.HealthChecks;
+using Ukraine.Framework.Core.Host;
+using Ukraine.Framework.Core.Serilog;
+using Ukraine.Framework.Dapr;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
 
-builder.Host.AddUkraineSerilog(services, configuration.GetSection("UkraineLogging"));
+builder.Host.UseSerilog(configuration);
 builder.Host.AddServicesValidationOnBuild();
 
-services.AddUkraineDaprEventBus(configuration.GetSection("UkraineEventBus"));
+services.AddDaprEventBus(options =>
+{
+	options.PubSubName = "ukraine-pubsub";
+});
+
 services.AddControllers();
+
 services
-	.AddUkraineHealthChecks()
-	.AddUkraineDaprHealthCheck()
-	.AddUkraineServiceCheck();
+	.AddHealthChecks()
+	.AddCheck(
+		"Service",
+		() => HealthCheckResult.Healthy(),
+		new[] { "service", "api", "demo" })
+	.AddDaprHealthCheck(
+		"Dapr Sidecar",
+		HealthStatus.Unhealthy,
+		new[] { "service", "dapr" });
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 
-app.UseUkraineDaprEventBus();
+app.UseCloudEvents();
+app.MapSubscribeHandler();
 app.MapControllers();
-app.UseUkraineHealthChecks();
+app.MapDefaultHealthChecks();
 
 try
 {

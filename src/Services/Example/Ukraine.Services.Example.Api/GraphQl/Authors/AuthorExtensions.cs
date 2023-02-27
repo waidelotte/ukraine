@@ -1,11 +1,9 @@
-﻿using HotChocolate;
-using HotChocolate.Types;
-using Ukraine.Services.Example.Infrastructure.DTOs;
+﻿using Ukraine.Services.Example.Infrastructure.DTOs;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Authors;
 
 [ExtendObjectType(typeof(AuthorDTO))]
-public class AuthorExtensions
+internal sealed class AuthorExtensions
 {
 	public string FullInformation([Parent] AuthorDTO author)
 	{

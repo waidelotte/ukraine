@@ -1,6 +1,6 @@
 ﻿namespace Ukraine.Services.Identity.Options;
 
-public class IdentityUserPasswordOptions
+internal sealed class IdentityUserPasswordOptions
 {
 	public bool RequireDigit { get; set; } = true;
 

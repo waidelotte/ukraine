@@ -1,9 +1,6 @@
 ﻿using System.Net;
-using Bogus;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
 namespace Ukraine.Services.Example.Api.Controllers;
 
@@ -12,15 +9,6 @@ namespace Ukraine.Services.Example.Api.Controllers;
 [Authorize(Constants.Policy.REST_API)]
 public class ExampleController : ControllerBase
 {
-	private readonly IMediator _mediator;
-	private readonly ILogger<ExampleController> _logger;
-
-	public ExampleController(IMediator mediator, ILogger<ExampleController> logger)
-	{
-		_mediator = mediator;
-		_logger = logger;
-	}
-
 	[AllowAnonymous]
 	[HttpGet("GetOk")]
 	[ProducesResponseType((int)HttpStatusCode.OK)]
@@ -29,29 +17,10 @@ public class ExampleController : ControllerBase
 		return Ok();
 	}
 
-	[HttpGet("SeedData")]
+	[HttpGet("GetOkWithAuth")]
 	[ProducesResponseType((int)HttpStatusCode.OK)]
-	public async Task<ActionResult> SeedDataAsync(CancellationToken cancellationToken)
+	public OkResult GetOkWithAuth()
 	{
-		_logger.LogDebug($"{nameof(SeedDataAsync)} controller start");
-
-		var authorRequestFaker = new Faker<CreateAuthorRequest>()
-			.CustomInstantiator(f => new CreateAuthorRequest(f.Name.FullName(), f.Random.Number(5, 90)));
-
-		// foreach (var request in authorRequestFaker.Generate(50))
-		// {
-		// 	var author = await _mediator.Send(request, cancellationToken);
-		//
-		// 	var bookRequestFaker = new Faker<CreateBookRequest>()
-		// 		.CustomInstantiator(f => new CreateBookRequest(author.Author.Id, f.System.CommonFileName()));
-		//
-		// 	foreach (var createBookRequest in bookRequestFaker.Generate(3))
-		// 	{
-		// 		await _mediator.Send(createBookRequest, cancellationToken);
-		// 	}
-		// }
-
-		_logger.LogDebug($"{nameof(SeedDataAsync)} controller end");
 		return Ok();
 	}
 }

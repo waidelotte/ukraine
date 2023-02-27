@@ -1,11 +1,9 @@
+using Ukraine.Framework.Core.Options;
 using Ukraine.Web.Status.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var webStatusOptions = builder.Configuration.Get<WebStatusOptions>();
-
-if (webStatusOptions == null)
-	throw new Exception("Unable to initialize section: root");
+var webStatusOptions = builder.Configuration.GetRequiredSection("WebStatus").GetOptions<WebStatusOptions>();
 
 builder.Services
 	.AddHealthChecksUI(settings =>

@@ -1,5 +1,5 @@
-﻿using Ukraine.Domain.Models;
+﻿using Ukraine.Framework.Abstractions;
 
 namespace Ukraine.Services.Example.Friends.Registrar.Events;
 
-public record AuthorRegistrationDeclinedEvent(Guid AuthorId) : IntegrationEvent;
+internal sealed record AuthorRegistrationDeclinedEvent(Guid AuthorId) : BaseEvent;

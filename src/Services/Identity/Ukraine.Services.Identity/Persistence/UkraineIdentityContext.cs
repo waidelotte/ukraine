@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Ukraine.EfCore.Interfaces;
+using Ukraine.Framework.EFCore;
 using Ukraine.Services.Identity.Models;
 
 namespace Ukraine.Services.Identity.Persistence;
 
-public class UkraineIdentityContext : IdentityDbContext<UkraineUser>, IDatabaseFacadeResolver
+internal sealed class UkraineIdentityContext : IdentityDbContext<UkraineUser>, IDatabaseFacadeResolver
 {
 	public UkraineIdentityContext(DbContextOptions<UkraineIdentityContext> options) : base(options) { }
 

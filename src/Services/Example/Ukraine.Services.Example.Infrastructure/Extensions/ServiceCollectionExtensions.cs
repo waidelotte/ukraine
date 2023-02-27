@@ -1,26 +1,22 @@
 ﻿using System.Reflection;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Ukraine.Core.Mediator.Extensions;
-using Ukraine.Dapr.Extensions;
-using Ukraine.HealthChecks.Extenstion;
-using Ukraine.Telemetry.Extenstion;
+using Ukraine.Framework.Core.Mediator;
+using Ukraine.Framework.Dapr;
 
 namespace Ukraine.Services.Example.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddInfrastructure(
-		this IServiceCollection services,
-		IConfiguration configuration)
+	public static IServiceCollection AddInfrastructure(this IServiceCollection services)
 	{
-		services.AddMediatorAndValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-		services.AddMediatorRequestValidation();
-		services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-		services.AddUkraineTelemetry(configuration.GetSection("UkraineTelemetry"));
-		services.AddUkraineDaprEventBus(configuration.GetSection("UkraineEventBus"));
-		services.AddUkraineHealthChecks().AddUkraineDaprHealthCheck().AddUkraineServiceCheck();
+		services
+			.AddMediatorAndValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+			.AddMediatorRequestValidation()
+			.AddAutoMapper(Assembly.GetExecutingAssembly())
+			.AddDaprEventBus(options =>
+			{
+				options.PubSubName = "ukraine-pubsub";
+			});
 
 		return services;
 	}

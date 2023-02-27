@@ -1,9 +1,9 @@
-﻿using Ukraine.Domain.Models;
+﻿using Ukraine.Framework.Abstractions;
 using Ukraine.Services.Example.Domain.Enums;
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public sealed class Author : AuditableEntityBase<Guid>
+public sealed class Author : AuditableBase<Guid>
 {
 	public required string FullName { get; init; }
 
@@ -11,7 +11,7 @@ public sealed class Author : AuditableEntityBase<Guid>
 
 	public AuthorStatus Status { get; private set; }
 
-	public ICollection<Book> Books { get; private set; } = new HashSet<Book>();
+	public IEnumerable<Book> Books { get; } = new HashSet<Book>();
 
 	public void ChangeStatus(AuthorStatus status)
 	{

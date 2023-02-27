@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Infrastructure.DTOs;
 
 namespace Ukraine.Services.Example.Infrastructure.Mapper;
 
-public class AuthorProfile : Profile
+internal sealed class AuthorProfile : Profile
 {
 	public AuthorProfile()
 	{

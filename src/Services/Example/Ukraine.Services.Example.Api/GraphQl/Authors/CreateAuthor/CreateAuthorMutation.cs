@@ -1,11 +1,11 @@
-﻿using HotChocolate.Types;
-using MediatR;
+﻿using MediatR;
+using Ukraine.Services.Example.Api.GraphQl.Errors;
 using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Authors.CreateAuthor;
 
 [ExtendObjectType(Name = OperationTypeNames.Mutation)]
-public class CreateAuthorMutation
+internal sealed class CreateAuthorMutation
 {
 	[Error(typeof(ValidationError))]
 	[Error(typeof(OtherError))]

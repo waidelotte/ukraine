@@ -1,13 +1,11 @@
-﻿using HotChocolate.Types;
-using HotChocolate.Types.Relay;
-using MediatR;
+﻿using MediatR;
 using Ukraine.Services.Example.Infrastructure.DTOs;
 using Ukraine.Services.Example.Infrastructure.UseCases.GetAuthorById;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthorById;
 
 [ExtendObjectType(Name = OperationTypeNames.Query)]
-public class GetAuthorByIdQuery
+internal sealed class GetAuthorByIdQuery
 {
 	public async Task<GetAuthorByIdResponse> GetAuthorByIdAsync(
 		IMediator mediator,

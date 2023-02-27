@@ -1,11 +1,10 @@
 using Duende.IdentityServer.EntityFramework.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Ukraine.EfCore.Extensions;
 
 namespace Ukraine.Services.Identity.Persistence.Factories;
 
-public class ConfigurationDbContextFactory : IDesignTimeDbContextFactory<ConfigurationDbContext>
+internal sealed class ConfigurationDbContextFactory : IDesignTimeDbContextFactory<ConfigurationDbContext>
 {
 	public ConfigurationDbContext CreateDbContext(string[] args)
 	{
@@ -13,19 +12,28 @@ public class ConfigurationDbContextFactory : IDesignTimeDbContextFactory<Configu
 
 		var optionsBuilder = new DbContextOptionsBuilder<ConfigurationDbContext>();
 
-		optionsBuilder.UseUkraineNamingConvention();
-		optionsBuilder.UseUkrainePostgres<Program>(connectionString, "ukraine_identity_configuration");
+		optionsBuilder.UseSnakeCaseNamingConvention();
+		optionsBuilder.UseNpgsql(connectionString, sqlOptions =>
+		{
+			sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
+			sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_configuration");
+		});
 
 		IServiceCollection services = new ServiceCollection();
 
-		services.AddIdentityServer()
+		services
+			.AddIdentityServer()
 			.AddConfigurationStore(options =>
 			{
 				options.DefaultSchema = "ukraine_identity_configuration";
 				options.ConfigureDbContext = b =>
 				{
-					b.UseUkraineNamingConvention();
-					b.UseUkrainePostgres<Program>(connectionString, "ukraine_identity_configuration");
+					b.UseSnakeCaseNamingConvention();
+					b.UseNpgsql(connectionString, sqlOptions =>
+					{
+						sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
+						sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_configuration");
+					});
 				};
 			});
 

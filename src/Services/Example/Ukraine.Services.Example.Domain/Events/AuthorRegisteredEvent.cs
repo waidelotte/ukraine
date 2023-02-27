@@ -1,5 +1,5 @@
-﻿using Ukraine.Domain.Models;
+﻿using Ukraine.Framework.Abstractions;
 
 namespace Ukraine.Services.Example.Domain.Events;
 
-public record AuthorRegisteredEvent(Guid AuthorId) : IntegrationEvent;
+public record AuthorRegisteredEvent(Guid AuthorId) : BaseEvent;

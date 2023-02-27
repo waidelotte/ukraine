@@ -6,7 +6,7 @@ public class AuthorDTO
 {
 	public Guid Id { get; set; }
 
-	public string FullName { get; set; } = null!;
+	public required string FullName { get; set; }
 
 	public int? Age { get; set; }
 

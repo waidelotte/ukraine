@@ -1,12 +1,12 @@
 ﻿using MediatR;
-using Ukraine.EfCore.Interfaces;
-using Ukraine.Services.Example.Domain.Exceptions;
+using Ukraine.Framework.Abstractions;
+using Ukraine.Framework.EFCore;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Persistence.Specifications;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.ChangeAuthorStatus;
 
-public class ChangeAuthorStatusHandler : IRequestHandler<ChangeAuthorStatusRequest, bool>
+internal sealed class ChangeAuthorStatusHandler : IRequestHandler<ChangeAuthorStatusRequest, bool>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
@@ -23,7 +23,7 @@ public class ChangeAuthorStatusHandler : IRequestHandler<ChangeAuthorStatusReque
 		var author = await repository.GetAsync(AuthorSpec.Create(request.AuthorId), cancellationToken);
 
 		if (author == null)
-			throw ExampleException.Exception("Author not exists");
+			throw new KeyNotFoundException($"Author [{request.AuthorId}] not exists");
 
 		author.ChangeStatus(request.Status);
 

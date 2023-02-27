@@ -1,9 +1,8 @@
-﻿using HotChocolate.Types;
-using Ukraine.Services.Example.Infrastructure.DTOs;
+﻿using Ukraine.Services.Example.Infrastructure.DTOs;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Authors;
 
-public class AuthorType : ObjectType<AuthorDTO>
+internal sealed class AuthorType : ObjectType<AuthorDTO>
 {
 	protected override void Configure(IObjectTypeDescriptor<AuthorDTO> descriptor)
 	{
