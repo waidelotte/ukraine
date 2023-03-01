@@ -10,8 +10,18 @@ public sealed class BookByAuthorSpec : Specification<Book>
 		Query.Where(w => w.AuthorId == authorId);
 	}
 
+	private BookByAuthorSpec(IEnumerable<Guid> authorsIds)
+	{
+		Query.Where(w => authorsIds.Contains(w.AuthorId));
+	}
+
 	public static BookByAuthorSpec Create(Guid authorId)
 	{
 		return new BookByAuthorSpec(authorId);
+	}
+
+	public static BookByAuthorSpec Create(IEnumerable<Guid> authorsIds)
+	{
+		return new BookByAuthorSpec(authorsIds);
 	}
 }

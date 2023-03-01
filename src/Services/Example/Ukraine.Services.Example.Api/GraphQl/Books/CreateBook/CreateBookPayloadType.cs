@@ -1,4 +1,4 @@
-﻿using Ukraine.Services.Example.Infrastructure.UseCases.CreateBook;
+﻿using Ukraine.Services.Example.Infrastructure.UseCases.Books.CreateBook;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Books.CreateBook;
 

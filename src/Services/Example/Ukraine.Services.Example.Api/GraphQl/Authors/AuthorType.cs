@@ -7,6 +7,6 @@ internal sealed class AuthorType : ObjectType<AuthorDTO>
 	protected override void Configure(IObjectTypeDescriptor<AuthorDTO> descriptor)
 	{
 		descriptor.Name("Author");
-		descriptor.Field(f => f.Id).ID();
+		descriptor.Field(f => f.Id).ID().IsProjected();
 	}
 }

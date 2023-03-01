@@ -5,6 +5,8 @@ namespace Ukraine.Services.Example.Persistence.Specifications;
 
 public sealed class AuthorSpec : Specification<Author>
 {
+	private AuthorSpec() { }
+
 	private AuthorSpec(Guid id)
 	{
 		Query.Where(w => w.Id == id);
@@ -13,6 +15,11 @@ public sealed class AuthorSpec : Specification<Author>
 	private AuthorSpec(IEnumerable<Guid> ids)
 	{
 		Query.Where(w => ids.Contains(w.Id));
+	}
+
+	public static AuthorSpec Create()
+	{
+		return new AuthorSpec();
 	}
 
 	public static AuthorSpec Create(Guid id)

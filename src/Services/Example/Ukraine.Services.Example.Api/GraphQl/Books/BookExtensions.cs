@@ -7,7 +7,7 @@ namespace Ukraine.Services.Example.Api.GraphQl.Books;
 internal sealed class BookExtensions
 {
 	public async Task<AuthorDTO> Author(
-		[Parent] BookDTO book, AuthorBatchDataLoader dataLoader, CancellationToken cancellationToken)
+		[Parent] BookDTO book, AuthorsBatchDataLoader dataLoader, CancellationToken cancellationToken)
 	{
 		return await dataLoader.LoadAsync(book.AuthorId, cancellationToken);
 	}

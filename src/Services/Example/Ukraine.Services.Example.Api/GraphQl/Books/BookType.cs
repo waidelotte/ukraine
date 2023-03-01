@@ -8,6 +8,6 @@ internal sealed class BookType : ObjectType<BookDTO>
 	{
 		descriptor.Name("Book");
 		descriptor.Field(f => f.Id).ID();
-		descriptor.Field(f => f.AuthorId).ID(nameof(AuthorDTO));
+		descriptor.Field(f => f.AuthorId).ID(nameof(AuthorDTO)).IsProjected();
 	}
 }

@@ -5,6 +5,7 @@ using Ukraine.Framework.Core.Options;
 using Ukraine.Services.Example.Api.GraphQl.Authors;
 using Ukraine.Services.Example.Api.GraphQl.Authors.CreateAuthor;
 using Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthorById;
+using Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthors;
 using Ukraine.Services.Example.Api.GraphQl.Books;
 using Ukraine.Services.Example.Api.GraphQl.Books.CreateBook;
 using Ukraine.Services.Example.Api.GraphQl.Options;
@@ -61,14 +62,20 @@ internal static class ServiceCollectionExtensions
 			.RegisterService<IMediator>(ServiceKind.Synchronized)
 
 			.AddType<AuthorType>()
+			.AddType<AuthorFilterType>()
+			.AddType<AuthorSortType>()
+
 			.AddType<CreateAuthorMutation>()
 			.AddType<CreateAuthorInputType>()
 			.AddType<CreateAuthorPayloadType>()
 			.AddType<GetAuthorByIdQuery>()
-			.AddType<GetAuthorByIdPayloadType>()
+			.AddType<GetAuthorsQuery>()
 			.AddTypeExtension<AuthorExtensions>()
 
 			.AddType<BookType>()
+			.AddType<BookFilterType>()
+			.AddType<BookSortType>()
+
 			.AddType<CreateBookMutation>()
 			.AddType<CreateBookInputType>()
 			.AddType<CreateBookPayloadType>()

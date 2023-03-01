@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Services.Example.Domain.Enums;
 using Ukraine.Services.Example.Domain.Events;
-using Ukraine.Services.Example.Infrastructure.UseCases.ChangeAuthorStatus;
+using Ukraine.Services.Example.Infrastructure.UseCases.Authors.ChangeAuthorStatus;
 
 namespace Ukraine.Services.Example.Api.Controllers;
 

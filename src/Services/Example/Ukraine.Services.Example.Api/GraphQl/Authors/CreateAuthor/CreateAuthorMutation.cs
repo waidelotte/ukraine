@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Ukraine.Services.Example.Api.GraphQl.Errors;
-using Ukraine.Services.Example.Infrastructure.UseCases.CreateAuthor;
+using Ukraine.Services.Example.Infrastructure.UseCases.Authors.CreateAuthor;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Authors.CreateAuthor;
 
