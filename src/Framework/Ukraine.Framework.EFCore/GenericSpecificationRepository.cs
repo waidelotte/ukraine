@@ -29,6 +29,11 @@ internal class GenericSpecificationRepository<TEntity> : ISpecificationRepositor
 		return await ApplySpecification(specification).ProjectTo<TProject>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
 	}
 
+	public async Task<IEnumerable<TProject>> GetProjectListAsync<TProject>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+	{
+		return await ApplySpecification(specification).ProjectTo<TProject>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+	}
+
 	private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
 	{
 		return SpecificationEvaluator.Default.GetQuery(_dbSet.AsQueryable(), specification);

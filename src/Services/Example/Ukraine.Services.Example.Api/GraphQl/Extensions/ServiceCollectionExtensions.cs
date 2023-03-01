@@ -5,6 +5,8 @@ using Ukraine.Framework.Core.Options;
 using Ukraine.Services.Example.Api.GraphQl.Authors;
 using Ukraine.Services.Example.Api.GraphQl.Authors.CreateAuthor;
 using Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthorById;
+using Ukraine.Services.Example.Api.GraphQl.Books;
+using Ukraine.Services.Example.Api.GraphQl.Books.CreateBook;
 using Ukraine.Services.Example.Api.GraphQl.Options;
 using Ukraine.Services.Example.Persistence;
 
@@ -57,13 +59,21 @@ internal static class ServiceCollectionExtensions
 			})
 			.AddMutationConventions(applyToAllMutations: true)
 			.RegisterService<IMediator>(ServiceKind.Synchronized)
+
 			.AddType<AuthorType>()
-			.AddTypeExtension<AuthorExtensions>()
 			.AddType<CreateAuthorMutation>()
 			.AddType<CreateAuthorInputType>()
 			.AddType<CreateAuthorPayloadType>()
 			.AddType<GetAuthorByIdQuery>()
 			.AddType<GetAuthorByIdPayloadType>()
+			.AddTypeExtension<AuthorExtensions>()
+
+			.AddType<BookType>()
+			.AddType<CreateBookMutation>()
+			.AddType<CreateBookInputType>()
+			.AddType<CreateBookPayloadType>()
+			.AddTypeExtension<BookExtensions>()
+
 			.InitializeOnStartup();
 
 		return serviceCollection;

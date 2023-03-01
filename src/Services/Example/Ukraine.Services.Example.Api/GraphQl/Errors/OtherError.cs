@@ -13,4 +13,9 @@ internal sealed class OtherError
 	{
 		return new OtherError(ex.Message);
 	}
+
+	public static OtherError CreateErrorFrom(KeyNotFoundException ex)
+	{
+		return new OtherError(ex.Message);
+	}
 }

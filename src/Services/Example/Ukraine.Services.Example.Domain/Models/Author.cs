@@ -11,7 +11,7 @@ public sealed class Author : AuditableBase<Guid>
 
 	public AuthorStatus Status { get; private set; }
 
-	public IEnumerable<Book> Books { get; } = new HashSet<Book>();
+	public ICollection<Book> Books { get; } = new HashSet<Book>();
 
 	public void ChangeStatus(AuthorStatus status)
 	{

@@ -8,7 +8,7 @@ public sealed class Book : AuditableBase<Guid>
 
 	public int Rating { get; private set; }
 
-	public Guid AuthorId { get; private set; }
+	public Guid AuthorId { get; init; }
 
 	public Author Author { get; private set; } = null!;
 }
