@@ -25,9 +25,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     fullname = table.Column<string>(name: "full_name", type: "text", nullable: false),
                     age = table.Column<int>(type: "integer", nullable: true),
-                    status = table.Column<int>(type: "integer", nullable: false),
-                    createdutc = table.Column<DateTime>(name: "created_utc", type: "timestamp with time zone", nullable: false),
-                    lastmodifiedutc = table.Column<DateTime>(name: "last_modified_utc", type: "timestamp with time zone", nullable: true)
+                    status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,9 +40,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     rating = table.Column<int>(type: "integer", nullable: false),
-                    authorid = table.Column<Guid>(name: "author_id", type: "uuid", nullable: false),
-                    createdutc = table.Column<DateTime>(name: "created_utc", type: "timestamp with time zone", nullable: false),
-                    lastmodifiedutc = table.Column<DateTime>(name: "last_modified_utc", type: "timestamp with time zone", nullable: true)
+                    authorid = table.Column<Guid>(name: "author_id", type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {

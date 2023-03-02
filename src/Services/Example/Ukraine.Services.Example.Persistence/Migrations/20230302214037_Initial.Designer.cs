@@ -12,7 +12,7 @@ using Ukraine.Services.Example.Persistence;
 namespace Ukraine.Services.Example.Persistence.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    [Migration("20230227135055_Initial")]
+    [Migration("20230302214037_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,18 +38,10 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
-                    b.Property<DateTime>("CreatedUtc")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_utc");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("full_name");
-
-                    b.Property<DateTime?>("LastModifiedUtc")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_modified_utc");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")
@@ -71,14 +63,6 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uuid")
                         .HasColumnName("author_id");
-
-                    b.Property<DateTime>("CreatedUtc")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_utc");
-
-                    b.Property<DateTime?>("LastModifiedUtc")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_modified_utc");
 
                     b.Property<string>("Name")
                         .IsRequired()

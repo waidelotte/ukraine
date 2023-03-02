@@ -3,7 +3,7 @@ using Ukraine.Services.Example.Domain.Enums;
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public sealed class Author : AuditableBase<Guid>
+public sealed class Author : EntityRootBase<Guid>
 {
 	public required string FullName { get; init; }
 

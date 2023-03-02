@@ -31,7 +31,6 @@ public static class ServiceCollectionExtensions
 			});
 
 			dbBuilder.UseSnakeCaseNamingConvention();
-			dbBuilder.AddAuditSaveInterceptor();
 		});
 
 		serviceCollection.AddDatabaseFacadeResolver<ExampleContext>();
