@@ -1,4 +1,5 @@
 ﻿using Duende.IdentityServer.EntityFramework.DbContexts;
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,6 +13,7 @@ using Ukraine.Framework.Dapr;
 using Ukraine.Framework.EFCore;
 using Ukraine.Services.Identity.Models;
 using Ukraine.Services.Identity.Persistence;
+using Ukraine.Services.Identity.Services;
 using IdentityOptions = Ukraine.Services.Identity.Options.IdentityOptions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -101,6 +103,8 @@ if (isDevelopment)
 	 identitySever.AddDeveloperSigningCredential();
 
 services.AddAuthentication();
+
+services.AddScoped<IProfileService, ProfileService>();
 
 services
 	.AddHealthChecks()

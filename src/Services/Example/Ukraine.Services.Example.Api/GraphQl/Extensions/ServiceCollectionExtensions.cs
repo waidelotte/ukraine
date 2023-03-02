@@ -9,6 +9,7 @@ using Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthors;
 using Ukraine.Services.Example.Api.GraphQl.Books;
 using Ukraine.Services.Example.Api.GraphQl.Books.CreateBook;
 using Ukraine.Services.Example.Api.GraphQl.Options;
+using Ukraine.Services.Example.Api.GraphQl.Users.GetMyId;
 using Ukraine.Services.Example.Persistence;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Extensions;
@@ -80,6 +81,8 @@ internal static class ServiceCollectionExtensions
 			.AddType<CreateBookInputType>()
 			.AddType<CreateBookPayloadType>()
 			.AddTypeExtension<BookExtensions>()
+
+			.AddType<GetMyIdQuery>()
 
 			.InitializeOnStartup();
 

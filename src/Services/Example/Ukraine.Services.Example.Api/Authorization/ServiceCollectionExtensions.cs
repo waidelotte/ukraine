@@ -15,6 +15,12 @@ internal static class ServiceCollectionExtensions
 			{
 				builder.RequireClaim("scope", Constants.Scope.GRAPHQL_SCOPE);
 			});
+
+			options.AddPolicy(Constants.Policy.GRAPHQL_ADMIN, builder =>
+			{
+				builder.RequireRole(Constants.Role.ADMIN);
+				builder.RequireClaim("scope", Constants.Scope.GRAPHQL_SCOPE);
+			});
 		});
 	}
 }
