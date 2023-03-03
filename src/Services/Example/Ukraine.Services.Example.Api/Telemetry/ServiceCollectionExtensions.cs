@@ -13,7 +13,7 @@ internal static class ServiceCollectionExtensions
 		var telemetryOptions = serviceCollection
 			.BindAndGetOptions<ServiceTelemetryOptions>(configuration.GetSection(ServiceTelemetryOptions.CONFIGURATION_SECTION));
 
-		serviceCollection.AddOpenTelemetryTracing(o =>
+		serviceCollection.AddOpenTelemetry().WithTracing(o =>
 		{
 			o.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(Constants.SERVICE_ID))
 				.SetSampler(new AlwaysOnSampler());
