@@ -3,7 +3,7 @@ using MediatR;
 using Ukraine.Services.Example.Api.GraphQl.Errors;
 using Ukraine.Services.Example.Infrastructure.UseCases.Books.CreateBook;
 
-namespace Ukraine.Services.Example.Api.GraphQl.Books.CreateBook;
+namespace Ukraine.Services.Example.Api.GraphQl.Data.Books.CreateBook;
 
 [ExtendObjectType(Name = OperationTypeNames.Mutation)]
 internal sealed class CreateBookMutation

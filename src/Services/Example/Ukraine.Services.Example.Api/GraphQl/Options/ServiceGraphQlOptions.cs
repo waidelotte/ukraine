@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using HotChocolate.Execution.Options;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Options;
 
@@ -24,6 +25,8 @@ internal sealed class ServiceGraphQlOptions
 	public bool EnableBananaCakePop { get; set; }
 
 	public bool EnableBatching { get; set; }
+
+	public TracingPreference ApolloTracing { get; set; } = TracingPreference.Never;
 
 	[Required]
 	public required TimeSpan ExecutionTimeout { get; set; }

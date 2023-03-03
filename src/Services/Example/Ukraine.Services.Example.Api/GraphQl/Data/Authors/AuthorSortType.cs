@@ -1,7 +1,7 @@
 ﻿using HotChocolate.Data.Sorting;
 using Ukraine.Services.Example.Infrastructure.DTOs;
 
-namespace Ukraine.Services.Example.Api.GraphQl.Authors;
+namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors;
 
 public class AuthorSortType : SortInputType<AuthorDTO>
 {

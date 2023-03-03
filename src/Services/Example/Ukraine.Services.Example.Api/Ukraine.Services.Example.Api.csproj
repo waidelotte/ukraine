@@ -29,4 +29,8 @@
     <ItemGroup>
       <ProjectReference Include="..\Ukraine.Services.Example.Infrastructure\Ukraine.Services.Example.Infrastructure.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="GraphQl\Data" />
+    </ItemGroup>
 </Project>

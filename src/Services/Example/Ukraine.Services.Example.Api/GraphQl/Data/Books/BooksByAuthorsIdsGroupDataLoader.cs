@@ -2,7 +2,7 @@
 using Ukraine.Services.Example.Infrastructure.DTOs;
 using Ukraine.Services.Example.Infrastructure.UseCases.Books.GetBooksByAuthorsIds;
 
-namespace Ukraine.Services.Example.Api.GraphQl.DataLoaders;
+namespace Ukraine.Services.Example.Api.GraphQl.Data.Books;
 
 public class BooksByAuthorsIdsGroupDataLoader : GroupedDataLoader<Guid, BookDTO>
 {

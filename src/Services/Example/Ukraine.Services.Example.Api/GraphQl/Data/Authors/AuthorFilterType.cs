@@ -1,7 +1,7 @@
 ﻿using HotChocolate.Data.Filters;
 using Ukraine.Services.Example.Infrastructure.DTOs;
 
-namespace Ukraine.Services.Example.Api.GraphQl.Authors;
+namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors;
 
 public class AuthorFilterType : FilterInputType<AuthorDTO>
 {

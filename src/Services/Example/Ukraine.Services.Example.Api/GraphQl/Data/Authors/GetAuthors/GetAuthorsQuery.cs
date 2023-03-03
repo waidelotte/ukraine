@@ -2,7 +2,7 @@
 using Ukraine.Services.Example.Infrastructure.DTOs;
 using Ukraine.Services.Example.Infrastructure.UseCases.Authors.GetAuthorQuery;
 
-namespace Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthors;
+namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthors;
 
 [ExtendObjectType(Name = OperationTypeNames.Query)]
 internal sealed class GetAuthorsQuery

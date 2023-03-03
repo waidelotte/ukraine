@@ -1,13 +1,12 @@
-﻿using Ukraine.Services.Example.Api.GraphQl.DataLoaders;
-using Ukraine.Services.Example.Infrastructure.DTOs;
+﻿using Ukraine.Services.Example.Infrastructure.DTOs;
 
-namespace Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthorById;
+namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthorById;
 
 [ExtendObjectType(Name = OperationTypeNames.Query)]
 internal sealed class GetAuthorByIdQuery
 {
 	public async Task<AuthorDTO> GetAuthorByIdAsync(
-		AuthorsBatchDataLoader dataLoader,
+		AuthorsByIdsBatchDataLoader dataLoader,
 		[ID(nameof(AuthorDTO))] Guid authorId,
 		CancellationToken cancellationToken)
 	{

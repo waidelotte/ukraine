@@ -1,15 +1,17 @@
-﻿using HotChocolate.Language;
+﻿using HotChocolate.Execution.Options;
+using HotChocolate.Language;
 using HotChocolate.Types.Pagination;
 using MediatR;
 using Ukraine.Framework.Core.Options;
-using Ukraine.Services.Example.Api.GraphQl.Authors;
-using Ukraine.Services.Example.Api.GraphQl.Authors.CreateAuthor;
-using Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthorById;
-using Ukraine.Services.Example.Api.GraphQl.Authors.GetAuthors;
-using Ukraine.Services.Example.Api.GraphQl.Books;
-using Ukraine.Services.Example.Api.GraphQl.Books.CreateBook;
+using Ukraine.Services.Example.Api.GraphQl.Data.Authors;
+using Ukraine.Services.Example.Api.GraphQl.Data.Authors.CreateAuthor;
+using Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthorById;
+using Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthors;
+using Ukraine.Services.Example.Api.GraphQl.Data.Books;
+using Ukraine.Services.Example.Api.GraphQl.Data.Books.CreateBook;
+using Ukraine.Services.Example.Api.GraphQl.Data.Users.GetMyId;
+using Ukraine.Services.Example.Api.GraphQl.Interceptors;
 using Ukraine.Services.Example.Api.GraphQl.Options;
-using Ukraine.Services.Example.Api.GraphQl.Users.GetMyId;
 using Ukraine.Services.Example.Persistence;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Extensions;
@@ -39,6 +41,7 @@ internal static class ServiceCollectionExtensions
 			.AddFiltering()
 			.AddProjections()
 			.AddSorting()
+			.AddHttpRequestInterceptor<HttpRequestInterceptor>()
 			.AllowIntrospection(graphQlOptions.EnableIntrospection)
 			.ModifyRequestOptions(o =>
 			{
@@ -84,6 +87,7 @@ internal static class ServiceCollectionExtensions
 
 			.AddType<GetMyIdQuery>()
 
+			.AddApolloTracing(graphQlOptions.ApolloTracing)
 			.InitializeOnStartup();
 
 		return serviceCollection;

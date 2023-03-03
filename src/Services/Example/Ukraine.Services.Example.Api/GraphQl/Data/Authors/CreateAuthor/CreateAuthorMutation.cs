@@ -3,7 +3,7 @@ using MediatR;
 using Ukraine.Services.Example.Api.GraphQl.Errors;
 using Ukraine.Services.Example.Infrastructure.UseCases.Authors.CreateAuthor;
 
-namespace Ukraine.Services.Example.Api.GraphQl.Authors.CreateAuthor;
+namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors.CreateAuthor;
 
 [ExtendObjectType(Name = OperationTypeNames.Mutation)]
 internal sealed class CreateAuthorMutation
