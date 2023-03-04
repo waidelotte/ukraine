@@ -1,168 +1,73 @@
-﻿using Duende.IdentityServer.EntityFramework.DbContexts;
-using Duende.IdentityServer.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Ukraine.Framework.Core.Configuration;
-using Ukraine.Framework.Core.HealthChecks;
-using Ukraine.Framework.Core.Host;
-using Ukraine.Framework.Core.Options;
-using Ukraine.Framework.Core.Serilog;
-using Ukraine.Framework.Dapr;
-using Ukraine.Framework.EFCore;
-using Ukraine.Services.Identity.Models;
+using Serilog;
+using Skoruba.AuditLogging.EntityFramework.Entities;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.Configuration;
+using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.ApplicationBuilder;
+using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.DependencyInjection;
+using Ukraine.Services.Identity.Core.DTOs;
 using Ukraine.Services.Identity.Persistence;
-using Ukraine.Services.Identity.Services;
-using IdentityOptions = Ukraine.Services.Identity.Options.IdentityOptions;
+using Ukraine.Services.Identity.Persistence.DbContexts;
+using Ukraine.Services.Identity.Persistence.Entities;
+using Ukraine.Services.Identity.Persistence.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
-var isDevelopment = builder.Environment.IsDevelopment();
 
-configuration.AddDaprSecretStore("ukraine-secretstore");
+var loggerConfiguration = new LoggerConfiguration()
+	.ReadFrom.Configuration(configuration);
 
-builder.Host.UseSerilog(configuration);
-builder.Host.AddServicesValidationOnBuild();
+Log.Logger = loggerConfiguration.CreateLogger();
 
-var connectionString = builder.Configuration.GetRequiredConnectionString("Postgres");
+builder.Host.UseSerilog();
 
-services.AddRazorPages();
-
-services.AddDbContext<UkraineIdentityContext>(dbBuilder =>
+services.AddIdentityServerAdminUI<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext,
+	AdminLogDbContext, AdminAuditLogDbContext, AuditLog, IdentityServerDataProtectionDbContext,
+	UserIdentity, UserIdentityRole, UserIdentityUserClaim, UserIdentityUserRole,
+	UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken, string,
+	IdentityUserDTO, IdentityRoleDTO, IdentityUsersDTO, IdentityRolesDTO, IdentityUserRolesDTO,
+	IdentityUserClaimsDTO, IdentityUserProviderDTO, IdentityUserProvidersDTO, IdentityUserChangePasswordDTO,
+	IdentityRoleClaimsDTO, IdentityUserClaimDTO, IdentityRoleClaimDTO>(options =>
 {
-	dbBuilder.UseNpgsql(connectionString, sqlOptions =>
-	{
-		sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
-		sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_example");
-	});
-
-	dbBuilder.UseSnakeCaseNamingConvention();
+	options.BindConfiguration(configuration);
+	options.Security.UseDeveloperExceptionPage = builder.Environment.IsDevelopment();
+	options.DatabaseMigrations.SetMigrationsAssemblies(typeof(MigrationAssembly).Assembly.GetName().Name);
+	options.Testing.IsStaging = builder.Environment.IsStaging() || builder.Environment.IsProduction();
 });
-
-services.AddDatabaseFacadeResolver<UkraineIdentityContext>();
-services.TryAddScoped<DbContext, UkraineIdentityContext>();
-
-var identityOptions = builder.Configuration.GetRequiredSection(IdentityOptions.SECTION_NAME).GetOptions<IdentityOptions>();
-
-services
-	.AddIdentity<UkraineUser, IdentityRole>(options =>
-	{
-		options.SignIn.RequireConfirmedEmail = identityOptions.User.Email.RequireConfirmed;
-		options.User.RequireUniqueEmail = identityOptions.User.Email.RequireUnique;
-		options.Password.RequireDigit = identityOptions.User.Password.RequireDigit;
-		options.Password.RequiredLength = identityOptions.User.Password.RequiredLength;
-		options.Password.RequireUppercase = identityOptions.User.Password.RequireUppercase;
-		options.Password.RequireLowercase = identityOptions.User.Password.RequireLowercase;
-		options.Password.RequireNonAlphanumeric = identityOptions.User.Password.RequireNonAlphanumeric;
-	})
-	.AddDefaultTokenProviders()
-	.AddEntityFrameworkStores<UkraineIdentityContext>();
-
-var identitySever = builder.Services
-	.AddIdentityServer(options =>
-	{
-		options.IssuerUri = identityOptions.IssuerUri;
-		options.Authentication.CookieLifetime = identityOptions.CookieLifetime;
-		options.EmitStaticAudienceClaim = identityOptions.EmitStaticAudienceClaim;
-		options.Events.RaiseErrorEvents = identityOptions.RaiseErrorEvents;
-		options.Events.RaiseInformationEvents = identityOptions.RaiseInformationEvents;
-		options.Events.RaiseFailureEvents = identityOptions.RaiseFailureEvents;
-		options.Events.RaiseSuccessEvents = identityOptions.RaiseSuccessEvents;
-	})
-	.AddAspNetIdentity<UkraineUser>()
-	.AddConfigurationStore(configurationStoreOptions =>
-	{
-		configurationStoreOptions.DefaultSchema = "ukraine_identity_configuration";
-		configurationStoreOptions.ConfigureDbContext = b =>
-		{
-			b.UseSnakeCaseNamingConvention();
-			b.UseNpgsql(connectionString, sqlOptions =>
-			{
-				sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
-				sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_configuration");
-			});
-		};
-	})
-	.AddOperationalStore(operationalStoreOptions =>
-	{
-		operationalStoreOptions.DefaultSchema = "ukraine_identity_operational";
-		operationalStoreOptions.ConfigureDbContext = b =>
-		{
-			b.UseSnakeCaseNamingConvention();
-			b.UseNpgsql(connectionString, sqlOptions =>
-			{
-				sqlOptions.MigrationsAssembly(typeof(UkraineIdentityContext).Assembly.GetName().Name);
-				sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_identity_operational");
-			});
-		};
-	});
-
-if (isDevelopment)
-	 identitySever.AddDeveloperSigningCredential();
-
-services.AddAuthentication();
-
-services.AddScoped<IProfileService, ProfileService>();
-
-services
-	.AddHealthChecks()
-	.AddCheck(
-		"Identity Server",
-		() => HealthCheckResult.Healthy(),
-		new[] { "service", "identity" })
-	.AddNpgSql(
-		connectionString,
-		name: "Postgres Database",
-		tags: new[] { "database", "postgres" });
 
 var app = builder.Build();
 
-if (isDevelopment)
-{
-	app.UseDeveloperExceptionPage();
+await ApplyDbMigrationsWithDataSeedAsync(configuration, app);
 
-	using (var scope = app.Services.CreateScope())
-	{
-		await scope.MigrateDatabaseAsync<UkraineIdentityContext>();
-		await scope.MigrateDatabaseAsync<ConfigurationDbContext>();
-		await scope.MigrateDatabaseAsync<PersistedGrantDbContext>();
-
-		if (isDevelopment)
-		{
-			await scope.SeedAdminRoleAsync();
-			await scope.SeedDevUserAsync();
-			await scope.SeedApiScopesAsync();
-			await scope.SeedApiResourcesAsync();
-			await scope.SeedIdentityResourcesAsync();
-			await scope.SeedClientsAsync();
-		}
-	}
-
-	app.UseDeveloperExceptionPage();
-}
-
-app.UseStaticFiles();
-
-// Fix login issues with Chrome 80+ using HTTP
-app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
 app.UseRouting();
-app.UseIdentityServer();
-app.UseAuthorization();
-app.MapRazorPages().RequireAuthorization();
-app.MapDefaultHealthChecks();
+app.UseIdentityServerAdminUI();
+app.MapIdentityServerAdminUI();
+app.MapIdentityServerAdminUIHealthChecks();
 
 try
 {
-	app.Logger.LogInformation("Starting Web Host [service-identity]");
+	app.Logger.LogInformation("Starting Web Host [ukraine-identity]");
 	app.Run();
 }
 catch (Exception ex)
 {
-	app.Logger.LogCritical(ex, "Host terminated unexpectedly [service-identity]");
+	app.Logger.LogCritical(ex, "Host terminated unexpectedly [ukraine-identity]");
 }
 finally
 {
-	Serilog.Log.CloseAndFlush();
+	Log.CloseAndFlush();
+}
+
+static async Task ApplyDbMigrationsWithDataSeedAsync(IConfiguration configuration, IHost host)
+{
+	var seedConfiguration = configuration.GetSection(nameof(SeedConfiguration)).Get<SeedConfiguration>();
+	var databaseMigrationsConfiguration = configuration.GetSection(nameof(DatabaseMigrationsConfiguration))
+		.Get<DatabaseMigrationsConfiguration>();
+
+	await DbMigrationHelpers
+		.ApplyDbMigrationsWithDataSeedAsync<IdentityServerConfigurationDbContext, AdminIdentityDbContext,
+			IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext,
+			IdentityServerDataProtectionDbContext, UserIdentity, UserIdentityRole>(
+			host,
+			seedConfiguration,
+			databaseMigrationsConfiguration);
 }

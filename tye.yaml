@@ -12,6 +12,10 @@ extensions:
         enabled: false
       web-status:
         enabled: false
+      service-identity:
+        enabled: false
+      service-identity-token:
+        enabled: false
   - name: seq
     logPath: ./.logs
 
@@ -55,6 +59,7 @@ services:
       - port: 7001
     tags:
       - example
+      - identity
 
   - name: service-identity
     project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
@@ -67,13 +72,24 @@ services:
       - example
       - identity
 
+  - name: service-identity-token
+    project: src/Services/Identity/Ukraine.Services.Identity.Token/Ukraine.Services.Identity.Token.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7003
+    tags:
+      - example
+      - identity
+
   - name: service-example-api
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7003
+      - port: 7004
     tags:
       - example
 
@@ -83,6 +99,6 @@ services:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7004
+      - port: 7005
     tags:
       - example

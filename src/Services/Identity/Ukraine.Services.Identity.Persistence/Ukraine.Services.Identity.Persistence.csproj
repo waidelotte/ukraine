@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration" Version="1.2.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
+</Project>
