@@ -1,11 +1,4 @@
 ﻿@using Duende.IdentityServer.Extensions
-@{
-    string? name = null;
-    if (!true.Equals(ViewData["signed-out"]))
-    {
-        name = Context.User.GetDisplayName();
-    }
-}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +13,7 @@
 <body>
 
     <div class="menu d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow">
-        @if (User.Identity?.IsAuthenticated == true && !string.IsNullOrEmpty(name))
+        @if (User.Identity?.IsAuthenticated == true && !string.IsNullOrEmpty(Context.User.GetDisplayName()))
         {
             <a class="menu-item my-2 btn btn-outline-primary" asp-action="Logout" asp-controller="Account">Logout</a>
         }
