@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Hosting
+@model Ukraine.Services.Identity.ViewModels.Home.ErrorViewModel
+@inject IWebHostEnvironment Host
+
+@{
+	var error = Model.Error?.Error;
+	var errorDescription = Host.IsDevelopment() ? Model.Error?.ErrorDescription : null;
+	var requestId = Model.Error?.RequestId;
+}
+
+<h1>Error</h1>
+
+<div>
+	<div>
+		Sorry, there was an error
+
+		@if (error != null)
+		{
+			<strong>
+				<em>
+					: @error
+				</em>
+			</strong>
+
+			if (errorDescription != null)
+			{
+				<div>@errorDescription</div>
+			}
+		}
+	</div>
+
+	@if (requestId != null)
+	{
+		<div>Request Id: @requestId</div>
+	}
+</div>
