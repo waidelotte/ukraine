@@ -13,8 +13,8 @@ internal static class Constants
 
 	public static class Scope
 	{
-		public const string REST_SCOPE = "API_REST_EXAMPLE_SCOPE";
-		public const string GRAPHQL_SCOPE = "API_GRAPHQL_EXAMPLE_SCOPE";
+		public const string REST_SCOPE = "service-example-rest-scope";
+		public const string GRAPHQL_SCOPE = "service-example-graphql-scope";
 	}
 
 	public static class Role
