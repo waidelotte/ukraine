@@ -2,7 +2,7 @@
 using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
-namespace Ukraine.Services.Identity.Token.Configurations;
+namespace Ukraine.Services.Identity.Token.Application;
 
 public class OpenIdClaimsMappingConfig : ConfigureAuthenticationOptions<OpenIdConnectOptions, OidcProvider>
 {

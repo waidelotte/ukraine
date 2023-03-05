@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
-namespace Ukraine.Services.Identity.Token.Conventions
+namespace Ukraine.Services.Identity.Token.Application
 {
 	public class GenericTypeControllerFeatureProvider<TUser, TKey> : IApplicationFeatureProvider<ControllerFeature>
 		where TUser : IdentityUser<TKey>

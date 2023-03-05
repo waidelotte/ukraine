@@ -1,7 +1,7 @@
 ﻿using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Validation;
 
-namespace Ukraine.Services.Identity.Token.Validators
+namespace Ukraine.Services.Identity.Token.Application
 {
 	public class DelegationGrantValidator : IExtensionGrantValidator
 	{

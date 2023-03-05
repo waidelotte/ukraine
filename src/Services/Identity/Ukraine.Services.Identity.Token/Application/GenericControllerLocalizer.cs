@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Localization;
 
-namespace Ukraine.Services.Identity.Token.Localization;
+namespace Ukraine.Services.Identity.Token.Application;
 
 public class GenericControllerLocalizer<TResourceSource> : IGenericControllerLocalizer<TResourceSource>
 {

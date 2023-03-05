@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 
-namespace Ukraine.Services.Identity.Token.Localization
+namespace Ukraine.Services.Identity.Token.Application
 {
 	public interface IGenericControllerLocalizer<out T>
 	{

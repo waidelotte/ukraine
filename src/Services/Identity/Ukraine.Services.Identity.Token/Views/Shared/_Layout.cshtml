@@ -1,0 +1,63 @@
+﻿@using Duende.IdentityServer.Extensions
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    string? name = null;
+    if (!true.Equals(ViewData["signed-out"]))
+    {
+        name = Context.User.GetDisplayName();
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ukraine Identity</title>
+    <link href="~/dist/css/bundle.min.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/dist/css/web.css" asp-append-version="true" rel="stylesheet" />
+    @await RenderSectionAsync("styles", required: false)
+</head>
+<body>
+
+    <div class="menu d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow">
+        <!--Site name -->
+        <h3 class="menu-logo my-0 mr-md-auto font-weight-normal"><a class="logo" asp-area="" asp-controller="Home" asp-action="Index">Ukraine Identity</a></h3>
+        <!--Menu item -->
+        @if (User.Identity?.IsAuthenticated == true && !string.IsNullOrEmpty(name))
+        {
+            <!--Menu item -->
+            <vc:identity-server-admin-link></vc:identity-server-admin-link>
+
+            <!--Menu item -->
+            <div class="menu-item my-2 my-md-0 mr-md-3 dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    @Localizer["Settings"] - @name
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" asp-controller="Manage" asp-action="Index">@Localizer["ManageProfile"]</a>
+                    <a class="dropdown-item" asp-controller="Manage" asp-action="PersonalData">@Localizer["ManagePersonalData"]</a>
+                    <a class="dropdown-item" asp-controller="Grants" asp-action="Index">@Localizer["Grants"]</a>
+                </div>
+            </div>
+
+            <a class="menu-item my-2 btn btn-outline-primary" asp-action="Logout" asp-controller="Account">@Localizer["Signout"]</a>
+        }
+
+        <!--Menu button - show in < MD -->
+        <a class="my-2 btn btn-outline-primary menu-button" href="#">
+            <span class="oi oi-menu" title="menu" aria-hidden="true"></span> @Localizer["Menu"]
+        </a>
+    </div>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <script src="~/dist/js/bundle.min.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("scripts", required: false)
+</body>
+</html>

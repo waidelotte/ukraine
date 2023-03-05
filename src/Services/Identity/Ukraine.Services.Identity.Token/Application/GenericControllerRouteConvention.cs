@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace Ukraine.Services.Identity.Token.Conventions;
+namespace Ukraine.Services.Identity.Token.Application;
 
 public class GenericControllerRouteConvention : IControllerModelConvention
 {

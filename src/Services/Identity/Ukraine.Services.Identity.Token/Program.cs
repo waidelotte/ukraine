@@ -1,6 +1,7 @@
 using System.Globalization;
 using Duende.IdentityServer.Configuration;
 using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
@@ -9,17 +10,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.PostgreSQL;
-using Skoruba.Duende.IdentityServer.Shared.Configuration.Authentication;
-using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Common;
-using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
-using Skoruba.Duende.IdentityServer.Shared.Configuration.Helpers;
 using Ukraine.Services.Identity.Persistence.DbContexts;
 using Ukraine.Services.Identity.Persistence.Entities;
-using Ukraine.Services.Identity.Token.Configurations;
-using Ukraine.Services.Identity.Token.Conventions;
-using Ukraine.Services.Identity.Token.Localization;
-using Ukraine.Services.Identity.Token.Managers;
-using Ukraine.Services.Identity.Token.Validators;
+using Ukraine.Services.Identity.Token.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -47,17 +40,12 @@ services.RegisterNpgSqlDbContexts<
 	persistedGrantsConnectionString,
 	dataProtectionConnectionString);
 
-services.AddDataProtection<IdentityServerDataProtectionDbContext>(
-	new DataProtectionConfiguration
-	{
-		ProtectKeysWithAzureKeyVault = false
-	},
-	new AzureKeyVaultConfiguration());
+services
+	.AddDataProtection()
+	.SetApplicationName("Ukraine.IdentityServer")
+	.PersistKeysToDbContext<IdentityServerDataProtectionDbContext>();
 
 services
-	.AddSingleton(configuration.GetSection(nameof(RegisterConfiguration)).Get<RegisterConfiguration>())
-	.AddSingleton(configuration.GetSection(nameof(IdentityOptions)).Get<IdentityOptions>())
-	.AddScoped<ApplicationSignInManager<UserIdentity>>()
 	.AddIdentity<UserIdentity, UserIdentityRole>(options => configuration.GetSection(nameof(IdentityOptions)).Bind(options))
 	.AddEntityFrameworkStores<AdminIdentityDbContext>()
 	.AddDefaultTokenProviders();
@@ -66,10 +54,6 @@ services.Configure<CookiePolicyOptions>(options =>
 {
 	options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
 	options.Secure = CookieSecurePolicy.SameAsRequest;
-	options.OnAppendCookie = cookieContext =>
-		AuthenticationHelpers.CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
-	options.OnDeleteCookie = cookieContext =>
-		AuthenticationHelpers.CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
 });
 
 var configurationSection = configuration.GetSection(nameof(IdentityServerOptions));
@@ -124,8 +108,7 @@ services.AddAuthorization(options =>
 	options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("admin"));
 });
 
-
-var healthChecksBuilder = services
+services
 	.AddHealthChecks()
 	.AddDbContextCheck<IdentityServerConfigurationDbContext>("ConfigurationDbContext")
 	.AddDbContextCheck<IdentityServerPersistedGrantDbContext>("PersistedGrantsDbContext")
@@ -147,7 +130,6 @@ var healthChecksBuilder = services
 		dataProtectionConnectionString,
 		name: "DataProtectionDb",
 		healthQuery: "SELECT * FROM \"DataProtectionKeys\" LIMIT 1");
-
 
 var app = builder.Build();
 
