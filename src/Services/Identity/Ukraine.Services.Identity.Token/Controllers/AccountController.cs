@@ -1,36 +1,28 @@
-﻿using Duende.IdentityServer.Events;
-using Duende.IdentityServer.Extensions;
-using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Ukraine.Services.Identity.Token.Application;
+using Ukraine.Services.Identity.Persistence.Entities;
 using Ukraine.Services.Identity.Token.ViewModels.Account;
 
 namespace Ukraine.Services.Identity.Token.Controllers;
 
-[SecurityHeaders]
 [Authorize]
-public class AccountController<TUser, TKey> : Controller
-	where TUser : IdentityUser<TKey>, new()
-	where TKey : IEquatable<TKey>
+public class AccountController : Controller
 {
-	private readonly UserManager<TUser> _userManager;
-	private readonly SignInManager<TUser> _signInManager;
+	private readonly UserManager<UserIdentity> _userManager;
+	private readonly SignInManager<UserIdentity> _signInManager;
 	private readonly IIdentityServerInteractionService _interaction;
-	private readonly IEventService _events;
 
 	public AccountController(
-		UserManager<TUser> userManager,
-		SignInManager<TUser> signInManager,
-		IIdentityServerInteractionService interaction,
-		IEventService events)
+		UserManager<UserIdentity> userManager,
+		SignInManager<UserIdentity> signInManager,
+		IIdentityServerInteractionService interaction)
 	{
 		_userManager = userManager;
 		_signInManager = signInManager;
 		_interaction = interaction;
-		_events = events;
 	}
 
 	[HttpGet]
@@ -59,7 +51,7 @@ public class AccountController<TUser, TKey> : Controller
 			{
 				await _interaction.DenyAuthorizationAsync(context, AuthorizationError.AccessDenied);
 
-				return context.IsNativeClient() ? this.LoadingPage("Redirect", model.ReturnUrl) : Redirect(model.ReturnUrl);
+				return Redirect(model.ReturnUrl);
 			}
 
 			return Redirect("~/");
@@ -68,17 +60,13 @@ public class AccountController<TUser, TKey> : Controller
 		if (ModelState.IsValid)
 		{
 			var user = await _userManager.FindByNameAsync(model.Username);
-			if (user != default(TUser))
+			if (user != default(UserIdentity))
 			{
 				var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberLogin, lockoutOnFailure: true);
 				if (result.Succeeded)
 				{
-					await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName));
-
 					if (context != null && !string.IsNullOrEmpty(model.ReturnUrl))
-					{
-						return context.IsNativeClient() ? this.LoadingPage("Redirect", model.ReturnUrl) : Redirect(model.ReturnUrl);
-					}
+						Redirect(model.ReturnUrl);
 
 					if (Url.IsLocalUrl(model.ReturnUrl))
 						return Redirect(model.ReturnUrl);
@@ -93,7 +81,6 @@ public class AccountController<TUser, TKey> : Controller
 					return View("Lockout");
 			}
 
-			await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "Invalid credentials", clientId: context?.Client.ClientId));
 			ModelState.AddModelError(string.Empty, "Invalid username or password");
 		}
 
@@ -123,17 +110,9 @@ public class AccountController<TUser, TKey> : Controller
 	{
 		var logout = await _interaction.GetLogoutContextAsync(model.LogoutId);
 
-		var vm = new LoggedOutViewModel
-		{
-			PostLogoutRedirectUri = logout?.PostLogoutRedirectUri
-		};
-
 		if (User.Identity?.IsAuthenticated == true)
-		{
 			await _signInManager.SignOutAsync();
-			await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
-		}
 
-		return View("LoggedOut", vm);
+		return Redirect(string.IsNullOrEmpty(logout?.PostLogoutRedirectUri) ? "~/" : logout.PostLogoutRedirectUri);
 	}
 }

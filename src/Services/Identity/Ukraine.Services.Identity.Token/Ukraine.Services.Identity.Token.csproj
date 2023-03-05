@@ -16,4 +16,9 @@
       <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.14" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\js\signin-redirect.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\signout-redirect.js" />
+    </ItemGroup>
+
 </Project>

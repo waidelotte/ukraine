@@ -15,12 +15,12 @@ public class AdminIdentityDbContext : IdentityDbContext<UserIdentity, UserIdenti
 	{
 		base.OnModelCreating(builder);
 
-		builder.Entity<UserIdentityRole>().ToTable(Constants.IdentityRoles);
-		builder.Entity<UserIdentityRoleClaim>().ToTable(Constants.IdentityRoleClaims);
-		builder.Entity<UserIdentityUserRole>().ToTable(Constants.IdentityUserRoles);
-		builder.Entity<UserIdentity>().ToTable(Constants.IdentityUsers);
-		builder.Entity<UserIdentityUserLogin>().ToTable(Constants.IdentityUserLogins);
-		builder.Entity<UserIdentityUserClaim>().ToTable(Constants.IdentityUserClaims);
-		builder.Entity<UserIdentityUserToken>().ToTable(Constants.IdentityUserTokens);
+		builder.Entity<UserIdentityRole>().ToTable("Roles");
+		builder.Entity<UserIdentityRoleClaim>().ToTable("RoleClaims");
+		builder.Entity<UserIdentityUserRole>().ToTable("UserRoles");
+		builder.Entity<UserIdentity>().ToTable("Users");
+		builder.Entity<UserIdentityUserLogin>().ToTable("UserLogins");
+		builder.Entity<UserIdentityUserClaim>().ToTable("UserClaims");
+		builder.Entity<UserIdentityUserToken>().ToTable("UserTokens");
 	}
 }

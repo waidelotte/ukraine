@@ -1,18 +1,16 @@
 using System.Globalization;
 using Duende.IdentityServer.Configuration;
+using Duende.IdentityServer.EntityFramework.Storage;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
-using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.PostgreSQL;
 using Ukraine.Services.Identity.Persistence.DbContexts;
 using Ukraine.Services.Identity.Persistence.Entities;
-using Ukraine.Services.Identity.Token.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -30,15 +28,12 @@ var configurationConnectionString = configuration.GetConnectionString("Configura
 var persistedGrantsConnectionString = configuration.GetConnectionString("PersistedGrantDbConnection");
 var dataProtectionConnectionString = configuration.GetConnectionString("DataProtectionDbConnection");
 
-services.RegisterNpgSqlDbContexts<
-	AdminIdentityDbContext,
-	IdentityServerConfigurationDbContext,
-	IdentityServerPersistedGrantDbContext,
-	IdentityServerDataProtectionDbContext>(
-	identityConnectionString,
-	configurationConnectionString,
-	persistedGrantsConnectionString,
-	dataProtectionConnectionString);
+services.AddDbContext<AdminIdentityDbContext>(options => options.UseNpgsql(identityConnectionString));
+services.AddDbContext<IdentityServerDataProtectionDbContext>(options => options.UseNpgsql(dataProtectionConnectionString));
+services.AddConfigurationDbContext<IdentityServerConfigurationDbContext>(
+	options => options.ConfigureDbContext = b => b.UseNpgsql(configurationConnectionString));
+services.AddOperationalDbContext<IdentityServerPersistedGrantDbContext>(
+	options => options.ConfigureDbContext = b => b.UseNpgsql(persistedGrantsConnectionString));
 
 services
 	.AddDataProtection()
@@ -61,39 +56,12 @@ var configurationSection = configuration.GetSection(nameof(IdentityServerOptions
 services.AddIdentityServer(options =>
 	{
 		configurationSection.Bind(options);
-		options.DynamicProviders.SignInScheme = IdentityConstants.ExternalScheme;
-		options.DynamicProviders.SignOutScheme = IdentityConstants.ApplicationScheme;
 	})
 	.AddConfigurationStore<IdentityServerConfigurationDbContext>()
 	.AddOperationalStore<IdentityServerPersistedGrantDbContext>()
-	.AddAspNetIdentity<UserIdentity>()
-	.AddExtensionGrantValidator<DelegationGrantValidator>();
+	.AddAspNetIdentity<UserIdentity>();
 
-services.ConfigureOptions<OpenIdClaimsMappingConfig>();
-
-services.AddHsts(options =>
-{
-	options.Preload = true;
-	options.IncludeSubDomains = true;
-	options.MaxAge = TimeSpan.FromDays(365);
-});
-
-services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
-
-services.TryAddTransient(typeof(IGenericControllerLocalizer<>), typeof(GenericControllerLocalizer<>));
-
-services.AddControllersWithViews(o =>
-	{
-		o.Conventions.Add(new GenericControllerRouteConvention());
-	})
-	.AddViewLocalization(
-		LanguageViewLocationExpanderFormat.Suffix,
-		opts => { opts.ResourcesPath = "Resources"; })
-	.AddDataAnnotationsLocalization()
-	.ConfigureApplicationPartManager(m =>
-	{
-		m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider<UserIdentity, string>());
-	});
+services.AddControllersWithViews();
 
 services.Configure<RequestLocalizationOptions>(
 	opts =>
@@ -136,13 +104,7 @@ var app = builder.Build();
 app.UseCookiePolicy();
 
 if (app.Environment.IsDevelopment())
-{
 	app.UseDeveloperExceptionPage();
-}
-else
-{
-	app.UseHsts();
-}
 
 app.UseStaticFiles();
 app.UseIdentityServer();

@@ -1,17 +1,8 @@
-﻿@inject IViewLocalizer Localizer
-@using Microsoft.AspNetCore.Mvc.Localization
-@{
-    ViewData["Title"] = Localizer["Title"];
+﻿@{
+    ViewData["Title"] = "Locked out";
 }
 
 <header>
     <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">@Localizer["Info"]</p>
+    <p class="text-danger">This account has been locked out</p>
 </header>
-
-
-
-
-
-
-
