@@ -1,0 +1,24 @@
+﻿@using Duende.IdentityServer.Extensions
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ukraine Identity</title>
+    @await RenderSectionAsync("styles", required: false)
+</head>
+<body>
+
+    <div>
+        @if (User.Identity?.IsAuthenticated == true && !string.IsNullOrEmpty(Context.User.GetDisplayName()))
+        {
+            <a asp-action="Logout" asp-controller="Account">Logout</a>
+        }
+    </div>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    @await RenderSectionAsync("scripts", required: false)
+</body>
+</html>

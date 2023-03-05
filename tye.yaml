@@ -73,7 +73,7 @@ services:
       - identity
 
   - name: service-identity-token
-    project: src/Services/Identity/Ukraine.Services.Identity.Token/Ukraine.Services.Identity.Token.csproj
+    project: src/Services/Identity/Ukraine.Services.Identity.Admin/Ukraine.Services.Identity.Admin.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development

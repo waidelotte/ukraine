@@ -63,9 +63,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity.Persistence", "src\Services\Identity\Ukraine.Services.Identity.Persistence\Ukraine.Services.Identity.Persistence.csproj", "{DE05B3AE-ACF8-4272-AF0D-1C21793FB3EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity", "src\Services\Identity\Ukraine.Services.Identity\Ukraine.Services.Identity.csproj", "{09ED6658-1E52-43F6-86FC-D6F25799777D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity.Admin", "src\Services\Identity\Ukraine.Services.Identity.Admin\Ukraine.Services.Identity.Admin.csproj", "{09ED6658-1E52-43F6-86FC-D6F25799777D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity.Token", "src\Services\Identity\Ukraine.Services.Identity.Token\Ukraine.Services.Identity.Token.csproj", "{C2C7125A-4EA8-4107-A005-56B32F76E03E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Identity", "src\Services\Identity\Ukraine.Services.Identity\Ukraine.Services.Identity.csproj", "{C2C7125A-4EA8-4107-A005-56B32F76E03E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

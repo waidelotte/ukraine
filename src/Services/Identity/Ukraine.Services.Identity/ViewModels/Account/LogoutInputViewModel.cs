@@ -1,4 +1,4 @@
-﻿namespace Ukraine.Services.Identity.Token.ViewModels.Account
+﻿namespace Ukraine.Services.Identity.ViewModels.Account
 {
 	public class LogoutInputViewModel
 	{

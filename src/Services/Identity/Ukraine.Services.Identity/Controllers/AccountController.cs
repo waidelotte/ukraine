@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Ukraine.Services.Identity.Persistence.Entities;
-using Ukraine.Services.Identity.Token.ViewModels.Account;
+using Ukraine.Services.Identity.ViewModels.Account;
 
-namespace Ukraine.Services.Identity.Token.Controllers;
+namespace Ukraine.Services.Identity.Controllers;
 
 [Authorize]
 public class AccountController : Controller

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Ukraine.Services.Identity.Token.ViewModels.Account;
+namespace Ukraine.Services.Identity.ViewModels.Account;
 
 public class LoginInputViewModel
 {

@@ -1,13 +1,16 @@
+using System.Globalization;
+using Duende.IdentityServer.Configuration;
+using Duende.IdentityServer.EntityFramework.Storage;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Serilog;
-using Skoruba.AuditLogging.EntityFramework.Entities;
-using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.Configuration;
-using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.ApplicationBuilder;
-using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.DependencyInjection;
-using Ukraine.Services.Identity.Core.DTOs;
-using Ukraine.Services.Identity.Persistence;
 using Ukraine.Services.Identity.Persistence.DbContexts;
 using Ukraine.Services.Identity.Persistence.Entities;
-using Ukraine.Services.Identity.Persistence.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -20,28 +23,102 @@ Log.Logger = loggerConfiguration.CreateLogger();
 
 builder.Host.UseSerilog();
 
-services.AddIdentityServerAdminUI<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext,
-	AdminLogDbContext, AdminAuditLogDbContext, AuditLog, IdentityServerDataProtectionDbContext,
-	UserIdentity, UserIdentityRole, UserIdentityUserClaim, UserIdentityUserRole,
-	UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken, string,
-	IdentityUserDTO, IdentityRoleDTO, IdentityUsersDTO, IdentityRolesDTO, IdentityUserRolesDTO,
-	IdentityUserClaimsDTO, IdentityUserProviderDTO, IdentityUserProvidersDTO, IdentityUserChangePasswordDTO,
-	IdentityRoleClaimsDTO, IdentityUserClaimDTO, IdentityRoleClaimDTO>(options =>
+var identityConnectionString = configuration.GetConnectionString("IdentityDbConnection");
+var configurationConnectionString = configuration.GetConnectionString("ConfigurationDbConnection");
+var persistedGrantsConnectionString = configuration.GetConnectionString("PersistedGrantDbConnection");
+var dataProtectionConnectionString = configuration.GetConnectionString("DataProtectionDbConnection");
+
+services.AddDbContext<AdminIdentityDbContext>(options => options.UseNpgsql(identityConnectionString));
+services.AddDbContext<IdentityServerDataProtectionDbContext>(options => options.UseNpgsql(dataProtectionConnectionString));
+services.AddConfigurationDbContext<IdentityServerConfigurationDbContext>(
+	options => options.ConfigureDbContext = b => b.UseNpgsql(configurationConnectionString));
+services.AddOperationalDbContext<IdentityServerPersistedGrantDbContext>(
+	options => options.ConfigureDbContext = b => b.UseNpgsql(persistedGrantsConnectionString));
+
+services
+	.AddDataProtection()
+	.SetApplicationName("Ukraine.IdentityServer")
+	.PersistKeysToDbContext<IdentityServerDataProtectionDbContext>();
+
+services
+	.AddIdentity<UserIdentity, UserIdentityRole>(options => configuration.GetSection(nameof(IdentityOptions)).Bind(options))
+	.AddEntityFrameworkStores<AdminIdentityDbContext>()
+	.AddDefaultTokenProviders();
+
+services.Configure<CookiePolicyOptions>(options =>
 {
-	options.BindConfiguration(configuration);
-	options.Security.UseDeveloperExceptionPage = builder.Environment.IsDevelopment();
-	options.DatabaseMigrations.SetMigrationsAssemblies(typeof(MigrationAssembly).Assembly.GetName().Name);
-	options.Testing.IsStaging = builder.Environment.IsStaging() || builder.Environment.IsProduction();
+	options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+	options.Secure = CookieSecurePolicy.SameAsRequest;
 });
+
+var configurationSection = configuration.GetSection(nameof(IdentityServerOptions));
+
+services.AddIdentityServer(options =>
+	{
+		configurationSection.Bind(options);
+	})
+	.AddConfigurationStore<IdentityServerConfigurationDbContext>()
+	.AddOperationalStore<IdentityServerPersistedGrantDbContext>()
+	.AddAspNetIdentity<UserIdentity>();
+
+services.AddControllersWithViews();
+
+services.Configure<RequestLocalizationOptions>(
+	opts =>
+	{
+		opts.DefaultRequestCulture = new RequestCulture("en");
+		opts.SupportedCultures = new List<CultureInfo> { new("en") };
+		opts.SupportedUICultures = new List<CultureInfo> { new("en") };
+	});
+
+services.AddAuthorization(options =>
+{
+	options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("admin"));
+});
+
+services
+	.AddHealthChecks()
+	.AddDbContextCheck<IdentityServerConfigurationDbContext>("ConfigurationDbContext")
+	.AddDbContextCheck<IdentityServerPersistedGrantDbContext>("PersistedGrantsDbContext")
+	.AddDbContextCheck<AdminIdentityDbContext>("IdentityDbContext")
+	.AddDbContextCheck<IdentityServerDataProtectionDbContext>("DataProtectionDbContext")
+	.AddNpgSql(
+		configurationConnectionString,
+		name: "ConfigurationDb",
+		healthQuery: "SELECT * FROM \"ApiResources\" LIMIT 1")
+	.AddNpgSql(
+		persistedGrantsConnectionString,
+		name: "PersistentGrantsDb",
+		healthQuery: "SELECT * FROM \"PersistedGrants\" LIMIT 1")
+	.AddNpgSql(
+		identityConnectionString,
+		name: "IdentityDb",
+		healthQuery: "SELECT * FROM \"Users\" LIMIT 1")
+	.AddNpgSql(
+		dataProtectionConnectionString,
+		name: "DataProtectionDb",
+		healthQuery: "SELECT * FROM \"DataProtectionKeys\" LIMIT 1");
 
 var app = builder.Build();
 
-await ApplyDbMigrationsWithDataSeedAsync(configuration, app);
+app.UseCookiePolicy();
+
+if (app.Environment.IsDevelopment())
+	app.UseDeveloperExceptionPage();
+
+app.UseStaticFiles();
+app.UseIdentityServer();
+
+var options = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(options.Value);
 
 app.UseRouting();
-app.UseIdentityServerAdminUI();
-app.MapIdentityServerAdminUI();
-app.MapIdentityServerAdminUIHealthChecks();
+app.UseAuthorization();
+app.MapDefaultControllerRoute();
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 try
 {
@@ -55,19 +132,4 @@ catch (Exception ex)
 finally
 {
 	Log.CloseAndFlush();
-}
-
-static async Task ApplyDbMigrationsWithDataSeedAsync(IConfiguration configuration, IHost host)
-{
-	var seedConfiguration = configuration.GetSection(nameof(SeedConfiguration)).Get<SeedConfiguration>();
-	var databaseMigrationsConfiguration = configuration.GetSection(nameof(DatabaseMigrationsConfiguration))
-		.Get<DatabaseMigrationsConfiguration>();
-
-	await DbMigrationHelpers
-		.ApplyDbMigrationsWithDataSeedAsync<IdentityServerConfigurationDbContext, AdminIdentityDbContext,
-			IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext,
-			IdentityServerDataProtectionDbContext, UserIdentity, UserIdentityRole>(
-			host,
-			seedConfiguration,
-			databaseMigrationsConfiguration);
 }
