@@ -59,7 +59,7 @@ services:
       - port: 7001
     tags:
       - example
-      - identity
+      - status
 
   - name: service-identity
     project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
