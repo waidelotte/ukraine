@@ -8,7 +8,7 @@ namespace Ukraine.Framework.Core.HealthChecks
 	{
 		public static void MapDefaultHealthChecks(this WebApplication webApplication)
 		{
-			webApplication.MapHealthChecks("/health/ready", new HealthCheckOptions
+			webApplication.MapHealthChecks("/health", new HealthCheckOptions
 			{
 				ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 			});

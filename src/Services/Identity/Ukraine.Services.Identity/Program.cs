@@ -1,15 +1,11 @@
-using System.Globalization;
 using Duende.IdentityServer.Configuration;
 using Duende.IdentityServer.EntityFramework.Storage;
-using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Serilog;
 using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core.HealthChecks;
 using Ukraine.Framework.Core.Options;
 using Ukraine.Framework.Core.Serilog;
 using Ukraine.Services.Identity.Persistence.Configuration;
@@ -70,14 +66,6 @@ services.AddIdentityServer(options =>
 
 services.AddControllersWithViews();
 
-services.Configure<RequestLocalizationOptions>(
-	opts =>
-	{
-		opts.DefaultRequestCulture = new RequestCulture("en");
-		opts.SupportedCultures = new List<CultureInfo> { new("en") };
-		opts.SupportedUICultures = new List<CultureInfo> { new("en") };
-	});
-
 services.AddAuthorization();
 
 services
@@ -114,17 +102,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseIdentityServer();
-
-var options = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
-app.UseRequestLocalization(options.Value);
-
 app.UseRouting();
 app.UseAuthorization();
 app.MapDefaultControllerRoute();
-app.MapHealthChecks("/health", new HealthCheckOptions
-{
-	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-});
+app.MapDefaultHealthChecks();
 
 try
 {
