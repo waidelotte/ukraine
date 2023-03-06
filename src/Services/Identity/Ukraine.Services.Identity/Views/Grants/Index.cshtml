@@ -1,0 +1,49 @@
+﻿@model Ukraine.Services.Identity.ViewModels.Grants.GrantsViewModel
+
+<h1>
+	Client Application Access
+</h1>
+<p>Below is the list of applications you have given access to and the names of the resources they have access to.</p>
+
+@if (!Model.Grants.Any())
+{
+	<p>You have not given access to any applications</p>
+}
+else
+{
+	foreach (var grant in Model.Grants)
+	{
+		<div>
+			<div>@grant.ClientName</div>
+			<div>Created: @grant.Created.ToString("yyyy-MM-dd")</div>
+			@if (grant.Expires.HasValue)
+			{
+				<div>Expires: @grant.Expires.Value.ToString("yyyy-MM-dd")</div>
+			}
+			@if (grant.IdentityGrantNames.Any())
+			{
+				<div>
+					<div>Identity Grants</div>
+					<ul>
+						@foreach (var name in grant.IdentityGrantNames)
+						{
+							<li>@name</li>
+						}
+					</ul>
+				</div>
+			}
+			@if (grant.ApiGrantNames.Any())
+			{
+				<div>
+					<div>API Grants</div>
+					<ul>
+						@foreach (var name in grant.ApiGrantNames)
+						{
+							<li>@name</li>
+						}
+					</ul>
+				</div>
+			}
+		</div>
+	}
+}

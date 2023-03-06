@@ -1,0 +1,14 @@
+﻿@using Duende.IdentityServer.Extensions
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div>
+    @if (!User.IsAuthenticated())
+    {
+        <a asp-controller="Account" asp-action="Login">Login</a>
+    }
+    @if (User.IsAuthenticated())
+    {
+        <a asp-controller="Grants" asp-action="Index">Persisted Grants</a>
+    }
+    <a href="~/.well-known/openid-configuration">Discovery Document</a>
+</div>

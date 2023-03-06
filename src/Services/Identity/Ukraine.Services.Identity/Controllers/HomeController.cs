@@ -13,6 +13,11 @@ namespace Ukraine.Services.Identity.Controllers
 			_interaction = interaction;
 		}
 
+		public IActionResult Index()
+		{
+			return View();
+		}
+
 		public async Task<IActionResult> Error(string errorId)
 		{
 			var vm = new ErrorViewModel();
