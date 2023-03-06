@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Ukraine.Services.Identity.Persistence.DbContexts;
@@ -11,15 +10,14 @@ using Ukraine.Services.Identity.Persistence.DbContexts;
 
 namespace Ukraine.Services.Identity.Persistence.Migrations.Identity
 {
-    [DbContext(typeof(AdminIdentityDbContext))]
-    [Migration("20230304002918_Initial")]
-    partial class Initial
+    [DbContext(typeof(ServiceIdentityDbContext))]
+    partial class ServiceIdentityDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);

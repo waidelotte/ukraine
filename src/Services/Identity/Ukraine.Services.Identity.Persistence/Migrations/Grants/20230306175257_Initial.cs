@@ -6,8 +6,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
 {
+    /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -20,8 +22,8 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                     SessionId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     ClientId = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Expiration = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Expiration = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Data = table.Column<string>(type: "character varying(50000)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
@@ -35,7 +37,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     Version = table.Column<int>(type: "integer", nullable: false),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Use = table.Column<string>(type: "text", nullable: true),
                     Algorithm = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     IsX509Certificate = table.Column<bool>(type: "boolean", nullable: false),
@@ -59,9 +61,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                     SessionId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     ClientId = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Expiration = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    ConsumedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Expiration = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ConsumedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Data = table.Column<string>(type: "character varying(50000)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
@@ -80,9 +82,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                     SubjectId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     SessionId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     DisplayName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Renewed = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Expires = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Renewed = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Expires = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Data = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -159,6 +161,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                 column: "SubjectId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

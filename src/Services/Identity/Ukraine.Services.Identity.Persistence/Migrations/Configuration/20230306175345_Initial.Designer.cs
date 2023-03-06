@@ -12,14 +12,15 @@ using Ukraine.Services.Identity.Persistence.DbContexts;
 namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
 {
     [DbContext(typeof(IdentityServerConfigurationDbContext))]
-    [Migration("20230304003032_Initial")]
+    [Migration("20230306175345_Initial")]
     partial class Initial
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -37,7 +38,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
@@ -51,7 +52,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastAccessed")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -68,7 +69,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("Updated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -167,14 +168,14 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
 
                     b.Property<DateTime?>("Expiration")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -202,7 +203,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
@@ -219,7 +220,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastAccessed")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -236,7 +237,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("Updated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -375,7 +376,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
@@ -404,7 +405,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastAccessed")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LogoUri")
                         .HasMaxLength(2000)
@@ -450,7 +451,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("Updated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserCodeType")
                         .HasMaxLength(100)
@@ -681,14 +682,14 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasMaxLength(2000)
                         .HasColumnType("character varying(2000)");
 
                     b.Property<DateTime?>("Expiration")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -716,7 +717,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(200)
@@ -726,7 +727,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastAccessed")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("NonEditable")
                         .HasColumnType("boolean");
@@ -745,7 +746,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("character varying(20)");
 
                     b.Property<DateTime?>("Updated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -764,7 +765,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
@@ -795,7 +796,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("Updated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

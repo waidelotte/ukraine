@@ -1,14 +1,10 @@
 ﻿using Duende.IdentityServer.EntityFramework.DbContexts;
 using Microsoft.EntityFrameworkCore;
-using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Interfaces;
 
 namespace Ukraine.Services.Identity.Persistence.DbContexts;
 
-public class IdentityServerPersistedGrantDbContext : PersistedGrantDbContext<IdentityServerPersistedGrantDbContext>,
-	IAdminPersistedGrantDbContext
+public class IdentityServerPersistedGrantDbContext : PersistedGrantDbContext<IdentityServerPersistedGrantDbContext>
 {
 	public IdentityServerPersistedGrantDbContext(DbContextOptions<IdentityServerPersistedGrantDbContext> options)
-		: base(options)
-	{
-	}
+		: base(options) { }
 }

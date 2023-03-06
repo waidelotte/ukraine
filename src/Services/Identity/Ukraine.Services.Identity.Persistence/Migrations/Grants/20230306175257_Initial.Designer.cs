@@ -12,14 +12,15 @@ using Ukraine.Services.Identity.Persistence.DbContexts;
 namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
 {
     [DbContext(typeof(IdentityServerPersistedGrantDbContext))]
-    [Migration("20230304003115_Initial")]
+    [Migration("20230306175257_Initial")]
     partial class Initial
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -36,7 +37,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                         .HasColumnType("character varying(200)");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Data")
                         .IsRequired()
@@ -54,7 +55,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
 
                     b.Property<DateTime?>("Expiration")
                         .IsRequired()
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SessionId")
                         .HasMaxLength(100)
@@ -85,7 +86,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                         .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Data")
                         .IsRequired()
@@ -124,10 +125,10 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                         .HasColumnType("character varying(200)");
 
                     b.Property<DateTime?>("ConsumedTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Data")
                         .IsRequired()
@@ -139,7 +140,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                         .HasColumnType("character varying(200)");
 
                     b.Property<DateTime?>("Expiration")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Key")
                         .HasMaxLength(200)
@@ -183,7 +184,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Data")
                         .IsRequired()
@@ -194,7 +195,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                         .HasColumnType("character varying(100)");
 
                     b.Property<DateTime?>("Expires")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Key")
                         .IsRequired()
@@ -202,7 +203,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Grants
                         .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("Renewed")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Scheme")
                         .IsRequired()

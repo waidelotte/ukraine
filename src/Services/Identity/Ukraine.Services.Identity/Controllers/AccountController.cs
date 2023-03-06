@@ -59,10 +59,10 @@ public class AccountController : Controller
 
 		if (ModelState.IsValid)
 		{
-			var user = await _userManager.FindByNameAsync(model.Username);
+			var user = await _userManager.FindByNameAsync(model.Username!);
 			if (user != default(UserIdentity))
 			{
-				var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberLogin, lockoutOnFailure: true);
+				var result = await _signInManager.PasswordSignInAsync(user.UserName!, model.Password!, model.RememberLogin, lockoutOnFailure: true);
 				if (result.Succeeded)
 				{
 					if (context != null && !string.IsNullOrEmpty(model.ReturnUrl))

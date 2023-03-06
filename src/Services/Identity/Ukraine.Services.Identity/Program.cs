@@ -9,26 +9,33 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core.Options;
+using Ukraine.Framework.Core.Serilog;
+using Ukraine.Services.Identity.Persistence.Configuration;
 using Ukraine.Services.Identity.Persistence.DbContexts;
 using Ukraine.Services.Identity.Persistence.Entities;
+using Ukraine.Services.Identity.Persistence.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var configuration = builder.Configuration;
+configuration.AddJsonFile($"Seed/identity_data.{builder.Environment.EnvironmentName}.json", true, false);
+configuration.AddJsonFile($"Seed/identity_server_data.{builder.Environment.EnvironmentName}.json", true, false);
+
 var services = builder.Services;
 
-var loggerConfiguration = new LoggerConfiguration()
-	.ReadFrom.Configuration(configuration);
+builder.Host.UseSerilog(configuration);
 
-Log.Logger = loggerConfiguration.CreateLogger();
+services.AddSingleton(configuration.GetRequiredSection(nameof(IdentityData)).GetOptions<IdentityData>());
+services.AddSingleton(configuration.GetRequiredSection(nameof(IdentityServerData)).GetOptions<IdentityServerData>());
 
-builder.Host.UseSerilog();
+var identityConnectionString = configuration.GetRequiredConnectionString("IdentityDbConnection");
+var configurationConnectionString = configuration.GetRequiredConnectionString("ConfigurationDbConnection");
+var persistedGrantsConnectionString = configuration.GetRequiredConnectionString("PersistedGrantDbConnection");
+var dataProtectionConnectionString = configuration.GetRequiredConnectionString("DataProtectionDbConnection");
 
-var identityConnectionString = configuration.GetConnectionString("IdentityDbConnection");
-var configurationConnectionString = configuration.GetConnectionString("ConfigurationDbConnection");
-var persistedGrantsConnectionString = configuration.GetConnectionString("PersistedGrantDbConnection");
-var dataProtectionConnectionString = configuration.GetConnectionString("DataProtectionDbConnection");
-
-services.AddDbContext<AdminIdentityDbContext>(options => options.UseNpgsql(identityConnectionString));
+services.AddDbContext<ServiceIdentityDbContext>(options => options.UseNpgsql(identityConnectionString));
 services.AddDbContext<IdentityServerDataProtectionDbContext>(options => options.UseNpgsql(dataProtectionConnectionString));
 services.AddConfigurationDbContext<IdentityServerConfigurationDbContext>(
 	options => options.ConfigureDbContext = b => b.UseNpgsql(configurationConnectionString));
@@ -42,7 +49,7 @@ services
 
 services
 	.AddIdentity<UserIdentity, UserIdentityRole>(options => configuration.GetSection(nameof(IdentityOptions)).Bind(options))
-	.AddEntityFrameworkStores<AdminIdentityDbContext>()
+	.AddEntityFrameworkStores<ServiceIdentityDbContext>()
 	.AddDefaultTokenProviders();
 
 services.Configure<CookiePolicyOptions>(options =>
@@ -71,16 +78,13 @@ services.Configure<RequestLocalizationOptions>(
 		opts.SupportedUICultures = new List<CultureInfo> { new("en") };
 	});
 
-services.AddAuthorization(options =>
-{
-	options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("admin"));
-});
+services.AddAuthorization();
 
 services
 	.AddHealthChecks()
 	.AddDbContextCheck<IdentityServerConfigurationDbContext>("ConfigurationDbContext")
 	.AddDbContextCheck<IdentityServerPersistedGrantDbContext>("PersistedGrantsDbContext")
-	.AddDbContextCheck<AdminIdentityDbContext>("IdentityDbContext")
+	.AddDbContextCheck<ServiceIdentityDbContext>("IdentityDbContext")
 	.AddDbContextCheck<IdentityServerDataProtectionDbContext>("DataProtectionDbContext")
 	.AddNpgSql(
 		configurationConnectionString,
@@ -100,6 +104,8 @@ services
 		healthQuery: "SELECT * FROM \"DataProtectionKeys\" LIMIT 1");
 
 var app = builder.Build();
+
+await app.ApplyMigrationsWithDataSeedAsync();
 
 app.UseCookiePolicy();
 

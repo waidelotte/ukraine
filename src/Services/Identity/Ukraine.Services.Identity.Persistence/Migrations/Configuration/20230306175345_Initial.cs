@@ -6,8 +6,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
 {
+    /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -23,9 +25,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     AllowedAccessTokenSigningAlgorithms = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     ShowInDiscoveryDocument = table.Column<bool>(type: "boolean", nullable: false),
                     RequireResourceIndicator = table.Column<bool>(type: "boolean", nullable: false),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Updated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastAccessed = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastAccessed = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     NonEditable = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -46,9 +48,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     Required = table.Column<bool>(type: "boolean", nullable: false),
                     Emphasize = table.Column<bool>(type: "boolean", nullable: false),
                     ShowInDiscoveryDocument = table.Column<bool>(type: "boolean", nullable: false),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Updated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastAccessed = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastAccessed = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     NonEditable = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -104,9 +106,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     CibaLifetime = table.Column<int>(type: "integer", nullable: true),
                     PollingInterval = table.Column<int>(type: "integer", nullable: true),
                     CoordinateLifetimeWithUserSession = table.Column<bool>(type: "boolean", nullable: true),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Updated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastAccessed = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastAccessed = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     NonEditable = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -125,9 +127,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     Enabled = table.Column<bool>(type: "boolean", nullable: false),
                     Type = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     Properties = table.Column<string>(type: "text", nullable: true),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Updated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastAccessed = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastAccessed = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     NonEditable = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -148,8 +150,8 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     Required = table.Column<bool>(type: "boolean", nullable: false),
                     Emphasize = table.Column<bool>(type: "boolean", nullable: false),
                     ShowInDiscoveryDocument = table.Column<bool>(type: "boolean", nullable: false),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Updated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     NonEditable = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -227,9 +229,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     ApiResourceId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
                     Value = table.Column<string>(type: "character varying(4000)", maxLength: 4000, nullable: false),
-                    Expiration = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Expiration = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Type = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -454,9 +456,9 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                     ClientId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: true),
                     Value = table.Column<string>(type: "character varying(4000)", maxLength: 4000, nullable: false),
-                    Expiration = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Expiration = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Type = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -641,6 +643,7 @@ namespace Ukraine.Services.Identity.Persistence.Migrations.Configuration
                 unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
