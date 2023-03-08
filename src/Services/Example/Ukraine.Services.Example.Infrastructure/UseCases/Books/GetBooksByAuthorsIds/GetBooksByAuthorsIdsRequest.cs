@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Ukraine.Services.Example.Infrastructure.UseCases.Books.GetBooksByAuthorId;
 
 namespace Ukraine.Services.Example.Infrastructure.UseCases.Books.GetBooksByAuthorsIds;
 

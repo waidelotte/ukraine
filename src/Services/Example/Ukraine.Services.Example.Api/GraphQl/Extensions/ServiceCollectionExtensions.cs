@@ -1,5 +1,4 @@
-﻿using HotChocolate.Execution.Options;
-using HotChocolate.Language;
+﻿using HotChocolate.Language;
 using HotChocolate.Types.Pagination;
 using MediatR;
 using Ukraine.Framework.Core.Options;
