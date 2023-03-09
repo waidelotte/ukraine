@@ -9,20 +9,20 @@
 - [Tye](https://github.com/dotnet/tye/blob/main/docs/getting_started.md)
 
 ## Structure
-- **Dapr**. Event Bus and Secret store.
-  - **RabbitMq** pubsub.
+- **[Dapr](https://dapr.io/)**. Event Bus and Secret store.
+  - **[RabbitMq](https://www.rabbitmq.com/)** pubsub.
   - Local file store.
-  - **Zipkin** tracing system.
-- **Tye**. Run services with one command.
-  - Include **PostgreSql** database.
-  - Include **Seq** — structured logs.
+  - **[Zipkin](https://zipkin.io/)** tracing system.
+- **[Tye](https://github.com/dotnet/tye)**. Run services with one command.
+  - Include **[PostgreSQL](https://www.postgresql.org/)** database.
+  - Include **[Seq](https://datalust.co/seq)** — structured logs.
 - **Framework**
   - **Abstractions**
   - **Core**
     - Various extensions.
-    - **Mediatr** + Base Fluent Request Validator.
-    - **AutoMapper** and **Serilog** packages.
-  - **Dapr**
+    - **[Mediatr](https://github.com/jbogard/MediatR)** + Base **[Fluent](https://github.com/FluentValidation)** Request Validator.
+    - **[AutoMapper](https://automapper.org/)** and **[Serilog](https://serilog.net/)** packages.
+  - **[Dapr](https://dapr.io/)**
     - Dapr Event Bus.
     - Dapr Health Checks.
     - Dapr Secret store.
@@ -34,14 +34,14 @@
   - **Example** (DDD/CQRS/ES)
     - Authorization.
     - JWT Authentication.
-    - **GraphQL** Server. Annotation/Code-first mix.
-    - **REST** Controller with **Swagger**
+    - **[GraphQL](https://graphql.org/)** Server. Annotation/Code-first mix.
+    - **REST** Controller with **[Swagger](https://swagger.io/)**
     - Event Bus subscriptions.
     - Health Checks.
-    - Open Telemetry.
-    - **Serilog**.
-    - **Bogus**. Fake data generator.
-  - **Identity Server** without UI styles.
+    - **[Open Telemetry](https://opentelemetry.io/)**.
+    - **[Serilog](https://serilog.net/)**.
+    - **[Bogus](https://github.com/bchavez/Bogus)**. Fake data generator.
+  - **[Identity Server](https://duendesoftware.com/products/identityserver)** without UI styles.
     - Only basic controllers.
     - Seed Roles, Users, Resources and clients.
     - Migration Helper.
