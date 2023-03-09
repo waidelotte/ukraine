@@ -4,6 +4,7 @@ using MediatR;
 using Ukraine.Framework.Core.Options;
 using Ukraine.Services.Example.Api.GraphQl.Data.Authors;
 using Ukraine.Services.Example.Api.GraphQl.Data.Authors.CreateAuthor;
+using Ukraine.Services.Example.Api.GraphQl.Data.Authors.CreateSampleAuthors;
 using Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthorById;
 using Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthors;
 using Ukraine.Services.Example.Api.GraphQl.Data.Books;
@@ -71,6 +72,7 @@ internal static class ServiceCollectionExtensions
 			.AddType<CreateAuthorMutation>()
 			.AddType<CreateAuthorInputType>()
 			.AddType<CreateAuthorPayloadType>()
+			.AddType<CreateSampleAuthorsMutation>()
 			.AddType<GetAuthorByIdQuery>()
 			.AddType<GetAuthorsQuery>()
 			.AddTypeExtension<AuthorExtensions>()
