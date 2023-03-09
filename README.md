@@ -40,6 +40,7 @@
     - Health Checks.
     - Open Telemetry.
     - **Serilog**.
+    - **Bogus**. Fake data generator.
   - **Identity Server** without UI styles.
     - Only basic controllers.
     - Seed Roles, Users, Resources and clients.
