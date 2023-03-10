@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Ardalis.GuardClauses;
+using AutoMapper;
 using MediatR;
 using Ukraine.Framework.Abstractions;
 using Ukraine.Framework.EFCore;
@@ -31,8 +32,7 @@ internal sealed class CreateBookHandler : IRequestHandler<CreateBookRequest, Cre
 
 		var author = await repository.GetAsync(AuthorSpec.Create(request.AuthorId), cancellationToken);
 
-		if (author == null)
-			throw new KeyNotFoundException($"Author [{request.AuthorId}] not exists");
+		Guard.Against.NotFound(request.AuthorId, author);
 
 		var book = new Book
 		{

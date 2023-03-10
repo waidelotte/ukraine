@@ -22,6 +22,7 @@
     - Various extensions.
     - **[Mediatr](https://github.com/jbogard/MediatR)** + Base **[Fluent](https://github.com/FluentValidation)** Request Validator.
     - **[AutoMapper](https://automapper.org/)** and **[Serilog](https://serilog.net/)** packages.
+    - **[Guard Clauses](https://github.com/ardalis/GuardClauses)** + Validation Guard
   - **[Dapr](https://dapr.io/)**
     - Dapr Event Bus.
     - Dapr Health Checks.

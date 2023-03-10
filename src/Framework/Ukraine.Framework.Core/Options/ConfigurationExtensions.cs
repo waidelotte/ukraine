@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Ardalis.GuardClauses;
+using Microsoft.Extensions.Configuration;
 
 namespace Ukraine.Framework.Core.Options;
 
@@ -11,24 +12,7 @@ public static class ConfigurationExtensions
 	{
 		var options = Options<TOptions>(configurationSection, errorOnUnknownConfiguration);
 
-		if (options == null)
-		{
-			throw new KeyNotFoundException(
-				$"Configuration Section [{configurationSection.Key}] is empty");
-		}
-
-		return options;
-	}
-
-	public static TOptions GetOptions<TOptions>(
-		this IConfiguration configuration,
-		bool errorOnUnknownConfiguration = true)
-		where TOptions : class
-	{
-		var options = Options<TOptions>(configuration, errorOnUnknownConfiguration);
-
-		if (options == null)
-			throw new KeyNotFoundException("Configuration Section is empty");
+		Guard.Against.Null(options, message: $"Configuration Section [{configurationSection.Key}] is empty");
 
 		return options;
 	}

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Ardalis.GuardClauses;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -36,10 +37,7 @@ internal sealed class RequestValidationBehavior<TRequest, TResponse> : IPipeline
 				.Where(f => f != null)
 				.ToList();
 
-			if (failures.Any())
-			{
-				throw new ValidationException(failures);
-			}
+			Guard.Against.Failure(failures);
 		}
 
 		_logger.LogDebug($"The {nameof(request)} is valid.");

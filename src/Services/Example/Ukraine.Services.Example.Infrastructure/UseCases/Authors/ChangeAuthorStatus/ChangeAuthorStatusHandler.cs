@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.GuardClauses;
+using MediatR;
 using Ukraine.Framework.Abstractions;
 using Ukraine.Framework.EFCore;
 using Ukraine.Services.Example.Domain.Models;
@@ -22,8 +23,7 @@ internal sealed class ChangeAuthorStatusHandler : IRequestHandler<ChangeAuthorSt
 
 		var author = await repository.GetAsync(AuthorSpec.Create(request.AuthorId), cancellationToken);
 
-		if (author == null)
-			throw new KeyNotFoundException($"Author [{request.AuthorId}] not exists");
+		Guard.Against.NotFound(request.AuthorId, author);
 
 		author.ChangeStatus(request.Status);
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Ardalis.GuardClauses;
+using Microsoft.Extensions.Configuration;
 
 namespace Ukraine.Framework.Core.Configuration;
 
@@ -8,8 +9,7 @@ public static class ConfigurationExtensions
 	{
 		var connectionString = configuration.GetConnectionString(name);
 
-		if (string.IsNullOrEmpty(connectionString))
-			throw new KeyNotFoundException("Connection string is null or empty");
+		Guard.Against.NullOrEmpty(connectionString, nameof(connectionString));
 
 		return connectionString;
 	}
