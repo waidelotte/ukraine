@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin-slim:2.24
+    networks:
+      - ukraine-network
+
+  seq:
+    container_name: seq
+    image: datalust/seq:2023.1.9101
+    networks:
+      - ukraine-network
+
+  postgresql:
+    container_name: postgresql
+    image: postgres:15.2-alpine3.17
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ukraine-network
+
+  service-identity:
+    container_name: service-identity
+    image: ${REGISTRY:-ukraine}/service-identity:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Ukraine.Services.Identity/Dockerfile
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    networks:
+      - ukraine-network
+
+networks:
+  ukraine-network:
