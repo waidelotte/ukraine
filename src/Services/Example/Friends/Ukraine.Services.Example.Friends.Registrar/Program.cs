@@ -20,10 +20,7 @@ services.AddControllers();
 
 services
 	.AddHealthChecks()
-	.AddCheck(
-		"Service",
-		() => HealthCheckResult.Healthy(),
-		new[] { "service", "api", "demo" })
+	.AddDefaultCheck("Service", new[] { "service", "api", "demo" })
 	.AddDaprHealthCheck(
 		"Dapr Sidecar",
 		HealthStatus.Unhealthy,

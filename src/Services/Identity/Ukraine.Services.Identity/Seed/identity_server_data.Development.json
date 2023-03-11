@@ -84,36 +84,6 @@
     ],
     "Clients": [
       {
-        "ClientId": "admin-client",
-        "ClientName": "admin-client",
-        "ClientUri": "http://localhost:7003",
-        "AllowedGrantTypes": [
-          "authorization_code"
-        ],
-        "RequirePkce": true,
-        "ClientSecrets": [
-          {
-            "Value": "admin_local_secret"
-          }
-        ],
-        "RedirectUris": [
-          "http://localhost:7003/signin-oidc"
-        ],
-        "FrontChannelLogoutUri": "http://localhost:7003/signout-oidc",
-        "PostLogoutRedirectUris": [
-          "http://localhost:7003/signout-callback-oidc"
-        ],
-        "AllowedCorsOrigins": [
-          "http://localhost:7003"
-        ],
-        "AllowedScopes": [
-          "openid",
-          "email",
-          "profile",
-          "roles"
-        ]
-      },
-      {
         "ClientId": "service-example-rest-swagger",
         "ClientName": "service-example-rest-swagger",
         "ClientUri": "http://localhost:7004",
@@ -156,6 +126,29 @@
         ],
         "AllowedCorsOrigins": [
           "http://localhost:7004"
+        ],
+        "AllowedScopes": [
+          "service-example-graphql-scope"
+        ]
+      },
+      {
+        "ClientId": "gateway-graphql",
+        "ClientName": "gateway-graphql",
+        "ClientUri": "http://localhost:7006",
+        "AllowedGrantTypes": [
+          "authorization_code"
+        ],
+        "RequirePkce": true,
+        "RequireClientSecret": false,
+        "RedirectUris": [
+          "http://localhost:7006/#/oauth",
+          "http://localhost:7006/"
+        ],
+        "PostLogoutRedirectUris": [
+          "http://localhost:7006/"
+        ],
+        "AllowedCorsOrigins": [
+          "http://localhost:7006"
         ],
         "AllowedScopes": [
           "service-example-graphql-scope"

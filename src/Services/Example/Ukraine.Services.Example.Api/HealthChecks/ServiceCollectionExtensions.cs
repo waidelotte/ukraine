@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core.HealthChecks;
 using Ukraine.Framework.Dapr;
 
 namespace Ukraine.Services.Example.Api.HealthChecks;
@@ -14,10 +15,7 @@ internal static class ServiceCollectionExtensions
 
 		serviceCollection
 			.AddHealthChecks()
-			.AddCheck(
-				"Service",
-				() => HealthCheckResult.Healthy(),
-				new[] { "service", "api", "demo" })
+			.AddDefaultCheck("Service", new[] { "service", "api", "demo" })
 			.AddNpgSql(
 				connectionString,
 				name: "Postgres Database",

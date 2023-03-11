@@ -14,6 +14,8 @@ extensions:
         enabled: false
       service-identity:
         enabled: false
+      gateway-graphql:
+        enabled: false
   - name: seq
     logPath: ./.logs
 
@@ -33,7 +35,6 @@ services:
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
     tags:
       - example
-      - identity
 
   - name: component-rabbitmq
     image: rabbitmq:3-management
@@ -57,7 +58,6 @@ services:
       - port: 7001
     tags:
       - example
-      - status
 
   - name: service-identity
     project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
@@ -68,7 +68,6 @@ services:
       - port: 7002
     tags:
       - example
-      - identity
 
   - name: service-example-api
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
@@ -87,5 +86,15 @@ services:
         value: Development
     bindings:
       - port: 7005
+    tags:
+      - example
+
+  - name: gateway-graphql
+    project: src/Gateway/Ukraine.Gateway.GraphQl/Ukraine.Gateway.GraphQl.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7006
     tags:
       - example
