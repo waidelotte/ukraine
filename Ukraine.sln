@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{3D7ED6A3-5
 	ProjectSection(SolutionItems) = preProject
 		NuGet.config = NuGet.config
 		tye.yaml = tye.yaml
-		.dockerignore = .dockerignore
 		.gitignore = .gitignore
 		.gitattributes = .gitattributes
 		README.md = README.md
