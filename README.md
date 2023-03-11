@@ -57,6 +57,7 @@
 - Mail Sender
 - Blazor Server/Client
 - ReadOnlyDictionary.Empty (after .NET 8)
+- Docker support
 
 ## License
 
