@@ -34,7 +34,8 @@
       "documentInternalElements": false,
       "documentInterfaces": false,
       "documentExposedElements": false,
-      "documentationCulture": "en-US"
+      "documentationCulture": "en-US",
+      "xmlHeader": false
     },
     "readabilityRules": {
       "allowBuiltInTypeAliases": false
