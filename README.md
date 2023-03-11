@@ -53,7 +53,6 @@
 
 ### TODO
 - Identity Server Frontend
-- Swagger/GraphQL Gateway
 - Mail Sender
 - Blazor Server/Client
 - ReadOnlyDictionary.Empty (after .NET 8)
