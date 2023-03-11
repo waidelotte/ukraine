@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ukraine.Framework.Core.Configuration;
-using Ukraine.Framework.Core.Options;
 using Ukraine.Framework.EFCore;
 using Ukraine.Services.Example.Persistence.Options;
 

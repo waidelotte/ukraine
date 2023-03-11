@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Ukraine.Framework.Core.Configuration;
 using Ukraine.Framework.Core.HealthChecks;
-using Ukraine.Framework.Core.Options;
 using Ukraine.Framework.Core.Serilog;
 using Ukraine.Services.Identity.Persistence.Configuration;
 using Ukraine.Services.Identity.Persistence.DbContexts;

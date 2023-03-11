@@ -1,6 +1,6 @@
+using Ukraine.Framework.Core.Configuration;
 using Ukraine.Framework.Core.HealthChecks;
 using Ukraine.Framework.Core.Host;
-using Ukraine.Framework.Core.Options;
 using Ukraine.Framework.Core.Serilog;
 using Ukraine.Gateway.GraphQl.Options;
 

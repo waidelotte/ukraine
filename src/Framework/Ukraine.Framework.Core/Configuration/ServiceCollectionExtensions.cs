@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Ukraine.Framework.Core.Options;
+namespace Ukraine.Framework.Core.Configuration;
 
 public static class ServiceCollectionExtensions
 {

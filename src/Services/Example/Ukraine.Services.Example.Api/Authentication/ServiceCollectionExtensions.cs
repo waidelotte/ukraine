@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Ukraine.Framework.Core.Authentication;
-using Ukraine.Framework.Core.Options;
+using Ukraine.Framework.Core.Configuration;
 
 namespace Ukraine.Services.Example.Api.Authentication;
 

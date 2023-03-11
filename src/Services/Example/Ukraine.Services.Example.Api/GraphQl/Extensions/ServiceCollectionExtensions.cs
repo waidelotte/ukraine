@@ -1,7 +1,7 @@
 ﻿using HotChocolate.Language;
 using HotChocolate.Types.Pagination;
 using MediatR;
-using Ukraine.Framework.Core.Options;
+using Ukraine.Framework.Core.Configuration;
 using Ukraine.Services.Example.Api.GraphQl.Data.Authors;
 using Ukraine.Services.Example.Api.GraphQl.Data.Authors.CreateAuthor;
 using Ukraine.Services.Example.Api.GraphQl.Data.Authors.CreateSampleAuthors;

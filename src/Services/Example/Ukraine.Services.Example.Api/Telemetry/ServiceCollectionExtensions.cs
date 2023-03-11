@@ -1,6 +1,6 @@
 ﻿using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using Ukraine.Framework.Core.Options;
+using Ukraine.Framework.Core.Configuration;
 
 namespace Ukraine.Services.Example.Api.Telemetry;
 
