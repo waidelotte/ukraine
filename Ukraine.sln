@@ -40,7 +40,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", 
 		dapr\components\ukraine-pubsub.yaml = dapr\components\ukraine-pubsub.yaml
 		dapr\components\ukraine-secrets.json = dapr\components\ukraine-secrets.json
 		dapr\components\ukraine-secretstore.yaml = dapr\components\ukraine-secretstore.yaml
-		dapr\components\ukraine-statestore.yaml.disalbed = dapr\components\ukraine-statestore.yaml.disalbed
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Friends", "Friends", "{69ECFF64-8808-4053-B53E-8A2D8747F547}"

@@ -1,8 +1,0 @@
-**/.dockerignore
-**/docker-compose*.yml
-**/Dockerfile*
-**/.gitignore
-**/README.md
-
-.logs
-.idea
