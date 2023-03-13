@@ -1,5 +1,5 @@
+using Ukraine.Framework.Core;
 using Ukraine.Framework.Core.HealthChecks;
-using Ukraine.Framework.Core.Host;
 using Ukraine.Framework.Core.Serilog;
 using Ukraine.Framework.Dapr;
 using Ukraine.Framework.EFCore;
@@ -38,10 +38,9 @@ services.ConfigureTelemetry(configuration);
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
-{
 	app.UseDeveloperExceptionPage();
-	await app.Services.MigrateDatabaseAsync<ExampleContext>();
-}
+
+await app.Services.MigrateDatabaseAsync<ExampleContext>();
 
 app.UseAuthentication();
 app.UseAuthorization();

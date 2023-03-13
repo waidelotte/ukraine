@@ -1,0 +1,159 @@
+{
+  "IdentityServerData": {
+    "IdentityResources": [
+      {
+        "Name": "roles",
+        "Enabled": true,
+        "DisplayName": "Roles",
+        "UserClaims": [
+          "role"
+        ]
+      },
+      {
+        "Name": "openid",
+        "Enabled": true,
+        "Required": true,
+        "DisplayName": "User identifier",
+        "UserClaims": [
+          "sub"
+        ]
+      },
+      {
+        "Name": "profile",
+        "Enabled": true,
+        "DisplayName": "User profile",
+        "Emphasize": true,
+        "UserClaims": [
+          "name",
+          "family_name",
+          "given_name",
+          "middle_name",
+          "nickname",
+          "preferred_username",
+          "profile",
+          "picture",
+          "website",
+          "gender",
+          "birthdate",
+          "zoneinfo",
+          "locale",
+          "updated_at"
+        ]
+      },
+      {
+        "Name": "email",
+        "Enabled": true,
+        "DisplayName": "Email address",
+        "Emphasize": true,
+        "UserClaims": [
+          "email",
+          "email_verified"
+        ]
+      },
+      {
+        "Name": "address",
+        "Enabled": true,
+        "DisplayName": "Address",
+        "Emphasize": true,
+        "UserClaims": [
+          "address"
+        ]
+      }
+    ],
+    "ApiScopes": [
+      {
+        "Name": "service-example-rest-scope",
+        "DisplayName": "service-example-rest-scope"
+      },
+      {
+        "Name": "service-example-graphql-scope",
+        "DisplayName": "service-example-graphql-scope",
+        "UserClaims": [
+          "role"
+        ]
+      }
+    ],
+    "ApiResources": [
+      {
+        "Name": "service-example",
+        "Scopes": [
+          "service-example-rest-scope",
+          "service-example-graphql-scope"
+        ]
+      }
+    ],
+    "Clients": [
+      {
+        "ClientId": "service-example-rest-swagger",
+        "ClientName": "service-example-rest-swagger",
+        "ClientUri": "http://localhost:7004",
+        "AllowedGrantTypes": [
+          "implicit"
+        ],
+        "AllowAccessTokensViaBrowser": true,
+        "RedirectUris": [
+          "http://localhost:7004/swagger/oauth2-redirect.html"
+        ],
+        "PostLogoutRedirectUris": [
+          "http://localhost:7004/swagger/"
+        ],
+        "AllowedCorsOrigins": [
+          "http://localhost:7004"
+        ],
+        "AllowedScopes": [
+          "service-example-rest-scope"
+        ]
+      },
+      {
+        "ClientId": "service-example-graphql",
+        "ClientName": "service-example-graphql",
+        "ClientUri": "http://localhost:7004",
+        "AllowedGrantTypes": [
+          "authorization_code"
+        ],
+        "RequirePkce": true,
+        "ClientSecrets": [
+          {
+            "Value": "local_secret"
+          }
+        ],
+        "RedirectUris": [
+          "http://localhost:7004/graphql/#/oauth",
+          "http://localhost:7004/graphql"
+        ],
+        "PostLogoutRedirectUris": [
+          "http://localhost:7004/graphql"
+        ],
+        "AllowedCorsOrigins": [
+          "http://localhost:7004"
+        ],
+        "AllowedScopes": [
+          "service-example-graphql-scope"
+        ]
+      },
+      {
+        "ClientId": "gateway-graphql",
+        "ClientName": "gateway-graphql",
+        "ClientUri": "http://localhost:7006",
+        "AllowedGrantTypes": [
+          "authorization_code"
+        ],
+        "RequirePkce": true,
+        "RequireClientSecret": false,
+        "RedirectUris": [
+          "http://localhost:7006/#/oauth",
+          "http://localhost:7006/"
+        ],
+        "PostLogoutRedirectUris": [
+          "http://localhost:7006/"
+        ],
+        "AllowedCorsOrigins": [
+          "http://localhost:7006"
+        ],
+        "AllowedScopes": [
+          "service-example-graphql-scope"
+        ]
+      }
+    ]
+  }
+}

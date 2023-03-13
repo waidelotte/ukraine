@@ -31,11 +31,8 @@ services:
 
   service-identity:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development-Docker
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - Serilog__WriteTo__0__Name=Console
-      - Serilog__WriteTo__1__Name=Seq
-      - Serilog__WriteTo__1__Args__serverUrl=http://seq
     ports:
       - "7000:80"
 

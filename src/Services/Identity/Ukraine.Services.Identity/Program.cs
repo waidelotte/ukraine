@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core;
 using Ukraine.Framework.Core.HealthChecks;
 using Ukraine.Framework.Core.Serilog;
 using Ukraine.Framework.Dapr;
@@ -16,6 +16,7 @@ using Ukraine.Services.Identity.Persistence.Helpers;
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
+
 configuration.AddJsonFile($"Seed/identity_data.{builder.Environment.EnvironmentName}.json", true, false);
 configuration.AddJsonFile($"Seed/identity_server_data.{builder.Environment.EnvironmentName}.json", true, false);
 configuration.AddDaprSecretStore("ukraine-secretstore");
@@ -95,7 +96,7 @@ await app.ApplyMigrationsWithDataSeedAsync();
 
 app.UseCookiePolicy();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopmentDocker())
 	app.UseDeveloperExceptionPage();
 
 app.UseStaticFiles();

@@ -1,4 +1,4 @@
-using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core;
 using Ukraine.Web.Status.Options;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using Microsoft.Extensions.Configuration;
 
-namespace Ukraine.Framework.Core.Configuration;
+namespace Ukraine.Framework.Core;
 
 public static class ConfigurationExtensions
 {

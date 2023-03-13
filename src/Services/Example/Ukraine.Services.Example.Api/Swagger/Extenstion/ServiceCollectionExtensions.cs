@@ -1,5 +1,5 @@
 using Microsoft.OpenApi.Models;
-using Ukraine.Framework.Core.Configuration;
+using Ukraine.Framework.Core;
 using Ukraine.Services.Example.Api.Swagger.Filters;
 using Ukraine.Services.Example.Api.Swagger.Options;
 

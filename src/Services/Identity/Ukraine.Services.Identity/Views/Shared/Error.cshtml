@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Hosting
-@using Microsoft.Extensions.Hosting
+@using Ukraine.Framework.Core
 @model Ukraine.Services.Identity.ViewModels.Home.ErrorViewModel
 @inject IWebHostEnvironment Host
 
 @{
 	var error = Model.Error?.Error;
-	var errorDescription = Host.IsDevelopment() ? Model.Error?.ErrorDescription : null;
+	var errorDescription = Host.IsDevelopmentDocker() ? Model.Error?.ErrorDescription : null;
 	var requestId = Model.Error?.RequestId;
 }
 
