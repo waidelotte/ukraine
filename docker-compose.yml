@@ -97,5 +97,14 @@ services:
     volumes:
       - "./dapr/components/:/components"
 
+  web-status:
+    container_name: web-status
+    image: ${REGISTRY:-ukraine}/web-status:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Web/Ukraine.Web.Status/Dockerfile
+    networks:
+      - ukraine-network
+
 networks:
   ukraine-network:

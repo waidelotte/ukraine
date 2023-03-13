@@ -80,3 +80,10 @@ services:
               "-components-path", "/components",
               "-config", "/components/ukraine-config.yaml"
     ]
+
+  web-status:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development-Docker
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+    ports:
+      - "7003:80"
