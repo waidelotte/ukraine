@@ -11,7 +11,7 @@ internal static class ServiceCollectionExtensions
 		this IServiceCollection serviceCollection,
 		IConfiguration configuration)
 	{
-		var connectionString = configuration.GetRequiredConnectionString("Postgres");
+		var connectionString = configuration.GetRequiredConnectionString("ukraine");
 
 		serviceCollection
 			.AddHealthChecks()
