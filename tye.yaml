@@ -21,8 +21,8 @@ extensions:
 
 services:
 
-  - name: component-postgresql
-    image: postgres:14.4
+  - name: postgresql
+    image: postgres:15.2-alpine3.17
     env:
       - name: POSTGRES_DB
         value: ukraine
@@ -33,11 +33,9 @@ services:
     bindings:
       - port: 5432
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
-    tags:
-      - example
 
-  - name: component-rabbitmq
-    image: rabbitmq:3-management
+  - name: rabbitmq
+    image: rabbitmq:3.11.10-management-alpine
     bindings:
       - name: ui
         protocol: http
@@ -46,8 +44,6 @@ services:
       - name: amqp
         protocol: amqp
         port: 5672
-    tags:
-      - example
 
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
@@ -55,9 +51,7 @@ services:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7001
-    tags:
-      - example
+      - port: 7003
 
   - name: service-identity
     project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
@@ -65,9 +59,7 @@ services:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7002
-    tags:
-      - example
+      - port: 7000
 
   - name: service-example
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
@@ -75,9 +67,7 @@ services:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7004
-    tags:
-      - example
+      - port: 7001
 
   - name: service-example-friend-registrar
     project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Ukraine.Services.Example.Friends.Registrar.csproj
@@ -85,9 +75,7 @@ services:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7005
-    tags:
-      - example
+      - port: 7002
 
   - name: gateway-graphql
     project: src/Gateway/Ukraine.Gateway.GraphQl/Ukraine.Gateway.GraphQl.csproj
@@ -95,6 +83,4 @@ services:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7006
-    tags:
-      - example
+      - port: 7004

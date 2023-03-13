@@ -86,19 +86,19 @@
       {
         "ClientId": "service-example-rest-swagger",
         "ClientName": "service-example-rest-swagger",
-        "ClientUri": "http://localhost:7004",
+        "ClientUri": "http://localhost:7001",
         "AllowedGrantTypes": [
           "implicit"
         ],
         "AllowAccessTokensViaBrowser": true,
         "RedirectUris": [
-          "http://localhost:7004/swagger/oauth2-redirect.html"
+          "http://localhost:7001/swagger/oauth2-redirect.html"
         ],
         "PostLogoutRedirectUris": [
-          "http://localhost:7004/swagger/"
+          "http://localhost:7001/swagger/"
         ],
         "AllowedCorsOrigins": [
-          "http://localhost:7004"
+          "http://localhost:7001"
         ],
         "AllowedScopes": [
           "service-example-rest-scope"
@@ -107,7 +107,7 @@
       {
         "ClientId": "service-example-graphql",
         "ClientName": "service-example-graphql",
-        "ClientUri": "http://localhost:7004",
+        "ClientUri": "http://localhost:7001",
         "AllowedGrantTypes": [
           "authorization_code"
         ],
@@ -118,14 +118,14 @@
           }
         ],
         "RedirectUris": [
-          "http://localhost:7004/graphql/#/oauth",
-          "http://localhost:7004/graphql"
+          "http://localhost:7001/graphql/#/oauth",
+          "http://localhost:7001/graphql"
         ],
         "PostLogoutRedirectUris": [
-          "http://localhost:7004/graphql"
+          "http://localhost:7001/graphql"
         ],
         "AllowedCorsOrigins": [
-          "http://localhost:7004"
+          "http://localhost:7001"
         ],
         "AllowedScopes": [
           "service-example-graphql-scope"
@@ -134,21 +134,21 @@
       {
         "ClientId": "gateway-graphql",
         "ClientName": "gateway-graphql",
-        "ClientUri": "http://localhost:7006",
+        "ClientUri": "http://localhost:7004",
         "AllowedGrantTypes": [
           "authorization_code"
         ],
         "RequirePkce": true,
         "RequireClientSecret": false,
         "RedirectUris": [
-          "http://localhost:7006/#/oauth",
-          "http://localhost:7006/"
+          "http://localhost:7004/#/oauth",
+          "http://localhost:7004/"
         ],
         "PostLogoutRedirectUris": [
-          "http://localhost:7006/"
+          "http://localhost:7004/"
         ],
         "AllowedCorsOrigins": [
-          "http://localhost:7006"
+          "http://localhost:7004"
         ],
         "AllowedScopes": [
           "service-example-graphql-scope"
