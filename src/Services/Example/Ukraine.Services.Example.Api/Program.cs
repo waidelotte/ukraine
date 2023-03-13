@@ -54,12 +54,12 @@ app.MapDefaultHealthChecks();
 
 try
 {
-	app.Logger.LogInformation("Starting Web Host [service-example-api]");
+	app.Logger.LogInformation("Starting Web Host [service-example]");
 	app.Run();
 }
 catch (Exception ex)
 {
-	app.Logger.LogCritical(ex, "Host terminated unexpectedly [service-example-api]");
+	app.Logger.LogCritical(ex, "Host terminated unexpectedly [service-example]");
 }
 finally
 {

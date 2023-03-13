@@ -75,7 +75,7 @@
     ],
     "ApiResources": [
       {
-        "Name": "service-example-api",
+        "Name": "service-example",
         "Scopes": [
           "service-example-rest-scope",
           "service-example-graphql-scope"

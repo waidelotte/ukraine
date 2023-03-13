@@ -69,7 +69,7 @@ services:
     tags:
       - example
 
-  - name: service-example-api
+  - name: service-example
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT

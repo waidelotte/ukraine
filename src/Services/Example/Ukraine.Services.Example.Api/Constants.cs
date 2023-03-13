@@ -2,7 +2,7 @@
 
 internal static class Constants
 {
-	public const string SERVICE_ID = "service-example-api";
+	public const string SERVICE_ID = "service-example";
 
 	public static class Policy
 	{
