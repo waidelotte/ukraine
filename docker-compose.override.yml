@@ -87,3 +87,10 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
       - "7003:80"
+
+  gateway-graphql:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development-Docker
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+    ports:
+      - "7004:80"

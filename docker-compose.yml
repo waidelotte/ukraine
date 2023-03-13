@@ -106,5 +106,16 @@ services:
     networks:
       - ukraine-network
 
+  gateway-graphql:
+    container_name: gateway-graphql
+    image: ${REGISTRY:-ukraine}/gateway-graphql:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Gateway/Ukraine.Gateway.GraphQl/Dockerfile
+    depends_on:
+      - service-example
+    networks:
+      - ukraine-network
+
 networks:
   ukraine-network:

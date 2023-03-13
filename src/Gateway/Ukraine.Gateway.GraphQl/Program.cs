@@ -31,7 +31,7 @@ services
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopmentDocker())
 	app.UseDeveloperExceptionPage();
 
 app.UseHeaderPropagation();
@@ -39,4 +39,16 @@ app.UseHeaderPropagation();
 app.MapGraphQL("/");
 app.MapDefaultHealthChecks();
 
-app.Run();
+try
+{
+	app.Logger.LogInformation("Starting Web Host [gateway-graphql]");
+	app.Run();
+}
+catch (Exception ex)
+{
+	app.Logger.LogCritical(ex, "Host terminated unexpectedly [gateway-graphql]");
+}
+finally
+{
+	Serilog.Log.CloseAndFlush();
+}

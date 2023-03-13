@@ -56,8 +56,6 @@
 - Mail Sender
 - Blazor Server/Client
 - ReadOnlyDictionary.Empty (after .NET 8)
-- Docker support
-- Move all connection strings to dapr secret store
 
 ## License
 

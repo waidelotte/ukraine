@@ -134,21 +134,21 @@
       {
         "ClientId": "gateway-graphql",
         "ClientName": "gateway-graphql",
-        "ClientUri": "http://localhost:7006",
+        "ClientUri": "http://localhost:7004",
         "AllowedGrantTypes": [
           "authorization_code"
         ],
         "RequirePkce": true,
         "RequireClientSecret": false,
         "RedirectUris": [
-          "http://localhost:7006/#/oauth",
-          "http://localhost:7006/"
+          "http://localhost:7004/#/oauth",
+          "http://localhost:7004/"
         ],
         "PostLogoutRedirectUris": [
-          "http://localhost:7006/"
+          "http://localhost:7004/"
         ],
         "AllowedCorsOrigins": [
-          "http://localhost:7006"
+          "http://localhost:7004"
         ],
         "AllowedScopes": [
           "service-example-graphql-scope"
