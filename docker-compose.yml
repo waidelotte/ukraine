@@ -28,6 +28,8 @@ services:
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3.11.10-management-alpine
+    networks:
+      - ukraine-network
 
   dapr-placement:
     container_name: dapr-placement
@@ -53,6 +55,27 @@ services:
     network_mode: "service:service-identity"
     depends_on:
       - service-identity
+    volumes:
+      - "./dapr/components/:/components"
+
+  service-example:
+    container_name: service-example
+    image: ${REGISTRY:-ukraine}/service-example:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Example/Ukraine.Services.Example.Api/Dockerfile
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    networks:
+      - ukraine-network
+
+  service-example-dapr:
+    container_name: service-example-dapr
+    image: "daprio/daprd:1.10.2"
+    network_mode: "service:service-example"
+    depends_on:
+      - service-example
     volumes:
       - "./dapr/components/:/components"
 

@@ -20,6 +20,10 @@ services:
       - "5432:5432"
 
   rabbitmq:
+    environment:
+      RABBITMQ_DEFAULT_USER: "ukraine"
+      RABBITMQ_DEFAULT_PASS: "ukraine"
+      RABBITMQ_DEFAULT_VHOST: "/"
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -39,6 +43,22 @@ services:
   service-identity-dapr:
     command: ["./daprd",
               "-app-id", "service-identity",
+              "-app-port", "80",
+              "-placement-host-address", "dapr-placement:50000",
+              "-components-path", "/components",
+              "-config", "/components/ukraine-config.yaml"
+    ]
+
+  service-example:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development-Docker
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+    ports:
+      - "7001:80"
+
+  service-example-dapr:
+    command: ["./daprd",
+              "-app-id", "service-example",
               "-app-port", "80",
               "-placement-host-address", "dapr-placement:50000",
               "-components-path", "/components",

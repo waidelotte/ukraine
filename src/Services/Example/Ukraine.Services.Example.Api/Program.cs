@@ -14,10 +14,11 @@ using Ukraine.Services.Example.Persistence;
 using Ukraine.Services.Example.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
-var services = builder.Services;
 
+var configuration = builder.Configuration;
 configuration.AddDaprSecretStore("ukraine-secretstore");
+
+var services = builder.Services;
 
 services.AddInfrastructure();
 services.AddPersistence(configuration);
@@ -37,7 +38,7 @@ services.ConfigureTelemetry(configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopmentDocker())
 	app.UseDeveloperExceptionPage();
 
 await app.Services.MigrateDatabaseAsync<ExampleContext>();
