@@ -79,5 +79,23 @@ services:
     volumes:
       - "./dapr/components/:/components"
 
+  service-example-friend-registrar:
+    container_name: service-example-friend-registrar
+    image: ${REGISTRY:-ukraine}/service-example-friend-registrar:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Dockerfile
+    networks:
+      - ukraine-network
+
+  service-example-friend-registrar-dapr:
+    container_name: service-example-friend-registrar-dapr
+    image: "daprio/daprd:1.10.2"
+    network_mode: "service:service-example-friend-registrar"
+    depends_on:
+      - service-example-friend-registrar
+    volumes:
+      - "./dapr/components/:/components"
+
 networks:
   ukraine-network:

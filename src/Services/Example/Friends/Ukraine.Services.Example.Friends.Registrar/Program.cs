@@ -28,7 +28,7 @@ services
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopmentDocker())
 	app.UseDeveloperExceptionPage();
 
 app.UseCloudEvents();
