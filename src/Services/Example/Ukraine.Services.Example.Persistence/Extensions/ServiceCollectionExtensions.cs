@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
 		this IServiceCollection serviceCollection,
 		IConfiguration configuration)
 	{
-		var connectionString = configuration.GetRequiredConnectionString("Postgres");
+		var connectionString = configuration.GetRequiredConnectionString("ukraine");
 
 		var databaseOptions = serviceCollection
 			.BindAndGetOptions<ServiceDatabaseOptions>(configuration.GetSection(ServiceDatabaseOptions.CONFIGURATION_SECTION));
