@@ -25,6 +25,16 @@ services:
     networks:
       - ukraine-network
 
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.11.10-management-alpine
+
+  dapr-placement:
+    container_name: dapr-placement
+    image: "daprio/dapr:1.10.2"
+    networks:
+      - ukraine-network
+
   service-identity:
     container_name: service-identity
     image: ${REGISTRY:-ukraine}/service-identity:${TAG:-latest}
@@ -36,6 +46,15 @@ services:
         condition: service_healthy
     networks:
       - ukraine-network
+
+  service-identity-dapr:
+    container_name: service-identity-dapr
+    image: "daprio/daprd:1.10.2"
+    network_mode: "service:service-identity"
+    depends_on:
+      - service-identity
+    volumes:
+      - "./dapr/components/:/components"
 
 networks:
   ukraine-network:

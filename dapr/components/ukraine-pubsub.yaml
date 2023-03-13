@@ -8,7 +8,7 @@ spec:
   version: v1
   metadata:
     - name: host
-      value: "amqp://localhost:5672"
+      value: "amqp://rabbitmq:5672"
     - name: durable
       value: "false"
     - name: deletedWhenUnused
@@ -20,5 +20,5 @@ spec:
     - name: concurrency
       value: parallel
 scopes:
-  - service-example-api
+  - service-example
   - service-example-friend-registrar

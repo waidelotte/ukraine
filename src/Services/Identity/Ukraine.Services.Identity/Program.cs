@@ -7,6 +7,7 @@ using Serilog;
 using Ukraine.Framework.Core.Configuration;
 using Ukraine.Framework.Core.HealthChecks;
 using Ukraine.Framework.Core.Serilog;
+using Ukraine.Framework.Dapr;
 using Ukraine.Services.Identity.Persistence.Configuration;
 using Ukraine.Services.Identity.Persistence.DbContexts;
 using Ukraine.Services.Identity.Persistence.Entities;
@@ -17,6 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 configuration.AddJsonFile($"Seed/identity_data.{builder.Environment.EnvironmentName}.json", true, false);
 configuration.AddJsonFile($"Seed/identity_server_data.{builder.Environment.EnvironmentName}.json", true, false);
+configuration.AddDaprSecretStore("ukraine-secretstore");
 
 var services = builder.Services;
 
@@ -25,17 +27,14 @@ builder.Host.UseSerilog(configuration);
 services.AddSingleton(configuration.GetRequiredSection(nameof(IdentityData)).GetOptions<IdentityData>());
 services.AddSingleton(configuration.GetRequiredSection(nameof(IdentityServerData)).GetOptions<IdentityServerData>());
 
-var identityConnectionString = configuration.GetRequiredConnectionString("IdentityDbConnection");
-var configurationConnectionString = configuration.GetRequiredConnectionString("ConfigurationDbConnection");
-var persistedGrantsConnectionString = configuration.GetRequiredConnectionString("PersistedGrantDbConnection");
-var dataProtectionConnectionString = configuration.GetRequiredConnectionString("DataProtectionDbConnection");
+var connectionString = configuration.GetRequiredConnectionString("ukraine_identity");
 
-services.AddDbContext<ServiceIdentityDbContext>(options => options.UseNpgsql(identityConnectionString));
-services.AddDbContext<IdentityServerDataProtectionDbContext>(options => options.UseNpgsql(dataProtectionConnectionString));
+services.AddDbContext<ServiceIdentityDbContext>(options => options.UseNpgsql(connectionString));
+services.AddDbContext<IdentityServerDataProtectionDbContext>(options => options.UseNpgsql(connectionString));
 services.AddConfigurationDbContext<IdentityServerConfigurationDbContext>(
-	options => options.ConfigureDbContext = b => b.UseNpgsql(configurationConnectionString));
+	options => options.ConfigureDbContext = b => b.UseNpgsql(connectionString));
 services.AddOperationalDbContext<IdentityServerPersistedGrantDbContext>(
-	options => options.ConfigureDbContext = b => b.UseNpgsql(persistedGrantsConnectionString));
+	options => options.ConfigureDbContext = b => b.UseNpgsql(connectionString));
 
 services
 	.AddDataProtection()
@@ -74,19 +73,19 @@ services
 	.AddDbContextCheck<ServiceIdentityDbContext>("IdentityDbContext")
 	.AddDbContextCheck<IdentityServerDataProtectionDbContext>("DataProtectionDbContext")
 	.AddNpgSql(
-		configurationConnectionString,
+		connectionString,
 		name: "ConfigurationDb",
 		healthQuery: "SELECT * FROM \"ApiResources\" LIMIT 1")
 	.AddNpgSql(
-		persistedGrantsConnectionString,
+		connectionString,
 		name: "PersistentGrantsDb",
 		healthQuery: "SELECT * FROM \"PersistedGrants\" LIMIT 1")
 	.AddNpgSql(
-		identityConnectionString,
+		connectionString,
 		name: "IdentityDb",
 		healthQuery: "SELECT * FROM \"Users\" LIMIT 1")
 	.AddNpgSql(
-		dataProtectionConnectionString,
+		connectionString,
 		name: "DataProtectionDb",
 		healthQuery: "SELECT * FROM \"DataProtectionKeys\" LIMIT 1");
 
