@@ -5,14 +5,12 @@ extensions:
   - name: dapr
     log-level: debug
     config: ukraine-config
-    components-path: ./dapr/components
+    components-path: ./dapr/components/local
     app-max-concurrency: 1
     services:
       gateway-http:
         enabled: false
       web-status:
-        enabled: false
-      service-identity:
         enabled: false
       gateway-graphql:
         enabled: false
@@ -24,8 +22,6 @@ services:
   - name: postgresql
     image: postgres:15.2-alpine3.17
     env:
-      - name: POSTGRES_DB
-        value: ukraine
       - name: POSTGRES_USER
         value: postgres
       - name: POSTGRES_PASSWORD
@@ -36,6 +32,13 @@ services:
 
   - name: rabbitmq
     image: rabbitmq:3.11.10-management-alpine
+    env:
+      - name: RABBITMQ_DEFAULT_USER
+        value: ukraine
+      - name: RABBITMQ_DEFAULT_PASS
+        value: ukraine
+      - name: RABBITMQ_DEFAULT_VHOST
+        value: /
     bindings:
       - name: ui
         protocol: http

@@ -1,0 +1,24 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: ukraine-pubsub
+  namespace: ukraine
+spec:
+  type: pubsub.rabbitmq
+  version: v1
+  metadata:
+    - name: connectionString
+      value: "amqp://ukraine:ukraine@localhost:5672"
+    - name: durable
+      value: "false"
+    - name: deletedWhenUnused
+      value: "false"
+    - name: autoAck
+      value: "false"
+    - name: reconnectWait
+      value: "0"
+    - name: concurrency
+      value: parallel
+scopes:
+  - service-example
+  - service-example-friend-registrar

@@ -37,12 +37,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.Persistence", "src\Services\Example\Ukraine.Services.Example.Persistence\Ukraine.Services.Example.Persistence.csproj", "{9DA0E518-0A7D-4F08-80A6-D51F09383EF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}"
-	ProjectSection(SolutionItems) = preProject
-		dapr\components\ukraine-config.yaml = dapr\components\ukraine-config.yaml
-		dapr\components\ukraine-pubsub.yaml = dapr\components\ukraine-pubsub.yaml
-		dapr\components\ukraine-secrets.json = dapr\components\ukraine-secrets.json
-		dapr\components\ukraine-secretstore.yaml = dapr\components\ukraine-secretstore.yaml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Friends", "Friends", "{69ECFF64-8808-4053-B53E-8A2D8747F547}"
 EndProject
@@ -67,6 +61,22 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{CD5742CA-0EB8-43A1-9D20-1EBD34CBDC40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Gateway.GraphQl", "src\Gateway\Ukraine.Gateway.GraphQl\Ukraine.Gateway.GraphQl.csproj", "{4C4812E5-18CB-4390-BB22-CA0AEA9C3E3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "local", "local", "{2C2D025D-B78C-4E83-B96E-C18C9F1F7075}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\components\local\ukraine-config.yaml = dapr\components\local\ukraine-config.yaml
+		dapr\components\local\ukraine-pubsub.yaml = dapr\components\local\ukraine-pubsub.yaml
+		dapr\components\local\ukraine-secrets.json = dapr\components\local\ukraine-secrets.json
+		dapr\components\local\ukraine-secretstore.yaml = dapr\components\local\ukraine-secretstore.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{F50FE59B-2794-410C-9B2F-0800F47E459B}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\components\docker\ukraine-config.yaml = dapr\components\docker\ukraine-config.yaml
+		dapr\components\docker\ukraine-pubsub.yaml = dapr\components\docker\ukraine-pubsub.yaml
+		dapr\components\docker\ukraine-secrets.json = dapr\components\docker\ukraine-secrets.json
+		dapr\components\docker\ukraine-secretstore.yaml = dapr\components\docker\ukraine-secretstore.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +105,8 @@ Global
 		{C2C7125A-4EA8-4107-A005-56B32F76E03E} = {6BB857AE-11A7-4560-AE8A-18C93CF54D2C}
 		{CD5742CA-0EB8-43A1-9D20-1EBD34CBDC40} = {1C32040D-03EF-4BCE-9506-C8F61C4930ED}
 		{4C4812E5-18CB-4390-BB22-CA0AEA9C3E3B} = {CD5742CA-0EB8-43A1-9D20-1EBD34CBDC40}
+		{2C2D025D-B78C-4E83-B96E-C18C9F1F7075} = {F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}
+		{F50FE59B-2794-410C-9B2F-0800F47E459B} = {F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3C0450E-105B-47C6-AC24-12A4C44174E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

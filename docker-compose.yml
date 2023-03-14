@@ -56,7 +56,7 @@ services:
     depends_on:
       - service-identity
     volumes:
-      - "./dapr/components/:/components"
+      - "./dapr/components/docker/:/components"
 
   service-example:
     container_name: service-example
@@ -77,7 +77,7 @@ services:
     depends_on:
       - service-example
     volumes:
-      - "./dapr/components/:/components"
+      - "./dapr/components/docker/:/components"
 
   service-example-friend-registrar:
     container_name: service-example-friend-registrar
@@ -95,7 +95,7 @@ services:
     depends_on:
       - service-example-friend-registrar
     volumes:
-      - "./dapr/components/:/components"
+      - "./dapr/components/docker/:/components"
 
   web-status:
     container_name: web-status
