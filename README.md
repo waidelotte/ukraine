@@ -16,6 +16,7 @@
 - **[Tye](https://github.com/dotnet/tye)**. Run services with one command.
   - Include **[PostgreSQL](https://www.postgresql.org/)** database.
   - Include **[Seq](https://datalust.co/seq)** — structured logs.
+- **[Docker Support](https://docs.docker.com/)**
 - **Framework**
   - **Abstractions**
   - **Core**
@@ -60,3 +61,8 @@
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
+
+
+## Give a Star! :star:
+
+If you liked this project or if it helped you, please give a star :star: for this repository. Thank you!
