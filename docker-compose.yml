@@ -24,6 +24,8 @@ services:
       retries: 5
     networks:
       - ukraine-network
+#    volumes:
+#      - database-data:/var/lib/postgresql/data
 
   rabbitmq:
     container_name: rabbitmq
@@ -143,3 +145,6 @@ services:
 
 networks:
   ukraine-network:
+
+#volumes:
+#  database-data:
