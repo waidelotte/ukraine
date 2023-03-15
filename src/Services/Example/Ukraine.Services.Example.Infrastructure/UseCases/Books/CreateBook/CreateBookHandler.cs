@@ -44,8 +44,6 @@ internal sealed class CreateBookHandler : IRequestHandler<CreateBookRequest, Cre
 
 		await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-		await _eventBus.PublishAsync(new AuthorRegisteredEvent(author.Id), cancellationToken);
-
 		return new CreateBookResponse(_mapper.Map<BookDTO>(book));
 	}
 }
