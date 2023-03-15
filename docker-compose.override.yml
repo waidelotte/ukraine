@@ -35,8 +35,8 @@ services:
 
   service-identity:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development-Docker
-      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=${ENV_DOCKER_DEV}
+      - ASPNETCORE_URLS=${LOCAL_WEB_URL}
     ports:
       - "7000:80"
 
@@ -51,8 +51,8 @@ services:
 
   service-example:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development-Docker
-      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=${ENV_DOCKER_DEV}
+      - ASPNETCORE_URLS=${LOCAL_WEB_URL}
     ports:
       - "7001:80"
 
@@ -67,8 +67,8 @@ services:
 
   service-example-friend-registrar:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development-Docker
-      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=${ENV_DOCKER_DEV}
+      - ASPNETCORE_URLS=${LOCAL_WEB_URL}
     ports:
       - "7002:80"
 
@@ -83,15 +83,15 @@ services:
 
   web-status:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development-Docker
-      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=${ENV_DOCKER_DEV}
+      - ASPNETCORE_URLS=${LOCAL_WEB_URL}
     ports:
       - "7003:80"
 
   gateway-graphql:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development-Docker
-      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=${ENV_DOCKER_DEV}
+      - ASPNETCORE_URLS=${LOCAL_WEB_URL}
     ports:
       - "7004:80"
 
@@ -102,8 +102,8 @@ services:
 
   service-example-friend-email:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development-Docker
-      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=${ENV_DOCKER_DEV}
+      - ASPNETCORE_URLS=${LOCAL_WEB_URL}
     ports:
       - "7005:80"
 
