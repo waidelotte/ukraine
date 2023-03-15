@@ -12,11 +12,11 @@
 - **[Dapr](https://dapr.io/)**. Event Bus and Secret store.
   - **[RabbitMq](https://www.rabbitmq.com/)** pubsub.
   - Local file secret store.
-  - **[Zipkin](https://zipkin.io/)** tracing system.
 - **[Tye](https://github.com/dotnet/tye)**. Run services with one command.
 - **[Docker Support](https://docs.docker.com/)**
 - **[PostgreSQL](https://www.postgresql.org/)** database.
-- **[Seq](https://datalust.co/seq)** — structured logs.
+- **[Seq](https://datalust.co/seq)** structured logs.
+- **[Zipkin](https://zipkin.io/)** tracing system.
 - **Framework**
   - **Abstractions**
   - **Core**
@@ -50,6 +50,8 @@
     - Seed Roles, Users, Resources and clients.
     - Migration Helper.
 - **Web**. Health Checks UI.
+- **Gateway**
+  - GraphQL Gateway (Schema Stitching)
 
 ## Coding Guidelines
 - Projects use [StyleCop](https://github.com/DotNetAnalyzers/StyleCopAnalyzers) to produce style warnings. Please fix all warnings in any code you submit.
