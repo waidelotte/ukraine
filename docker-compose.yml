@@ -48,6 +48,7 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
+    restart: always
     networks:
       - ukraine-network
 
@@ -57,6 +58,7 @@ services:
     network_mode: "service:service-identity"
     depends_on:
       - service-identity
+    restart: always
     volumes:
       - "./dapr/components/docker/:/components"
 
@@ -69,6 +71,7 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
+    restart: always
     networks:
       - ukraine-network
 
@@ -78,6 +81,7 @@ services:
     network_mode: "service:service-example"
     depends_on:
       - service-example
+    restart: always
     volumes:
       - "./dapr/components/docker/:/components"
 
@@ -87,6 +91,7 @@ services:
     build:
       context: .
       dockerfile: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Dockerfile
+    restart: always
     networks:
       - ukraine-network
 
@@ -96,6 +101,7 @@ services:
     network_mode: "service:service-example-friend-registrar"
     depends_on:
       - service-example-friend-registrar
+    restart: always
     volumes:
       - "./dapr/components/docker/:/components"
 
@@ -105,6 +111,7 @@ services:
     build:
       context: .
       dockerfile: src/Web/Ukraine.Web.Status/Dockerfile
+    restart: always
     networks:
       - ukraine-network
 
@@ -116,6 +123,7 @@ services:
       dockerfile: src/Gateway/Ukraine.Gateway.GraphQl/Dockerfile
     depends_on:
       - service-example
+    restart: always
     networks:
       - ukraine-network
 
@@ -131,6 +139,7 @@ services:
     build:
       context: .
       dockerfile: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Email/Dockerfile
+    restart: always
     networks:
       - ukraine-network
 
@@ -140,6 +149,7 @@ services:
     network_mode: "service:service-example-friend-email"
     depends_on:
       - service-example-friend-email
+    restart: always
     volumes:
       - "./dapr/components/docker/:/components"
 
