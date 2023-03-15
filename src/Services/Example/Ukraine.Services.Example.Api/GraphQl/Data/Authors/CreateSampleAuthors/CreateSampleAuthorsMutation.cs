@@ -17,7 +17,7 @@ internal sealed class CreateSampleAuthorsMutation
 		CancellationToken cancellationToken)
 	{
 		var authorRequestFaker = new Faker<CreateAuthorRequest>()
-			.CustomInstantiator(f => new CreateAuthorRequest(f.Name.FullName(), f.Random.Number(5, 90)));
+			.CustomInstantiator(f => new CreateAuthorRequest(f.Name.FullName(), f.Internet.ExampleEmail(), f.Random.Number(5, 90)));
 
 		foreach (var request in authorRequestFaker.Generate(50))
 		{

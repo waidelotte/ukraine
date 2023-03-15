@@ -32,11 +32,11 @@ public class AuthorSubscriberController : ControllerBase
 
 		if (gen.Next(100) < 50)
 		{
-			await _eventBus.PublishAsync(new AuthorRegistrationApprovedEvent(request.AuthorId));
+			await _eventBus.PublishAsync(new AuthorRegistrationApprovedEvent(request.AuthorId, request.Email));
 		}
 		else
 		{
-			await _eventBus.PublishAsync(new AuthorRegistrationDeclinedEvent(request.AuthorId));
+			await _eventBus.PublishAsync(new AuthorRegistrationDeclinedEvent(request.AuthorId, request.Email));
 		}
 	}
 }

@@ -25,6 +25,7 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     fullname = table.Column<string>(name: "full_name", type: "text", nullable: false),
                     age = table.Column<int>(type: "integer", nullable: true),
+                    email = table.Column<string>(type: "text", nullable: false),
                     status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

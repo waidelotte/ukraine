@@ -10,5 +10,7 @@ public class AuthorDTO
 
 	public int? Age { get; set; }
 
+	public required string Email { get; set; }
+
 	public AuthorStatus Status { get; set; }
 }

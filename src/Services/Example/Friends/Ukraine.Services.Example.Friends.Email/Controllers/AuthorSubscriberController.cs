@@ -16,7 +16,7 @@ public class AuthorSubscriberController : ControllerBase
 	{
 		await emailService.SendEmailAsync(
 			"Your registration has been completed successfully!",
-			"test@test.com",
+			request.Email,
 			"Registration is completed!");
 	}
 }

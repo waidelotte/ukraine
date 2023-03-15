@@ -8,6 +8,6 @@ internal sealed class AuthorType : ObjectType<AuthorDTO>
 	{
 		descriptor.Name("Author");
 		descriptor.Field(f => f.Id).ID().IsProjected();
-		descriptor.Field(f => f.Status).Authorize(Constants.Policy.GRAPHQL_ADMIN);
+		descriptor.Field(f => f.Email).Authorize(Constants.Policy.GRAPHQL_ADMIN);
 	}
 }

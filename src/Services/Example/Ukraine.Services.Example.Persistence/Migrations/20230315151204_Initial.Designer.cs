@@ -12,7 +12,7 @@ using Ukraine.Services.Example.Persistence;
 namespace Ukraine.Services.Example.Persistence.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    [Migration("20230302214037_Initial")]
+    [Migration("20230315151204_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -37,6 +37,11 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     b.Property<int?>("Age")
                         .HasColumnType("integer")
                         .HasColumnName("age");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("email");
 
                     b.Property<string>("FullName")
                         .IsRequired()

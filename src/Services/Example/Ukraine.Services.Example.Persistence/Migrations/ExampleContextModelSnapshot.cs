@@ -35,6 +35,11 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text")

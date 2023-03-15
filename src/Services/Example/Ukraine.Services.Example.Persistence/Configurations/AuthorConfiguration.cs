@@ -10,5 +10,6 @@ internal sealed class AuthorConfiguration : IEntityTypeConfiguration<Author>
 	{
 		builder.HasKey(b => b.Id);
 		builder.Property(b => b.FullName).IsRequired();
+		builder.Property(b => b.Email).IsRequired();
 	}
 }

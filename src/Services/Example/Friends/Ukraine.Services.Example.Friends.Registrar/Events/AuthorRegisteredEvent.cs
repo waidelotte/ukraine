@@ -2,4 +2,4 @@
 
 namespace Ukraine.Services.Example.Friends.Registrar.Events;
 
-public sealed record AuthorRegisteredEvent(Guid AuthorId) : BaseEvent;
+public sealed record AuthorRegisteredEvent(Guid AuthorId, string Email) : BaseEvent;

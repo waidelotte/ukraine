@@ -2,4 +2,4 @@
 
 namespace Ukraine.Services.Example.Domain.Events;
 
-public record AuthorRegistrationApprovedEvent(Guid AuthorId) : BaseEvent;
+public record AuthorRegistrationApprovedEvent(Guid AuthorId, string Email) : BaseEvent;

@@ -9,6 +9,8 @@ public sealed class Author : EntityRootBase<Guid>
 
 	public int? Age { get; init; }
 
+	public required string Email { get; init; }
+
 	public AuthorStatus Status { get; private set; }
 
 	public ICollection<Book> Books { get; } = new HashSet<Book>();

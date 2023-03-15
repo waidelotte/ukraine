@@ -28,6 +28,7 @@ internal sealed class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest,
 		var author = new Author
 		{
 			FullName = request.FullName,
+			Email = request.Email,
 			Age = request.Age
 		};
 
@@ -37,7 +38,7 @@ internal sealed class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest,
 
 		await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-		await _eventBus.PublishAsync(new AuthorRegisteredEvent(author.Id), cancellationToken);
+		await _eventBus.PublishAsync(new AuthorRegisteredEvent(author.Id, author.Email), cancellationToken);
 
 		return new CreateAuthorResponse(_mapper.Map<AuthorDTO>(author));
 	}

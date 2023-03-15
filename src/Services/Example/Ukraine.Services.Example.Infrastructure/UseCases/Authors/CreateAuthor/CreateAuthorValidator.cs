@@ -10,6 +10,10 @@ internal sealed class CreateAuthorValidator : AbstractValidator<CreateAuthorRequ
 			.Cascade(CascadeMode.Stop)
 			.NotEmpty();
 
+		RuleFor(request => request.Email)
+			.Cascade(CascadeMode.Stop)
+			.EmailAddress();
+
 		RuleFor(request => request.Age)
 			.Cascade(CascadeMode.Stop)
 			.GreaterThanOrEqualTo(1);
