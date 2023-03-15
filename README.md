@@ -11,12 +11,12 @@
 ## Structure
 - **[Dapr](https://dapr.io/)**. Event Bus and Secret store.
   - **[RabbitMq](https://www.rabbitmq.com/)** pubsub.
-  - Local file store.
+  - Local file secret store.
   - **[Zipkin](https://zipkin.io/)** tracing system.
 - **[Tye](https://github.com/dotnet/tye)**. Run services with one command.
-  - Include **[PostgreSQL](https://www.postgresql.org/)** database.
-  - Include **[Seq](https://datalust.co/seq)** — structured logs.
 - **[Docker Support](https://docs.docker.com/)**
+- **[PostgreSQL](https://www.postgresql.org/)** database.
+- **[Seq](https://datalust.co/seq)** — structured logs.
 - **Framework**
   - **Abstractions**
   - **Core**
@@ -43,6 +43,8 @@
     - **[Open Telemetry](https://opentelemetry.io/)**.
     - **[Serilog](https://serilog.net/)**.
     - **[Bogus](https://github.com/bchavez/Bogus)**. Fake data generator.
+  - **Example Registrar** - Processes the registration Event.
+  - **Example Mail** - Confirmation of registration by Email using the **[MailDev](https://github.com/maildev/maildev)**.
   - **[Identity Server](https://duendesoftware.com/products/identityserver)** without UI styles.
     - Only basic controllers.
     - Seed Roles, Users, Resources and clients.
@@ -54,7 +56,6 @@
 
 ### TODO
 - Identity Server Frontend
-- Mail Sender
 - Blazor Server/Client
 - ReadOnlyDictionary.Empty (after .NET 8)
 
