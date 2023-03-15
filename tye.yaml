@@ -1,6 +1,3 @@
-# TODO REQUIRE UPDATE LATER
-# missing maildev, friend-email
-
 name: ukraine
 
 extensions:
@@ -53,6 +50,18 @@ services:
         port: 5672
     replicas: 1
 
+  - name: maildev
+    image: maildev/maildev:2.0.5
+    bindings:
+      - port: 1080
+        protocol: http
+        containerPort: 1080
+        name: ui
+      - port: 1025
+        containerPort: 1025
+        name: smtp
+    replicas: 1
+
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
     env:
@@ -73,7 +82,6 @@ services:
     liveness:
       http:
         path: /health
-      initialDelay: 1
 
   - name: service-example
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
@@ -86,7 +94,6 @@ services:
     liveness:
       http:
         path: /health
-      initialDelay: 1
 
   - name: service-example-friend-registrar
     project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Ukraine.Services.Example.Friends.Registrar.csproj
@@ -99,7 +106,18 @@ services:
     liveness:
       http:
         path: /health
-      initialDelay: 1
+
+  - name: service-example-friend-email
+    project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Email/Ukraine.Services.Example.Friends.Email.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7005
+    replicas: 1
+    liveness:
+      http:
+        path: /health
 
   - name: gateway-graphql
     project: src/Gateway/Ukraine.Gateway.GraphQl/Ukraine.Gateway.GraphQl.csproj
@@ -112,4 +130,3 @@ services:
     liveness:
       http:
         path: /health
-      initialDelay: 1
