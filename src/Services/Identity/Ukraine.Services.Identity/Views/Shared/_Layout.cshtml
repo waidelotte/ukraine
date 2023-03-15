@@ -11,6 +11,7 @@
     <div>
         @if (User.Identity?.IsAuthenticated == true && !string.IsNullOrEmpty(Context.User.GetDisplayName()))
         {
+            @Html.AntiForgeryToken()
             <a asp-action="Logout" asp-controller="Account">Logout</a>
         }
     </div>

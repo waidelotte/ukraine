@@ -8,6 +8,7 @@ using Ukraine.Framework.Core;
 using Ukraine.Framework.Core.HealthChecks;
 using Ukraine.Framework.Core.Serilog;
 using Ukraine.Framework.Dapr;
+using Ukraine.Services.Identity.Helpers;
 using Ukraine.Services.Identity.Persistence.Configuration;
 using Ukraine.Services.Identity.Persistence.DbContexts;
 using Ukraine.Services.Identity.Persistence.Entities;
@@ -51,6 +52,8 @@ services.Configure<CookiePolicyOptions>(options =>
 {
 	options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
 	options.Secure = CookieSecurePolicy.SameAsRequest;
+	options.OnAppendCookie = cookieContext => CookieHelper.SetSameSite(cookieContext.Context, cookieContext.CookieOptions);
+	options.OnDeleteCookie = cookieContext => CookieHelper.SetSameSite(cookieContext.Context, cookieContext.CookieOptions);
 });
 
 var configurationSection = configuration.GetSection(nameof(IdentityServerOptions));

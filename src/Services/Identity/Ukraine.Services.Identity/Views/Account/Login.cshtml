@@ -6,6 +6,7 @@
     @await Html.PartialAsync("_ValidationSummary")
 
     <form asp-route="Login">
+        @Html.AntiForgeryToken()
         <input type="hidden" asp-for="ReturnUrl" />
         <input placeholder="Username" asp-for="Username" aria-label="Username" aria-describedby="input-username">
         <input placeholder="Password" asp-for="Password" type="password" aria-label="Password" aria-describedby="input-password" autocomplete="off">
