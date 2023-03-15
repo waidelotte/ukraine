@@ -28,6 +28,7 @@
     - Dapr Event Bus.
     - Dapr Health Checks.
     - Dapr Secret store.
+    - Dapr Email Service.
   - **EF Core**
     - Base Repository with projections.
     - Specification Repository.
