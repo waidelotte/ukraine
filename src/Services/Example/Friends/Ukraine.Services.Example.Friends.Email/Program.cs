@@ -1,0 +1,57 @@
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Ukraine.Framework.Core;
+using Ukraine.Framework.Core.HealthChecks;
+using Ukraine.Framework.Core.Serilog;
+using Ukraine.Framework.Dapr;
+
+var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+var services = builder.Services;
+
+builder.Host.UseSerilog(configuration);
+builder.Host.AddServicesValidationOnBuild();
+
+services.AddDaprEventBus(options =>
+{
+	options.PubSubName = "ukraine-pubsub";
+});
+
+services.AddDaprEmailService(options =>
+{
+	options.BindingName = "ukraine-mail";
+	options.EmailFrom = "dev@practicalukraine.com";
+});
+
+services.AddControllers();
+
+services
+	.AddHealthChecks()
+	.AddDefaultCheck("Service", new[] { "service", "api", "demo" })
+	.AddDaprHealthCheck(
+		"Dapr Sidecar",
+		HealthStatus.Unhealthy,
+		new[] { "service", "dapr" });
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopmentDocker())
+	app.UseDeveloperExceptionPage();
+
+app.UseCloudEvents();
+app.MapSubscribeHandler();
+app.MapControllers();
+app.MapDefaultHealthChecks();
+
+try
+{
+	app.Logger.LogInformation("Starting Web Host [service-example-friend-email]");
+	app.Run();
+}
+catch (Exception ex)
+{
+	app.Logger.LogCritical(ex, "Host terminated unexpectedly [service-example-friend-email]");
+}
+finally
+{
+	Serilog.Log.CloseAndFlush();
+}

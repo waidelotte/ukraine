@@ -117,5 +117,29 @@ services:
     networks:
       - ukraine-network
 
+  maildev:
+    container_name: maildev
+    image: maildev/maildev:2.0.5
+    networks:
+      - ukraine-network
+
+  service-example-friend-email:
+    container_name: service-example-friend-email
+    image: ${REGISTRY:-ukraine}/service-example-friend-email:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Email/Dockerfile
+    networks:
+      - ukraine-network
+
+  service-example-friend-email-dapr:
+    container_name: service-example-friend-email-dapr
+    image: "daprio/daprd:1.10.2"
+    network_mode: "service:service-example-friend-email"
+    depends_on:
+      - service-example-friend-email
+    volumes:
+      - "./dapr/components/docker/:/components"
+
 networks:
   ukraine-network:

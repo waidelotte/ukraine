@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Framework\Ukraine.Framework.Core\Ukraine.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\Ukraine.Framework.Dapr\Ukraine.Framework.Dapr.csproj" />
+  </ItemGroup>
+</Project>

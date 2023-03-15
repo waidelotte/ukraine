@@ -11,6 +11,28 @@ public static class ServiceCollectionExtensions
 		this IServiceCollection services,
 		Action<DaprEventBusOptions> configure)
 	{
+		AddDaprClient(services);
+
+		services.Configure(configure);
+		services.TryAddScoped<IEventBus, DaprEventBus>();
+
+		return services;
+	}
+
+	public static IServiceCollection AddDaprEmailService(
+		this IServiceCollection services,
+		Action<DaprEmailOptions> configure)
+	{
+		AddDaprClient(services);
+
+		services.Configure(configure);
+		services.TryAddScoped<IEmailService, DaprEmailService>();
+
+		return services;
+	}
+
+	private static void AddDaprClient(IServiceCollection services)
+	{
 		var serializerOptions = new JsonSerializerOptions
 		{
 			PropertyNameCaseInsensitive = true,
@@ -21,10 +43,5 @@ public static class ServiceCollectionExtensions
 		{
 			client.UseJsonSerializationOptions(serializerOptions);
 		});
-
-		services.Configure(configure);
-		services.TryAddScoped<IEventBus, DaprEventBus>();
-
-		return services;
 	}
 }

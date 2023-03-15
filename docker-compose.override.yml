@@ -94,3 +94,24 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
       - "7004:80"
+
+  maildev:
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
+  service-example-friend-email:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development-Docker
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+    ports:
+      - "7005:80"
+
+  service-example-friend-email-dapr:
+    command: ["./daprd",
+              "-app-id", "service-example-friend-email",
+              "-app-port", "80",
+              "-placement-host-address", "dapr-placement:50000",
+              "-components-path", "/components",
+              "-config", "/components/ukraine-config.yaml"
+    ]

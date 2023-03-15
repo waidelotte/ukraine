@@ -68,6 +68,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "local", "local", "{2C2D025D
 		dapr\components\local\ukraine-pubsub.yaml = dapr\components\local\ukraine-pubsub.yaml
 		dapr\components\local\ukraine-secrets.json = dapr\components\local\ukraine-secrets.json
 		dapr\components\local\ukraine-secretstore.yaml = dapr\components\local\ukraine-secretstore.yaml
+		dapr\components\local\ukraine-email.yaml = dapr\components\local\ukraine-email.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{F50FE59B-2794-410C-9B2F-0800F47E459B}"
@@ -76,7 +77,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{F50FE5
 		dapr\components\docker\ukraine-pubsub.yaml = dapr\components\docker\ukraine-pubsub.yaml
 		dapr\components\docker\ukraine-secrets.json = dapr\components\docker\ukraine-secrets.json
 		dapr\components\docker\ukraine-secretstore.yaml = dapr\components\docker\ukraine-secretstore.yaml
+		dapr\components\docker\ukraine-email.yaml = dapr\components\docker\ukraine-email.yaml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.Friends.Email", "src\Services\Example\Friends\Ukraine.Services.Example.Friends.Email\Ukraine.Services.Example.Friends.Email.csproj", "{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +111,7 @@ Global
 		{4C4812E5-18CB-4390-BB22-CA0AEA9C3E3B} = {CD5742CA-0EB8-43A1-9D20-1EBD34CBDC40}
 		{2C2D025D-B78C-4E83-B96E-C18C9F1F7075} = {F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}
 		{F50FE59B-2794-410C-9B2F-0800F47E459B} = {F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}
+		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F} = {69ECFF64-8808-4053-B53E-8A2D8747F547}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3C0450E-105B-47C6-AC24-12A4C44174E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -161,5 +166,9 @@ Global
 		{4C4812E5-18CB-4390-BB22-CA0AEA9C3E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C4812E5-18CB-4390-BB22-CA0AEA9C3E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C4812E5-18CB-4390-BB22-CA0AEA9C3E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

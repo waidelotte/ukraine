@@ -1,0 +1,27 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: ukraine-mail
+  namespace: ukraine
+spec:
+  type: bindings.smtp
+  version: v1
+  metadata:
+    - name: host
+      value: localhost
+    - name: port
+      value: 1025
+    - name: user
+      secretKeyRef:
+        name: Smtp.User
+        key: Smtp.User
+    - name: password
+      secretKeyRef:
+        name: Smtp.Password
+        key: Smtp.Password
+    - name: skipTLSVerify
+      value: true
+auth:
+  secretStore: ukraine-secretstore
+scopes:
+  - service-example-friend-email
