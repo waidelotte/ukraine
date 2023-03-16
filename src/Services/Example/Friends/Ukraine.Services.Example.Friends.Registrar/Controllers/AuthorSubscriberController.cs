@@ -19,9 +19,9 @@ public class AuthorSubscriberController : ControllerBase
 		_eventBus = eventBus;
 	}
 
-	[HttpPost("AuthorRegistered")]
-	[Topic("ukraine-pubsub", nameof(AuthorRegisteredEvent))]
-	public async Task HandleAsync(AuthorRegisteredEvent request)
+	[HttpPost("AuthorCreated")]
+	[Topic("ukraine-pubsub", nameof(AuthorCreatedEvent))]
+	public async Task HandleAsync(AuthorCreatedEvent request)
 	{
 		_logger.LogDebug("Author Registered Event: {@Request}", request);
 		_logger.LogDebug("Register new Author {Id}", request.AuthorId);

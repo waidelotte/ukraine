@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Ukraine.Framework.Abstractions;
 
 namespace Ukraine.Framework.EFCore;
 
@@ -18,6 +19,21 @@ public static class ModelBuilderExtensions
 				{
 					property.SetValueConverter(DateTimeConverter.ToUtcConverter);
 				}
+			}
+		}
+
+		return builder;
+	}
+
+	public static ModelBuilder IgnoreDomainEventProperty(this ModelBuilder builder)
+	{
+		foreach (var entityType in builder.Model.GetEntityTypes())
+		{
+			if (typeof(IAggregateRoot).IsAssignableFrom(entityType.ClrType))
+			{
+				builder
+					.Entity(entityType.ClrType)
+					.Ignore(nameof(IAggregateRoot.DomainEvents));
 			}
 		}
 

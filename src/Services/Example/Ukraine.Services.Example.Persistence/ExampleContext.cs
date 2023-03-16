@@ -21,6 +21,7 @@ public sealed class ExampleContext : DbContext, IDatabaseFacadeResolver
 		modelBuilder.HasDefaultSchema("ukraine_example");
 		modelBuilder.HasPostgresUuidGenerator();
 		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+		modelBuilder.IgnoreDomainEventProperty();
 
 		foreach (var entityType in modelBuilder.Model.GetEntityTypes())
 		{

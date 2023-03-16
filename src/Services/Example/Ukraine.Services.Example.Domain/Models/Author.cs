@@ -1,9 +1,10 @@
 ﻿using Ukraine.Framework.Abstractions;
 using Ukraine.Services.Example.Domain.Enums;
+using Ukraine.Services.Example.Domain.Events;
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public sealed class Author : EntityRootBase<Guid>
+public sealed class Author : EntityRootBase
 {
 	private Author(string fullName, string email, int? age)
 	{
@@ -24,7 +25,9 @@ public sealed class Author : EntityRootBase<Guid>
 
 	public static Author From(string fullName, string email, int? age)
 	{
-		return new Author(fullName, email, age);
+		var author = new Author(fullName, email, age);
+		author.AddDomainEvent(new AuthorCreatedEvent(author.Id, author.Email));
+		return author;
 	}
 
 	public void ChangeStatus(AuthorStatus status)

@@ -3,9 +3,11 @@
 public interface IEvent { }
 
 #pragma warning disable SA1402
-public interface IEvent<TId> : IEvent
+public interface IEvent<out TId> : IEvent
 #pragma warning restore SA1402
 	where TId : struct
 {
-	TId EventId { get; init; }
+	TId EventId { get; }
+
+	DateTime Created { get; }
 }

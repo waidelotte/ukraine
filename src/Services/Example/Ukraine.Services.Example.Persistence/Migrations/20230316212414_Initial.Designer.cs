@@ -12,7 +12,7 @@ using Ukraine.Services.Example.Persistence;
 namespace Ukraine.Services.Example.Persistence.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    [Migration("20230316120035_Initial")]
+    [Migration("20230316212414_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
