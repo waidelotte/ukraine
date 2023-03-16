@@ -9,7 +9,7 @@
 - [Tye](https://github.com/dotnet/tye/blob/main/docs/getting_started.md)
 
 ## Structure
-- **[Dapr](https://dapr.io/)**. Event Bus and Secret store.
+- **[Dapr](https://dapr.io/)**. Microservice Building Blocks.
   - **[RabbitMq](https://www.rabbitmq.com/)** pubsub.
   - Local file secret store.
 - **[Tye](https://github.com/dotnet/tye)**. Run services with one command.
