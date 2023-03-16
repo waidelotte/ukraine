@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Ukraine.Framework.Abstractions;
 using Ukraine.Framework.EFCore;
 using Ukraine.Services.Example.Domain.Models;
 
@@ -18,7 +19,26 @@ public sealed class ExampleContext : DbContext, IDatabaseFacadeResolver
 		base.OnModelCreating(modelBuilder);
 
 		modelBuilder.HasDefaultSchema("ukraine_example");
-		modelBuilder.HasPostgresExtension("uuid-ossp");
+		modelBuilder.HasPostgresUuidGenerator();
 		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+		foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+		{
+			if (typeof(IEntity<Guid>).IsAssignableFrom(entityType.ClrType))
+			{
+				modelBuilder
+					.Entity(entityType.ClrType)
+					.Property(nameof(IEntity<Guid>.Id))
+					.HasUuidColumnType()
+					.HasDefaultPostgresUuid();
+
+				modelBuilder
+					.Entity(entityType.ClrType)
+					.Property(nameof(IEntity<Guid>.Created))
+					.HasDefaultPostgresDate();
+			}
+		}
+
+		modelBuilder.ApplyToUtcDateTimeConverter();
 	}
 }

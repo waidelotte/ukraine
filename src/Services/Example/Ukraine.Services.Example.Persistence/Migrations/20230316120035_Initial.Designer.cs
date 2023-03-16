@@ -12,7 +12,7 @@ using Ukraine.Services.Example.Persistence;
 namespace Ukraine.Services.Example.Persistence.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    [Migration("20230315151204_Initial")]
+    [Migration("20230316120035_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -32,11 +32,18 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<int?>("Age")
                         .HasColumnType("integer")
                         .HasColumnName("age");
+
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -52,6 +59,10 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
+
                     b.HasKey("Id")
                         .HasName("pk_authors");
 
@@ -63,11 +74,18 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uuid")
                         .HasColumnName("author_id");
+
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -77,6 +95,10 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("integer")
                         .HasColumnName("rating");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
                     b.HasKey("Id")
                         .HasName("pk_books");
