@@ -3,7 +3,6 @@ using AutoMapper;
 using MediatR;
 using Ukraine.Framework.Abstractions;
 using Ukraine.Framework.EFCore;
-using Ukraine.Services.Example.Domain.Events;
 using Ukraine.Services.Example.Domain.Models;
 using Ukraine.Services.Example.Infrastructure.DTOs;
 using Ukraine.Services.Example.Persistence.Specifications;
@@ -13,16 +12,13 @@ namespace Ukraine.Services.Example.Infrastructure.UseCases.Books.CreateBook;
 internal sealed class CreateBookHandler : IRequestHandler<CreateBookRequest, CreateBookResponse>
 {
 	private readonly IUnitOfWork _unitOfWork;
-	private readonly IEventBus _eventBus;
 	private readonly IMapper _mapper;
 
 	public CreateBookHandler(
 		IUnitOfWork unitOfWork,
-		IEventBus eventBus,
 		IMapper mapper)
 	{
 		_unitOfWork = unitOfWork;
-		_eventBus = eventBus;
 		_mapper = mapper;
 	}
 
@@ -34,11 +30,7 @@ internal sealed class CreateBookHandler : IRequestHandler<CreateBookRequest, Cre
 
 		Guard.Against.NotFound(request.AuthorId, author);
 
-		var book = new Book
-		{
-			AuthorId = author.Id,
-			Name = request.Name
-		};
+		var book = Book.From(request.Name, request.AuthorId);
 
 		author.Books.Add(book);
 

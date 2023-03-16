@@ -5,15 +5,27 @@ namespace Ukraine.Services.Example.Domain.Models;
 
 public sealed class Author : EntityRootBase<Guid>
 {
-	public required string FullName { get; init; }
+	private Author(string fullName, string email, int? age)
+	{
+		FullName = fullName;
+		Email = email;
+		Age = age;
+	}
 
-	public int? Age { get; init; }
+	public string FullName { get; private set; }
 
-	public required string Email { get; init; }
+	public int? Age { get; private set; }
+
+	public string Email { get; private set; }
 
 	public AuthorStatus Status { get; private set; }
 
-	public ICollection<Book> Books { get; } = new HashSet<Book>();
+	public ICollection<Book> Books { get; private set; } = new HashSet<Book>();
+
+	public static Author From(string fullName, string email, int? age)
+	{
+		return new Author(fullName, email, age);
+	}
 
 	public void ChangeStatus(AuthorStatus status)
 	{

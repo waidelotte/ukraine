@@ -25,12 +25,7 @@ internal sealed class CreateAuthorHandler : IRequestHandler<CreateAuthorRequest,
 
 	public async Task<CreateAuthorResponse> Handle(CreateAuthorRequest request, CancellationToken cancellationToken)
 	{
-		var author = new Author
-		{
-			FullName = request.FullName,
-			Email = request.Email,
-			Age = request.Age
-		};
+		var author = Author.From(request.FullName, request.Email, request.Age);
 
 		var repository = _unitOfWork.GetRepository<IRepository<Author>>();
 
