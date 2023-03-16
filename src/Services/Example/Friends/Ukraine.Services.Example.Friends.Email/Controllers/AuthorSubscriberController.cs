@@ -12,7 +12,7 @@ public class AuthorSubscriberController : ControllerBase
 {
 	[HttpPost("AuthorRegistrationApproved")]
 	[Topic("ukraine-pubsub", nameof(AuthorRegistrationApprovedEvent))]
-	public async Task HandleAsync([FromServices] IEmailService emailService, AuthorRegistrationApprovedEvent request)
+	public async Task HandleAsync(IEmailService emailService, AuthorRegistrationApprovedEvent request)
 	{
 		await emailService.SendEmailAsync(
 			"Your registration has been completed successfully!",
