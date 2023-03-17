@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Ukraine.Framework.Core;
 
 namespace Ukraine.Services.Example.Persistence;
 
@@ -17,6 +18,6 @@ internal sealed class ExampleContextFactory : IDesignTimeDbContextFactory<Exampl
 				sqlOptions.MigrationsHistoryTable("__migrations", "ukraine_example");
 			});
 
-		return new ExampleContext(optionsBuilder.Options);
+		return new ExampleContext(optionsBuilder.Options, new SystemDateTimeProvider());
 	}
 }

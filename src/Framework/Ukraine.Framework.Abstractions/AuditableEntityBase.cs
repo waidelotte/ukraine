@@ -1,6 +1,6 @@
 ﻿namespace Ukraine.Framework.Abstractions;
 
-public interface IAuditable
+public abstract class AuditableEntityBase : EntityBase, IAuditableEntity<Guid>
 {
 	public DateTime CreatedUtc { get; set; }
 

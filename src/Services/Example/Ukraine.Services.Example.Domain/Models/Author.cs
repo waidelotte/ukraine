@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Domain.Events;
 
 namespace Ukraine.Services.Example.Domain.Models;
 
-public sealed class Author : EntityRootBase
+public sealed class Author : AuditableEntityRootBase
 {
 	private Author(string fullName, string email, int? age)
 	{

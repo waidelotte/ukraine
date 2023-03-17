@@ -9,8 +9,4 @@ public interface IEntity<out TIdentity> : IEntity
 	where TIdentity : struct
 {
 	public TIdentity Id { get; }
-
-	public DateTime Created { get; }
-
-	public DateTime? Updated { get; }
 }

@@ -27,8 +27,8 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     age = table.Column<int>(type: "integer", nullable: true),
                     email = table.Column<string>(type: "text", nullable: false),
                     status = table.Column<int>(type: "integer", nullable: false),
-                    created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    createdutc = table.Column<DateTime>(name: "created_utc", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    lastmodifiedutc = table.Column<DateTime>(name: "last_modified_utc", type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,8 +44,8 @@ namespace Ukraine.Services.Example.Persistence.Migrations
                     name = table.Column<string>(type: "text", nullable: false),
                     rating = table.Column<int>(type: "integer", nullable: false),
                     authorid = table.Column<Guid>(name: "author_id", type: "uuid", nullable: false),
-                    created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    createdutc = table.Column<DateTime>(name: "created_utc", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    lastmodifiedutc = table.Column<DateTime>(name: "last_modified_utc", type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
