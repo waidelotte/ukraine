@@ -61,7 +61,7 @@
 
 ### TODO
 - Identity Server Frontend
-- Blazor Server/Client
+- Blazor Server/Client -> MudBlazor
 - ReadOnlyDictionary.Empty (after .NET 8)
 
 ## License
