@@ -9,6 +9,7 @@ internal sealed class UnitOfWork : IUnitOfWork
 	private readonly DbContext _context;
 	private readonly IServiceProvider _serviceProvider;
 	private Dictionary<Type, IRepository>? _repositories;
+	private bool _disposed;
 
 	public UnitOfWork(DbContext context, IServiceProvider serviceProvider)
 	{
@@ -38,5 +39,31 @@ internal sealed class UnitOfWork : IUnitOfWork
 	public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
 	{
 		return await _context.SaveChangesAsync(cancellationToken) > 0;
+	}
+
+	public void Rollback()
+	{
+		_context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+	}
+
+	public void Dispose()
+	{
+		Dispose(true);
+
+		// ReSharper disable once GCSuppressFinalizeForTypeWithoutDestructor
+		GC.SuppressFinalize(this);
+	}
+
+	private void Dispose(bool disposing)
+	{
+		if (!_disposed)
+		{
+			if (disposing)
+			{
+				_context.Dispose();
+			}
+		}
+
+		_disposed = true;
 	}
 }
