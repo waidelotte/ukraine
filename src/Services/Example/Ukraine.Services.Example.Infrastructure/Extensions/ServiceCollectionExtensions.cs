@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Ukraine.Framework.Core;
 using Ukraine.Framework.Core.Mediator;
 using Ukraine.Framework.Dapr;
 
@@ -10,6 +11,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddInfrastructure(this IServiceCollection services)
 	{
 		services
+			.AddSystemDateTimeProvider()
 			.AddMediatorAndValidatorsFromAssembly(Assembly.GetExecutingAssembly())
 			.AddMediatorRequestValidation()
 			.AddAutoMapper(Assembly.GetExecutingAssembly())

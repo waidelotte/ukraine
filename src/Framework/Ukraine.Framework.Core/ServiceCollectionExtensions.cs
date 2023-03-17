@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
+using Ukraine.Framework.Abstractions;
 
 namespace Ukraine.Framework.Core;
 
@@ -26,5 +28,11 @@ public static class ServiceCollectionExtensions
 			.Bind(configurationSection)
 			.ValidateDataAnnotations()
 			.ValidateOnStart();
+	}
+
+	public static IServiceCollection AddSystemDateTimeProvider(this IServiceCollection services)
+	{
+		services.TryAddTransient<IDateTimeProvider, SystemDateTimeProvider>();
+		return services;
 	}
 }
