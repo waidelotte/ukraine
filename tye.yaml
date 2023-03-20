@@ -32,6 +32,8 @@ services:
       - port: 5432
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
     replicas: 1
+    tags:
+      - blazor
 
   - name: rabbitmq
     image: rabbitmq:3.11.10-management-alpine
@@ -75,6 +77,8 @@ services:
     liveness:
       http:
         path: /health
+    tags:
+      - blazor
 
   - name: service-example
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
@@ -134,7 +138,7 @@ services:
         path: /health
 
   - name: web-blazor
-    project: src/Web/Ukraine.Web.Blazor.Server/Ukraine.Web.Blazor.Server.csproj
+    project: src/Web/Ukraine.Web.Blazor.Client/Ukraine.Web.Blazor.Client.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
@@ -144,3 +148,5 @@ services:
     liveness:
       http:
         path: /health
+    tags:
+      - blazor
