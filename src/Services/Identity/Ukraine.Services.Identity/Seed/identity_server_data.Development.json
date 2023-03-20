@@ -153,6 +153,31 @@
         "AllowedScopes": [
           "service-example-graphql-scope"
         ]
+      },
+      {
+        "ClientId": "web-blazor",
+        "ClientName": "web-blazor",
+        "ClientUri": "http://localhost:7006",
+        "AllowedGrantTypes": [
+          "authorization_code"
+        ],
+        "RequirePkce": true,
+        "RequireClientSecret": false,
+        "RedirectUris": [
+          "http://localhost:7006/authentication/login-callback"
+        ],
+        "PostLogoutRedirectUris": [
+          "http://localhost:7006/authentication/logout-callback"
+        ],
+        "AllowedCorsOrigins": [
+          "http://localhost:7006"
+        ],
+        "AllowedScopes": [
+          "openid",
+          "profile",
+          "service-example-graphql-scope",
+          "service-example-rest-scope"
+        ]
       }
     ]
   }
