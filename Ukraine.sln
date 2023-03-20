@@ -85,8 +85,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Web.Blazor.Client", "src\Web\Ukraine.Web.Blazor.Client\Ukraine.Web.Blazor.Client.csproj", "{D1F71DAF-BBDA-412B-9322-14A1226B1F14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Web.Blazor.Server", "src\Web\Ukraine.Web.Blazor.Server\Ukraine.Web.Blazor.Server.csproj", "{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,7 +116,6 @@ Global
 		{F50FE59B-2794-410C-9B2F-0800F47E459B} = {F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}
 		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F} = {69ECFF64-8808-4053-B53E-8A2D8747F547}
 		{D1F71DAF-BBDA-412B-9322-14A1226B1F14} = {AEB23F19-ECA5-4249-B81E-925BBE1165EA}
-		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691} = {AEB23F19-ECA5-4249-B81E-925BBE1165EA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3C0450E-105B-47C6-AC24-12A4C44174E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -181,9 +178,5 @@ Global
 		{D1F71DAF-BBDA-412B-9322-14A1226B1F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1F71DAF-BBDA-412B-9322-14A1226B1F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1F71DAF-BBDA-412B-9322-14A1226B1F14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

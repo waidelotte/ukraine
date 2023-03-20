@@ -1,31 +1,49 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
 
-<MudThemeProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
 <MudLayout>
     <MudAppBar Elevation="0">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@(_ => DrawerToggle())" />
+        <MudSpacer />
+        <AuthorizeView>
+            <Authorized>
+                @context!.User!.Identity!.Name
+                <MudTooltip Text="Log out" Color="Color.Inherit">
+                    <MudIconButton ButtonType="ButtonType.Button" OnClick="SignOut" Color="Color.Inherit" Icon="@Icons.Material.Filled.Logout"/>
+                </MudTooltip>
+            </Authorized>
+            <NotAuthorized>
+                <MudTooltip Text="Log in" Color="Color.Inherit">
+                    <MudIconButton Link="authentication/login" Target="_self" Color="Color.Inherit" Icon="@Icons.Material.Filled.Login"/>
+                </MudTooltip>
+            </NotAuthorized>
+        </AuthorizeView>
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
-        <MudDrawerHeader>
-            <MudText Typo="Typo.h6">Ukraine</MudText>
-        </MudDrawerHeader>
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
+        <MudContainer MaxWidth="MaxWidth.Large" Class="pt-4">
             @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>
 
 @code {
+
     private bool _drawerOpen = true;
 
     private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    private void SignOut()
+    {
+        Navigation.NavigateToLogout("authentication/logout");
     }
 }
