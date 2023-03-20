@@ -83,9 +83,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{F50FE5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Services.Example.Friends.Email", "src\Services\Example\Friends\Ukraine.Services.Example.Friends.Email\Ukraine.Services.Example.Friends.Email.csproj", "{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Web.Blazor.Host", "src\Web\Ukraine.Web.Blazor.Host\Ukraine.Web.Blazor.Host.csproj", "{4F33CE29-1419-4A18-BF31-AE1DA905E1F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Web.Blazor.Client", "src\Web\Ukraine.Web.Blazor.Client\Ukraine.Web.Blazor.Client.csproj", "{D1F71DAF-BBDA-412B-9322-14A1226B1F14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Web.Blazor.Client", "src\Web\Ukraine.Web.Blazor.Client\Ukraine.Web.Blazor.Client.csproj", "{56D8C9B4-2CD3-476D-842E-22C95A86BE78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Web.Blazor.Server", "src\Web\Ukraine.Web.Blazor.Server\Ukraine.Web.Blazor.Server.csproj", "{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,8 +117,8 @@ Global
 		{2C2D025D-B78C-4E83-B96E-C18C9F1F7075} = {F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}
 		{F50FE59B-2794-410C-9B2F-0800F47E459B} = {F3D4B0CF-A6CB-4D52-B7F1-7DF14875E72B}
 		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F} = {69ECFF64-8808-4053-B53E-8A2D8747F547}
-		{4F33CE29-1419-4A18-BF31-AE1DA905E1F1} = {AEB23F19-ECA5-4249-B81E-925BBE1165EA}
-		{56D8C9B4-2CD3-476D-842E-22C95A86BE78} = {AEB23F19-ECA5-4249-B81E-925BBE1165EA}
+		{D1F71DAF-BBDA-412B-9322-14A1226B1F14} = {AEB23F19-ECA5-4249-B81E-925BBE1165EA}
+		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691} = {AEB23F19-ECA5-4249-B81E-925BBE1165EA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3C0450E-105B-47C6-AC24-12A4C44174E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -177,13 +177,13 @@ Global
 		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB85F3B7-DEBC-475E-9365-BB8222CFFF6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F33CE29-1419-4A18-BF31-AE1DA905E1F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F33CE29-1419-4A18-BF31-AE1DA905E1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F33CE29-1419-4A18-BF31-AE1DA905E1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F33CE29-1419-4A18-BF31-AE1DA905E1F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56D8C9B4-2CD3-476D-842E-22C95A86BE78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56D8C9B4-2CD3-476D-842E-22C95A86BE78}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56D8C9B4-2CD3-476D-842E-22C95A86BE78}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56D8C9B4-2CD3-476D-842E-22C95A86BE78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F71DAF-BBDA-412B-9322-14A1226B1F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F71DAF-BBDA-412B-9322-14A1226B1F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F71DAF-BBDA-412B-9322-14A1226B1F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F71DAF-BBDA-412B-9322-14A1226B1F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C0E2CC-9EB3-42F6-A1D6-8C788C44B691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

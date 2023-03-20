@@ -14,6 +14,8 @@ extensions:
         enabled: false
       gateway-graphql:
         enabled: false
+      web-blazor:
+        enabled: false
   - name: seq
     logPath: ./.logs
 
@@ -62,15 +64,6 @@ services:
         name: smtp
     replicas: 1
 
-  - name: web-status
-    project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
-    env:
-      - name: ASPNETCORE_ENVIRONMENT
-        value: Development
-    bindings:
-      - port: 7003
-    replicas: 1
-
   - name: service-identity
     project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
     env:
@@ -107,6 +100,27 @@ services:
       http:
         path: /health
 
+  - name: web-status
+    project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7003
+    replicas: 1
+
+  - name: gateway-graphql
+    project: src/Gateway/Ukraine.Gateway.GraphQl/Ukraine.Gateway.GraphQl.csproj
+    env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+    bindings:
+      - port: 7004
+    replicas: 1
+    liveness:
+      http:
+        path: /health
+
   - name: service-example-friend-email
     project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Email/Ukraine.Services.Example.Friends.Email.csproj
     env:
@@ -119,13 +133,13 @@ services:
       http:
         path: /health
 
-  - name: gateway-graphql
-    project: src/Gateway/Ukraine.Gateway.GraphQl/Ukraine.Gateway.GraphQl.csproj
+  - name: web-blazor
+    project: src/Web/Ukraine.Web.Blazor.Server/Ukraine.Web.Blazor.Server.csproj
     env:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
     bindings:
-      - port: 7004
+      - port: 7006
     replicas: 1
     liveness:
       http:
