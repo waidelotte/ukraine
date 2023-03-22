@@ -33,7 +33,7 @@ services:
         connectionString: Server=${host};Port=${port};User Id=postgres;Password=${env:POSTGRES_PASSWORD};
     replicas: 1
     tags:
-      - blazor
+      - db
 
   - name: rabbitmq
     image: rabbitmq:3.11.10-management-alpine
@@ -53,6 +53,8 @@ services:
         protocol: amqp
         port: 5672
     replicas: 1
+    tags:
+      - rb
 
   - name: maildev
     image: maildev/maildev:2.0.5
@@ -65,6 +67,8 @@ services:
         containerPort: 1025
         name: smtp
     replicas: 1
+    tags:
+      - mail
 
   - name: service-identity
     project: src/Services/Identity/Ukraine.Services.Identity/Ukraine.Services.Identity.csproj
@@ -78,7 +82,7 @@ services:
       http:
         path: /health
     tags:
-      - blazor
+      - id
 
   - name: service-example
     project: src/Services/Example/Ukraine.Services.Example.Api/Ukraine.Services.Example.Api.csproj
@@ -91,6 +95,8 @@ services:
     liveness:
       http:
         path: /health
+    tags:
+      - example
 
   - name: service-example-friend-registrar
     project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Registrar/Ukraine.Services.Example.Friends.Registrar.csproj
@@ -103,6 +109,8 @@ services:
     liveness:
       http:
         path: /health
+    tags:
+      - example
 
   - name: web-status
     project: src/Web/Ukraine.Web.Status/Ukraine.Web.Status.csproj
@@ -112,6 +120,8 @@ services:
     bindings:
       - port: 7003
     replicas: 1
+    tags:
+      - status
 
   - name: gateway-graphql
     project: src/Gateway/Ukraine.Gateway.GraphQl/Ukraine.Gateway.GraphQl.csproj
@@ -124,6 +134,8 @@ services:
     liveness:
       http:
         path: /health
+    tags:
+      - gw
 
   - name: service-example-friend-email
     project: src/Services/Example/Friends/Ukraine.Services.Example.Friends.Email/Ukraine.Services.Example.Friends.Email.csproj
@@ -136,6 +148,8 @@ services:
     liveness:
       http:
         path: /health
+    tags:
+      - example
 
   - name: web-blazor
     project: src/Web/Ukraine.Web.Blazor.Client/Ukraine.Web.Blazor.Client.csproj
