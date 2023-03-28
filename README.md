@@ -52,7 +52,9 @@
     - Only basic controllers.
     - Seed Roles, Users, Resources and clients.
     - Migration Helper.
-- **Web**. Health Checks UI.
+- **Web**
+  - Blazor Client with MudBlazor (WIP)
+  - Health Checks UI.
 - **Gateway**
   - GraphQL Gateway (Schema Stitching)
 
@@ -61,7 +63,6 @@
 
 ### TODO
 - Identity Server Frontend
-- Blazor Server/Client -> MudBlazor
 - ReadOnlyDictionary.Empty (after .NET 8)
 
 ## License
