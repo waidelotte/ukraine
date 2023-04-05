@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Ukraine.Framework.Abstractions;
 
 namespace Ukraine.Framework.EFCore;
 
