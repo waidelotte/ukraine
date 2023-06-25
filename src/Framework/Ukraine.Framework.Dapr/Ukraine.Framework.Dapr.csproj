@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Dapr.AspNetCore" Version="1.10.0" />
-    <PackageReference Include="Dapr.Extensions.Configuration" Version="1.10.0" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.11.0" />
+    <PackageReference Include="Dapr.Extensions.Configuration" Version="1.11.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ukraine.Framework.Abstractions\Ukraine.Framework.Abstractions.csproj" />

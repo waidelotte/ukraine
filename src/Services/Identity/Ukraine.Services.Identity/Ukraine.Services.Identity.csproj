@@ -8,12 +8,12 @@
 
 	<ItemGroup>
 	  <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
-	  <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.2.3" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
+	  <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.3.2" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
