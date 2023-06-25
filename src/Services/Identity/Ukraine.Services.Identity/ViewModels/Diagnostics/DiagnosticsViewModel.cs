@@ -15,7 +15,7 @@ public class DiagnosticsViewModel
 		{
 			var value = Encoding.UTF8.GetString(
 				Base64Url.Decode(
-					result.Properties.Items["client_list"]));
+					result.Properties.Items["client_list"] ?? string.Empty));
 
 			Clients = JsonConvert.DeserializeObject<string[]>(value) ?? Array.Empty<string>();
 		}
