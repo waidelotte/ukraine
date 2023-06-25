@@ -5,7 +5,7 @@ using Ukraine.Services.Example.Infrastructure.UseCases.Books.CreateBook;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Data.Books.CreateBook;
 
-[ExtendObjectType(Name = OperationTypeNames.Mutation)]
+[ExtendObjectType(OperationTypeNames.Mutation)]
 internal sealed class CreateBookMutation
 {
 	[Authorize(Constants.Policy.GRAPHQL_API)]

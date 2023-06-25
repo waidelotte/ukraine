@@ -3,7 +3,7 @@ using Ukraine.Services.Example.Api.GraphQl.Attributes;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Data.Users.GetMyId;
 
-[ExtendObjectType(Name = OperationTypeNames.Query)]
+[ExtendObjectType(OperationTypeNames.Query)]
 internal sealed class GetMyIdQuery
 {
 	[Authorize]

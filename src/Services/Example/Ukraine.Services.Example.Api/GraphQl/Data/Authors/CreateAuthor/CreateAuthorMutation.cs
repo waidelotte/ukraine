@@ -5,7 +5,7 @@ using Ukraine.Services.Example.Infrastructure.UseCases.Authors.CreateAuthor;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors.CreateAuthor;
 
-[ExtendObjectType(Name = OperationTypeNames.Mutation)]
+[ExtendObjectType(OperationTypeNames.Mutation)]
 internal sealed class CreateAuthorMutation
 {
 	[Authorize(Constants.Policy.GRAPHQL_API)]

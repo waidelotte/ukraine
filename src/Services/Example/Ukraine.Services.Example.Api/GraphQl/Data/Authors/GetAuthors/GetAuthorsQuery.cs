@@ -4,7 +4,7 @@ using Ukraine.Services.Example.Infrastructure.UseCases.Authors.GetAuthorQuery;
 
 namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthors;
 
-[ExtendObjectType(Name = OperationTypeNames.Query)]
+[ExtendObjectType(OperationTypeNames.Query)]
 internal sealed class GetAuthorsQuery
 {
 	[UsePaging]

@@ -2,7 +2,7 @@
 
 namespace Ukraine.Services.Example.Api.GraphQl.Data.Authors.GetAuthorById;
 
-[ExtendObjectType(Name = OperationTypeNames.Query)]
+[ExtendObjectType(OperationTypeNames.Query)]
 internal sealed class GetAuthorByIdQuery
 {
 	public async Task<AuthorDTO> GetAuthorByIdAsync(
