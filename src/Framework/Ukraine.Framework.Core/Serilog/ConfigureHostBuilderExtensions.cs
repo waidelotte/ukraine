@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace Ukraine.Framework.Core.Serilog;
 
 public static class ConfigureHostBuilderExtensions
 {
-	public static ConfigureHostBuilder UseSerilog(
-		this ConfigureHostBuilder builder,
+	public static IHostBuilder UseSerilog(
+		this IHostBuilder builder,
 		IConfiguration configurationSection)
 	{
 		var loggerConfiguration = new LoggerConfiguration()
