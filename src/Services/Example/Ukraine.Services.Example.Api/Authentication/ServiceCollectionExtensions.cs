@@ -22,6 +22,7 @@ internal static class ServiceCollectionExtensions
 				options.TokenValidationParameters.ValidateAudience = true;
 				options.TokenValidationParameters.ValidateIssuer = true;
 				options.TokenValidationParameters.ValidateIssuerSigningKey = true;
+				options.TokenValidationParameters.ClockSkew = TimeSpan.FromMinutes(1);
 			});
 	}
 }
